@@ -39,7 +39,7 @@ export default async function Home() {
                   <ul className="space-y-2 text-gray-600">
                     <li className="flex gap-2"><span>✓</span> Arrays — Prefix Sum</li>
                     <li className="flex gap-2 text-indigo-600 font-medium"><span>→</span> Sliding Window — 5 problems</li>
-                    <li className="flex gap-2"><span>→</span> System Design — Caching</li>
+                    <li className="flex gap-2"><span>→</span> System Design Caching</li>
                   </ul>
                 </div>
               </div>
