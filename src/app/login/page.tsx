@@ -1,72 +1,84 @@
-import { login, signup } from './actions'
+import { login, signup } from "./actions";
 
-export default async function LoginPage(props: { searchParams: Promise<{ message: string }> }) {
+export default async function LoginPage(props: {
+  searchParams: Promise<{ message: string }>;
+}) {
   const searchParams = await props.searchParams;
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-md space-y-8 rounded-xl bg-white p-8 shadow-md">
-        <div className="text-center">
-          <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900">
-            Welcome to Interview OS
+    <div className="qx-root" style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "100vh", padding: "24px" }}>
+      <div
+        className="qx-dash-card"
+        style={{ maxWidth: 420, width: "100%", position: "relative", zIndex: 1 }}
+      >
+        <div style={{ textAlign: "center", marginBottom: 32 }}>
+          <span className="qx-pixel qx-eyebrow">🔑 CONTINUE</span>
+          <h2 className="qx-pixel" style={{ fontSize: 18, marginTop: 20, lineHeight: 1.6 }}>
+            PrepForge
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="qx-sub" style={{ fontSize: 14, marginTop: 12 }}>
             Sign in to access your AI DSA mentor
           </p>
         </div>
 
-        <form className="mt-8 space-y-6">
-          <div className="space-y-4 rounded-md shadow-sm">
-            <div>
-              <label htmlFor="email" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                className="relative block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder="Email address"
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                className="relative block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder="Password"
-              />
-            </div>
+        <form style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          <div>
+            <label htmlFor="email" className="qx-field-label">
+              Email address
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              className="qx-input"
+              placeholder="you@example.com"
+            />
+          </div>
+          <div>
+            <label htmlFor="password" className="qx-field-label">
+              Password
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              required
+              className="qx-input"
+              placeholder="••••••••"
+            />
           </div>
 
           {searchParams?.message && (
-            <p className="mt-4 p-4 bg-red-50 text-red-700 text-center text-sm rounded-md">
+            <p
+              className="qx-mono"
+              style={{
+                background: "rgba(255,107,107,0.12)",
+                border: "2px solid var(--coral)",
+                color: "var(--coral)",
+                padding: "12px",
+                fontSize: 12,
+                textAlign: "center",
+              }}
+            >
               {searchParams.message}
             </p>
           )}
 
-          <div className="flex flex-col gap-3">
-            <button
-              formAction={login}
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Log In
+          <div style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 8 }}>
+            <button formAction={login} className="qx-btn" style={{ width: "100%", textAlign: "center" }}>
+              LOG IN
             </button>
             <button
               formAction={signup}
-              className="flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+              className="qx-btn qx-btn-ghost"
+              style={{ width: "100%", textAlign: "center" }}
             >
-              Sign Up
+              SIGN UP
             </button>
           </div>
         </form>
       </div>
     </div>
-  )
+  );
 }

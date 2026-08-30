@@ -1,26 +1,833 @@
 @import "tailwindcss";
 
+/* ---------- DUNGEON QUEST THEME (exact spec values) ---------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0c0a09; /* obsidian */
+  --bg-elevated: #171412;
+  --bg-card: #1c1917; /* stone */
+  --line: #44403c; /* wall */
+  --primary: #8b5cf6;
+  --primary-dim: #6d3fd1;
+  --mint: #f59e0b; /* amber-gold — CTA / active border / easy CR / XP-bar fill */
+  --gold: #f59e0b; /* alias, title color */
+  --brown-shadow: #92400e; /* button 3D drop-shadow */
+  --silver: #9ca3af; /* medium CR shield */
+  --coral: #dc2626; /* hard CR / danger */
+  --purple: #8b5cf6; /* XP pill */
+  --success: #22c55e; /* passed badge */
+  --parchment: #e7e5e4;
+  --text: #f5f5f4;
+  --text-dim: #a8a29e;
+  --ink: #0a0705;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
+  --color-obsidian: var(--bg);
+  --color-stone: var(--bg-card);
+  --color-wall: var(--line);
+  --color-amber: var(--mint);
+  --color-brown: var(--brown-shadow);
+  --color-passed: var(--success);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-ui: var(--font-ui);
+  --font-mono: var(--font-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body), sans-serif;
+}
+
+/* big carved-stone title type — hero headline, brand wordmark */
+.qx-display {
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: 0.01em;
+}
+/* bold UI sans — buttons, badges, card titles, nav */
+.qx-pixel {
+  font-family: var(--font-ui), sans-serif;
+  letter-spacing: 0.01em;
+}
+.qx-mono {
+  font-family: var(--font-mono), monospace;
+}
+
+.qx-root {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* stone dungeon wall texture */
+.qx-root::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+      circle at 2px 2px,
+      rgba(244, 185, 66, 0.05) 1px,
+      transparent 0
+    ),
+    radial-gradient(ellipse at 20% 10%, rgba(139, 92, 246, 0.06), transparent 55%),
+    radial-gradient(ellipse at 80% 30%, rgba(244, 185, 66, 0.05), transparent 50%);
+  background-size: 24px 24px, auto, auto;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* vignette to keep focus on the quest cards */
+.qx-root::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* ---------- STARFIELD (now: drifting dust / embers) ---------- */
+.qx-starfield {
+  position: absolute;
+  inset: 0;
+  height: 640px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.qx-star {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--text);
+  animation: qx-twinkle 3s ease-in-out infinite;
+}
+@keyframes qx-twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+.qx-asteroid {
+  position: absolute;
+  border: 2px solid var(--ink);
+  opacity: 0.5;
+  animation: qx-drift 6s ease-in-out infinite;
+}
+@keyframes qx-drift {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(8deg);
+  }
+}
+
+/* ---------- SOUND TOGGLE ---------- */
+.qx-sound-toggle {
+  background: transparent;
+  border: 2px solid var(--line);
+  color: var(--text-dim);
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 13px;
+  display: grid;
+  place-items: center;
+  transition: border-color 0.1s, color 0.1s;
+}
+.qx-sound-toggle:hover {
+  border-color: var(--mint);
+  color: var(--mint);
+}
+
+.qx-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- NAV ---------- */
+.qx-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 3px solid var(--line);
+  position: relative;
+  z-index: 2;
+}
+.qx-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.qx-logo-mark {
+  width: 28px;
+  height: 28px;
+  background: var(--primary);
+  border: 3px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+}
+.qx-logo-text {
+  font-size: 13px;
+}
+.qx-navlinks {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+.qx-navlinks a,
+.qx-navlinks button.qx-link {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body), sans-serif;
+  transition: color 0.1s;
+}
+.qx-navlinks a:hover,
+.qx-navlinks button.qx-link:hover {
+  color: var(--mint);
+}
+
+/* ---------- BUTTONS ---------- */
+.qx-btn {
+  font-family: var(--font-pixel), monospace;
+  font-size: 11px;
+  padding: 14px 20px;
+  border: 3px solid var(--ink);
+  background: var(--mint);
+  color: var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 0.06s, box-shadow 0.06s;
+  text-decoration: none;
+}
+.qx-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.qx-btn:active {
+  transform: translate(5px, 5px);
+  box-shadow: 0 0 0 var(--ink);
+}
+.qx-btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--line);
+  box-shadow: 5px 5px 0 var(--line);
+}
+.qx-btn-ghost:hover {
+  box-shadow: 3px 3px 0 var(--line);
+}
+.qx-btn-sm {
+  font-size: 9px;
+  padding: 9px 12px;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.qx-btn-sm:hover {
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+/* ---------- HERO ---------- */
+.qx-hero {
+  padding: 88px 24px 64px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.qx-eyebrow {
+  font-size: 10px;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: inline-block;
+  border: 2px dashed var(--gold);
+  padding: 6px 12px;
+}
+.qx-h1 {
+  font-size: clamp(28px, 5vw, 48px);
+  line-height: 1.35;
+  margin: 0 0 20px;
+  text-shadow: 4px 4px 0 var(--primary-dim);
+}
+.qx-h1 span {
+  color: var(--mint);
+  text-shadow: 4px 4px 0 var(--ink);
+}
+.qx-sub {
+  font-size: 17px;
+  color: var(--text-dim);
+  max-width: 560px;
+  margin: 0 auto 36px;
+  line-height: 1.6;
+}
+.qx-hero-ctas {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ---------- DASHBOARD (logged-in state) ---------- */
+.qx-dash-card {
+  background: var(--bg-card);
+  border: 3px solid var(--line);
+  box-shadow: 5px 5px 0 var(--line);
+  padding: 20px;
+  text-align: left;
+}
+.qx-dash-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 16px;
+  margin-top: 32px;
+  text-align: left;
+}
+@media (max-width: 640px) {
+  .qx-dash-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.qx-dash-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+.qx-dash-list li {
+  display: flex;
+  gap: 8px;
+}
+
+/* ---------- SECTIONS ---------- */
+.qx-section {
+  padding: 72px 24px;
+}
+.qx-section-head {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.qx-section-title {
+  font-size: 18px;
+  margin: 0 0 12px;
+}
+.qx-section-desc {
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+/* ---------- QUEST MAP ---------- */
+.qx-map {
+  position: relative;
+  padding: 40px 0 20px;
+}
+.qx-map-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  position: relative;
+}
+.qx-node-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.qx-node-wrap:nth-child(even) {
+  transform: translateY(-34px);
+}
+.qx-node {
+  width: 64px;
+  height: 64px;
+  border: 3px solid var(--ink);
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: transform 0.08s;
+}
+.qx-node:hover {
+  transform: translateY(-3px);
+}
+.qx-node.current {
+  background: var(--mint);
+  animation: qx-pulse 1.8s ease-in-out infinite;
+}
+.qx-node.locked {
+  background: var(--bg-card);
+  color: var(--text-dim);
+}
+@keyframes qx-pulse {
+  0%,
+  100% {
+    box-shadow: 4px 4px 0 var(--ink), 0 0 0 0 rgba(61, 255, 192, 0.5);
+  }
+  50% {
+    box-shadow: 4px 4px 0 var(--ink), 0 0 16px 4px rgba(61, 255, 192, 0.5);
+  }
+}
+.qx-sprite {
+  position: absolute;
+  top: -34px;
+  font-size: 20px;
+  z-index: 3;
+}
+.qx-connector-track {
+  width: 46px;
+  height: 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--line) 0,
+    var(--line) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+.qx-connector-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--mint);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+.qx-node-label {
+  margin-top: 10px;
+  font-size: 10px;
+  text-align: center;
+  width: 92px;
+  color: var(--text-dim);
+}
+.qx-node-count {
+  margin-top: 4px;
+  font-size: 9px;
+  color: var(--gold);
+}
+.qx-node-tooltip {
+  position: absolute;
+  top: -46px;
+  background: var(--ink);
+  color: var(--mint);
+  padding: 6px 10px;
+  font-size: 9px;
+  border: 2px solid var(--mint);
+  white-space: nowrap;
+  z-index: 5;
+}
+
+/* ---------- GRID / CARDS ---------- */
+.qx-grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 720px) {
+  .qx-grid3 {
+    grid-template-columns: 1fr;
+  }
+}
+.qx-card {
+  background: var(--bg-card);
+  border: 3px solid var(--line);
+  padding: 24px;
+  box-shadow: 5px 5px 0 var(--line);
+}
+.qx-card-num {
+  font-size: 10px;
+  color: var(--mint);
+  margin-bottom: 12px;
+}
+.qx-card-title {
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+.qx-card-body {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ---------- DIFFICULTY BADGES ---------- */
+.qx-badges {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.qx-badge {
+  border: 3px solid var(--ink);
+  padding: 16px 22px;
+  text-align: center;
+  box-shadow: 4px 4px 0 var(--ink);
+  min-width: 120px;
+}
+.diff-easy {
+  background: var(--mint);
+  color: var(--ink);
+}
+.diff-med {
+  background: var(--gold);
+  color: var(--ink);
+}
+.diff-hard {
+  background: var(--coral);
+  color: var(--ink);
+}
+.qx-badge-glyph {
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.qx-badge-count {
+  font-size: 20px;
+  font-family: var(--font-mono), monospace;
+  font-weight: 700;
+}
+.qx-badge-label {
+  font-size: 10px;
+  margin-top: 6px;
+}
+
+/* ---------- QUEST BOARD (D&D quest cards) ---------- */
+.quest-board {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+@media (max-width: 720px) {
+  .quest-board {
+    grid-template-columns: 1fr;
+  }
+}
+.quest-card {
+  background: var(--bg-card);
+  border: 3px solid var(--line);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.35), inset 0 0 40px rgba(0, 0, 0, 0.2);
+}
+.quest-card--active {
+  border-color: var(--mint);
+  box-shadow: 0 0 0 3px rgba(244, 185, 66, 0.25), 0 8px 0 rgba(0, 0, 0, 0.35),
+    0 0 24px rgba(244, 185, 66, 0.15);
+}
+.quest-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.quest-cr {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+}
+.quest-cr--easy {
+  background: rgba(244, 185, 66, 0.18);
+  color: var(--mint);
+  border-color: rgba(244, 185, 66, 0.35);
+}
+.quest-cr--medium {
+  background: rgba(156, 163, 175, 0.14);
+  color: var(--silver);
+  border-color: rgba(156, 163, 175, 0.3);
+}
+.quest-cr--hard {
+  background: rgba(226, 72, 61, 0.16);
+  color: var(--coral);
+  border-color: rgba(226, 72, 61, 0.32);
+}
+.quest-xp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--purple);
+  color: #fff;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
+}
+.quest-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--parchment);
+  margin-bottom: 22px;
+}
+.quest-begin-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-ui), sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  color: #3a2205;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(to bottom, #fbbf51, var(--mint));
+  box-shadow: 0 5px 0 var(--brown-shadow), 0 8px 14px rgba(0, 0, 0, 0.35);
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+.quest-begin-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 var(--brown-shadow), 0 10px 16px rgba(0, 0, 0, 0.4);
+}
+.quest-begin-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--brown-shadow), 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------- PLAYER BADGE (nav corner) ---------- */
+.player-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-card);
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  padding: 8px 14px 8px 8px;
+}
+.player-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--primary);
+  border: 2px solid var(--ink);
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.player-xp-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.player-xp-track {
+  width: 100px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.player-xp-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--gold), var(--mint));
+  border-radius: 999px;
+}
+.player-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+.player-lvl {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-dim);
+}
+.player-passed {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--success);
+  background: rgba(52, 199, 89, 0.15);
+  border: 1px solid rgba(52, 199, 89, 0.4);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+/* ---------- PARTY CHAT ---------- */
+.party-chat {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 260px;
+  background: var(--bg-card);
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 60;
+  overflow: hidden;
+}
+.party-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--line);
+  cursor: pointer;
+  background: var(--bg-elevated);
+}
+.party-chat-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--parchment);
+}
+.party-chat-body {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.party-msg {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.party-msg-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--primary-dim);
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.party-msg-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--parchment);
+}
+.party-msg-text {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+.party-chat-input-row {
+  display: flex;
+  gap: 6px;
+  padding: 10px 12px;
+  border-top: 2px solid var(--line);
+}
+.party-chat-input {
+  flex: 1;
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: var(--text);
+  font-size: 12px;
+  font-family: var(--font-body), sans-serif;
+}
+.party-chat-input::placeholder {
+  color: var(--text-dim);
+}
+.party-chat-send {
+  background: var(--mint);
+  color: var(--ink);
+  border: none;
+  border-radius: 8px;
+  width: 32px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* ---------- FORM FIELDS (login) ---------- */
+.qx-field-label {
+  font-size: 10px;
+  color: var(--text-dim);
+  display: block;
+  margin-bottom: 6px;
+}
+.qx-input {
+  width: 100%;
+  background: var(--bg);
+  border: 3px solid var(--line);
+  color: var(--text);
+  padding: 12px 14px;
+  font-family: var(--font-mono), monospace;
+  font-size: 14px;
+}
+.qx-input:focus {
+  outline: none;
+  border-color: var(--mint);
+}
+.qx-input::placeholder {
+  color: var(--text-dim);
+}
+
+/* ---------- ACCESSIBILITY ---------- */
+a:focus-visible,
+button:focus-visible,
+.qx-input:focus-visible {
+  outline: 3px solid var(--mint);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qx-star,
+  .qx-asteroid,
+  .qx-node.current {
+    animation: none !important;
+  }
+  * {
+    scroll-behavior: auto !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ---------- FOOTER ---------- */
+.qx-footer {
+  padding: 40px 24px;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 11px;
+  border-top: 3px solid var(--line);
 }
