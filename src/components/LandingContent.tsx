@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import Starfield from "@/components/Starfield";
 import QuestMap, { type Topic } from "@/components/QuestMap";
 import QuestBoard from "@/components/QuestBoard";
 import PlayerBadge from "@/components/PlayerBadge";
 import PartyChat from "@/components/PartyChat";
+import DungeonBackground from "@/components/DungeonBackground";
 import { blipHover, blipClick } from "@/lib/sound";
 
 const TOPICS: Topic[] = [
@@ -66,13 +66,11 @@ export default function LandingContent({
 
   return (
     <div className="qx-root">
-      <Starfield />
-
       {/* NAV */}
       <nav className="qx-nav">
         <div className="qx-logo">
           <div className="qx-logo-mark">⚔️</div>
-          <span className="qx-display qx-logo-text">PrepForge</span>
+          <span className="qx-display qx-logo-text">DSA QUESTS</span>
         </div>
         <div className="qx-navlinks">
           <a href="#board" onMouseEnter={sfx.hover}>
@@ -119,9 +117,10 @@ export default function LandingContent({
         initial="hidden"
         animate="show"
       >
+        <DungeonBackground videoSrc="/backgrounds/dungeon-runes.mp4" />
         <div className="qx-container">
           <motion.h1 variants={fadeUp} className="qx-display qx-h1" style={{ color: "var(--mint)" }}>
-            PREP FORGE
+            DSA QUESTS
           </motion.h1>
           <motion.p variants={fadeUp} className="qx-sub">
             Slay Data Structures. Conquer Algorithms.
@@ -252,7 +251,7 @@ export default function LandingContent({
         </div>
       </section>
 
-      <footer className="qx-footer">PrepForege — built one dungeon at a time</footer>
+      <footer className="qx-footer">DSA Quests — built one dungeon at a time</footer>
 
       <PartyChat muted={muted} />
     </div>

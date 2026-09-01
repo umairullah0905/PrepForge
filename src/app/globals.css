@@ -1,3 +1,4 @@
+@config "../../tailwind.config.ts";
 @import "tailwindcss";
 
 /* ---------- DUNGEON QUEST THEME (exact spec values) ---------- */
@@ -67,36 +68,9 @@ body {
   overflow-x: hidden;
 }
 
-/* stone dungeon wall texture */
-.qx-root::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(
-      circle at 2px 2px,
-      rgba(244, 185, 66, 0.05) 1px,
-      transparent 0
-    ),
-    radial-gradient(ellipse at 20% 10%, rgba(139, 92, 246, 0.06), transparent 55%),
-    radial-gradient(ellipse at 80% 30%, rgba(244, 185, 66, 0.05), transparent 50%);
-  background-size: 24px 24px, auto, auto;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* vignette to keep focus on the quest cards */
-.qx-root::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    transparent 55%,
-    rgba(0, 0, 0, 0.45) 100%
-  );
-  pointer-events: none;
-  z-index: 50;
-}
+/* background art + vignette live in DungeonBackground (scoped to the
+   hero section, not a page-wide fixed layer) — see component and the
+   .dungeon-bg-* rules further down */
 
 /* ---------- STARFIELD (now: drifting dust / embers) ---------- */
 .qx-starfield {
@@ -173,6 +147,7 @@ body {
   border-bottom: 3px solid var(--line);
   position: relative;
   z-index: 2;
+  background: var(--bg);
 }
 .qx-logo {
   display: flex;
@@ -256,8 +231,17 @@ body {
 
 /* ---------- HERO ---------- */
 .qx-hero {
-  padding: 88px 24px 64px;
+  padding: 88px 24px 96px;
   text-align: center;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  min-height: min(90vh, 720px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.qx-hero > .qx-container {
   position: relative;
   z-index: 1;
 }
@@ -626,6 +610,24 @@ body {
   transform: translateY(3px);
   box-shadow: 0 2px 0 var(--brown-shadow), 0 4px 8px rgba(0, 0, 0, 0.3);
 }
+.quest-begin-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+}
+.quest-completed-pill {
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-ui), sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: var(--success);
+  padding: 14px;
+  border-radius: 10px;
+  border: 2px solid var(--success);
+  background: rgba(34, 197, 94, 0.12);
+}
 
 /* ---------- PLAYER BADGE (nav corner) ---------- */
 .player-badge {
@@ -830,4 +832,58 @@ html {
   color: var(--text-dim);
   font-size: 11px;
   border-top: 3px solid var(--line);
+}
+
+/* ---------- DUNGEON BACKGROUND (scoped to its parent section, not the page) ---------- */
+.dungeon-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--bg);
+}
+.dungeon-bg-parallax {
+  position: absolute;
+  inset: -8% 0 -8% 0; /* extra bleed so the parallax drift never shows an edge */
+}
+.dungeon-bg-media {
+  position: absolute;
+  inset: -4%; /* overscan to match the parallax bleed */
+  background-size: cover;
+  background-position: center;
+}
+.dungeon-bg-image {
+  width: 108%;
+  height: 108%;
+}
+video.dungeon-bg-media {
+  width: 108%;
+  height: 108%;
+  object-fit: cover;
+}
+
+.dungeon-bg-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      ellipse at center,
+      transparent 40%,
+      rgba(6, 5, 4, 0.5) 100%
+    ),
+    linear-gradient(rgba(6, 5, 4, 0.3), rgba(6, 5, 4, 0.55));
+}
+
+/* blends the bottom of the hero scene into the solid page background
+   below it, so the transition to the rest of the page isn't a hard cut */
+.dungeon-bg-fade {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 35%;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dungeon-bg-parallax {
+    transform: none !important;
+  }
 }
