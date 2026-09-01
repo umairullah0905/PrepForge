@@ -1,8 +1,10 @@
 export default function PlayerBadge({
+  name,
   level,
   xpPercent,
   passed,
 }: {
+  name?: string;
   level: number;
   xpPercent: number;
   passed?: boolean;
@@ -11,6 +13,14 @@ export default function PlayerBadge({
     <div className="player-badge">
       <div className="player-avatar">🧝</div>
       <div>
+        {name && (
+          <div
+            className="qx-pixel"
+            style={{ fontSize: 11, color: "var(--parchment)", marginBottom: 4 }}
+          >
+            {name}
+          </div>
+        )}
         <div className="player-xp-row">
           <span className="qx-mono" style={{ fontSize: 10, color: "var(--text-dim)" }}>
             XP

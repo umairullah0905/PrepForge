@@ -1,7 +1,10 @@
 "use client";
 
+import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import QuestCard, { type Quest } from "@/components/QuestCard";
 import { blipHover, blipClick } from "@/lib/sound";
+import { completeQuestAction } from "@/app/quest-actions";
 
 export default function QuestBoard({ muted, questions = [] }: { muted: boolean, questions?: any[] }) {
   const sfx = {

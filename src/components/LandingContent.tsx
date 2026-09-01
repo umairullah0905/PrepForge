@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 import QuestMap, { type Topic } from "@/components/QuestMap";
 import QuestBoard from "@/components/QuestBoard";
 import PlayerBadge from "@/components/PlayerBadge";
-import PartyChat from "@/components/PartyChat";
 import DungeonBackground from "@/components/DungeonBackground";
 import { blipHover, blipClick } from "@/lib/sound";
+import { xpProgressPercent, type Profile } from "@/lib/progress";
 
 const TOPICS: Topic[] = [
   { name: "Arrays & Hashing", status: "current", count: 12 },
@@ -53,14 +53,19 @@ function Reveal({
 
 export default function LandingContent({
   userEmail,
+  profile,
+  completedQuestTitles,
   signOutAction,
   questions,
 }: {
   userEmail: string | null;
+  profile: Profile | null;
+  completedQuestTitles: string[];
   signOutAction: () => void;
   questions: any[];
 }) {
   const [muted, setMuted] = useState(true);
+  const isLoggedIn = !!userEmail;
   const sfx = {
     hover: () => !muted && blipHover(),
     click: () => !muted && blipClick(),
@@ -87,7 +92,22 @@ export default function LandingContent({
           <a href="#map" onMouseEnter={sfx.hover}>
             Roadmap
           </a>
-          <PlayerBadge level={5} xpPercent={68} passed />
+          <a href="/community" onMouseEnter={sfx.hover}>
+            Community
+          </a>
+          {isLoggedIn && (
+            <a href="/profile" onMouseEnter={sfx.hover}>
+              Profile
+            </a>
+          )}
+          {profile && (
+            <PlayerBadge
+              name={profile.name}
+              level={profile.level}
+              xpPercent={xpProgressPercent(profile.xp)}
+              passed={profile.xp > 0}
+            />
+          )}
           <button
             className="qx-sound-toggle"
             onClick={() => {
@@ -99,7 +119,7 @@ export default function LandingContent({
           >
             {muted ? "🔇" : "🔊"}
           </button>
-          {userEmail ? (
+          {isLoggedIn ? (
             <form action={signOutAction}>
               <button type="submit" className="qx-link" onMouseEnter={sfx.hover}>
                 Sign out
@@ -134,32 +154,42 @@ export default function LandingContent({
             Slay Data Structures. Conquer Algorithms.
           </motion.p>
 
-          {userEmail ? (
+          {isLoggedIn && profile ? (
             <motion.div variants={fadeUp} className="qx-dash-card">
               <p className="qx-mono" style={{ fontSize: 13, color: "var(--text-dim)" }}>
                 Good to see you back —
               </p>
-              <p className="qx-pixel" style={{ fontSize: 13, color: "var(--mint)", marginTop: 8 }}>
-                {userEmail}
+              <p className="qx-pixel" style={{ fontSize: 16, color: "var(--mint)", marginTop: 8 }}>
+                {profile.name}
               </p>
               <div className="qx-dash-grid">
                 <div className="qx-dash-card">
                   <div className="qx-mono" style={{ fontSize: 10, color: "var(--text-dim)" }}>
-                    OVERALL READINESS
+                    QUESTS COMPLETED
                   </div>
                   <div className="qx-pixel" style={{ fontSize: 28, color: "var(--mint)", marginTop: 8 }}>
-                    67%
+                    {completedQuestTitles.length}
                   </div>
                 </div>
                 <div className="qx-dash-card">
                   <div className="qx-mono" style={{ fontSize: 10, color: "var(--text-dim)" }}>
-                    TODAY&rsquo;S PLAN
+                    LEVEL &amp; XP
                   </div>
-                  <ul className="qx-dash-list">
-                    <li>✅ Arrays — Prefix Sum</li>
-                    <li style={{ color: "var(--mint)" }}>→ Sliding Window — 5 problems</li>
-                    <li>→ System Design — Caching</li>
-                  </ul>
+                  <div style={{ marginTop: 8 }}>
+                    <span className="qx-pixel" style={{ fontSize: 20, color: "var(--mint)" }}>
+                      LVL {profile.level}
+                    </span>
+                    <span className="qx-mono" style={{ fontSize: 12, color: "var(--text-dim)", marginLeft: 10 }}>
+                      {profile.xp} XP total
+                    </span>
+                  </div>
+                  <a
+                    href="/profile"
+                    className="qx-mono"
+                    style={{ fontSize: 11, color: "var(--gold)", display: "inline-block", marginTop: 10 }}
+                  >
+                    View full profile →
+                  </a>
                 </div>
               </div>
             </motion.div>
@@ -259,9 +289,7 @@ export default function LandingContent({
         </div>
       </section>
 
-      <footer className="qx-footer">PrepForge — built one dungeon at a time</footer>
-
-      <PartyChat muted={muted} />
+      <footer className="qx-footer">Prep Forge — built one dungeon at a time</footer>
     </div>
   );
 }

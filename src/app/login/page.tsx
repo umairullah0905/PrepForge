@@ -14,7 +14,7 @@ export default async function LoginPage(props: {
         <div style={{ textAlign: "center", marginBottom: 32 }}>
           <span className="qx-pixel qx-eyebrow">🔑 CONTINUE</span>
           <h2 className="qx-pixel" style={{ fontSize: 18, marginTop: 20, lineHeight: 1.6 }}>
-            PrepForge
+            Interview OS
           </h2>
           <p className="qx-sub" style={{ fontSize: 14, marginTop: 12 }}>
             Sign in to access your AI DSA mentor
@@ -22,6 +22,18 @@ export default async function LoginPage(props: {
         </div>
 
         <form style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          <div>
+            <label htmlFor="name" className="qx-field-label">
+              Name <span style={{ color: "var(--text-dim)" }}>(for signing up)</span>
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              className="qx-input"
+              placeholder="Your name"
+            />
+          </div>
           <div>
             <label htmlFor="email" className="qx-field-label">
               Email address

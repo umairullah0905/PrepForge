@@ -777,6 +777,63 @@ body {
   cursor: pointer;
   font-weight: 700;
 }
+.party-chat-send:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* ---------- COMMUNITY (full chat page, reuses party-msg-* classes) ---------- */
+.community-chat {
+  background: var(--bg-card);
+  border: 3px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.community-chat-list {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 55vh;
+  min-height: 320px;
+  overflow-y: auto;
+}
+.community-msg {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.community-msg-text {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+.community-chat-input-row {
+  display: flex;
+  gap: 10px;
+  padding: 14px 16px;
+  border-top: 2px solid var(--line);
+  background: var(--bg-elevated);
+}
+.community-chat-input-row .party-chat-input {
+  font-size: 13px;
+  padding: 10px 12px;
+}
+.community-chat-input-row .party-chat-send {
+  width: 40px;
+}
+.community-chat-signin {
+  padding: 16px;
+  text-align: center;
+  border-top: 2px solid var(--line);
+  background: var(--bg-elevated);
+}
 
 /* ---------- FORM FIELDS (login) ---------- */
 .qx-field-label {
