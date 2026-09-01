@@ -54,9 +54,11 @@ function Reveal({
 export default function LandingContent({
   userEmail,
   signOutAction,
+  questions,
 }: {
   userEmail: string | null;
   signOutAction: () => void;
+  questions: any[];
 }) {
   const [muted, setMuted] = useState(true);
   const sfx = {
@@ -75,6 +77,12 @@ export default function LandingContent({
         <div className="qx-navlinks">
           <a href="#board" onMouseEnter={sfx.hover}>
             Quests
+          </a>
+          <a href="/system-design" onMouseEnter={sfx.hover}>
+            System Design
+          </a>
+          <a href="/forums" onMouseEnter={sfx.hover}>
+            Forums
           </a>
           <a href="#map" onMouseEnter={sfx.hover}>
             Roadmap
@@ -191,7 +199,7 @@ export default function LandingContent({
               Pick a bounty. Higher CR means a tougher fight — and a bigger payout.
             </p>
           </Reveal>
-          <QuestBoard muted={muted} />
+          <QuestBoard muted={muted} questions={questions} />
         </div>
       </section>
 
