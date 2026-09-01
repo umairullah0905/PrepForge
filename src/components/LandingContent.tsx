@@ -70,7 +70,7 @@ export default function LandingContent({
       <nav className="qx-nav">
         <div className="qx-logo">
           <div className="qx-logo-mark">⚔️</div>
-          <span className="qx-display qx-logo-text">DSA QUESTS</span>
+          <span className="qx-display qx-logo-text">PREP FORGE</span>
         </div>
         <div className="qx-navlinks">
           <a href="#board" onMouseEnter={sfx.hover}>
@@ -120,7 +120,7 @@ export default function LandingContent({
         <DungeonBackground videoSrc="/backgrounds/dungeon-runes.mp4" />
         <div className="qx-container">
           <motion.h1 variants={fadeUp} className="qx-display qx-h1" style={{ color: "var(--mint)" }}>
-            DSA QUESTS
+            PREP FORGE
           </motion.h1>
           <motion.p variants={fadeUp} className="qx-sub">
             Slay Data Structures. Conquer Algorithms.
@@ -251,7 +251,7 @@ export default function LandingContent({
         </div>
       </section>
 
-      <footer className="qx-footer">DSA Quests — built one dungeon at a time</footer>
+      <footer className="qx-footer">PrepForge — built one dungeon at a time</footer>
 
       <PartyChat muted={muted} />
     </div>
