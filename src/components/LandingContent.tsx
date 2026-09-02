@@ -83,6 +83,9 @@ export default function LandingContent({
           <a href="#board" onMouseEnter={sfx.hover}>
             Quests
           </a>
+          <a href="/company-questions" onMouseEnter={sfx.hover}>
+            Company Questions
+          </a>
           <a href="/system-design" onMouseEnter={sfx.hover}>
             System Design
           </a>
