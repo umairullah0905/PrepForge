@@ -892,22 +892,21 @@ html {
 }
 
 /* ---------- DUNGEON BACKGROUND (scoped to its parent section, not the page) ---------- */
-.dungeon-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  background: var(--bg);
-}
+/* ✅ what it should be (my last fix) */
 .dungeon-bg-parallax {
   position: absolute;
-  inset: -8% 0 -8% 0; /* extra bleed so the parallax drift never shows an edge */
+  inset: -10% 0;
 }
 .dungeon-bg-media {
   position: absolute;
-  inset: -4%; /* overscan to match the parallax bleed */
+  inset: 0;
+  width: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
+}
+video.dungeon-bg-media {
+  object-fit: cover;
 }
 .dungeon-bg-image {
   width: 108%;
