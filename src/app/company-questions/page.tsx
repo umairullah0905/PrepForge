@@ -1,4 +1,5 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@/utils/supabase/server';
+import { getCompletedQuestTitles } from "@/lib/progress";
 
 export const revalidate = 0;
 
@@ -20,7 +21,9 @@ export default async function CompanyQuestionsPage({
   const currentPage = Math.max(1, parseInt(resolvedParams.page || "1", 10));
   const itemsPerPage = 15;
 
-  const supabase = createClient(supabaseUrl, supabaseKey);
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  const completedTitles = user ? await getCompletedQuestTitles(supabase, user.id) : [];
   
   // Fetch ALL questions and filter in JS to easily support case-insensitive array matching
   let { data: allQuestions, error } = await supabase
@@ -150,7 +153,7 @@ export default async function CompanyQuestionsPage({
                       </td>
                       <td className="p-4">
                         <a href={q.link} target="_blank" rel="noopener noreferrer" className="hover:underline font-medium" style={{ color: 'var(--gold)' }}>
-                          {q.title}
+                          {completedTitles.includes(q.title) ? "✅ " : "📜 "} {q.title}
                         </a>
                       </td>
                       <td className="p-4">

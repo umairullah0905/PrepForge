@@ -7,6 +7,8 @@ import {
   xpProgressPercent,
 } from "@/lib/progress";
 
+import ProfileSyncForm from "./ProfileSyncForm";
+
 export default async function ProfilePage() {
   const supabase = await createClient();
   const {
@@ -28,7 +30,7 @@ export default async function ProfilePage() {
         <div className="qx-logo">
           <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
             <div className="qx-logo-mark">⚔️</div>
-            <span className="qx-display qx-logo-text">DSA QUESTS</span>
+            <span className="qx-display qx-logo-text">PREP FORGE</span>
           </Link>
         </div>
         <div className="qx-navlinks">
@@ -106,9 +108,16 @@ export default async function ProfilePage() {
             )}
           </div>
         </div>
+        
+        {/* Profile Sync Form */}
+        <ProfileSyncForm 
+          initialLeetcode={profile?.leetcode_username} 
+          initialCodeforces={profile?.codeforces_username} 
+        />
+        
       </div>
 
-      <footer className="qx-footer">DSA Quests — built one dungeon at a time</footer>
+      <footer className="qx-footer">PREP FORGE — built one dungeon at a time</footer>
     </div>
   );
 }

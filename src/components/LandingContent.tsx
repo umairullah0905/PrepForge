@@ -80,20 +80,14 @@ export default function LandingContent({
           <span className="qx-display qx-logo-text">PREP FORGE</span>
         </div>
         <div className="qx-navlinks">
-          <a href="#board" onMouseEnter={sfx.hover}>
-            Quests
-          </a>
-          <a href="/company-questions" onMouseEnter={sfx.hover}>
-            Company Questions
+          <a href="/dsa" onMouseEnter={sfx.hover}>
+            DSA Hub
           </a>
           <a href="/system-design" onMouseEnter={sfx.hover}>
             System Design
           </a>
           <a href="/forums" onMouseEnter={sfx.hover}>
             Forums
-          </a>
-          <a href="#map" onMouseEnter={sfx.hover}>
-            Roadmap
           </a>
           <a href="/community" onMouseEnter={sfx.hover}>
             Community
@@ -232,7 +226,7 @@ export default function LandingContent({
               Pick a bounty. Higher CR means a tougher fight — and a bigger payout.
             </p>
           </Reveal>
-          <QuestBoard muted={muted} questions={questions} />
+          <QuestBoard muted={muted} questions={questions} completedQuestTitles={completedQuestTitles} />
         </div>
       </section>
 

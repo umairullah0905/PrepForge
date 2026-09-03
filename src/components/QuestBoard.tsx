@@ -6,7 +6,7 @@ import QuestCard, { type Quest } from "@/components/QuestCard";
 import { blipHover, blipClick } from "@/lib/sound";
 import { completeQuestAction } from "@/app/quest-actions";
 
-export default function QuestBoard({ muted, questions = [] }: { muted: boolean, questions?: any[] }) {
+export default function QuestBoard({ muted, questions = [], completedQuestTitles = [] }: { muted: boolean, questions?: any[], completedQuestTitles?: string[] }) {
   const sfx = {
     hover: () => !muted && blipHover(),
     click: () => !muted && blipClick(),
@@ -20,6 +20,7 @@ export default function QuestBoard({ muted, questions = [] }: { muted: boolean, 
       <div className="quest-board" style={{ marginTop: 0 }}>
         {displayedQuestions.map((q, i) => {
           // Map DB question to Quest type
+          const isCompleted = completedQuestTitles.includes(q.title);
           const questProp: Quest = {
             id: q.id,
             title: q.title,
@@ -31,7 +32,8 @@ export default function QuestBoard({ muted, questions = [] }: { muted: boolean, 
             solution_link: q.solution_link,
             platform: q.platform,
             description: q.description,
-            topics: q.topics
+            topics: q.topics,
+            completed: isCompleted
           };
 
           return (

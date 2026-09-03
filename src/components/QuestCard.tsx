@@ -14,6 +14,7 @@ export type Quest = {
   platform?: string;
   description?: string;
   topics?: string[];
+  completed?: boolean;
 };
 
 const CR_CLASS: Record<Quest["difficulty"], string> = {
@@ -67,7 +68,7 @@ export default function QuestCard({
       </div>
       
       <div className="quest-title" style={{ color: 'black', marginBottom: '16px', fontSize: '1.1rem', fontWeight: 'bold' }}>
-        📜 {quest.title}
+        {quest.completed ? "✅ " : "📜 "} {quest.title}
       </div>
 
       <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>

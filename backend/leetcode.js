@@ -50,6 +50,24 @@ async function fetchLeetCodeQuestions(limit = 10, topicSlug = "") {
   };
 
   try {
+    // 1. Fetch the total number of questions for this filter to generate a random skip
+    const countQuery = JSON.parse(JSON.stringify(problemListQuery));
+    countQuery.variables.limit = 1;
+    
+    let randomSkip = 0;
+    try {
+      const countRes = await axios.post(LEETCODE_API_ENDPOINT, countQuery);
+      const totalNum = countRes.data.data.problemsetQuestionList.total;
+      if (totalNum > limit) {
+        randomSkip = Math.floor(Math.random() * (totalNum - limit));
+      }
+    } catch (e) {
+      console.log("Could not fetch total count, falling back to random skip.");
+      randomSkip = Math.floor(Math.random() * 2000); // Rough fallback
+    }
+
+    // 2. Fetch the actual random subset
+    problemListQuery.variables.skip = randomSkip;
     const response = await axios.post(LEETCODE_API_ENDPOINT, problemListQuery);
     const questions = response.data.data.problemsetQuestionList.questions;
     

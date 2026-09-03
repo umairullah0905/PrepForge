@@ -5,6 +5,8 @@ export type Profile = {
   name: string;
   level: number;
   xp: number;
+  leetcode_username?: string;
+  codeforces_username?: string;
 };
 
 export async function getProfile(
@@ -13,25 +15,37 @@ export async function getProfile(
 ): Promise<Profile | null> {
   const { data, error } = await supabase
     .from("profiles")
-    .select("id, name, level, xp")
+    .select("id, full_name, level, xp, leetcode_username, codeforces_username")
     .eq("id", userId)
     .single();
 
   if (error || !data) return null;
-  return data as Profile;
+  return {
+    id: data.id,
+    name: data.full_name || "",
+    level: data.level || 1,
+    xp: data.xp || 0,
+    leetcode_username: data.leetcode_username,
+    codeforces_username: data.codeforces_username
+  };
 }
 
 export async function getCompletedQuestTitles(
   supabase: SupabaseClient,
   userId: string
 ): Promise<string[]> {
-  const { data, error } = await supabase
-    .from("quest_progress")
-    .select("quest_title")
-    .eq("user_id", userId);
-
-  if (error || !data) return [];
-  return data.map((row) => row.quest_title as string);
+  const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/quest_progress?select=quest_title&user_id=eq.${userId}`;
+  const res = await fetch(url, {
+    headers: {
+      apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string,
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string}`
+    },
+    cache: "no-store"
+  });
+  
+  if (!res.ok) return [];
+  const data = await res.json();
+  return data.map((row: any) => row.quest_title as string);
 }
 
 export type QuestProgressRow = {
@@ -44,13 +58,17 @@ export async function getQuestProgressRows(
   supabase: SupabaseClient,
   userId: string
 ): Promise<QuestProgressRow[]> {
-  const { data, error } = await supabase
-    .from("quest_progress")
-    .select("quest_title, xp_earned, completed_at")
-    .eq("user_id", userId)
-    .order("completed_at", { ascending: false });
-
-  if (error || !data) return [];
+  const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/quest_progress?select=quest_title,xp_earned,completed_at&user_id=eq.${userId}&order=completed_at.desc`;
+  const res = await fetch(url, {
+    headers: {
+      apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string,
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string}`
+    },
+    cache: "no-store"
+  });
+  
+  if (!res.ok) return [];
+  const data = await res.json();
   return data as QuestProgressRow[];
 }
 

@@ -18,7 +18,15 @@ async function fetchCodeforcesQuestions(limit = 5, topic = "") {
       throw new Error("Codeforces API error");
     }
 
-    const problems = response.data.result.problems.slice(0, limit);
+    let allProblems = response.data.result.problems;
+    
+    // Shuffle the array to pick random questions
+    for (let i = allProblems.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [allProblems[i], allProblems[j]] = [allProblems[j], allProblems[i]];
+    }
+    
+    const problems = allProblems.slice(0, limit);
 
     console.log("Launching Puppeteer to bypass Cloudflare...");
     const browser = await puppeteer.launch({ 

@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import QuestCard, { type Quest } from "@/components/QuestCard";
 import { blipHover, blipClick } from "@/lib/sound";
 
-export default function ClientQuestsView({ questions = [] }: { questions?: any[] }) {
+export default function ClientQuestsView({ questions = [], completedTitles = [] }: { questions?: any[], completedTitles?: string[] }) {
   const [selectedTopic, setSelectedTopic] = useState<string>('All');
   const [muted, setMuted] = useState(false);
   
@@ -66,6 +66,7 @@ export default function ClientQuestsView({ questions = [] }: { questions?: any[]
       {/* Quest Cards Grid */}
       <div className="flex-1 quest-board" style={{ marginTop: 0 }}>
         {displayedQuestions.map((q, i) => {
+          const isCompleted = completedTitles.includes(q.title);
           const questProp: Quest = {
             id: q.id,
             title: q.title,
@@ -77,7 +78,8 @@ export default function ClientQuestsView({ questions = [] }: { questions?: any[]
             solution_link: q.solution_link,
             platform: q.platform,
             description: q.description,
-            topics: q.topics
+            topics: q.topics,
+            completed: isCompleted
           };
 
           return (
