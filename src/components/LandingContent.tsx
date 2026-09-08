@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import QuestMap, { type Topic } from "@/components/QuestMap";
 import QuestBoard from "@/components/QuestBoard";
+import TopicCard from "@/components/TopicCard";
 import PlayerBadge from "@/components/PlayerBadge";
 import DungeonBackground from "@/components/DungeonBackground";
 import { blipHover, blipClick } from "@/lib/sound";
@@ -216,6 +217,27 @@ export default function LandingContent({
           )}
         </div>
       </motion.header>
+
+      {/* CHOOSE YOUR PATH */}
+      <section className="qx-section" id="paths">
+        <div className="qx-container">
+          <Reveal className="qx-section-head">
+            <h2 className="qx-pixel qx-section-title">Choose Your Path</h2>
+            <p className="qx-section-desc">
+              Pick a track and start clearing quests. More tracks coming soon.
+            </p>
+          </Reveal>
+          <div className="topic-grid">
+            <TopicCard
+              href="/dsa"
+              bannerSrc="/backgrounds/DSA.webp"
+              title="DSA"
+              description="Slay data structures, conquer algorithms — from arrays and hashing all the way to graphs."
+              level="BEGINNER"
+            />
+          </div>
+        </div>
+      </section>
 
       {/* QUEST BOARD */}
       <section className="qx-section" id="board">

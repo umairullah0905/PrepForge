@@ -506,6 +506,71 @@ body {
   margin-top: 6px;
 }
 
+/* ---------- TOPIC CARDS (Codédex-style course cards) ---------- */
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+.topic-card {
+  display: block;
+  text-decoration: none;
+  background: var(--bg-card);
+  border: 3px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.35);
+  transition: transform 0.12s, box-shadow 0.12s, border-color 0.12s;
+}
+.topic-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--mint);
+  box-shadow: 0 12px 0 rgba(0, 0, 0, 0.35), 0 0 24px rgba(245, 158, 11, 0.15);
+}
+.topic-card-banner {
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+  border-bottom: 3px solid var(--line);
+}
+.topic-card-body {
+  padding: 20px;
+}
+.topic-card-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+.topic-card-title {
+  font-size: 16px;
+  color: var(--text);
+  margin: 0 0 10px;
+}
+.topic-card-desc {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin: 0 0 18px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.topic-card-level {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 14px;
+}
+
 /* ---------- QUEST BOARD (D&D quest cards) ---------- */
 .quest-board {
   display: grid;
@@ -627,6 +692,62 @@ body {
   border-radius: 10px;
   border: 2px solid var(--success);
   background: rgba(34, 197, 94, 0.12);
+}
+.quest-platform-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-dim);
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+.quest-actions-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.quest-actions-row .quest-begin-btn {
+  width: auto;
+  flex: 1 1 auto;
+  padding: 10px 14px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.quest-begin-btn--ghost {
+  background: transparent;
+  color: var(--text);
+  box-shadow: 0 5px 0 var(--line), 0 8px 14px rgba(0, 0, 0, 0.2);
+  border: 2px solid var(--line);
+}
+.quest-begin-btn--ghost:hover {
+  box-shadow: 0 7px 0 var(--line), 0 10px 16px rgba(0, 0, 0, 0.25);
+}
+.quest-begin-btn--ghost:active {
+  box-shadow: 0 2px 0 var(--line), 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.quest-begin-btn--purple {
+  background: linear-gradient(to bottom, #a78bfa, var(--purple));
+  color: #fff;
+  box-shadow: 0 5px 0 #5b21b6, 0 8px 14px rgba(0, 0, 0, 0.35);
+}
+.quest-begin-btn--purple:hover {
+  box-shadow: 0 7px 0 #5b21b6, 0 10px 16px rgba(0, 0, 0, 0.4);
+}
+.quest-begin-btn--purple:active {
+  box-shadow: 0 2px 0 #5b21b6, 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.quest-begin-btn--amber-ghost {
+  background: transparent;
+  color: var(--gold);
+  border: 2px solid rgba(245, 158, 11, 0.4);
+  box-shadow: 0 5px 0 rgba(245, 158, 11, 0.25), 0 8px 14px rgba(0, 0, 0, 0.2);
+}
+.quest-begin-btn--amber-ghost:hover {
+  box-shadow: 0 7px 0 rgba(245, 158, 11, 0.25), 0 10px 16px rgba(0, 0, 0, 0.25);
+}
+.quest-begin-btn--amber-ghost:active {
+  box-shadow: 0 2px 0 rgba(245, 158, 11, 0.25), 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* ---------- PLAYER BADGE (nav corner) ---------- */
@@ -857,6 +978,36 @@ body {
 }
 .qx-input::placeholder {
   color: var(--text-dim);
+}
+
+/* auth tabs (login/signup toggle) */
+.auth-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid var(--line);
+}
+.auth-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-family: var(--font-ui), sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  padding: 12px 8px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.1s, border-color 0.1s;
+}
+.auth-tab.active {
+  color: var(--mint);
+  border-bottom-color: var(--mint);
+}
+.auth-tab:hover:not(.active) {
+  color: var(--text);
 }
 
 /* ---------- ACCESSIBILITY ---------- */
