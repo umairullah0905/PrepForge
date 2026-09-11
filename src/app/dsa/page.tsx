@@ -1,52 +1,59 @@
+import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
-import { getCompletedQuestTitles } from "@/lib/progress";
+import { getProfile, getCompletedQuestTitles } from "@/lib/progress";
+import { getCachedQuestions, getCachedCompanyQuestions } from "@/lib/questions";
+import Navbar from "@/components/Navbar";
 import ClientQuestsView from "../quests/ClientQuestsView";
+import { signOutAction } from "../actions";
+import {
+  Search,
+  Building2,
+  Code2,
+  CheckCircle2,
+  ExternalLink,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
-export const revalidate = 0;
+export const revalidate = 30;
 
 export default async function DsaHubPage(props: {
   searchParams: Promise<{ tab?: string; company?: string; topic?: string; page?: string }>;
 }) {
   const resolvedParams = await props.searchParams;
   const currentTab = resolvedParams.tab || "quests"; // 'quests' or 'companies'
-  
+
   const rawCompany = resolvedParams.company || "";
   const topicFilter = resolvedParams.topic || "";
   const currentPage = Math.max(1, parseInt(resolvedParams.page || "1", 10));
-  const itemsPerPage = 15;
+  const itemsPerPage = 20;
 
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  const completedTitles = user ? await getCompletedQuestTitles(supabase, user.id) : [];
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  // Data fetching based on tab
-  let questsData = [];
-  let companyData = [];
-  
-  if (currentTab === "quests") {
-    const { data } = await supabase
-      .from('questions')
-      .select('*')
-      .order('created_at', { ascending: false });
-    questsData = data || [];
-  } else {
-    let { data } = await supabase
-      .from('company_questions')
-      .select('*')
-      .order('title', { ascending: true });
-    
-    companyData = data || [];
-    
+  // Run user data and tab data in parallel with high-performance caching
+  const [profile, completedTitles, questsData, rawCompanyData] = await Promise.all([
+    user ? getProfile(supabase, user.id) : Promise.resolve(null),
+    user ? getCompletedQuestTitles(supabase, user.id) : Promise.resolve([]),
+    currentTab === "quests" ? getCachedQuestions() : Promise.resolve([]),
+    currentTab === "companies" ? getCachedCompanyQuestions() : Promise.resolve([]),
+  ]);
+
+  let companyData = rawCompanyData;
+  if (currentTab === "companies") {
+
     if (rawCompany) {
       const searchCompany = rawCompany.toLowerCase();
-      companyData = companyData.filter(q => 
+      companyData = companyData.filter((q: any) =>
         q.company_names?.some((c: string) => c.toLowerCase().includes(searchCompany))
       );
     }
-    
+
     if (topicFilter) {
       const searchTopic = topicFilter.toLowerCase();
-      companyData = companyData.filter(q => 
+      companyData = companyData.filter((q: any) =>
         q.topics?.toLowerCase().includes(searchTopic)
       );
     }
@@ -58,189 +65,271 @@ export default async function DsaHubPage(props: {
   const paginatedCompanyData = companyData.slice(startIndex, startIndex + itemsPerPage);
 
   return (
-    <div className="qx-root" style={{ minHeight: '100vh', backgroundColor: 'var(--bg)', color: 'var(--text)' }}>
-      <nav className="qx-nav">
-        <div className="qx-logo">
-          <div className="qx-logo-mark">⚔️</div>
-          <span className="qx-display qx-logo-text">PREP FORGE</span>
-        </div>
-        <div className="qx-navlinks">
-          <a href="/" className="qx-link">Dashboard</a>
-          <a href="/dsa" className="qx-link">DSA Hub</a>
-          <a href="/system-design" className="qx-link">System Design</a>
-          <a href="/forums" className="qx-link">Forums</a>
-          <a href="/community" className="qx-link">Community</a>
-        </div>
-      </nav>
+    <div className="qx-root flex flex-col min-h-screen">
+      <Navbar
+        userEmail={user?.email ?? null}
+        profile={profile}
+        completedCount={completedTitles.length}
+        signOutAction={signOutAction}
+      />
 
-      <div className="qx-container" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
-        <div className="qx-section-head">
-          <h1 className="qx-pixel qx-section-title">Data Structures & Algorithms</h1>
-          <p className="qx-section-desc">Master the patterns and clear the technical interview.</p>
-        </div>
-
-        {/* TABS */}
-        <div style={{ display: 'flex', gap: '16px', marginBottom: '32px', borderBottom: '2px solid var(--line)', paddingBottom: '16px' }}>
-          <a 
-            href="/dsa?tab=quests" 
-            className={`qx-btn ${currentTab === 'quests' ? '' : 'qx-btn-ghost'}`}
-            style={{ padding: '10px 24px', fontSize: '14px', margin: 0 }}
-          >
-            Topic Quests
-          </a>
-          <a 
-            href="/dsa?tab=companies" 
-            className={`qx-btn ${currentTab === 'companies' ? '' : 'qx-btn-ghost'}`}
-            style={{ padding: '10px 24px', fontSize: '14px', margin: 0 }}
-          >
-            Company Tagged
-          </a>
-        </div>
-        
-        {/* TAB CONTENT */}
-        {currentTab === 'quests' ? (
-          <ClientQuestsView questions={questsData} completedTitles={completedTitles} />
-        ) : (
-          <div>
-            <div className="mb-8" style={{ background: 'var(--bg-card)', border: '3px solid var(--line)', padding: '24px', boxShadow: '5px 5px 0 var(--line)' }}>
-              <form method="GET" action="/dsa" className="flex flex-col md:flex-row gap-4 items-end">
-                <input type="hidden" name="tab" value="companies" />
-                <div className="flex-1 w-full">
-                   <label htmlFor="company-input" className="block font-semibold text-sm mb-2" style={{ color: 'var(--text)' }}>Company Name</label>
-                   <input 
-                     type="text" 
-                     name="company" 
-                     id="company-input"
-                     defaultValue={rawCompany} 
-                     placeholder="e.g. Google, Apple, Amazon" 
-                     className="w-full rounded p-3 focus:outline-none"
-                     style={{ background: 'var(--bg-elevated)', border: '2px solid var(--line)', color: 'var(--text)' }}
-                   />
-                </div>
-                
-                <div className="flex-1 w-full">
-                   <label htmlFor="topic-input" className="block font-semibold text-sm mb-2" style={{ color: 'var(--text)' }}>Topic</label>
-                   <input 
-                     type="text" 
-                     name="topic" 
-                     id="topic-input"
-                     defaultValue={topicFilter} 
-                     placeholder="e.g. Array, Hash Table, Math" 
-                     className="w-full rounded p-3 focus:outline-none"
-                     style={{ background: 'var(--bg-elevated)', border: '2px solid var(--line)', color: 'var(--text)' }}
-                   />
-                </div>
-
-                <div className="flex gap-4 w-full md:w-auto">
-                    <button type="submit" className="qx-btn" style={{ padding: '12px 24px', fontSize: '13px' }}>Search</button>
-                    {(rawCompany || topicFilter) && (
-                      <a href="/dsa?tab=companies" className="qx-btn qx-btn-ghost flex items-center justify-center" style={{ padding: '12px 24px', fontSize: '13px' }}>
-                        Clear
-                      </a>
-                    )}
-                </div>
-              </form>
-              <div className="mt-4 text-xs" style={{ color: 'var(--text-dim)' }}>
-                 Showing {totalQuestions} total questions. You can now type any part of a company name.
+      <main className="flex-1 pb-20">
+        <div className="qx-container pt-8 sm:pt-10">
+          {/* Header section - Full Width */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 pb-6 mb-8 border-b border-zinc-800/80">
+            <div>
+              <div className="flex items-center gap-2 text-xs font-mono text-zinc-500 mb-1.5">
+                <Link href="/" className="hover:text-zinc-300 transition-colors">
+                  Overview
+                </Link>
+                <span>/</span>
+                <span className="text-zinc-300">DSA Workspace</span>
               </div>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100">
+                Data Structures &amp; Algorithms
+              </h1>
+              <p className="text-sm sm:text-base text-zinc-400 mt-1.5">
+                Curated interview patterns, algorithm archives, and company frequency tagging.
+              </p>
             </div>
 
-            {companyData.length === 0 ? (
-              <div className="text-center" style={{ background: 'var(--bg-card)', border: '3px solid var(--line)', padding: '48px', boxShadow: '5px 5px 0 var(--line)' }}>
-                <p style={{ color: 'var(--text)' }}>No questions found matching your criteria.</p>
-                <p className="text-sm mt-2" style={{ color: 'var(--text-dim)' }}>Try adjusting your spelling or using fewer filters.</p>
-              </div>
-            ) : (
-              <div className="flex flex-col" style={{ background: 'var(--bg-card)', border: '3px solid var(--line)', boxShadow: '5px 5px 0 var(--line)', overflow: 'hidden' }}>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse text-sm md:text-base">
-                    <thead>
-                      <tr style={{ borderBottom: '2px solid var(--line)', background: 'var(--bg-elevated)' }}>
-                        <th className="p-4 font-semibold w-1/4" style={{ color: 'var(--text)' }}>Companies</th>
-                        <th className="p-4 font-semibold w-1/3" style={{ color: 'var(--text)' }}>Title</th>
-                        <th className="p-4 font-semibold" style={{ color: 'var(--text)' }}>Difficulty</th>
-                        <th className="p-4 font-semibold" style={{ color: 'var(--text)' }}>Topics</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {paginatedCompanyData.map((q) => (
-                        <tr key={q.id} style={{ borderBottom: '1px solid var(--line)' }} className="hover:bg-opacity-80 transition-colors">
-                          <td className="p-4">
-                            <div className="flex flex-wrap gap-2">
-                              {q.company_names?.slice(0, 5).map((c: string) => (
-                                <span key={c} style={{ background: 'var(--line)', color: 'var(--text)' }} className="text-xs px-2 py-1 rounded">{c}</span>
-                              ))}
-                              {q.company_names?.length > 5 && (
-                                <span className="text-xs px-1 pt-1 font-medium" style={{ color: 'var(--text-dim)' }}>+{q.company_names.length - 5} more</span>
-                              )}
-                            </div>
-                          </td>
-                          <td className="p-4">
-                            <a href={q.link} target="_blank" rel="noopener noreferrer" className="hover:underline font-medium" style={{ color: 'var(--gold)' }}>
-                              {completedTitles.includes(q.title) ? "✅ " : "📜 "} {q.title}
-                            </a>
-                          </td>
-                          <td className="p-4">
-                            <span className="text-xs font-bold px-2 py-1 rounded" style={{
-                              background: q.difficulty === 'EASY' ? 'rgba(244, 185, 66, 0.18)' : 
-                                         q.difficulty === 'MEDIUM' ? 'rgba(156, 163, 175, 0.14)' : 
-                                         q.difficulty === 'HARD' ? 'rgba(226, 72, 61, 0.16)' : 'rgba(156, 163, 175, 0.14)',
-                              color: q.difficulty === 'EASY' ? 'var(--mint)' : 
-                                     q.difficulty === 'MEDIUM' ? 'var(--silver)' : 
-                                     q.difficulty === 'HARD' ? 'var(--coral)' : 'var(--silver)',
-                              border: `1px solid ${
-                                q.difficulty === 'EASY' ? 'rgba(244, 185, 66, 0.35)' : 
-                                q.difficulty === 'MEDIUM' ? 'rgba(156, 163, 175, 0.3)' : 
-                                q.difficulty === 'HARD' ? 'rgba(226, 72, 61, 0.32)' : 'rgba(156, 163, 175, 0.3)'
-                              }`
-                            }}>
-                              {q.difficulty}
-                            </span>
-                          </td>
-                          <td className="p-4">
-                            <div className="flex flex-wrap gap-2">
-                              {q.topics ? q.topics.split(',').map((t: string) => (
-                                <span key={t.trim()} style={{ background: 'rgba(139, 92, 246, 0.15)', color: 'var(--primary)', border: '1px solid rgba(139, 92, 246, 0.3)' }} className="text-xs px-2 py-1 rounded">{t.trim()}</span>
-                              )) : '-'}
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                
-                {/* Pagination Controls */}
-                {totalPages > 1 && (
-                  <div className="flex justify-between items-center p-6 border-t" style={{ borderColor: 'var(--line)', background: 'var(--bg-elevated)' }}>
-                    <div className="text-sm" style={{ color: 'var(--text-dim)' }}>
-                      Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, totalQuestions)} of {totalQuestions} results
-                    </div>
-                    <div className="flex gap-4">
-                      {currentPage > 1 && (
-                        <a 
-                          href={`/dsa?tab=companies&company=${encodeURIComponent(rawCompany)}&topic=${encodeURIComponent(topicFilter)}&page=${currentPage - 1}`} 
-                          className="qx-btn qx-btn-ghost"
-                        >
-                          Previous
-                        </a>
-                      )}
-                      {currentPage < totalPages && (
-                        <a 
-                          href={`/dsa?tab=companies&company=${encodeURIComponent(rawCompany)}&topic=${encodeURIComponent(topicFilter)}&page=${currentPage + 1}`} 
-                          className="qx-btn qx-btn-ghost"
-                        >
-                          Next
-                        </a>
-                      )}
+            {/* Segmented Tab Controls */}
+            <div className="flex rounded-lg border border-zinc-800 bg-zinc-900/60 p-1">
+              <Link
+                href="/dsa?tab=quests"
+                className={`inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-semibold transition-colors ${
+                  currentTab === "quests"
+                    ? "bg-zinc-800 text-zinc-100 shadow-sm"
+                    : "text-zinc-400 hover:text-zinc-200"
+                }`}
+              >
+                <Code2 className="h-4 w-4" />
+                <span>Pattern Quests</span>
+              </Link>
+              <Link
+                href="/dsa?tab=companies"
+                className={`inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-semibold transition-colors ${
+                  currentTab === "companies"
+                    ? "bg-zinc-800 text-zinc-100 shadow-sm"
+                    : "text-zinc-400 hover:text-zinc-200"
+                }`}
+              >
+                <Building2 className="h-4 w-4" />
+                <span>Company Archives</span>
+              </Link>
+            </div>
+          </div>
+
+          {/* TAB CONTENT */}
+          {currentTab === "quests" ? (
+            <ClientQuestsView questions={questsData} completedTitles={completedTitles} />
+          ) : (
+            <div className="flex flex-col gap-6">
+              {/* Search & Filter Toolbar */}
+              <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5 shadow-sm">
+                <form method="GET" action="/dsa" className="flex flex-col md:flex-row gap-4 items-end">
+                  <input type="hidden" name="tab" value="companies" />
+
+                  <div className="flex-1 w-full">
+                    <label
+                      htmlFor="company-input"
+                      className="block font-mono text-xs uppercase tracking-wider text-zinc-400 mb-2 font-semibold"
+                    >
+                      Company Filter
+                    </label>
+                    <div className="relative">
+                      <Search className="absolute left-3 top-3 h-4 w-4 text-zinc-500" />
+                      <input
+                        type="text"
+                        name="company"
+                        id="company-input"
+                        defaultValue={rawCompany}
+                        placeholder="e.g. Google, Apple, Amazon, Meta"
+                        className="h-10 w-full rounded-lg border border-zinc-800 bg-zinc-950 pl-9 pr-3 text-sm text-zinc-200 placeholder:text-zinc-500 focus:border-zinc-700 focus:outline-none"
+                      />
                     </div>
                   </div>
-                )}
+
+                  <div className="flex-1 w-full">
+                    <label
+                      htmlFor="topic-input"
+                      className="block font-mono text-xs uppercase tracking-wider text-zinc-400 mb-2 font-semibold"
+                    >
+                      Topic / Pattern
+                    </label>
+                    <input
+                      type="text"
+                      name="topic"
+                      id="topic-input"
+                      defaultValue={topicFilter}
+                      placeholder="e.g. Array, Dynamic Programming, Tree"
+                      className="h-10 w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 text-sm text-zinc-200 placeholder:text-zinc-500 focus:border-zinc-700 focus:outline-none"
+                    />
+                  </div>
+
+                  <div className="flex gap-2.5 w-full md:w-auto">
+                    <button
+                      type="submit"
+                      className="h-10 rounded-lg bg-zinc-100 px-5 text-sm font-semibold text-zinc-950 hover:bg-white transition-colors cursor-pointer shadow-sm"
+                    >
+                      Filter
+                    </button>
+                    {(rawCompany || topicFilter) && (
+                      <Link
+                        href="/dsa?tab=companies"
+                        className="h-10 rounded-lg border border-zinc-800 bg-zinc-950 px-4 text-sm font-medium text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900 transition-colors flex items-center justify-center"
+                      >
+                        Reset
+                      </Link>
+                    )}
+                  </div>
+                </form>
+
+                <div className="mt-3 text-xs font-mono text-zinc-500">
+                  Showing {totalQuestions} company-tagged questions matching criteria.
+                </div>
               </div>
-            )}
-          </div>
-        )}
-      </div>
+
+              {/* Company Questions Table */}
+              {companyData.length === 0 ? (
+                <div className="rounded-xl border border-dashed border-zinc-800 p-16 text-center text-sm font-mono text-zinc-500">
+                  No company questions found matching your filter criteria.
+                </div>
+              ) : (
+                <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 overflow-hidden shadow-sm">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-sm border-collapse">
+                      <thead>
+                        <tr className="border-b border-zinc-800 bg-zinc-950/80 text-xs font-mono text-zinc-400 uppercase tracking-wider">
+                          <th className="py-3 px-5 w-1/4">Companies</th>
+                          <th className="py-3 px-5 w-2/5">Problem Title</th>
+                          <th className="py-3 px-5 w-32">Difficulty</th>
+                          <th className="py-3 px-5">Topics</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-zinc-850">
+                        {paginatedCompanyData.map((q) => {
+                          const isCompleted = completedTitles.includes(q.title);
+                          const diff = q.difficulty?.toLowerCase() || "easy";
+                          const diffClass =
+                            diff === "easy"
+                              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+                              : diff === "medium"
+                              ? "bg-amber-500/10 text-amber-400 border-amber-500/20"
+                              : "bg-rose-500/10 text-rose-400 border-rose-500/20";
+
+                          return (
+                            <tr
+                              key={q.id}
+                              className="hover:bg-zinc-900/80 transition-colors group"
+                            >
+                              <td className="py-3.5 px-5">
+                                <div className="flex flex-wrap gap-1.5">
+                                  {q.company_names?.slice(0, 4).map((c: string) => (
+                                    <span
+                                      key={c}
+                                      className="rounded bg-zinc-950 px-2 py-0.5 text-xs font-mono text-zinc-300 border border-zinc-800"
+                                    >
+                                      {c}
+                                    </span>
+                                  ))}
+                                  {q.company_names?.length > 4 && (
+                                    <span className="text-xs font-mono text-zinc-500 self-center">
+                                      +{q.company_names.length - 4}
+                                    </span>
+                                  )}
+                                </div>
+                              </td>
+
+                              <td className="py-3.5 px-5">
+                                <a
+                                  href={q.link}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="font-semibold text-sm sm:text-base text-zinc-200 group-hover:text-white hover:underline inline-flex items-center gap-2"
+                                >
+                                  {isCompleted ? (
+                                    <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                                  ) : null}
+                                  <span>{q.title}</span>
+                                  <ExternalLink className="h-3.5 w-3.5 text-zinc-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                </a>
+                              </td>
+
+                              <td className="py-3.5 px-5">
+                                <span
+                                  className={`inline-flex items-center rounded-md border px-2.5 py-1 font-mono text-xs font-semibold ${diffClass}`}
+                                >
+                                  {q.difficulty}
+                                </span>
+                              </td>
+
+                              <td className="py-3.5 px-5">
+                                <div className="flex flex-wrap gap-1.5">
+                                  {q.topics ? (
+                                    q.topics.split(",").map((t: string) => (
+                                      <span
+                                        key={t.trim()}
+                                        className="rounded bg-zinc-950 px-2 py-0.5 text-xs font-mono text-zinc-400 border border-zinc-800/80"
+                                      >
+                                        {t.trim()}
+                                      </span>
+                                    ))
+                                  ) : (
+                                    <span className="text-zinc-600 font-mono text-xs">-</span>
+                                  )}
+                                </div>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Pagination Controls */}
+                  {totalPages > 1 && (
+                    <div className="flex items-center justify-between px-6 py-4 border-t border-zinc-800 bg-zinc-950/60 text-sm font-mono text-zinc-400">
+                      <div>
+                        Showing {startIndex + 1} to{" "}
+                        {Math.min(startIndex + itemsPerPage, totalQuestions)} of {totalQuestions}
+                      </div>
+
+                      <div className="flex items-center gap-2.5">
+                        {currentPage > 1 && (
+                          <Link
+                            href={`/dsa?tab=companies&company=${encodeURIComponent(
+                              rawCompany
+                            )}&topic=${encodeURIComponent(topicFilter)}&page=${currentPage - 1}`}
+                            className="inline-flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors"
+                          >
+                            <ChevronLeft className="h-4 w-4" />
+                            <span>Prev</span>
+                          </Link>
+                        )}
+                        <span className="text-zinc-400">
+                          {currentPage} / {totalPages}
+                        </span>
+                        {currentPage < totalPages && (
+                          <Link
+                            href={`/dsa?tab=companies&company=${encodeURIComponent(
+                              rawCompany
+                            )}&topic=${encodeURIComponent(topicFilter)}&page=${currentPage + 1}`}
+                            className="inline-flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors"
+                          >
+                            <span>Next</span>
+                            <ChevronRight className="h-4 w-4" />
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </main>
     </div>
   );
 }

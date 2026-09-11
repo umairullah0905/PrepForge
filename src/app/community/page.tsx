@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import CommunityChat, { type ChatMessage } from "@/components/CommunityChat";
-import { getProfile } from "@/lib/progress";
+import Navbar from "@/components/Navbar";
+import { getProfile, getCompletedQuestTitles } from "@/lib/progress";
+import { signOutAction } from "@/app/actions";
+
+export const revalidate = 0;
 
 export default async function CommunityPage() {
   const supabase = await createClient();
@@ -10,6 +14,7 @@ export default async function CommunityPage() {
   } = await supabase.auth.getUser();
 
   const profile = user ? await getProfile(supabase, user.id) : null;
+  const completedTitles = user ? await getCompletedQuestTitles(supabase, user.id) : [];
 
   const { data: messageRows } = await supabase
     .from("messages")
@@ -22,40 +27,32 @@ export default async function CommunityPage() {
     .reverse();
 
   return (
-    <div className="qx-root">
-      <nav className="qx-nav">
-        <Link
-          href="/"
-          className="qx-logo"
-          style={{ textDecoration: "none" }}
-        >
-          <div className="qx-logo-mark">⚔️</div>
-          <span className="qx-display qx-logo-text">DSA QUESTS</span>
-        </Link>
-        <div className="qx-navlinks">
-          <Link href="/">← Back to Quest Board</Link>
+    <div className="qx-root flex flex-col min-h-screen">
+      <Navbar
+        userEmail={user?.email ?? null}
+        profile={profile}
+        completedCount={completedTitles.length}
+        signOutAction={signOutAction}
+      />
+
+      <main className="flex-1 pb-16">
+        <div className="qx-container pt-8">
+          <div className="pb-6 mb-8 border-b border-zinc-800/80 text-center max-w-2xl mx-auto">
+            <h1 className="text-2xl font-semibold tracking-tight text-zinc-100">
+              Community Channels
+            </h1>
+            <p className="text-xs text-zinc-400 mt-1">
+              Real-time engineering chat. Discuss solutions, debugging techniques, and interview preparation.
+            </p>
+          </div>
+
+          <CommunityChat
+            initialMessages={initialMessages}
+            currentUserId={user?.id ?? null}
+            currentUserName={profile?.name ?? user?.email ?? null}
+          />
         </div>
-      </nav>
-
-      <div
-        className="qx-container"
-        style={{ padding: "56px 24px", position: "relative", zIndex: 1 }}
-      >
-        <div className="qx-section-head">
-          <h1 className="qx-pixel qx-section-title">🏰 Community Hall</h1>
-          <p className="qx-section-desc">
-            Talk strategy, brag about a quest you just cleared, ask for help.
-          </p>
-        </div>
-
-        <CommunityChat
-          initialMessages={initialMessages}
-          currentUserId={user?.id ?? null}
-          currentUserName={profile?.name ?? user?.email ?? null}
-        />
-      </div>
-
-      <footer className="qx-footer">DSA Quests — built one dungeon at a time</footer>
+      </main>
     </div>
   );
 }

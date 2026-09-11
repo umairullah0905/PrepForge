@@ -1,55 +1,143 @@
-export default function ForumsPage() {
+import Link from "next/link";
+import { createClient } from "@/utils/supabase/server";
+import Navbar from "@/components/Navbar";
+import { getProfile, getCompletedQuestTitles } from "@/lib/progress";
+import { signOutAction } from "@/app/actions";
+import { MessageSquare, Plus, Search, Filter, ThumbsUp } from "lucide-react";
+
+export const revalidate = 0;
+
+export default async function ForumsPage() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const profile = user ? await getProfile(supabase, user.id) : null;
+  const completedTitles = user ? await getCompletedQuestTitles(supabase, user.id) : [];
+
+  const threads = [
+    {
+      topic: "Dynamic Programming",
+      title: "How to develop intuition for state transitions in 2D memoization problems?",
+      author: "alex_dev",
+      replies: 24,
+      upvotes: 42,
+      time: "2 hours ago",
+    },
+    {
+      topic: "System Design",
+      title: "Distributed consensus comparison: Raft vs Paxos in production databases",
+      author: "k8s_architect",
+      replies: 15,
+      upvotes: 38,
+      time: "5 hours ago",
+    },
+    {
+      topic: "Graphs",
+      title: "Dijkstra vs Bellman-Ford: When negative cycles actually matter in interview questions",
+      author: "pathfinder",
+      replies: 89,
+      upvotes: 112,
+      time: "1 day ago",
+    },
+    {
+      topic: "Two Pointers",
+      title: "Optimal pointer traversal strategy for Trapping Rain Water with O(1) space",
+      author: "matrix_coder",
+      replies: 19,
+      upvotes: 27,
+      time: "2 days ago",
+    },
+  ];
+
   return (
-    <div className="qx-root" style={{ minHeight: '100vh', backgroundColor: 'var(--bg)', color: 'var(--text)' }}>
-      <nav className="qx-nav">
-        <div className="qx-logo">
-          <div className="qx-logo-mark">⚔️</div>
-          <span className="qx-display qx-logo-text">PREP FORGE</span>
-        </div>
-        <div className="qx-navlinks">
-          <a href="/" className="qx-link">Dashboard</a>
-          <a href="/system-design" className="qx-link">System Design</a>
-        </div>
-      </nav>
+    <div className="qx-root flex flex-col min-h-screen">
+      <Navbar
+        userEmail={user?.email ?? null}
+        profile={profile}
+        completedCount={completedTitles.length}
+        signOutAction={signOutAction}
+      />
 
-      <div className="qx-container" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
-        <div className="qx-section-head">
-          <h1 className="qx-pixel qx-section-title">The Tavern (Forums)</h1>
-          <p className="qx-section-desc">Discuss tough bounties. Share strategies with other adventurers.</p>
-        </div>
-
-        <div className="flex flex-col gap-6 mt-8">
-          <div className="qx-mono" style={{ color: 'var(--text-dim)', padding: '2rem', textAlign: 'center', border: '1px dashed var(--line)', borderRadius: '8px', marginBottom: '2rem' }}>
-            🚧 The Forums are currently being built. 🚧<br/><br/>
-            Soon you will be able to post your solutions, ask questions about difficult topics, and upvote the best explanations.
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {[
-              { topic: "Dynamic Programming", title: "How do you intuitively come up with the state transitions?", replies: 24, author: "Mage_Coder" },
-              { topic: "System Design", title: "When to choose Cassandra over MongoDB?", replies: 15, author: "Architect_Bob" },
-              { topic: "Graphs", title: "Dijkstra vs Bellman-Ford: A quick cheat sheet", replies: 89, author: "PathfinderX" },
-              { topic: "Two Pointers", title: "Stuck on Trapping Rain Water, please help!", replies: 5, author: "NoobSlayer" },
-            ].map((thread) => (
-              <div key={thread.title} style={{ padding: '1.5rem', border: '1px solid var(--line)', borderRadius: '8px', backgroundColor: 'rgba(255,255,255,0.02)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div>
-                  <span style={{ fontSize: '12px', color: 'var(--mint)', border: '1px solid var(--mint)', padding: '2px 8px', borderRadius: '4px', marginBottom: '8px', display: 'inline-block' }}>
-                    {thread.topic}
-                  </span>
-                  <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', margin: '0' }}>{thread.title}</h3>
-                  <p style={{ fontSize: '13px', color: 'var(--text-dim)', margin: '8px 0 0 0' }}>
-                    Started by {thread.author}
-                  </p>
-                </div>
-                <div style={{ textAlign: 'center', padding: '0.5rem 1rem', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: '8px' }}>
-                  <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--mint)' }}>{thread.replies}</div>
-                  <div style={{ fontSize: '11px', color: 'var(--text-dim)' }}>Replies</div>
-                </div>
+      <main className="flex-1 pb-16">
+        <div className="qx-container pt-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 mb-6 border-b border-zinc-800/80">
+            <div>
+              <div className="flex items-center gap-2 text-sm font-mono text-zinc-500 mb-1.5">
+                <Link href="/" className="hover:text-zinc-300 transition-colors">
+                  Overview
+                </Link>
+                <span>/</span>
+                <span className="text-zinc-300">Technical Discussions</span>
               </div>
-            ))}
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100">
+                Discussions &amp; Solutions
+              </h1>
+              <p className="text-sm text-zinc-400 mt-1.5">
+                Peer-reviewed solutions, algorithm intuition, and interview post-mortems.
+              </p>
+            </div>
+
+            <button
+              disabled
+              className="inline-flex items-center gap-2 rounded-md bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-950 opacity-60 cursor-not-allowed"
+            >
+              <Plus className="h-4 w-4" />
+              <span>New Thread</span>
+            </button>
+          </div>
+
+          {/* Threads List (GitHub Discussions Style) */}
+          <div className="rounded-lg border border-zinc-800 bg-zinc-900/40 overflow-hidden">
+            <div className="p-3.5 sm:p-4 border-b border-zinc-800 bg-zinc-950/60 flex items-center justify-between text-sm text-zinc-400 font-mono">
+              <span>Pinned Discussions &amp; Popular Threads</span>
+              <span>{threads.length} active threads</span>
+            </div>
+
+            <div className="divide-y divide-zinc-850">
+              {threads.map((t) => (
+                <div
+                  key={t.title}
+                  className="p-4 sm:p-5 hover:bg-zinc-900/80 transition-colors flex items-start justify-between gap-4 group"
+                >
+                  <div className="flex items-start gap-3.5">
+                    <div className="mt-0.5 h-8 w-8 rounded-md bg-zinc-850 border border-zinc-800 flex items-center justify-center text-zinc-400 shrink-0">
+                      <MessageSquare className="h-4 w-4" />
+                    </div>
+
+                    <div>
+                      <div className="flex items-center gap-2.5 mb-1.5">
+                        <span className="rounded bg-zinc-950 px-2.5 py-0.5 text-xs font-mono text-zinc-300 border border-zinc-800">
+                          {t.topic}
+                        </span>
+                        <span className="text-xs font-mono text-zinc-500">
+                          by {t.author} • {t.time}
+                        </span>
+                      </div>
+
+                      <h3 className="text-base font-medium text-zinc-200 group-hover:text-zinc-100 transition-colors">
+                        {t.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4 shrink-0 text-sm font-mono text-zinc-400">
+                    <div className="flex items-center gap-1.5">
+                      <ThumbsUp className="h-4 w-4 text-zinc-500" />
+                      <span>{t.upvotes}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 rounded-md bg-zinc-950 px-2.5 py-1 border border-zinc-800">
+                      <span>{t.replies}</span>
+                      <span className="text-zinc-500">replies</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

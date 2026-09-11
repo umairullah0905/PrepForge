@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import { createClient } from "@/utils/supabase/server";
 
 export type CompleteQuestResult =
@@ -29,7 +29,12 @@ export async function completeQuestAction(
     return { ok: false, reason: "error", message: error.message };
   }
 
+  updateTag(`progress-${user.id}`);
+  updateTag(`profile-${user.id}`);
+  updateTag(`progress-rows-${user.id}`);
   revalidatePath("/");
+  revalidatePath("/dsa");
+  revalidatePath("/quests");
   revalidatePath("/profile");
 
   const row = data?.[0];

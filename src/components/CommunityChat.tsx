@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { createClient } from "@/utils/supabase/client";
+import { Send, User } from "lucide-react";
 
 export type ChatMessage = {
   id: string;
@@ -15,10 +17,10 @@ function formatTime(iso: string) {
   const diffMs = Date.now() - new Date(iso).getTime();
   const mins = Math.floor(diffMs / 60000);
   if (mins < 1) return "just now";
-  if (mins < 60) return `${mins}m`;
+  if (mins < 60) return `${mins}m ago`;
   const hours = Math.floor(mins / 60);
-  if (hours < 24) return `${hours}h`;
-  return `${Math.floor(hours / 24)}d`;
+  if (hours < 24) return `${hours}h ago`;
+  return `${Math.floor(hours / 24)}d ago`;
 }
 
 export default function CommunityChat({
@@ -77,59 +79,89 @@ export default function CommunityChat({
   }
 
   return (
-    <div className="community-chat">
-      <div className="community-chat-list" ref={listRef}>
+    <div className="rounded-lg border border-zinc-800 bg-zinc-900/40 overflow-hidden flex flex-col max-w-3xl mx-auto">
+      {/* Header bar */}
+      <div className="px-4 py-3 border-b border-zinc-800 bg-zinc-950/60 flex items-center justify-between text-xs">
+        <div className="flex items-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-emerald-400" />
+          <span className="font-mono text-zinc-300">#general-discussion</span>
+        </div>
+        <span className="font-mono text-zinc-500 text-[11px]">
+          {messages.length} messages
+        </span>
+      </div>
+
+      {/* Message List */}
+      <div
+        className="p-4 flex flex-col gap-4 h-[55vh] min-h-[320px] overflow-y-auto"
+        ref={listRef}
+      >
         {messages.length === 0 ? (
-          <p className="qx-sub" style={{ fontSize: 13, margin: 0 }}>
-            No messages yet — be the first to say something.
-          </p>
+          <div className="m-auto text-center text-xs font-mono text-zinc-500">
+            No messages logged yet. Start the conversation.
+          </div>
         ) : (
-          messages.map((m) => (
-            <div className="community-msg" key={m.id}>
-              <div className="party-msg-avatar">🧙</div>
-              <div style={{ flex: 1 }}>
-                <div className="party-msg-name">
-                  <span
-                    style={{
-                      color: m.user_id === currentUserId ? "var(--mint)" : "var(--parchment)",
-                    }}
-                  >
-                    {m.name}
-                  </span>{" "}
-                  <span style={{ color: "var(--text-dim)", fontWeight: 400 }}>
-                    · {formatTime(m.created_at)}
-                  </span>
+          messages.map((m) => {
+            const isMe = m.user_id === currentUserId;
+            return (
+              <div className="flex items-start gap-3 text-xs" key={m.id}>
+                <div className="h-7 w-7 rounded bg-zinc-800 border border-zinc-700/60 flex items-center justify-center font-mono font-bold text-zinc-300 shrink-0 text-[11px]">
+                  {m.name?.[0]?.toUpperCase() || "U"}
                 </div>
-                <div className="community-msg-text">{m.body}</div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span
+                      className={`font-semibold ${
+                        isMe ? "text-zinc-100" : "text-zinc-300"
+                      }`}
+                    >
+                      {m.name}
+                    </span>
+                    <span className="text-[10px] font-mono text-zinc-500">
+                      {formatTime(m.created_at)}
+                    </span>
+                  </div>
+                  <div className="text-zinc-300 leading-relaxed break-words">
+                    {m.body}
+                  </div>
+                </div>
               </div>
-            </div>
-          ))
+            );
+          })
         )}
       </div>
 
+      {/* Input area */}
       {isLoggedIn ? (
-        <form className="community-chat-input-row" onSubmit={handleSend}>
+        <form
+          className="p-3 border-t border-zinc-800 bg-zinc-950/80 flex items-center gap-2"
+          onSubmit={handleSend}
+        >
           <input
-            className="party-chat-input"
-            placeholder="Say something to the party..."
+            className="flex-1 h-9 rounded-md border border-zinc-800 bg-zinc-900 px-3 text-xs text-zinc-200 placeholder:text-zinc-500 focus:border-zinc-700 focus:outline-none"
+            placeholder="Type a message..."
             value={draft}
             maxLength={500}
             onChange={(e) => setDraft(e.target.value)}
           />
           <button
             type="submit"
-            className="party-chat-send"
+            className="h-9 w-9 rounded-md bg-zinc-100 text-zinc-950 flex items-center justify-center hover:bg-white disabled:opacity-50 transition-colors shrink-0"
             disabled={sending || !draft.trim()}
-            aria-label="Send"
+            title="Send"
           >
-            ➤
+            <Send className="h-3.5 w-3.5" />
           </button>
         </form>
       ) : (
-        <div className="community-chat-signin">
-          <a href="/login" className="qx-btn qx-btn-sm">
-            SIGN IN TO CHAT
-          </a>
+        <div className="p-4 border-t border-zinc-800 bg-zinc-950/80 text-center text-xs text-zinc-400">
+          <span>Sign in to participate in technical community channels. </span>
+          <Link
+            href="/login"
+            className="font-medium text-zinc-100 hover:underline ml-1"
+          >
+            Sign In &rarr;
+          </Link>
         </div>
       )}
     </div>

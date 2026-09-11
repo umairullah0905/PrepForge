@@ -1,5 +1,16 @@
-import { createClient } from '@/utils/supabase/server';
-import { getCompletedQuestTitles } from "@/lib/progress";
+import Link from "next/link";
+import { createClient } from "@/utils/supabase/server";
+import { getProfile, getCompletedQuestTitles } from "@/lib/progress";
+import Navbar from "@/components/Navbar";
+import { signOutAction } from "../actions";
+import {
+  Search,
+  Building2,
+  CheckCircle2,
+  ExternalLink,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 export const revalidate = 0;
 
@@ -10,211 +21,291 @@ export default async function CompanyQuestionsPage({
 }) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  
+
   if (!supabaseUrl || !supabaseKey) {
-    return <div className="p-8 text-red-500">Missing Supabase environment variables.</div>;
+    return (
+      <div className="p-8 text-xs font-mono text-rose-400">
+        Missing Supabase environment variables.
+      </div>
+    );
   }
 
   const resolvedParams = await searchParams;
   const rawCompany = resolvedParams.company || "";
   const topicFilter = resolvedParams.topic || "";
   const currentPage = Math.max(1, parseInt(resolvedParams.page || "1", 10));
-  const itemsPerPage = 15;
+  const itemsPerPage = 20;
 
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const profile = user ? await getProfile(supabase, user.id) : null;
   const completedTitles = user ? await getCompletedQuestTitles(supabase, user.id) : [];
-  
-  // Fetch ALL questions and filter in JS to easily support case-insensitive array matching
+
   let { data: allQuestions, error } = await supabase
-    .from('company_questions')
-    .select('*')
-    .order('title', { ascending: true }); 
+    .from("company_questions")
+    .select("id, title, difficulty, company_names, topics, link")
+    .order("title", { ascending: true });
 
   if (error) {
-    return <div className="p-8 text-red-500">Error fetching questions: {error.message}. <br/> Make sure you created the new company_questions table!</div>;
+    return (
+      <div className="p-8 text-xs font-mono text-rose-400">
+        Error fetching questions: {error.message}.
+      </div>
+    );
   }
-  
-  // Client-side filtering in the server component
+
   let questions = allQuestions || [];
-  
+
   if (rawCompany) {
     const searchCompany = rawCompany.toLowerCase();
-    questions = questions.filter(q => 
+    questions = questions.filter((q) =>
       q.company_names?.some((c: string) => c.toLowerCase().includes(searchCompany))
     );
   }
-  
+
   if (topicFilter) {
     const searchTopic = topicFilter.toLowerCase();
-    questions = questions.filter(q => 
+    questions = questions.filter((q) =>
       q.topics?.toLowerCase().includes(searchTopic)
     );
   }
 
   const totalQuestions = questions.length;
   const totalPages = Math.ceil(totalQuestions / itemsPerPage);
-  
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedQuestions = questions.slice(startIndex, startIndex + itemsPerPage);
 
   return (
-    <div className="qx-root" style={{ minHeight: '100vh', backgroundColor: 'var(--bg)', color: 'var(--text)' }}>
-      <nav className="qx-nav">
-        <div className="qx-logo">
-          <div className="qx-logo-mark">⚔️</div>
-          <span className="qx-display qx-logo-text">PREP FORGE</span>
-        </div>
-        <div className="qx-navlinks">
-          <a href="/" className="qx-link">Dashboard</a>
-          <a href="/system-design" className="qx-link">System Design</a>
-          <a href="/forums" className="qx-link">Forums</a>
-        </div>
-      </nav>
+    <div className="qx-root flex flex-col min-h-screen">
+      <Navbar
+        userEmail={user?.email ?? null}
+        profile={profile}
+        completedCount={completedTitles.length}
+        signOutAction={signOutAction}
+      />
 
-      <div className="qx-container" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
-        <div className="qx-section-head">
-          <h1 className="qx-pixel qx-section-title">Company Tagged Questions</h1>
-          <p className="qx-section-desc">Search questions by company or topic.</p>
-        </div>
-        
-        <div className="mb-8" style={{ background: 'var(--bg-card)', border: '3px solid var(--line)', padding: '24px', boxShadow: '5px 5px 0 var(--line)' }}>
-          <form method="GET" className="flex flex-col md:flex-row gap-4 items-end">
-            
-            <div className="flex-1 w-full">
-               <label htmlFor="company-input" className="block font-semibold text-sm mb-2" style={{ color: 'var(--text)' }}>Company Name</label>
-               <input 
-                 type="text" 
-                 name="company" 
-                 id="company-input"
-                 defaultValue={rawCompany} 
-                 placeholder="e.g. Google, Apple, Amazon" 
-                 className="w-full rounded p-3 focus:outline-none"
-                 style={{ background: 'var(--bg-elevated)', border: '2px solid var(--line)', color: 'var(--text)' }}
-               />
+      <main className="flex-1 pb-16">
+        <div className="qx-container pt-8">
+          <div className="pb-6 mb-6 border-b border-zinc-800/80">
+            <div className="flex items-center gap-2 text-xs font-mono text-zinc-500 mb-1">
+              <Link href="/" className="hover:text-zinc-300 transition-colors">
+                Overview
+              </Link>
+              <span>/</span>
+              <span className="text-zinc-300">Company Tagged Questions</span>
             </div>
-            
-            <div className="flex-1 w-full">
-               <label htmlFor="topic-input" className="block font-semibold text-sm mb-2" style={{ color: 'var(--text)' }}>Topic</label>
-               <input 
-                 type="text" 
-                 name="topic" 
-                 id="topic-input"
-                 defaultValue={topicFilter} 
-                 placeholder="e.g. Array, Hash Table, Math" 
-                 className="w-full rounded p-3 focus:outline-none"
-                 style={{ background: 'var(--bg-elevated)', border: '2px solid var(--line)', color: 'var(--text)' }}
-               />
-            </div>
-
-            <div className="flex gap-4 w-full md:w-auto">
-                <button type="submit" className="qx-btn" style={{ padding: '12px 24px', fontSize: '13px' }}>Search</button>
-                {(rawCompany || topicFilter) && (
-                  <a href="/company-questions" className="qx-btn qx-btn-ghost flex items-center justify-center" style={{ padding: '12px 24px', fontSize: '13px' }}>
-                    Clear
-                  </a>
-                )}
-            </div>
-          </form>
-          <div className="mt-4 text-xs" style={{ color: 'var(--text-dim)' }}>
-             Showing {totalQuestions} total questions. You can now type any part of a company name.
+            <h1 className="text-2xl font-semibold tracking-tight text-zinc-100">
+              Company Interview Archives
+            </h1>
+            <p className="text-xs text-zinc-400 mt-1">
+              Targeted interview questions cataloged by company frequency.
+            </p>
           </div>
-        </div>
 
-        {questions.length === 0 ? (
-          <div className="text-center" style={{ background: 'var(--bg-card)', border: '3px solid var(--line)', padding: '48px', boxShadow: '5px 5px 0 var(--line)' }}>
-            <p style={{ color: 'var(--text)' }}>No questions found matching your criteria.</p>
-            <p className="text-sm mt-2" style={{ color: 'var(--text-dim)' }}>Try adjusting your spelling or using fewer filters.</p>
-          </div>
-        ) : (
-          <div className="flex flex-col" style={{ background: 'var(--bg-card)', border: '3px solid var(--line)', boxShadow: '5px 5px 0 var(--line)', overflow: 'hidden' }}>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse text-sm md:text-base">
-                <thead>
-                  <tr style={{ borderBottom: '2px solid var(--line)', background: 'var(--bg-elevated)' }}>
-                    <th className="p-4 font-semibold w-1/4" style={{ color: 'var(--text)' }}>Companies</th>
-                    <th className="p-4 font-semibold w-1/3" style={{ color: 'var(--text)' }}>Title</th>
-                    <th className="p-4 font-semibold" style={{ color: 'var(--text)' }}>Difficulty</th>
-                    <th className="p-4 font-semibold" style={{ color: 'var(--text)' }}>Topics</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {paginatedQuestions.map((q) => (
-                    <tr key={q.id} style={{ borderBottom: '1px solid var(--line)' }} className="hover:bg-opacity-80 transition-colors">
-                      <td className="p-4">
-                        <div className="flex flex-wrap gap-2">
-                          {q.company_names?.slice(0, 5).map((c: string) => (
-                            <span key={c} style={{ background: 'var(--line)', color: 'var(--text)' }} className="text-xs px-2 py-1 rounded">{c}</span>
-                          ))}
-                          {q.company_names?.length > 5 && (
-                            <span className="text-xs px-1 pt-1 font-medium" style={{ color: 'var(--text-dim)' }}>+{q.company_names.length - 5} more</span>
-                          )}
-                        </div>
-                      </td>
-                      <td className="p-4">
-                        <a href={q.link} target="_blank" rel="noopener noreferrer" className="hover:underline font-medium" style={{ color: 'var(--gold)' }}>
-                          {completedTitles.includes(q.title) ? "✅ " : "📜 "} {q.title}
-                        </a>
-                      </td>
-                      <td className="p-4">
-                        <span className="text-xs font-bold px-2 py-1 rounded" style={{
-                          background: q.difficulty === 'EASY' ? 'rgba(244, 185, 66, 0.18)' : 
-                                     q.difficulty === 'MEDIUM' ? 'rgba(156, 163, 175, 0.14)' : 
-                                     q.difficulty === 'HARD' ? 'rgba(226, 72, 61, 0.16)' : 'rgba(156, 163, 175, 0.14)',
-                          color: q.difficulty === 'EASY' ? 'var(--mint)' : 
-                                 q.difficulty === 'MEDIUM' ? 'var(--silver)' : 
-                                 q.difficulty === 'HARD' ? 'var(--coral)' : 'var(--silver)',
-                          border: `1px solid ${
-                            q.difficulty === 'EASY' ? 'rgba(244, 185, 66, 0.35)' : 
-                            q.difficulty === 'MEDIUM' ? 'rgba(156, 163, 175, 0.3)' : 
-                            q.difficulty === 'HARD' ? 'rgba(226, 72, 61, 0.32)' : 'rgba(156, 163, 175, 0.3)'
-                          }`
-                        }}>
-                          {q.difficulty}
-                        </span>
-                      </td>
-                      <td className="p-4">
-                        <div className="flex flex-wrap gap-2">
-                          {q.topics ? q.topics.split(',').map((t: string) => (
-                            <span key={t.trim()} style={{ background: 'rgba(139, 92, 246, 0.15)', color: 'var(--primary)', border: '1px solid rgba(139, 92, 246, 0.3)' }} className="text-xs px-2 py-1 rounded">{t.trim()}</span>
-                          )) : '-'}
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            
-            {/* Pagination Controls */}
-            {totalPages > 1 && (
-              <div className="flex justify-between items-center p-6 border-t" style={{ borderColor: 'var(--line)', background: 'var(--bg-elevated)' }}>
-                <div className="text-sm" style={{ color: 'var(--text-dim)' }}>
-                  Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, totalQuestions)} of {totalQuestions} results
-                </div>
-                <div className="flex gap-4">
-                  {currentPage > 1 && (
-                    <a 
-                      href={`/company-questions?company=${encodeURIComponent(rawCompany)}&topic=${encodeURIComponent(topicFilter)}&page=${currentPage - 1}`} 
-                      className="qx-btn qx-btn-ghost"
-                    >
-                      Previous
-                    </a>
-                  )}
-                  {currentPage < totalPages && (
-                    <a 
-                      href={`/company-questions?company=${encodeURIComponent(rawCompany)}&topic=${encodeURIComponent(topicFilter)}&page=${currentPage + 1}`} 
-                      className="qx-btn qx-btn-ghost"
-                    >
-                      Next
-                    </a>
-                  )}
+          {/* Search toolbar */}
+          <div className="rounded-lg border border-zinc-800 bg-zinc-900/40 p-4 mb-6">
+            <form method="GET" className="flex flex-col md:flex-row gap-3 items-end">
+              <div className="flex-1 w-full">
+                <label
+                  htmlFor="company-input"
+                  className="block font-mono text-[11px] uppercase tracking-wider text-zinc-400 mb-1.5"
+                >
+                  Company Name
+                </label>
+                <div className="relative">
+                  <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-zinc-500" />
+                  <input
+                    type="text"
+                    name="company"
+                    id="company-input"
+                    defaultValue={rawCompany}
+                    placeholder="e.g. Google, Apple, Amazon, Meta"
+                    className="h-9 w-full rounded-md border border-zinc-800 bg-zinc-950 pl-8 pr-3 text-xs text-zinc-200 placeholder:text-zinc-500 focus:border-zinc-700 focus:outline-none"
+                  />
                 </div>
               </div>
-            )}
+
+              <div className="flex-1 w-full">
+                <label
+                  htmlFor="topic-input"
+                  className="block font-mono text-[11px] uppercase tracking-wider text-zinc-400 mb-1.5"
+                >
+                  Topic / Pattern
+                </label>
+                <input
+                  type="text"
+                  name="topic"
+                  id="topic-input"
+                  defaultValue={topicFilter}
+                  placeholder="e.g. Array, Hash Table, Dynamic Programming"
+                  className="h-9 w-full rounded-md border border-zinc-800 bg-zinc-950 px-3 text-xs text-zinc-200 placeholder:text-zinc-500 focus:border-zinc-700 focus:outline-none"
+                />
+              </div>
+
+              <div className="flex gap-2 w-full md:w-auto">
+                <button
+                  type="submit"
+                  className="h-9 rounded-md bg-zinc-100 px-4 text-xs font-medium text-zinc-950 hover:bg-white transition-colors"
+                >
+                  Filter
+                </button>
+                {(rawCompany || topicFilter) && (
+                  <Link
+                    href="/company-questions"
+                    className="h-9 rounded-md border border-zinc-800 bg-zinc-950 px-3 text-xs font-medium text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900 transition-colors flex items-center justify-center"
+                  >
+                    Reset
+                  </Link>
+                )}
+              </div>
+            </form>
+
+            <div className="mt-2 text-[11px] font-mono text-zinc-500">
+              Showing {totalQuestions} total questions matching criteria.
+            </div>
           </div>
-        )}
-      </div>
+
+          {/* Questions Table */}
+          {questions.length === 0 ? (
+            <div className="rounded-lg border border-dashed border-zinc-800 p-12 text-center text-xs font-mono text-zinc-500">
+              No questions found matching your filter criteria.
+            </div>
+          ) : (
+            <div className="rounded-lg border border-zinc-800 bg-zinc-900/40 overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs border-collapse">
+                  <thead>
+                    <tr className="border-b border-zinc-800 bg-zinc-950/80 text-[11px] font-mono text-zinc-400 uppercase tracking-wider">
+                      <th className="py-2.5 px-4 w-1/4">Companies</th>
+                      <th className="py-2.5 px-4 w-2/5">Problem Title</th>
+                      <th className="py-2.5 px-4 w-28">Difficulty</th>
+                      <th className="py-2.5 px-4">Topics</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-zinc-850">
+                    {paginatedQuestions.map((q) => {
+                      const isCompleted = completedTitles.includes(q.title);
+                      const diff = q.difficulty?.toLowerCase() || "easy";
+                      const diffClass =
+                        diff === "easy"
+                          ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+                          : diff === "medium"
+                          ? "bg-amber-500/10 text-amber-400 border-amber-500/20"
+                          : "bg-rose-500/10 text-rose-400 border-rose-500/20";
+
+                      return (
+                        <tr
+                          key={q.id}
+                          className="hover:bg-zinc-900/80 transition-colors group"
+                        >
+                          <td className="py-3 px-4">
+                            <div className="flex flex-wrap gap-1">
+                              {q.company_names?.slice(0, 4).map((c: string) => (
+                                <span
+                                  key={c}
+                                  className="rounded bg-zinc-950 px-1.5 py-0.5 text-[10px] font-mono text-zinc-300 border border-zinc-800"
+                                >
+                                  {c}
+                                </span>
+                              ))}
+                              {q.company_names?.length > 4 && (
+                                <span className="text-[10px] font-mono text-zinc-500 self-center">
+                                  +{q.company_names.length - 4}
+                                </span>
+                              )}
+                            </div>
+                          </td>
+
+                          <td className="py-3 px-4">
+                            <a
+                              href={q.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="font-medium text-zinc-200 group-hover:text-zinc-50 hover:underline inline-flex items-center gap-1.5"
+                            >
+                              {isCompleted ? (
+                                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+                              ) : null}
+                              <span>{q.title}</span>
+                              <ExternalLink className="h-3 w-3 text-zinc-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                            </a>
+                          </td>
+
+                          <td className="py-3 px-4">
+                            <span
+                              className={`inline-flex items-center rounded border px-2 py-0.5 font-mono text-[11px] font-medium ${diffClass}`}
+                            >
+                              {q.difficulty}
+                            </span>
+                          </td>
+
+                          <td className="py-3 px-4">
+                            <div className="flex flex-wrap gap-1">
+                              {q.topics ? (
+                                q.topics.split(",").map((t: string) => (
+                                  <span
+                                    key={t.trim()}
+                                    className="rounded bg-zinc-950 px-1.5 py-0.5 text-[10px] font-mono text-zinc-400 border border-zinc-800/60"
+                                  >
+                                    {t.trim()}
+                                  </span>
+                                ))
+                              ) : (
+                                <span className="text-zinc-600 font-mono">-</span>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Pagination Controls */}
+              {totalPages > 1 && (
+                <div className="flex items-center justify-between px-4 py-3 border-t border-zinc-800 bg-zinc-950/60 text-xs font-mono text-zinc-400">
+                  <div>
+                    Showing {startIndex + 1} to{" "}
+                    {Math.min(startIndex + itemsPerPage, totalQuestions)} of {totalQuestions}
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    {currentPage > 1 && (
+                      <Link
+                        href={`/company-questions?company=${encodeURIComponent(
+                          rawCompany
+                        )}&topic=${encodeURIComponent(topicFilter)}&page=${currentPage - 1}`}
+                        className="inline-flex items-center gap-1 rounded border border-zinc-800 bg-zinc-900 px-2.5 py-1 text-xs text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 transition-colors"
+                      >
+                        <ChevronLeft className="h-3.5 w-3.5" />
+                        <span>Prev</span>
+                      </Link>
+                    )}
+                    <span className="text-zinc-500">
+                      {currentPage} / {totalPages}
+                    </span>
+                    {currentPage < totalPages && (
+                      <Link
+                        href={`/company-questions?company=${encodeURIComponent(
+                          rawCompany
+                        )}&topic=${encodeURIComponent(topicFilter)}&page=${currentPage + 1}`}
+                        className="inline-flex items-center gap-1 rounded border border-zinc-800 bg-zinc-900 px-2.5 py-1 text-xs text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 transition-colors"
+                      >
+                        <span>Next</span>
+                        <ChevronRight className="h-3.5 w-3.5" />
+                      </Link>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </main>
     </div>
   );
 }

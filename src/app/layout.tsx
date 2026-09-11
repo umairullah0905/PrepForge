@@ -1,21 +1,9 @@
 import type { Metadata } from "next";
-import { Bungee, Poppins, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const displayFont = Bungee({
-  variable: "--font-display",
-  weight: "400",
-  subsets: ["latin"],
-});
-
-const uiFont = Poppins({
-  variable: "--font-ui",
-  weight: ["600", "700", "800"],
-  subsets: ["latin"],
-});
-
-const bodyFont = Space_Grotesk({
-  variable: "--font-body",
+const sansFont = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
 });
 
@@ -25,18 +13,24 @@ const monoFont = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DSA Quests — Slay Data Structures. Conquer Algorithms.",
+  title: "PrepForge — Developer DSA & System Design Platform",
   description:
-    "The AI-powered DSA & System Design platform that teaches you the patterns, not just the answers.",
+    "High-density technical interview preparation platform. Track patterns, analyze algorithms, and conquer technical interviews.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en"
-      className={`${displayFont.variable} ${uiFont.variable} ${bodyFont.variable} ${monoFont.variable} h-full antialiased`}
+      className={`${sansFont.variable} ${monoFont.variable} dark h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-100 selection:bg-zinc-800 selection:text-zinc-100">
+        {children}
+      </body>
     </html>
   );
 }

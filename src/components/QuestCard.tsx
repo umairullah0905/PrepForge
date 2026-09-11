@@ -1,13 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Link from "next/link";
+import { CheckCircle2, Circle, ExternalLink, FileCode2, Lightbulb, MessageSquare } from "lucide-react";
 
 export type Quest = {
   id?: string;
   title: string;
-  cr: number;
-  difficulty: "Easy" | "Medium" | "Hard";
-  xp: number;
+  cr?: number;
+  difficulty: "Easy" | "Medium" | "Hard" | string;
+  xp?: number;
   active?: boolean;
   url?: string;
   solution_link?: string;
@@ -15,18 +16,6 @@ export type Quest = {
   description?: string;
   topics?: string[];
   completed?: boolean;
-};
-
-const CR_CLASS: Record<Quest["difficulty"], string> = {
-  Easy: "quest-cr--easy",
-  Medium: "quest-cr--medium",
-  Hard: "quest-cr--hard",
-};
-
-const CR_SHIELD: Record<Quest["difficulty"], string> = {
-  Easy: "🗡️", // dagger — novice fight
-  Medium: "🛡️", // shield — proper skirmish
-  Hard: "🐉", // dragon — boss-tier
 };
 
 export default function QuestCard({
@@ -42,72 +31,136 @@ export default function QuestCard({
   onHover?: () => void;
   onBegin?: () => void;
 }) {
+  const diff = quest.difficulty?.toLowerCase() || "easy";
+  const diffBadgeClass =
+    diff === "easy"
+      ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+      : diff === "medium"
+      ? "bg-amber-500/10 text-amber-400 border-amber-500/20"
+      : "bg-rose-500/10 text-rose-400 border-rose-500/20";
+
   return (
-    <motion.div
-      className={`quest-card ${quest.active && !quest.completed ? "quest-card--active" : ""}`}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ delay: index * 0.06, duration: 0.4 }}
-      whileHover={{ y: -4 }}
+    <div
       onMouseEnter={onHover}
+      className={`group relative flex flex-col justify-between rounded-lg border bg-zinc-900/60 p-4 transition-all hover:bg-zinc-900 hover:border-zinc-700 ${
+        quest.completed
+          ? "border-zinc-800/80"
+          : "border-zinc-800"
+      }`}
     >
-      <div className="quest-card-head">
-        <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
-          <span className={`quest-cr ${CR_CLASS[quest.difficulty]}`}>
-            {CR_SHIELD[quest.difficulty]} CR {quest.cr} • {quest.difficulty}
-          </span>
-          {quest.platform && <span className="quest-platform-tag">{quest.platform}</span>}
+      <div>
+        {/* Header: Status, Difficulty, Platform, XP */}
+        <div className="flex items-center justify-between gap-2 text-xs mb-2.5">
+          <div className="flex items-center gap-2">
+            <span
+              className={`inline-flex items-center gap-1 rounded border px-2 py-0.5 font-mono text-[11px] font-medium ${diffBadgeClass}`}
+            >
+              {quest.difficulty}
+            </span>
+
+            {quest.platform && (
+              <span className="rounded border border-zinc-800 bg-zinc-950/80 px-2 py-0.5 font-mono text-[10px] text-zinc-400">
+                {quest.platform}
+              </span>
+            )}
+          </div>
+
+          <div className="flex items-center gap-2">
+            {quest.completed ? (
+              <span className="inline-flex items-center gap-1 font-mono text-[11px] text-emerald-400 font-medium">
+                <CheckCircle2 className="h-3.5 w-3.5" />
+                Solved
+              </span>
+            ) : quest.xp ? (
+              <span className="font-mono text-[11px] text-zinc-500">
+                +{quest.xp} XP
+              </span>
+            ) : null}
+          </div>
         </div>
-        <span className="quest-xp">🏆 +{quest.xp} XP</span>
-      </div>
 
-      <div className="quest-title">
-        {quest.completed ? "✅" : "📜"} {quest.title}
-      </div>
-
-      {quest.completed ? (
-        <div className="quest-completed-pill">✅ QUEST COMPLETE</div>
-      ) : (
-        <div className="quest-actions-row">
-          {!hideDetails && quest.id && (
-            <a
-              href={`/quests/${quest.id}`}
-              className="quest-begin-btn"
-              style={{ flex: "1 1 auto", textDecoration: "none" }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              📖 VIEW DETAILS
-            </a>
-          )}
-          <button
-            className="quest-begin-btn quest-begin-btn--ghost"
-            style={{ flex: "1 1 auto" }}
-            onClick={onBegin}
+        {/* Title */}
+        <div className="mb-3">
+          <Link
+            href={quest.id ? `/quests/${quest.id}` : quest.url || "#"}
+            className="font-medium text-sm text-zinc-100 group-hover:text-zinc-50 transition-colors flex items-center gap-2"
           >
-            🔗 OPEN
-          </button>
-          {quest.solution_link && (
-            <button
-              className="quest-begin-btn quest-begin-btn--purple"
-              onClick={(e) => {
-                e.stopPropagation();
-                window.open(quest.solution_link, "_blank");
-              }}
-            >
-              💡 SOLUTION
-            </button>
-          )}
+            <span className="line-clamp-1">{quest.title}</span>
+          </Link>
+        </div>
+
+        {/* Topics */}
+        {quest.topics && quest.topics.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {quest.topics.slice(0, 3).map((t, idx) => (
+              <span
+                key={idx}
+                className="rounded bg-zinc-950 px-2 py-0.5 text-[10px] font-mono text-zinc-400 border border-zinc-800/60"
+              >
+                {t}
+              </span>
+            ))}
+            {quest.topics.length > 3 && (
+              <span className="text-[10px] font-mono text-zinc-500 self-center">
+                +{quest.topics.length - 3}
+              </span>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Action Row */}
+      <div className="flex items-center gap-2 pt-3 border-t border-zinc-800/60">
+        {!hideDetails && quest.id && (
+          <Link
+            href={`/quests/${quest.id}`}
+            className="inline-flex items-center gap-1.5 rounded-md border border-zinc-800 bg-zinc-950 px-2.5 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 transition-colors"
+          >
+            <FileCode2 className="h-3 w-3 text-zinc-400" />
+            Specs
+          </Link>
+        )}
+
+        {quest.url ? (
           <a
-            href="/forums"
-            className="quest-begin-btn quest-begin-btn--amber-ghost"
-            style={{ textDecoration: "none" }}
-            onClick={(e) => e.stopPropagation()}
+            href={quest.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onBegin}
+            className="inline-flex items-center gap-1.5 rounded-md border border-zinc-800 bg-zinc-950 px-2.5 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 transition-colors flex-1 justify-center"
           >
-            💬 DISCUSS
+            <span>Solve</span>
+            <ExternalLink className="h-3 w-3 text-zinc-400" />
           </a>
-        </div>
-      )}
-    </motion.div>
+        ) : (
+          <button
+            onClick={onBegin}
+            className="inline-flex items-center gap-1.5 rounded-md border border-zinc-800 bg-zinc-950 px-2.5 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 transition-colors flex-1 justify-center"
+          >
+            Start
+          </button>
+        )}
+
+        {quest.solution_link && (
+          <a
+            href={quest.solution_link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-md border border-zinc-800 bg-zinc-950 p-1.5 text-zinc-400 hover:text-amber-300 hover:border-zinc-700 transition-colors"
+            title="View Solution"
+          >
+            <Lightbulb className="h-3.5 w-3.5" />
+          </a>
+        )}
+
+        <Link
+          href="/forums"
+          className="inline-flex items-center justify-center rounded-md border border-zinc-800 bg-zinc-950 p-1.5 text-zinc-400 hover:text-zinc-200 hover:border-zinc-700 transition-colors"
+          title="Discuss"
+        >
+          <MessageSquare className="h-3.5 w-3.5" />
+        </Link>
+      </div>
+    </div>
   );
 }

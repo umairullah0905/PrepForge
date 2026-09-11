@@ -1,0 +1,215 @@
+[
+  {
+    "slug": "scale-from-zero-to-millions-of-users",
+    "title": "Scale From Zero To Millions Of Users",
+    "chapterNumber": 2,
+    "difficulty": "Fundamentals",
+    "scale": "1 to 10M+ Users",
+    "topics": [
+      "DNS & GeoDNS",
+      "Load Balancing",
+      "Database Replication",
+      "Cache Tier",
+      "CDN",
+      "Stateless Architecture",
+      "Message Queues",
+      "Database Sharding"
+    ],
+    "readTimeMinutes": "25 min read",
+    "byteByteGoUrl": "https://bytebytego.com/courses/system-design-interview/scale-from-zero-to-millions-of-users"
+  },
+  {
+    "slug": "back-of-the-envelope-estimation",
+    "title": "Back-of-the-envelope Estimation",
+    "chapterNumber": 3,
+    "difficulty": "Fundamentals",
+    "scale": "Capacity Calculations",
+    "topics": [
+      "Power of Two",
+      "Latency Numbers",
+      "QPS & TPS",
+      "Storage Calculations",
+      "Bandwidth Estimation"
+    ],
+    "readTimeMinutes": "6 min read",
+    "byteByteGoUrl": "https://bytebytego.com/courses/system-design-interview/back-of-the-envelope-estimation"
+  },
+  {
+    "slug": "a-framework-for-system-design-interviews",
+    "title": "A Framework For System Design Interviews",
+    "chapterNumber": 4,
+    "difficulty": "Interview Framework",
+    "scale": "4-Step Methodology",
+    "topics": [
+      "Scope Clarification",
+      "High-Level Design",
+      "Design Deep Dive",
+      "Wrap Up",
+      "Interviewer Collaboration"
+    ],
+    "readTimeMinutes": "12 min read",
+    "byteByteGoUrl": "https://bytebytego.com/courses/system-design-interview/a-framework-for-system-design-interviews"
+  },
+  {
+    "slug": "design-a-rate-limiter",
+    "title": "Design A Rate Limiter",
+    "chapterNumber": 5,
+    "difficulty": "Medium",
+    "scale": "500K+ Req/sec",
+    "topics": [
+      "Token Bucket",
+      "Leaking Bucket",
+      "Sliding Window Log",
+      "Sliding Window Counter",
+      "Redis Memory Store",
+      "Distributed Rate Limiting"
+    ],
+    "readTimeMinutes": "22 min read",
+    "byteByteGoUrl": "https://bytebytego.com/courses/system-design-interview/design-a-rate-limiter"
+  },
+  {
+    "slug": "design-consistent-hashing",
+    "title": "Design Consistent Hashing",
+    "chapterNumber": 6,
+    "difficulty": "Medium",
+    "scale": "Distributed Cluster",
+    "topics": [
+      "Hash Ring",
+      "Virtual Nodes",
+      "Data Skew Mitigation",
+      "Rebalancing",
+      "Distributed Caching"
+    ],
+    "readTimeMinutes": "9 min read",
+    "byteByteGoUrl": "https://bytebytego.com/courses/system-design-interview/design-consistent-hashing"
+  },
+  {
+    "slug": "design-a-key-value-store",
+    "title": "Design A Key-value Store",
+    "chapterNumber": 7,
+    "difficulty": "Hard",
+    "scale": "Petabyte-scale Storage",
+    "topics": [
+      "CAP Theorem",
+      "Consistent Hashing",
+      "Sloppy Quorum",
+      "Vector Clocks",
+      "Gossip Protocol",
+      "LSM-Tree & SSTable"
+    ],
+    "readTimeMinutes": "21 min read",
+    "byteByteGoUrl": "https://bytebytego.com/courses/system-design-interview/design-a-key-value-store"
+  },
+  {
+    "slug": "design-a-url-shortener",
+    "title": "Design A URL Shortener",
+    "chapterNumber": 9,
+    "difficulty": "Medium",
+    "scale": "100M URLs/Day",
+    "topics": [
+      "Base62 Encoding",
+      "Hash Collisions",
+      "Distributed ID Generator",
+      "Cache Strategy",
+      "301 vs 302 Redirects"
+    ],
+    "readTimeMinutes": "11 min read",
+    "byteByteGoUrl": "https://bytebytego.com/courses/system-design-interview/design-a-url-shortener"
+  },
+  {
+    "slug": "design-a-web-crawler",
+    "title": "Design A Web Crawler",
+    "chapterNumber": 10,
+    "difficulty": "Hard",
+    "scale": "1B Pages/Month",
+    "topics": [
+      "HTML Downloader",
+      "URL Frontier",
+      "Politeness & Robots.txt",
+      "Duplicate Detection",
+      "Robots Exclusion Standard"
+    ],
+    "readTimeMinutes": "20 min read",
+    "byteByteGoUrl": "https://bytebytego.com/courses/system-design-interview/design-a-web-crawler"
+  },
+  {
+    "slug": "design-a-news-feed-system",
+    "title": "Design A News Feed System",
+    "chapterNumber": 12,
+    "difficulty": "Medium",
+    "scale": "10M DAU",
+    "topics": [
+      "Fan-out on Read",
+      "Fan-out on Write",
+      "Feed Publishing",
+      "Feed Generation",
+      "Cache Architecture"
+    ],
+    "readTimeMinutes": "9 min read",
+    "byteByteGoUrl": "https://bytebytego.com/courses/system-design-interview/design-a-news-feed-system"
+  },
+  {
+    "slug": "design-a-chat-system",
+    "title": "Design A Chat System",
+    "chapterNumber": 13,
+    "difficulty": "Hard",
+    "scale": "50M Concurrent Connections",
+    "topics": [
+      "WebSockets",
+      "Presence Server",
+      "Message Synchronization",
+      "Push Notifications",
+      "Cassandra Chat Storage"
+    ],
+    "readTimeMinutes": "20 min read",
+    "byteByteGoUrl": "https://bytebytego.com/courses/system-design-interview/design-a-chat-system"
+  },
+  {
+    "slug": "design-youtube",
+    "title": "Design YouTube",
+    "chapterNumber": 15,
+    "difficulty": "Hard",
+    "scale": "500M Daily Views",
+    "topics": [
+      "Video Transcoding (DAG)",
+      "Blob Storage",
+      "CDN Streaming (HLS/DASH)",
+      "Pre-signed URLs",
+      "Copyright & DRM"
+    ],
+    "readTimeMinutes": "21 min read",
+    "byteByteGoUrl": "https://bytebytego.com/courses/system-design-interview/design-youtube"
+  },
+  {
+    "slug": "hotel-reservation-system",
+    "title": "Hotel Reservation System",
+    "chapterNumber": 23,
+    "difficulty": "Hard",
+    "scale": "Global Reservation Engine",
+    "topics": [
+      "Double Booking Prevention",
+      "Database Locking (Pessimistic/Optimistic)",
+      "Distributed Transactions",
+      "Microservice Architecture",
+      "Idempotency"
+    ],
+    "readTimeMinutes": "30 min read",
+    "byteByteGoUrl": "https://bytebytego.com/courses/system-design-interview/hotel-reservation-system"
+  },
+  {
+    "slug": "real-time-gaming-leaderboard",
+    "title": "Real-time Gaming Leaderboard",
+    "chapterNumber": 26,
+    "difficulty": "Hard",
+    "scale": "100M+ Players",
+    "topics": [
+      "Redis Sorted Sets (ZSET)",
+      "Skip Lists",
+      "Point vs Score Queries",
+      "Partitioning Leaderboards",
+      "WebSocket Live Updates"
+    ],
+    "readTimeMinutes": "30 min read",
+    "byteByteGoUrl": "https://bytebytego.com/courses/system-design-interview/real-time-gaming-leaderboard"
+  }
+]
