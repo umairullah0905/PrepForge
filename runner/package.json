@@ -1,0 +1,10 @@
+{
+  "name": "interviewos-sandbox-runner",
+  "version": "1.0.0",
+  "description": "Containerized multi-language code execution sandbox for InterviewOS",
+  "main": "server.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}

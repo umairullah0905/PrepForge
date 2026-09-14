@@ -1,0 +1,18 @@
+services:
+  sandbox:
+    build:
+      context: ./runner
+      dockerfile: Dockerfile
+    container_name: interviewos-sandbox
+    restart: unless-stopped
+    ports:
+      - "2000:2000"
+    tmpfs:
+      - /tmp:exec
+    environment:
+      - PORT=2000
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 512M
