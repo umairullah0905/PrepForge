@@ -18,6 +18,7 @@ import {
   Network,
   Check,
 } from "lucide-react";
+import { PlatformIcon } from "@/components/PlatformIcons";
 
 const DEFAULT_TOPICS: Topic[] = [
   { name: "Arrays & Hashing", status: "completed", count: 12 },
@@ -460,7 +461,10 @@ export default function LandingContent({
 
                           {/* Platform */}
                           <td className="py-3.5 px-5 font-mono text-zinc-400 text-xs sm:text-sm">
-                            {q.platform || "LeetCode"}
+                            <div className="inline-flex items-center gap-2">
+                              <PlatformIcon platform={q.platform} className="w-3.5 h-3.5" />
+                              <span>{q.platform || "LeetCode"}</span>
+                            </div>
                           </td>
 
                           {/* Actions */}

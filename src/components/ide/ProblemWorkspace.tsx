@@ -37,6 +37,7 @@ import {
 } from "lucide-react";
 import CodeEditor from "./CodeEditor";
 import { completeQuestAction } from "@/app/quest-actions";
+import { renderMathInHtml } from "@/lib/math";
 
 export interface QuestionData {
   id: string;
@@ -266,14 +267,31 @@ export default function ProblemWorkspace({
   const [sessionFeedbackMsg, setSessionFeedbackMsg] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [isBrowserLoggingIn, setIsBrowserLoggingIn] = useState<boolean>(false);
 
+  // Codeforces Submission & Account Connection State
+  const [isSubmittingCodeforces, setIsSubmittingCodeforces] = useState<boolean>(false);
+  const [codeforcesResult, setCodeforcesResult] = useState<any | null>(null);
+  const [isCfSessionModalOpen, setIsCfSessionModalOpen] = useState<boolean>(false);
+  const [cfSessionInput, setCfSessionInput] = useState<string>("");
+  const [cfHandleInput, setCfHandleInput] = useState<string>("");
+  const [hasSavedCfSession, setHasSavedCfSession] = useState<boolean>(false);
+  const [cfSessionFeedbackMsg, setCfSessionFeedbackMsg] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [isCfBrowserLoggingIn, setIsCfBrowserLoggingIn] = useState<boolean>(false);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("leetcode_session");
       setHasSavedSession(!!saved && saved.trim().length > 0);
+      const savedCf = localStorage.getItem("codeforces_session");
+      setHasSavedCfSession(!!savedCf && savedCf.trim().length > 0);
     }
   }, []);
 
   const isLeetCode = question.platform?.toLowerCase() === "leetcode";
+  const isCodeforces = question.platform?.toLowerCase() === "codeforces";
+
+  const renderedDescription = React.useMemo(() => {
+    return renderMathInHtml(question.description || "");
+  }, [question.description]);
 
   // Initialize testcases dynamically from question content
   const [testCases, setTestCases] = useState<TestCaseItem[]>(() =>
@@ -343,6 +361,8 @@ export default function ProblemWorkspace({
 
     setActiveConsoleTab("result");
     setCompileError(null);
+    setLeetCodeResult(null);
+    setCodeforcesResult(null);
 
     try {
       const payload = {
@@ -593,6 +613,241 @@ export default function ProblemWorkspace({
     }
   };
 
+  // Codeforces Session & Modal Handlers
+  const openCfSessionModal = () => {
+    const savedSession =
+      typeof window !== "undefined"
+        ? localStorage.getItem("codeforces_session") || ""
+        : "";
+    const savedHandle =
+      typeof window !== "undefined"
+        ? localStorage.getItem("codeforces_handle") || ""
+        : "";
+    setCfSessionInput(savedSession);
+    setCfHandleInput(savedHandle);
+    setHasSavedCfSession(!!savedSession.trim());
+    setCfSessionFeedbackMsg(null);
+    setIsCfSessionModalOpen(true);
+  };
+
+  const handleSaveCfCookieOnly = () => {
+    const trimmedSession = cfSessionInput.trim();
+    const trimmedHandle = cfHandleInput.trim();
+    if (!trimmedSession) {
+      setCfSessionFeedbackMsg({
+        type: "error",
+        text: "Codeforces session cookies cannot be empty.",
+      });
+      return;
+    }
+    if (typeof window !== "undefined") {
+      localStorage.setItem("codeforces_session", trimmedSession);
+      if (trimmedHandle) {
+        localStorage.setItem("codeforces_handle", trimmedHandle);
+      }
+    }
+    setHasSavedCfSession(true);
+    setCfSessionFeedbackMsg({
+      type: "success",
+      text: "Codeforces session saved successfully!",
+    });
+    setTimeout(() => {
+      setIsCfSessionModalOpen(false);
+      setCfSessionFeedbackMsg(null);
+    }, 1200);
+  };
+
+  const handleSaveCfAndSubmit = () => {
+    const trimmedSession = cfSessionInput.trim();
+    const trimmedHandle = cfHandleInput.trim();
+    if (!trimmedSession) {
+      setCfSessionFeedbackMsg({
+        type: "error",
+        text: "Codeforces session cookies cannot be empty.",
+      });
+      return;
+    }
+    if (typeof window !== "undefined") {
+      localStorage.setItem("codeforces_session", trimmedSession);
+      if (trimmedHandle) {
+        localStorage.setItem("codeforces_handle", trimmedHandle);
+      }
+    }
+    setHasSavedCfSession(true);
+    setIsCfSessionModalOpen(false);
+    setCfSessionFeedbackMsg(null);
+    submitToCodeforcesHandler();
+  };
+
+  const handleClearCfCookie = () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("codeforces_session");
+      localStorage.removeItem("codeforces_handle");
+    }
+    setCfSessionInput("");
+    setCfHandleInput("");
+    setHasSavedCfSession(false);
+    setCfSessionFeedbackMsg({
+      type: "success",
+      text: "Codeforces session cleared from browser.",
+    });
+  };
+
+  const handleCfBrowserLogin = async () => {
+    setIsCfBrowserLoggingIn(true);
+    setCfSessionFeedbackMsg({
+      type: "success",
+      text: "Opening Codeforces login window...",
+    });
+
+    try {
+      const res = await fetch("/api/codeforces/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await res.json();
+      if (data.success && data.sessionCookies) {
+        if (typeof window !== "undefined") {
+          localStorage.setItem("codeforces_session", data.sessionCookies);
+          if (data.handle) {
+            localStorage.setItem("codeforces_handle", data.handle);
+          }
+        }
+        setCfSessionInput(data.sessionCookies);
+        if (data.handle) {
+          setCfHandleInput(data.handle);
+        }
+        setHasSavedCfSession(true);
+
+        setCfSessionFeedbackMsg({
+          type: "success",
+          text: `🎉 Connected as ${data.handle || "Codeforces user"}!`,
+        });
+        setTimeout(() => {
+          setIsCfSessionModalOpen(false);
+          setCfSessionFeedbackMsg(null);
+        }, 1600);
+      } else {
+        setCfSessionFeedbackMsg({
+          type: "error",
+          text: data.error || "Login window closed or canceled.",
+        });
+      }
+    } catch (err: any) {
+      setCfSessionFeedbackMsg({
+        type: "error",
+        text: err.message || "Failed to detect session.",
+      });
+    } finally {
+      setIsCfBrowserLoggingIn(false);
+    }
+  };
+
+  // Submit code directly to Codeforces official judge
+  const submitToCodeforcesHandler = async () => {
+    const session =
+      typeof window !== "undefined"
+        ? localStorage.getItem("codeforces_session") || ""
+        : "";
+    const handle =
+      typeof window !== "undefined"
+        ? localStorage.getItem("codeforces_handle") || ""
+        : cfHandleInput.trim();
+
+    if (!session) {
+      setCfSessionFeedbackMsg({
+        type: "error",
+        text: "Please connect your Codeforces account to submit.",
+      });
+      setIsCfSessionModalOpen(true);
+      return;
+    }
+
+    setIsSubmittingCodeforces(true);
+    setActiveConsoleTab("result");
+    setCompileError(null);
+    setRunResults(null);
+    setLeetCodeResult(null);
+    setCodeforcesResult(null);
+
+    let problemCode = (question as any).platform_id || "";
+    let contestId = "";
+    let problemIndex = "";
+
+    if (question.url && question.url.includes("/problem/")) {
+      const match = question.url.match(/problem\/(\d+)\/([a-zA-Z0-9]+)/);
+      if (match) {
+        contestId = match[1];
+        problemIndex = match[2];
+        problemCode = `${contestId}${problemIndex}`;
+      }
+    }
+
+    if (!contestId && problemCode) {
+      const match = problemCode.match(/^(\d+)([a-zA-Z0-9]+)$/);
+      if (match) {
+        contestId = match[1];
+        problemIndex = match[2];
+      }
+    }
+
+    try {
+      const res = await fetch("/api/codeforces/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          problemCode,
+          contestId,
+          problemIndex,
+          language: selectedLanguage,
+          code: currentCode,
+          sessionCookies: session,
+          handle,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.needsAuth) {
+        setHasSavedCfSession(false);
+        setCfSessionFeedbackMsg({
+          type: "error",
+          text: data.error || "Codeforces session expired. Please reconnect.",
+        });
+        setIsCfSessionModalOpen(true);
+        setCompileError(data.error || "Codeforces authentication required.");
+        return;
+      }
+
+      if (!res.ok || !data.success) {
+        setCompileError(data.error || "Submission to Codeforces failed.");
+        return;
+      }
+
+      setCodeforcesResult(data);
+      setAllPassed(data.isAccepted);
+
+      if (data.isAccepted) {
+        startTransition(async () => {
+          const questXp = question.xp || 50;
+          const result = await completeQuestAction(question.title, questXp);
+          if (result.ok) {
+            setIsCompleted(true);
+            setAwardMessage(
+              result.awarded
+                ? `Accepted on Codeforces! +${questXp} XP Awarded (Level ${result.level})`
+                : "Accepted on Codeforces! Quest already completed."
+            );
+          }
+        });
+      }
+    } catch (err: any) {
+      setCompileError(err.message || "Failed to communicate with Codeforces.");
+    } finally {
+      setIsSubmittingCodeforces(false);
+    }
+  };
+
   const diff = question.difficulty?.toLowerCase() || "easy";
   const diffClass =
     diff === "easy"
@@ -657,6 +912,32 @@ export default function ProblemWorkspace({
               <span
                 className={`h-1.5 w-1.5 rounded-full ${
                   hasSavedSession ? "bg-emerald-400 animate-pulse" : "bg-amber-400"
+                }`}
+              />
+            </button>
+          )}
+
+          {isCodeforces && (
+            <button
+              onClick={openCfSessionModal}
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded border transition-colors text-xs ${
+                hasSavedCfSession
+                  ? "border-blue-500/40 bg-blue-950/30 text-blue-300 hover:bg-blue-900/40 hover:border-blue-500/60"
+                  : "border-sky-500/40 bg-sky-950/20 text-sky-300 hover:bg-sky-900/30 hover:border-sky-500/60"
+              }`}
+              title={
+                hasSavedCfSession
+                  ? "Codeforces Connected — Click to re-add, update, or disconnect"
+                  : "Connect your Codeforces session for direct submissions"
+              }
+            >
+              <Key className={`h-3 w-3 ${hasSavedCfSession ? "text-blue-400" : "text-sky-400"}`} />
+              <span className="hidden sm:inline">
+                {hasSavedCfSession ? "Codeforces Connected" : "Connect Codeforces"}
+              </span>
+              <span
+                className={`h-1.5 w-1.5 rounded-full ${
+                  hasSavedCfSession ? "bg-blue-400 animate-pulse" : "bg-sky-400"
                 }`}
               />
             </button>
@@ -746,12 +1027,18 @@ export default function ProblemWorkspace({
                     .spec-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1rem; }
                     .spec-content li { margin-bottom: 0.35rem; }
                     .spec-content strong { color: #fafafa; }
+                    .spec-content .katex { font-size: 1.05em; color: #f4f4f5; }
+                    .spec-content .katex-display { margin: 1rem 0; overflow-x: auto; overflow-y: hidden; }
+                    .spec-content .tex-font-style-tt { font-family: var(--font-mono), monospace; background: #18181b; padding: 2px 5px; border-radius: 4px; font-size: 0.9em; }
+                    .spec-content .tex-font-style-bf { font-weight: 700; color: #fff; }
+                    .spec-content .tex-font-style-it { font-style: italic; }
+                    .spec-content .section-title { font-weight: 700; font-size: 1.05rem; margin-top: 1.5rem; margin-bottom: 0.5rem; color: #fafafa; }
                   `,
                   }}
                 />
                 <div
                   className="spec-content"
-                  dangerouslySetInnerHTML={{ __html: question.description }}
+                  dangerouslySetInnerHTML={{ __html: renderedDescription }}
                 />
               </div>
 
@@ -867,7 +1154,7 @@ export default function ProblemWorkspace({
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => executeCode(false)}
-                      disabled={isRunning || isSubmitting || isSubmittingLeetCode}
+                      disabled={isRunning || isSubmitting || isSubmittingLeetCode || isSubmittingCodeforces}
                       className="inline-flex items-center gap-1.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-200 px-3 py-1 text-xs font-medium transition-colors disabled:opacity-50"
                     >
                       <Play className="h-3 w-3 fill-current text-zinc-300" />
@@ -876,7 +1163,7 @@ export default function ProblemWorkspace({
 
                     <button
                       onClick={() => executeCode(true)}
-                      disabled={isRunning || isSubmitting || isPending || isSubmittingLeetCode}
+                      disabled={isRunning || isSubmitting || isPending || isSubmittingLeetCode || isSubmittingCodeforces}
                       className="inline-flex items-center gap-1.5 rounded bg-zinc-700 hover:bg-zinc-600 text-zinc-200 px-3 py-1 text-xs font-medium transition-colors disabled:opacity-50"
                       title="Run against sample test cases locally"
                     >
@@ -887,13 +1174,27 @@ export default function ProblemWorkspace({
                     {isLeetCode && (
                       <button
                         onClick={submitToLeetCodeHandler}
-                        disabled={isRunning || isSubmitting || isPending || isSubmittingLeetCode}
+                        disabled={isRunning || isSubmitting || isPending || isSubmittingLeetCode || isSubmittingCodeforces}
                         className="inline-flex items-center gap-1.5 rounded bg-amber-600 hover:bg-amber-500 text-white px-3.5 py-1 text-xs font-semibold transition-colors disabled:opacity-50 shadow-sm"
                         title="Submit directly to LeetCode official judge"
                       >
                         <Globe className="h-3 w-3" />
                         <span>
                           {isSubmittingLeetCode ? "Judging on LeetCode..." : "Submit to LeetCode"}
+                        </span>
+                      </button>
+                    )}
+
+                    {isCodeforces && (
+                      <button
+                        onClick={submitToCodeforcesHandler}
+                        disabled={isRunning || isSubmitting || isPending || isSubmittingLeetCode || isSubmittingCodeforces}
+                        className="inline-flex items-center gap-1.5 rounded bg-blue-600 hover:bg-blue-500 text-white px-3.5 py-1 text-xs font-semibold transition-colors disabled:opacity-50 shadow-sm"
+                        title="Submit directly to Codeforces official judge"
+                      >
+                        <Globe className="h-3 w-3" />
+                        <span>
+                          {isSubmittingCodeforces ? "Judging on Codeforces..." : "Submit to Codeforces"}
                         </span>
                       </button>
                     )}
@@ -1001,6 +1302,16 @@ export default function ProblemWorkspace({
                             Evaluating code across LeetCode's complete hidden test suite
                           </span>
                         </div>
+                      ) : isSubmittingCodeforces ? (
+                        <div className="flex flex-col items-center gap-2 text-zinc-300 py-8 justify-center">
+                          <span className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+                          <span className="font-semibold text-xs text-blue-300">
+                            Submitting to Codeforces Official Judge...
+                          </span>
+                          <span className="text-[11px] text-zinc-500">
+                            Evaluating code across Codeforces official test suite
+                          </span>
+                        </div>
                       ) : compileError ? (
                         <div className="rounded border border-rose-900/50 bg-rose-950/20 p-3 text-rose-300">
                           <div className="flex items-center gap-2 font-bold mb-1.5 text-rose-400">
@@ -1095,6 +1406,58 @@ export default function ProblemWorkspace({
                               </pre>
                             </div>
                           )}
+                        </div>
+                      ) : codeforcesResult ? (
+                        <div className="space-y-4">
+                          {/* Codeforces Official Verdict Card */}
+                          <div
+                            className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-lg border ${
+                              codeforcesResult.isAccepted
+                                ? "bg-emerald-950/40 border-emerald-800/60 text-emerald-200"
+                                : "bg-rose-950/40 border-rose-800/60 text-rose-200"
+                            }`}
+                          >
+                            <div className="flex items-center gap-3">
+                              {codeforcesResult.isAccepted ? (
+                                <CheckCircle2 className="h-6 w-6 text-emerald-400 shrink-0" />
+                              ) : (
+                                <XCircle className="h-6 w-6 text-rose-400 shrink-0" />
+                              )}
+                              <div>
+                                <div className="text-base font-bold">
+                                  {codeforcesResult.statusMsg || codeforcesResult.verdict || "Evaluated"}
+                                </div>
+                                <div className="text-xs text-zinc-400">
+                                  {codeforcesResult.isAccepted
+                                    ? `Passed all ${codeforcesResult.passedTestCount} test cases on Codeforces`
+                                    : `Passed ${codeforcesResult.passedTestCount} test cases before failing`}
+                                  {codeforcesResult.userHandle && ` • Handle: ${codeforcesResult.userHandle}`}
+                                  {codeforcesResult.problemCode && ` • Problem: ${codeforcesResult.problemCode}`}
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="flex items-center gap-4 text-xs">
+                              {codeforcesResult.runtime && (
+                                <div className="bg-zinc-900/80 px-2.5 py-1.5 rounded border border-zinc-800 text-center">
+                                  <span className="text-zinc-500 block text-[10px] uppercase font-mono">Runtime</span>
+                                  <span className="font-bold text-zinc-100">{codeforcesResult.runtime}</span>
+                                </div>
+                              )}
+                              {codeforcesResult.memory && (
+                                <div className="bg-zinc-900/80 px-2.5 py-1.5 rounded border border-zinc-800 text-center">
+                                  <span className="text-zinc-500 block text-[10px] uppercase font-mono">Memory</span>
+                                  <span className="font-bold text-zinc-100">{codeforcesResult.memory}</span>
+                                </div>
+                              )}
+                              {codeforcesResult.programmingLanguage && (
+                                <div className="bg-zinc-900/80 px-2.5 py-1.5 rounded border border-zinc-800 text-center">
+                                  <span className="text-zinc-500 block text-[10px] uppercase font-mono">Compiler</span>
+                                  <span className="font-bold text-zinc-100">{codeforcesResult.programmingLanguage}</span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
                         </div>
                       ) : runResults ? (
                         <div className="space-y-4">
@@ -1445,6 +1808,194 @@ export default function ProblemWorkspace({
                   onClick={handleSaveAndSubmit}
                   disabled={!sessionInput.trim()}
                   className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded bg-amber-600 hover:bg-amber-500 disabled:opacity-50 text-white font-medium text-xs transition-colors shadow-sm"
+                >
+                  <Zap className="h-3 w-3" />
+                  <span>Save &amp; Submit</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Connect / Manage Codeforces Account Session Modal */}
+      {isCfSessionModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 animate-fade-in">
+          <div className="w-full max-w-lg rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow-2xl space-y-4">
+            {/* Header */}
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
+              <div className="flex items-center gap-2 text-sm font-semibold text-zinc-100">
+                <Globe className="h-4 w-4 text-blue-400" />
+                <span>Codeforces Account Connection</span>
+                {hasSavedCfSession ? (
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    Connected
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-zinc-800 text-zinc-400 border border-zinc-700">
+                    Not Connected
+                  </span>
+                )}
+              </div>
+              <button
+                onClick={() => setIsCfSessionModalOpen(false)}
+                className="text-zinc-400 hover:text-zinc-200 text-xs px-1.5 py-0.5 rounded hover:bg-zinc-800 transition-colors"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Notification / Feedback Banner */}
+            {cfSessionFeedbackMsg && (
+              <div
+                className={`p-2.5 rounded-lg text-xs flex items-center gap-2 border ${
+                  cfSessionFeedbackMsg.type === "success"
+                    ? "bg-emerald-950/40 text-emerald-300 border-emerald-500/30"
+                    : "bg-rose-950/40 text-rose-300 border-rose-500/30"
+                }`}
+              >
+                {cfSessionFeedbackMsg.type === "success" ? (
+                  <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                ) : (
+                  <AlertTriangle className="h-4 w-4 text-rose-400 shrink-0" />
+                )}
+                <span>{cfSessionFeedbackMsg.text}</span>
+              </div>
+            )}
+
+            <p className="text-xs text-zinc-400 leading-relaxed">
+              To submit solutions directly to Codeforces, InterviewOS needs your session cookies (
+              <code className="text-blue-300 bg-zinc-950 px-1 py-0.5 rounded border border-zinc-800 font-mono">
+                JSESSIONID
+              </code>
+              ,{" "}
+              <code className="text-blue-300 bg-zinc-950 px-1 py-0.5 rounded border border-zinc-800 font-mono">
+                39ce7
+              </code>
+              ) and handle. Connect automatically below or paste them manually.
+            </p>
+
+            {/* 1-Click Automated Browser Login Card */}
+            <div className="rounded-xl border border-blue-500/30 bg-gradient-to-b from-blue-950/25 to-zinc-950/60 p-4 space-y-2.5">
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                  <Sparkles className="h-4 w-4" />
+                </div>
+                <div>
+                  <h3 className="text-xs font-semibold text-zinc-100 flex items-center gap-1.5">
+                    <span>1-Click Auto-Detect &amp; Connect</span>
+                    <span className="text-[10px] text-blue-400 font-mono font-normal border border-blue-500/30 bg-blue-500/10 px-1.5 py-0.2 rounded">Instant</span>
+                  </h3>
+                  <p className="text-[11px] text-zinc-400">
+                    Opens a secure Codeforces sign-in window and auto-detects your session.
+                  </p>
+                </div>
+              </div>
+
+              <p className="text-[11px] text-zinc-400 leading-relaxed">
+                Click below to launch an official Codeforces login window. Once signed in, InterviewOS will automatically extract your handle and session credentials.
+              </p>
+
+              <button
+                type="button"
+                onClick={handleCfBrowserLogin}
+                disabled={isCfBrowserLoggingIn}
+                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-blue-500 hover:bg-blue-400 active:scale-[0.99] disabled:opacity-60 text-zinc-950 font-semibold text-xs transition-all shadow-md cursor-pointer disabled:cursor-not-allowed"
+              >
+                {isCfBrowserLoggingIn ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin text-zinc-950" />
+                    <span>Detecting Codeforces Session...</span>
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="h-4 w-4 text-zinc-950" />
+                    <span>{hasSavedCfSession ? "Refresh / Re-detect Codeforces Session" : "1-Click Auto-Detect / Connect"}</span>
+                  </>
+                )}
+              </button>
+            </div>
+
+            {/* Separator */}
+            <div className="relative flex items-center justify-center py-1">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-zinc-800" />
+              </div>
+              <span className="relative bg-zinc-900 px-3 text-[10px] font-mono text-zinc-500 uppercase tracking-wider">
+                Or Paste Credentials Manually
+              </span>
+            </div>
+
+            {/* Codeforces Handle & Session Cookie Inputs */}
+            <div className="space-y-3">
+              <div className="space-y-1">
+                <label className="block text-xs font-medium text-zinc-300">
+                  Codeforces Handle (Username):
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g. tourist"
+                  value={cfHandleInput}
+                  onChange={(e) => setCfHandleInput(e.target.value)}
+                  className="w-full rounded-lg bg-zinc-950 border border-zinc-700 p-2.5 text-xs text-zinc-200 focus:outline-none focus:border-blue-500 font-mono"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="block text-xs font-medium text-zinc-300">
+                  Session Cookie Header or JSON:
+                </label>
+                <input
+                  type="password"
+                  placeholder="JSESSIONID=...; 39ce7=..."
+                  value={cfSessionInput}
+                  onChange={(e) => setCfSessionInput(e.target.value)}
+                  className="w-full rounded-lg bg-zinc-950 border border-zinc-700 p-2.5 text-xs text-zinc-200 focus:outline-none focus:border-blue-500 font-mono"
+                />
+                <p className="text-[11px] text-zinc-500">
+                  Inspect DevTools on <code className="text-zinc-400">codeforces.com</code> &rarr; Application &rarr; Cookies, or use 1-Click Auto-Detect above.
+                </p>
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div className="flex items-center justify-between pt-2 border-t border-zinc-800">
+              {hasSavedCfSession ? (
+                <button
+                  type="button"
+                  onClick={handleClearCfCookie}
+                  className="px-2.5 py-1.5 rounded text-xs text-rose-400 hover:text-rose-300 hover:bg-rose-950/20 transition-colors inline-flex items-center gap-1.5"
+                >
+                  <Trash2 className="h-3 w-3" />
+                  <span>Remove Session</span>
+                </button>
+              ) : (
+                <div />
+              )}
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setIsCfSessionModalOpen(false)}
+                  className="px-3 py-1.5 rounded text-xs text-zinc-400 hover:text-zinc-200 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={handleSaveCfCookieOnly}
+                  disabled={!cfSessionInput.trim()}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-zinc-700 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 text-zinc-200 font-medium text-xs transition-colors"
+                >
+                  <Check className="h-3.5 w-3.5 text-zinc-400" />
+                  <span>{hasSavedCfSession ? "Update Session" : "Save Session"}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleSaveCfAndSubmit}
+                  disabled={!cfSessionInput.trim()}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-medium text-xs transition-colors shadow-sm"
                 >
                   <Zap className="h-3 w-3" />
                   <span>Save &amp; Submit</span>

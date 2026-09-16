@@ -4,6 +4,8 @@ const { fetchLeetCodeQuestions } = require('./leetcode');
 const { fetchCodeforcesQuestions } = require('./codeforces');
 const { submitToLeetCode } = require('./leetcode_submit');
 const { captureLeetCodeSession } = require('./leetcode_login');
+const { submitToCodeforces } = require('./codeforces_submit');
+const { captureCodeforcesSession } = require('./codeforces_login');
 
 const app = express();
 app.use(cors());
@@ -39,6 +41,45 @@ app.post('/api/leetcode/submit', async (req, res) => {
   } catch (error) {
     console.error("LeetCode Submit API Error:", error);
     res.status(500).json({ error: error.message || 'Submission failed' });
+  }
+});
+
+app.post('/api/codeforces/login', async (req, res) => {
+  try {
+    const result = await captureCodeforcesSession();
+    res.json(result);
+  } catch (error) {
+    console.error("Codeforces Login API Error:", error);
+    res.status(500).json({ success: false, error: error.message || 'Codeforces login failed' });
+  }
+});
+
+app.post('/api/codeforces/submit', async (req, res) => {
+  const { problemCode, contestId, problemIndex, language, code, sessionCookies, handle } = req.body;
+
+  if (!problemCode && (!contestId || !problemIndex)) {
+    return res.status(400).json({ error: 'Problem code (e.g. 1985A) is required' });
+  }
+
+  if (!code) {
+    return res.status(400).json({ error: 'Source code is required' });
+  }
+
+  try {
+    const result = await submitToCodeforces({
+      problemCode,
+      contestId,
+      problemIndex,
+      language,
+      code,
+      sessionCookies,
+      handle
+    });
+
+    res.json(result);
+  } catch (error) {
+    console.error("Codeforces Submit API Error:", error);
+    res.status(500).json({ error: error.message || 'Codeforces submission failed' });
   }
 });
 

@@ -27,6 +27,65 @@ const LEETCODE_LANG_MAP = {
   java: 'java'
 };
 
+function detectEffectiveLanguage(code, declaredLang) {
+  if (!code) return declaredLang || 'python3';
+  const trimmed = code.trim();
+
+  // Obvious C++ patterns on LeetCode
+  if (
+    trimmed.includes('vector<') ||
+    trimmed.includes('std::') ||
+    trimmed.includes('unordered_map<') ||
+    trimmed.includes('unordered_set<') ||
+    trimmed.includes('ListNode*') ||
+    trimmed.includes('TreeNode*') ||
+    (trimmed.includes('class Solution') && trimmed.includes('public:')) ||
+    trimmed.includes('#include')
+  ) {
+    return 'cpp';
+  }
+
+  // Obvious Java patterns on LeetCode
+  if (
+    trimmed.includes('public int') ||
+    trimmed.includes('public boolean') ||
+    trimmed.includes('public void') ||
+    trimmed.includes('public String') ||
+    trimmed.includes('public List<') ||
+    trimmed.includes('int[]') ||
+    trimmed.includes('String[]') ||
+    trimmed.includes('HashMap<') ||
+    trimmed.includes('System.out')
+  ) {
+    return 'java';
+  }
+
+  // Obvious Python patterns on LeetCode
+  if (
+    (trimmed.includes('def ') && trimmed.includes('self')) ||
+    (trimmed.includes('class Solution:') && !trimmed.includes('{')) ||
+    trimmed.includes('elif ') ||
+    /def\s+[a-zA-Z0-9_]+\s*\(\s*self/.test(trimmed)
+  ) {
+    return 'python3';
+  }
+
+  // Obvious TypeScript / JavaScript patterns on LeetCode
+  if (
+    trimmed.includes('function(') ||
+    trimmed.includes('function (') ||
+    trimmed.includes('console.log(') ||
+    (trimmed.includes('var ') && !trimmed.includes('class Solution'))
+  ) {
+    if (/:\s*(number|string|boolean|void|number\[\])/.test(trimmed)) {
+      return 'typescript';
+    }
+    return 'javascript';
+  }
+
+  return declaredLang || 'python3';
+}
+
 /**
  * Submits user code to LeetCode and polls for the execution verdict.
  */
@@ -64,7 +123,8 @@ async function submitToLeetCode({ slug, language, code, sessionCookie, questionI
     const problemUrl = `https://leetcode.com/problems/${slug}/`;
     await page.goto(problemUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
 
-    const langSlug = LEETCODE_LANG_MAP[language.toLowerCase()] || 'python3';
+    const effectiveLang = detectEffectiveLanguage(code, language);
+    const langSlug = LEETCODE_LANG_MAP[(effectiveLang || language || '').toLowerCase()] || 'python3';
 
     // Submit the code from inside the authenticated browser context
     const submitResult = await page.evaluate(async (args) => {

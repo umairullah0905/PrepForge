@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { CheckCircle2, Circle, ExternalLink, FileCode2, Lightbulb, MessageSquare } from "lucide-react";
+import { PlatformIcon } from "@/components/PlatformIcons";
 
 export type Quest = {
   id?: string;
@@ -59,8 +60,9 @@ export default function QuestCard({
             </span>
 
             {quest.platform && (
-              <span className="rounded border border-zinc-800 bg-zinc-950/80 px-2 py-0.5 font-mono text-[10px] text-zinc-400">
-                {quest.platform}
+              <span className="inline-flex items-center gap-1.5 rounded border border-zinc-800 bg-zinc-950/80 px-2 py-0.5 font-mono text-[10px] text-zinc-300">
+                <PlatformIcon platform={quest.platform} className="w-3 h-3" />
+                <span>{quest.platform}</span>
               </span>
             )}
           </div>

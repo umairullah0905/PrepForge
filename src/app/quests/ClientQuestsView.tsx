@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   CheckCircle2,
@@ -11,8 +11,27 @@ import {
   Lightbulb,
   LayoutGrid,
   List,
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+  Globe,
 } from "lucide-react";
 import QuestCard, { type Quest } from "@/components/QuestCard";
+import { PlatformIcon, LeetCodeIcon, CodeforcesIcon } from "@/components/PlatformIcons";
+
+function getPageNumbers(currentPage: number, totalPages: number): (number | "...")[] {
+  if (totalPages <= 7) {
+    return Array.from({ length: totalPages }, (_, i) => i + 1);
+  }
+  if (currentPage <= 4) {
+    return [1, 2, 3, 4, 5, "...", totalPages];
+  }
+  if (currentPage >= totalPages - 3) {
+    return [1, "...", totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+  }
+  return [1, "...", currentPage - 1, currentPage, currentPage + 1, "...", totalPages];
+}
 
 export default function ClientQuestsView({
   questions = [],
@@ -24,8 +43,22 @@ export default function ClientQuestsView({
   const [selectedTopic, setSelectedTopic] = useState<string>("All");
   const [difficultyFilter, setDifficultyFilter] = useState<string>("ALL");
   const [statusFilter, setStatusFilter] = useState<"ALL" | "SOLVED" | "TODO">("ALL");
+  const [platformFilter, setPlatformFilter] = useState<string>("ALL");
   const [searchQuery, setSearchQuery] = useState("");
   const [viewMode, setViewMode] = useState<"table" | "grid">("table");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(25);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Extract available platforms
+  const platforms = useMemo(() => {
+    const set = new Set<string>();
+    questions.forEach((q) => {
+      if (q.platform) set.add(q.platform);
+    });
+    return ["ALL", ...Array.from(set).sort()];
+  }, [questions]);
 
   // Group questions by topic
   const { topics, questionsByTopic } = useMemo(() => {
@@ -52,7 +85,7 @@ export default function ClientQuestsView({
     return { topics: sortedTopics, questionsByTopic: topicMap };
   }, [questions]);
 
-  // Filtered list based on selected topic, difficulty, status, and search query
+  // Filtered list based on selected topic, difficulty, status, platform, and search query
   const displayedQuestions = useMemo(() => {
     const topicList = questionsByTopic[selectedTopic] || [];
     const completedSet = new Set(completedTitles);
@@ -67,20 +100,160 @@ export default function ClientQuestsView({
       if (statusFilter === "SOLVED" && !isCompleted) return false;
       if (statusFilter === "TODO" && isCompleted) return false;
 
+      if (platformFilter !== "ALL" && q.platform?.toUpperCase() !== platformFilter.toUpperCase()) {
+        return false;
+      }
+
       if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase();
         const matchTitle = q.title?.toLowerCase().includes(query);
         const matchTopic = q.topics?.some((t: string) => t.toLowerCase().includes(query));
-        if (!matchTitle && !matchTopic) return false;
+        const matchPlatform = q.platform?.toLowerCase().includes(query);
+        if (!matchTitle && !matchTopic && !matchPlatform) return false;
       }
 
       return true;
     });
-  }, [questionsByTopic, selectedTopic, completedTitles, difficultyFilter, statusFilter, searchQuery]);
+  }, [questionsByTopic, selectedTopic, completedTitles, difficultyFilter, statusFilter, platformFilter, searchQuery]);
+
+  // Reset to page 1 whenever filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedTopic, difficultyFilter, statusFilter, platformFilter, searchQuery, pageSize]);
+
+  // Pagination calculations
+  const totalItems = displayedQuestions.length;
+  const totalPages = Math.max(1, Math.ceil(totalItems / pageSize));
+  const safeCurrentPage = Math.min(Math.max(1, currentPage), totalPages);
+
+  const startIndex = (safeCurrentPage - 1) * pageSize;
+  const endIndex = Math.min(startIndex + pageSize, totalItems);
+
+  const paginatedQuestions = useMemo(() => {
+    return displayedQuestions.slice(startIndex, endIndex);
+  }, [displayedQuestions, startIndex, endIndex]);
+
+  const goToPage = (page: number) => {
+    const target = Math.max(1, Math.min(page, totalPages));
+    setCurrentPage(target);
+    if (containerRef.current) {
+      containerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  // Reusable pagination bar component
+  const renderPagination = () => {
+    if (totalItems === 0) return null;
+
+    const pageNumbers = getPageNumbers(safeCurrentPage, totalPages);
+
+    return (
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 border-t border-zinc-800 bg-zinc-950/70 text-xs font-mono text-zinc-400">
+        {/* Left: Summary & Per Page Selector */}
+        <div className="flex flex-wrap items-center gap-3">
+          <span>
+            Showing <span className="text-zinc-200 font-semibold">{totalItems === 0 ? 0 : startIndex + 1}</span> to{" "}
+            <span className="text-zinc-200 font-semibold">{endIndex}</span> of{" "}
+            <span className="text-zinc-200 font-semibold">{totalItems}</span> problems
+          </span>
+
+          <div className="flex items-center gap-1.5 ml-2 pl-3 border-l border-zinc-800">
+            <span className="text-zinc-500">Per page:</span>
+            {[20, 50, 100].map((size) => (
+              <button
+                key={size}
+                onClick={() => setPageSize(size)}
+                className={`px-2 py-0.5 rounded transition-colors ${
+                  pageSize === size
+                    ? "bg-zinc-800 text-zinc-100 font-semibold border border-zinc-700"
+                    : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-900"
+                }`}
+              >
+                {size}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Right: Page Navigation Controls */}
+        {totalPages > 1 && (
+          <div className="flex items-center gap-1">
+            {/* First Page */}
+            <button
+              onClick={() => goToPage(1)}
+              disabled={safeCurrentPage === 1}
+              className="p-1.5 rounded-md border border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 disabled:opacity-30 disabled:pointer-events-none transition-colors"
+              title="First page"
+            >
+              <ChevronsLeft className="h-4 w-4" />
+            </button>
+
+            {/* Prev Page */}
+            <button
+              onClick={() => goToPage(safeCurrentPage - 1)}
+              disabled={safeCurrentPage === 1}
+              className="p-1.5 rounded-md border border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 disabled:opacity-30 disabled:pointer-events-none transition-colors"
+              title="Previous page"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+
+            {/* Numbered pages */}
+            <div className="flex items-center gap-1 px-1">
+              {pageNumbers.map((num, idx) => {
+                if (num === "...") {
+                  return (
+                    <span key={`ellipsis-${idx}`} className="px-1.5 text-zinc-600 select-none">
+                      ...
+                    </span>
+                  );
+                }
+
+                const isActive = num === safeCurrentPage;
+                return (
+                  <button
+                    key={num}
+                    onClick={() => goToPage(num as number)}
+                    className={`min-w-[28px] h-7 px-2 rounded-md font-semibold text-xs transition-colors ${
+                      isActive
+                        ? "bg-zinc-100 text-zinc-950 shadow-sm"
+                        : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 border border-zinc-800/80 bg-zinc-900/40"
+                    }`}
+                  >
+                    {num}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Next Page */}
+            <button
+              onClick={() => goToPage(safeCurrentPage + 1)}
+              disabled={safeCurrentPage === totalPages}
+              className="p-1.5 rounded-md border border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 disabled:opacity-30 disabled:pointer-events-none transition-colors"
+              title="Next page"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+
+            {/* Last Page */}
+            <button
+              onClick={() => goToPage(totalPages)}
+              disabled={safeCurrentPage === totalPages}
+              className="p-1.5 rounded-md border border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 disabled:opacity-30 disabled:pointer-events-none transition-colors"
+              title="Last page"
+            >
+              <ChevronsRight className="h-4 w-4" />
+            </button>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 items-start w-full">
-      {/* Topics Sidebar - Expanded and larger text */}
+    <div ref={containerRef} className="flex flex-col lg:flex-row gap-6 items-start w-full">
+      {/* Topics Sidebar */}
       <aside className="w-full lg:w-72 shrink-0 rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 shadow-sm">
         <div className="flex items-center justify-between px-2 pb-3 mb-3 border-b border-zinc-800 text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold">
           <span>Categories</span>
@@ -121,12 +294,49 @@ export default function ClientQuestsView({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Filter by title or tag..."
+              placeholder="Filter by title, topic, or platform..."
               className="h-10 w-full rounded-lg border border-zinc-800 bg-zinc-950/80 pl-9 pr-3 text-sm text-zinc-200 placeholder:text-zinc-500 focus:border-zinc-700 focus:outline-none"
             />
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
+            {/* Platform Filter */}
+            <div className="flex rounded-lg border border-zinc-800 bg-zinc-950 p-1 text-xs font-mono">
+              <button
+                onClick={() => setPlatformFilter("ALL")}
+                className={`inline-flex items-center gap-1.5 rounded px-2.5 py-1.5 text-xs font-semibold transition-colors ${
+                  platformFilter.toUpperCase() === "ALL"
+                    ? "bg-zinc-800 text-zinc-100 shadow-sm"
+                    : "text-zinc-400 hover:text-zinc-200"
+                }`}
+              >
+                <Globe className="w-3.5 h-3.5 text-zinc-400" />
+                <span>All</span>
+              </button>
+              <button
+                onClick={() => setPlatformFilter("LeetCode")}
+                className={`inline-flex items-center gap-1.5 rounded px-2.5 py-1.5 text-xs font-semibold transition-colors ${
+                  platformFilter.toUpperCase() === "LEETCODE"
+                    ? "bg-zinc-800 text-zinc-100 shadow-sm"
+                    : "text-zinc-400 hover:text-zinc-200"
+                }`}
+              >
+                <LeetCodeIcon className="w-3.5 h-3.5" />
+                <span>LeetCode</span>
+              </button>
+              <button
+                onClick={() => setPlatformFilter("Codeforces")}
+                className={`inline-flex items-center gap-1.5 rounded px-2.5 py-1.5 text-xs font-semibold transition-colors ${
+                  platformFilter.toUpperCase() === "CODEFORCES"
+                    ? "bg-zinc-800 text-zinc-100 shadow-sm"
+                    : "text-zinc-400 hover:text-zinc-200"
+                }`}
+              >
+                <CodeforcesIcon className="w-3.5 h-3.5" />
+                <span>Codeforces</span>
+              </button>
+            </div>
+
             {/* Status Filter */}
             <div className="flex rounded-lg border border-zinc-800 bg-zinc-950 p-1 text-xs font-mono">
               {(["ALL", "TODO", "SOLVED"] as const).map((st) => (
@@ -196,7 +406,7 @@ export default function ClientQuestsView({
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-zinc-850">
-                  {displayedQuestions.map((q, idx) => {
+                  {paginatedQuestions.map((q, idx) => {
                     const isCompleted = completedTitles.includes(q.title);
                     const diff = q.difficulty?.toLowerCase() || "easy";
                     const diffClass =
@@ -251,7 +461,10 @@ export default function ClientQuestsView({
                         </td>
 
                         <td className="py-3.5 px-5 font-mono text-zinc-400 text-xs sm:text-sm">
-                          {q.platform || "LeetCode"}
+                          <div className="inline-flex items-center gap-2">
+                            <PlatformIcon platform={q.platform} className="w-3.5 h-3.5" />
+                            <span>{q.platform || "LeetCode"}</span>
+                          </div>
                         </td>
 
                         <td className="py-3.5 px-5 text-right">
@@ -295,7 +508,7 @@ export default function ClientQuestsView({
                     );
                   })}
 
-                  {displayedQuestions.length === 0 && (
+                  {paginatedQuestions.length === 0 && (
                     <tr>
                       <td colSpan={5} className="py-16 text-center text-zinc-500 font-mono text-sm">
                         No problems match the current filters.
@@ -306,34 +519,42 @@ export default function ClientQuestsView({
               </table>
             </div>
 
-            <div className="px-6 py-3.5 border-t border-zinc-800 bg-zinc-950/60 text-xs font-mono text-zinc-400">
-              Showing {displayedQuestions.length} of {questions.length} problems
-            </div>
+            {/* Pagination Controls */}
+            {renderPagination()}
           </div>
         ) : (
           /* View Mode: Grid */
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-            {displayedQuestions.map((q, i) => {
-              const isCompleted = completedTitles.includes(q.title);
-              const questProp: Quest = {
-                id: q.id,
-                title: q.title,
-                difficulty: q.difficulty as "Easy" | "Medium" | "Hard",
-                xp: q.difficulty === "Easy" ? 100 : q.difficulty === "Medium" ? 300 : 700,
-                url: q.url,
-                solution_link: q.solution_link,
-                platform: q.platform,
-                description: q.description,
-                topics: q.topics,
-                completed: isCompleted,
-              };
+          <div className="flex flex-col gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+              {paginatedQuestions.map((q, i) => {
+                const isCompleted = completedTitles.includes(q.title);
+                const questProp: Quest = {
+                  id: q.id,
+                  title: q.title,
+                  difficulty: q.difficulty as "Easy" | "Medium" | "Hard",
+                  xp: q.difficulty === "Easy" ? 100 : q.difficulty === "Medium" ? 300 : 700,
+                  url: q.url,
+                  solution_link: q.solution_link,
+                  platform: q.platform,
+                  description: q.description,
+                  topics: q.topics,
+                  completed: isCompleted,
+                };
 
-              return <QuestCard key={q.id || i} quest={questProp} index={i} />;
-            })}
+                return <QuestCard key={q.id || i} quest={questProp} index={i} />;
+              })}
 
-            {displayedQuestions.length === 0 && (
-              <div className="col-span-full py-16 text-center rounded-xl border border-dashed border-zinc-800 text-zinc-500 font-mono text-sm">
-                No problems match the current filters.
+              {paginatedQuestions.length === 0 && (
+                <div className="col-span-full py-16 text-center rounded-xl border border-dashed border-zinc-800 text-zinc-500 font-mono text-sm">
+                  No problems match the current filters.
+                </div>
+              )}
+            </div>
+
+            {/* Pagination Controls in Grid View */}
+            {totalItems > 0 && (
+              <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 overflow-hidden shadow-sm">
+                {renderPagination()}
               </div>
             )}
           </div>

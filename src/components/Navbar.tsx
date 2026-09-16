@@ -129,7 +129,16 @@ export default function Navbar({
 
               {/* Sign out */}
               {signOutAction && (
-                <form action={signOutAction}>
+                <form
+                  action={signOutAction}
+                  onSubmit={() => {
+                    try {
+                      localStorage.removeItem("leetcode_session");
+                      localStorage.removeItem("codeforces_session");
+                      localStorage.removeItem("codeforces_handle");
+                    } catch (_) {}
+                  }}
+                >
                   <button
                     type="submit"
                     className="flex h-9 w-9 items-center justify-center rounded-md border border-zinc-800/80 bg-zinc-900/50 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-100 transition-colors cursor-pointer"

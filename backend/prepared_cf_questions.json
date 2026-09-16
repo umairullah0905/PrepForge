@@ -1,0 +1,7773 @@
+[
+  {
+    "platform": "Codeforces",
+    "platform_id": "1914D",
+    "contest_id": "1914",
+    "index": "D",
+    "title": "Three Activities",
+    "url": "https://codeforces.com/problemset/problem/1914/D",
+    "rating": 1200,
+    "topics": [
+      "Greedy",
+      "Sorting",
+      "Arrays"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1909B",
+    "contest_id": "1909",
+    "index": "B",
+    "title": "Make Almost Equal With Mod",
+    "url": "https://codeforces.com/problemset/problem/1909/B",
+    "rating": 1200,
+    "topics": [
+      "Math",
+      "Number Theory",
+      "Bitmasks"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1872D",
+    "contest_id": "1872",
+    "index": "D",
+    "title": "Plus Minus Permutation",
+    "url": "https://codeforces.com/problemset/problem/1872/D",
+    "rating": 1200,
+    "topics": [
+      "Math",
+      "Number Theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1857C",
+    "contest_id": "1857",
+    "index": "C",
+    "title": "Assembly via Minimums",
+    "url": "https://codeforces.com/problemset/problem/1857/C",
+    "rating": 1200,
+    "topics": [
+      "Sorting",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1848B",
+    "contest_id": "1848",
+    "index": "B",
+    "title": "Vika and the Bridge",
+    "url": "https://codeforces.com/problemset/problem/1848/B",
+    "rating": 1200,
+    "topics": [
+      "Binary Search",
+      "Arrays"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1832C",
+    "contest_id": "1832",
+    "index": "C",
+    "title": "Contrast Value",
+    "url": "https://codeforces.com/problemset/problem/1832/C",
+    "rating": 1200,
+    "topics": [
+      "Greedy",
+      "Arrays"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1808B",
+    "contest_id": "1808",
+    "index": "B",
+    "title": "Playing in a Casino",
+    "url": "https://codeforces.com/problemset/problem/1808/B",
+    "rating": 1200,
+    "topics": [
+      "Sorting",
+      "Math",
+      "Arrays"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1793C",
+    "contest_id": "1793",
+    "index": "C",
+    "title": "Dora and Search",
+    "url": "https://codeforces.com/problemset/problem/1793/C",
+    "rating": 1200,
+    "topics": [
+      "Two Pointers",
+      "Data Structures"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1790D",
+    "contest_id": "1790",
+    "index": "D",
+    "title": "Matryoshkas",
+    "url": "https://codeforces.com/problemset/problem/1790/D",
+    "rating": 1200,
+    "topics": [
+      "Greedy",
+      "Sorting",
+      "Dictionaries"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1742E",
+    "contest_id": "1742",
+    "index": "E",
+    "title": "Scuza",
+    "url": "https://codeforces.com/problemset/problem/1742/E",
+    "rating": 1200,
+    "topics": [
+      "Binary Search",
+      "Prefix Sums"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1734C",
+    "contest_id": "1734",
+    "index": "C",
+    "title": "Removing Smallest Multiples",
+    "url": "https://codeforces.com/problemset/problem/1734/C",
+    "rating": 1200,
+    "topics": [
+      "Math",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1729D",
+    "contest_id": "1729",
+    "index": "D",
+    "title": "Friends and the Restaurant",
+    "url": "https://codeforces.com/problemset/problem/1729/D",
+    "rating": 1200,
+    "topics": [
+      "Two Pointers",
+      "Sorting",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1704C",
+    "contest_id": "1704",
+    "index": "C",
+    "title": "Virus",
+    "url": "https://codeforces.com/problemset/problem/1704/C",
+    "rating": 1200,
+    "topics": [
+      "Sorting",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1703E",
+    "contest_id": "1703",
+    "index": "E",
+    "title": "Mirror Grid",
+    "url": "https://codeforces.com/problemset/problem/1703/E",
+    "rating": 1200,
+    "topics": [
+      "Implementation",
+      "Matrices"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1692E",
+    "contest_id": "1692",
+    "index": "E",
+    "title": "Binary Deque",
+    "url": "https://codeforces.com/problemset/problem/1692/E",
+    "rating": 1200,
+    "topics": [
+      "Two Pointers",
+      "Binary Search",
+      "Prefix Sums"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1671C",
+    "contest_id": "1671",
+    "index": "C",
+    "title": "Dolce Vita",
+    "url": "https://codeforces.com/problemset/problem/1671/C",
+    "rating": 1200,
+    "topics": [
+      "Binary Search",
+      "Math",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1635C",
+    "contest_id": "1635",
+    "index": "C",
+    "title": "Differential Sorting",
+    "url": "https://codeforces.com/problemset/problem/1635/C",
+    "rating": 1200,
+    "topics": [
+      "Constructive Algorithms",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1594C",
+    "contest_id": "1594",
+    "index": "C",
+    "title": "Make Them Equal",
+    "url": "https://codeforces.com/problemset/problem/1594/C",
+    "rating": 1200,
+    "topics": [
+      "Math",
+      "Greedy",
+      "Strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1582C",
+    "contest_id": "1582",
+    "index": "C",
+    "title": "Grandma Capa Knits a Scarf",
+    "url": "https://codeforces.com/problemset/problem/1582/C",
+    "rating": 1200,
+    "topics": [
+      "Two Pointers",
+      "Strings",
+      "Brute Force"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1541B",
+    "contest_id": "1541",
+    "index": "B",
+    "title": "Pleasant Pairs",
+    "url": "https://codeforces.com/problemset/problem/1541/B",
+    "rating": 1200,
+    "topics": [
+      "Math",
+      "Number Theory",
+      "Implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1539C",
+    "contest_id": "1539",
+    "index": "C",
+    "title": "Stable Groups",
+    "url": "https://codeforces.com/problemset/problem/1539/C",
+    "rating": 1200,
+    "topics": [
+      "Greedy",
+      "Sorting"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1536B",
+    "contest_id": "1536",
+    "index": "B",
+    "title": "Prinzessin der Verurteilung",
+    "url": "https://codeforces.com/problemset/problem/1536/B",
+    "rating": 1200,
+    "topics": [
+      "Strings",
+      "Brute Force"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1527B1",
+    "contest_id": "1527",
+    "index": "B1",
+    "title": "Palindrome Game (easy version)",
+    "url": "https://codeforces.com/problemset/problem/1527/B1",
+    "rating": 1200,
+    "topics": [
+      "Games",
+      "Constructive Algorithms"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1520D",
+    "contest_id": "1520",
+    "index": "D",
+    "title": "Same Differences",
+    "url": "https://codeforces.com/problemset/problem/1520/D",
+    "rating": 1200,
+    "topics": [
+      "Math",
+      "Data Structures",
+      "Hashing"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1514B",
+    "contest_id": "1514",
+    "index": "B",
+    "title": "AND 0, Sum Big",
+    "url": "https://codeforces.com/problemset/problem/1514/B",
+    "rating": 1200,
+    "topics": [
+      "Combinatorics",
+      "Math",
+      "Bitmasks"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1504B",
+    "contest_id": "1504",
+    "index": "B",
+    "title": "Flip the Bits",
+    "url": "https://codeforces.com/problemset/problem/1504/B",
+    "rating": 1200,
+    "topics": [
+      "Strings",
+      "Greedy",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1497B",
+    "contest_id": "1497",
+    "index": "B",
+    "title": "M-Arrays",
+    "url": "https://codeforces.com/problemset/problem/1497/B",
+    "rating": 1200,
+    "topics": [
+      "Math",
+      "Greedy",
+      "Data Structures"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1487B",
+    "contest_id": "1487",
+    "index": "B",
+    "title": "Cat cycle",
+    "url": "https://codeforces.com/problemset/problem/1487/B",
+    "rating": 1200,
+    "topics": [
+      "Math",
+      "Number Theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1433D",
+    "contest_id": "1433",
+    "index": "D",
+    "title": "Districts Connection",
+    "url": "https://codeforces.com/problemset/problem/1433/D",
+    "rating": 1200,
+    "topics": [
+      "Graphs",
+      "Constructive Algorithms"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1420B",
+    "contest_id": "1420",
+    "index": "B",
+    "title": "Rock and Lever",
+    "url": "https://codeforces.com/problemset/problem/1420/B",
+    "rating": 1200,
+    "topics": [
+      "Bitmasks",
+      "Math",
+      "Combinatorics"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1904A",
+    "contest_id": "1904",
+    "index": "A",
+    "title": "Forked!",
+    "url": "https://codeforces.com/problemset/problem/1904/A",
+    "rating": 900,
+    "topics": [
+      "Brute force",
+      "Implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1883B",
+    "contest_id": "1883",
+    "index": "B",
+    "title": "Chemistry",
+    "url": "https://codeforces.com/problemset/problem/1883/B",
+    "rating": 900,
+    "topics": [
+      "Greedy",
+      "Strings",
+      "Hash"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1878C",
+    "contest_id": "1878",
+    "index": "C",
+    "title": "Vasilije in Cacak",
+    "url": "https://codeforces.com/problemset/problem/1878/C",
+    "rating": 900,
+    "topics": [
+      "Math",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1875A",
+    "contest_id": "1875",
+    "index": "A",
+    "title": "Jellyfish and Undertale",
+    "url": "https://codeforces.com/problemset/problem/1875/A",
+    "rating": 900,
+    "topics": [
+      "Greedy",
+      "Implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1869A",
+    "contest_id": "1869",
+    "index": "A",
+    "title": "Make It Zero",
+    "url": "https://codeforces.com/problemset/problem/1869/A",
+    "rating": 900,
+    "topics": [
+      "Constructive algorithms",
+      "Bitmasks"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1855B",
+    "contest_id": "1855",
+    "index": "B",
+    "title": "Longest Divisors Interval",
+    "url": "https://codeforces.com/problemset/problem/1855/B",
+    "rating": 900,
+    "topics": [
+      "Math",
+      "Number theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1850D",
+    "contest_id": "1850",
+    "index": "D",
+    "title": "Balanced Round",
+    "url": "https://codeforces.com/problemset/problem/1850/D",
+    "rating": 900,
+    "topics": [
+      "Greedy",
+      "Sorting",
+      "Two pointers"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1837B",
+    "contest_id": "1837",
+    "index": "B",
+    "title": "Comparison String",
+    "url": "https://codeforces.com/problemset/problem/1837/B",
+    "rating": 900,
+    "topics": [
+      "Strings",
+      "Greedy",
+      "DP"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1828B",
+    "contest_id": "1828",
+    "index": "B",
+    "title": "Permutation Swap",
+    "url": "https://codeforces.com/problemset/problem/1828/B",
+    "rating": 900,
+    "topics": [
+      "Math",
+      "Number theory (GCD)"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1807D",
+    "contest_id": "1807",
+    "index": "D",
+    "title": "Odd Queries",
+    "url": "https://codeforces.com/problemset/problem/1807/D",
+    "rating": 900,
+    "topics": [
+      "Prefix sums",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1790B",
+    "contest_id": "1790",
+    "index": "B",
+    "title": "Not Dividing",
+    "url": "https://codeforces.com/problemset/problem/1790/B",
+    "rating": 900,
+    "topics": [
+      "Greedy",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1726A",
+    "contest_id": "1726",
+    "index": "A",
+    "title": "Mainak and Array",
+    "url": "https://codeforces.com/problemset/problem/1726/A",
+    "rating": 900,
+    "topics": [
+      "Greedy",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1696B",
+    "contest_id": "1696",
+    "index": "B",
+    "title": "NIT Destroys the Universe",
+    "url": "https://codeforces.com/problemset/problem/1696/B",
+    "rating": 900,
+    "topics": [
+      "Greedy",
+      "Arrays"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1679A",
+    "contest_id": "1679",
+    "index": "A",
+    "title": "AvtoBus",
+    "url": "https://codeforces.com/problemset/problem/1679/A",
+    "rating": 900,
+    "topics": [
+      "Math",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1675B",
+    "contest_id": "1675",
+    "index": "B",
+    "title": "Make It Increasing",
+    "url": "https://codeforces.com/problemset/problem/1675/B",
+    "rating": 900,
+    "topics": [
+      "Greedy",
+      "Arrays"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1666D",
+    "contest_id": "1666",
+    "index": "D",
+    "title": "Deletive Editing",
+    "url": "https://codeforces.com/problemset/problem/1666/D",
+    "rating": 900,
+    "topics": [
+      "Strings",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1665B",
+    "contest_id": "1665",
+    "index": "B",
+    "title": "Array Cloning Technique",
+    "url": "https://codeforces.com/problemset/problem/1665/B",
+    "rating": 900,
+    "topics": [
+      "Greedy",
+      "Sorting"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1624B",
+    "contest_id": "1624",
+    "index": "B",
+    "title": "Make AP",
+    "url": "https://codeforces.com/problemset/problem/1624/B",
+    "rating": 900,
+    "topics": [
+      "Math",
+      "Implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1607B",
+    "contest_id": "1607",
+    "index": "B",
+    "title": "Odd Grasshopper",
+    "url": "https://codeforces.com/problemset/problem/1607/B",
+    "rating": 900,
+    "topics": [
+      "Math",
+      "Patterns"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1606A",
+    "contest_id": "1606",
+    "index": "A",
+    "title": "AB Balance",
+    "url": "https://codeforces.com/problemset/problem/1606/A",
+    "rating": 900,
+    "topics": [
+      "Strings",
+      "Implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1593B",
+    "contest_id": "1593",
+    "index": "B",
+    "title": "Make it Divisible by 25",
+    "url": "https://codeforces.com/problemset/problem/1593/B",
+    "rating": 900,
+    "topics": [
+      "Strings",
+      "Math",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1582B",
+    "contest_id": "1582",
+    "index": "B",
+    "title": "Luntik and Subsequences",
+    "url": "https://codeforces.com/problemset/problem/1582/B",
+    "rating": 900,
+    "topics": [
+      "Combinatorics",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1559A",
+    "contest_id": "1559",
+    "index": "A",
+    "title": "Mocha and Math",
+    "url": "https://codeforces.com/problemset/problem/1559/A",
+    "rating": 900,
+    "topics": [
+      "Bitmasks",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1543A",
+    "contest_id": "1543",
+    "index": "A",
+    "title": "Exciting Bets",
+    "url": "https://codeforces.com/problemset/problem/1543/A",
+    "rating": 900,
+    "topics": [
+      "Math",
+      "Number theory (GCD)"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1537B",
+    "contest_id": "1537",
+    "index": "B",
+    "title": "Bad Boy",
+    "url": "https://codeforces.com/problemset/problem/1537/B",
+    "rating": 900,
+    "topics": [
+      "Math",
+      "Constructive algorithms"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1475A",
+    "contest_id": "1475",
+    "index": "A",
+    "title": "Odd Divisor",
+    "url": "https://codeforces.com/problemset/problem/1475/A",
+    "rating": 900,
+    "topics": [
+      "Math",
+      "Number theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1471A",
+    "contest_id": "1471",
+    "index": "A",
+    "title": "Strange Partition",
+    "url": "https://codeforces.com/problemset/problem/1471/A",
+    "rating": 900,
+    "topics": [
+      "Greedy",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1440B",
+    "contest_id": "1440",
+    "index": "B",
+    "title": "Sum of Medians",
+    "url": "https://codeforces.com/problemset/problem/1440/B",
+    "rating": 900,
+    "topics": [
+      "Greedy",
+      "Sorting"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1380A",
+    "contest_id": "1380",
+    "index": "A",
+    "title": "Three Indices",
+    "url": "https://codeforces.com/problemset/problem/1380/A",
+    "rating": 900,
+    "topics": [
+      "Brute force",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1373B",
+    "contest_id": "1373",
+    "index": "B",
+    "title": "01 Game",
+    "url": "https://codeforces.com/problemset/problem/1373/B",
+    "rating": 900,
+    "topics": [
+      "Games",
+      "Strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1374B",
+    "contest_id": "1374",
+    "index": "B",
+    "title": "Multiply by 2, divide by 6",
+    "url": "https://codeforces.com/problemset/problem/1374/B",
+    "rating": 900,
+    "topics": [
+      "Math",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1913B",
+    "contest_id": "1913",
+    "index": "B",
+    "title": "Swap and Delete",
+    "url": "https://codeforces.com/problemset/problem/1913/B",
+    "rating": 1000,
+    "topics": [
+      "Strings",
+      "Math",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1883C",
+    "contest_id": "1883",
+    "index": "C",
+    "title": "Raspberries",
+    "url": "https://codeforces.com/problemset/problem/1883/C",
+    "rating": 1000,
+    "topics": [
+      "Math",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1879C",
+    "contest_id": "1879",
+    "index": "C",
+    "title": "Make it Alternating",
+    "url": "https://codeforces.com/problemset/problem/1879/C",
+    "rating": 1300,
+    "topics": [
+      "Combinatorics",
+      "Math",
+      "Strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1859B",
+    "contest_id": "1859",
+    "index": "B",
+    "title": "Olya and Game with Arrays",
+    "url": "https://codeforces.com/problemset/problem/1859/B",
+    "rating": 1000,
+    "topics": [
+      "Constructive Algorithms",
+      "Greedy",
+      "Sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1849B",
+    "contest_id": "1849",
+    "index": "B",
+    "title": "Monsters",
+    "url": "https://codeforces.com/problemset/problem/1849/B",
+    "rating": 1000,
+    "topics": [
+      "Greedy",
+      "Sortings",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1840C",
+    "contest_id": "1840",
+    "index": "C",
+    "title": "Ski Resort",
+    "url": "https://codeforces.com/problemset/problem/1840/C",
+    "rating": 1000,
+    "topics": [
+      "Combinatorics",
+      "Math",
+      "Two Pointers"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1831B",
+    "contest_id": "1831",
+    "index": "B",
+    "title": "Array merging",
+    "url": "https://codeforces.com/problemset/problem/1831/B",
+    "rating": 1000,
+    "topics": [
+      "Greedy",
+      "Two Pointers",
+      "Arrays"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1791D",
+    "contest_id": "1791",
+    "index": "D",
+    "title": "Distinct Split",
+    "url": "https://codeforces.com/problemset/problem/1791/D",
+    "rating": 1000,
+    "topics": [
+      "Strings",
+      "Greedy",
+      "Prefix Sums"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1765M",
+    "contest_id": "1765",
+    "index": "M",
+    "title": "Minimum LCM",
+    "url": "https://codeforces.com/problemset/problem/1765/M",
+    "rating": 1000,
+    "topics": [
+      "Math",
+      "Number Theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1744C",
+    "contest_id": "1744",
+    "index": "C",
+    "title": "Traffic Light",
+    "url": "https://codeforces.com/problemset/problem/1744/C",
+    "rating": 1000,
+    "topics": [
+      "Strings",
+      "Two Pointers"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1725B",
+    "contest_id": "1725",
+    "index": "B",
+    "title": "Basketball Together",
+    "url": "https://codeforces.com/problemset/problem/1725/B",
+    "rating": 1000,
+    "topics": [
+      "Greedy",
+      "Sortings",
+      "Binary Search"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1715B",
+    "contest_id": "1715",
+    "index": "B",
+    "title": "Beautiful Array",
+    "url": "https://codeforces.com/problemset/problem/1715/B",
+    "rating": 1000,
+    "topics": [
+      "Math",
+      "Constructive Algorithms"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1704B",
+    "contest_id": "1704",
+    "index": "B",
+    "title": "Luke is a Foodie",
+    "url": "https://codeforces.com/problemset/problem/1704/B",
+    "rating": 1000,
+    "topics": [
+      "Greedy",
+      "Implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1691B",
+    "contest_id": "1691",
+    "index": "B",
+    "title": "Shoe Shuffling",
+    "url": "https://codeforces.com/problemset/problem/1691/B",
+    "rating": 1000,
+    "topics": [
+      "Constructive Algorithms",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1690D",
+    "contest_id": "1690",
+    "index": "D",
+    "title": "Black and White Stripe",
+    "url": "https://codeforces.com/problemset/problem/1690/D",
+    "rating": 1000,
+    "topics": [
+      "Strings",
+      "Sliding Window"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1659A",
+    "contest_id": "1659",
+    "index": "A",
+    "title": "Red Versus Blue",
+    "url": "https://codeforces.com/problemset/problem/1659/A",
+    "rating": 1000,
+    "topics": [
+      "Constructive Algorithms",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1632B",
+    "contest_id": "1632",
+    "index": "B",
+    "title": "Roof Construction",
+    "url": "https://codeforces.com/problemset/problem/1632/B",
+    "rating": 1000,
+    "topics": [
+      "Constructive Algorithms",
+      "Bitmasks"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1620B",
+    "contest_id": "1620",
+    "index": "B",
+    "title": "Triangles on a Rectangle",
+    "url": "https://codeforces.com/problemset/problem/1620/B",
+    "rating": 1000,
+    "topics": [
+      "Geometry",
+      "Math",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1614B",
+    "contest_id": "1614",
+    "index": "B",
+    "title": "Divan and a New Project",
+    "url": "https://codeforces.com/problemset/problem/1614/B",
+    "rating": 1000,
+    "topics": [
+      "Greedy",
+      "Sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1567B",
+    "contest_id": "1567",
+    "index": "B",
+    "title": "MEXor Mixup",
+    "url": "https://codeforces.com/problemset/problem/1567/B",
+    "rating": 1000,
+    "topics": [
+      "Bitmasks",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1506C",
+    "contest_id": "1506",
+    "index": "C",
+    "title": "Double-ended Strings",
+    "url": "https://codeforces.com/problemset/problem/1506/C",
+    "rating": 1000,
+    "topics": [
+      "Strings",
+      "Brute Force"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1485A",
+    "contest_id": "1485",
+    "index": "A",
+    "title": "Add and Divide",
+    "url": "https://codeforces.com/problemset/problem/1485/A",
+    "rating": 1000,
+    "topics": [
+      "Math",
+      "Brute Force",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1474B",
+    "contest_id": "1474",
+    "index": "B",
+    "title": "Different Divisors",
+    "url": "https://codeforces.com/problemset/problem/1474/B",
+    "rating": 1000,
+    "topics": [
+      "Math",
+      "Number Theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1447B",
+    "contest_id": "1447",
+    "index": "B",
+    "title": "Numbers Box",
+    "url": "https://codeforces.com/problemset/problem/1447/B",
+    "rating": 1000,
+    "topics": [
+      "Math",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1438B",
+    "contest_id": "1438",
+    "index": "B",
+    "title": "Valerii Against Everyone",
+    "url": "https://codeforces.com/problemset/problem/1438/B",
+    "rating": 1000,
+    "topics": [
+      "Bitmasks",
+      "Greedy",
+      "Sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1418A",
+    "contest_id": "1418",
+    "index": "A",
+    "title": "Buying Torches",
+    "url": "https://codeforces.com/problemset/problem/1418/A",
+    "rating": 1000,
+    "topics": [
+      "Math",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1411B",
+    "contest_id": "1411",
+    "index": "B",
+    "title": "Fair Numbers",
+    "url": "https://codeforces.com/problemset/problem/1411/B",
+    "rating": 1000,
+    "topics": [
+      "Brute Force",
+      "Number Theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1374C",
+    "contest_id": "1374",
+    "index": "C",
+    "title": "Move Brackets",
+    "url": "https://codeforces.com/problemset/problem/1374/C",
+    "rating": 1000,
+    "topics": [
+      "Greedy",
+      "Strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1362A",
+    "contest_id": "1362",
+    "index": "A",
+    "title": "Johnny and Ancient Computer",
+    "url": "https://codeforces.com/problemset/problem/1362/A",
+    "rating": 1000,
+    "topics": [
+      "Math",
+      "Bitmasks"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1312B",
+    "contest_id": "1312",
+    "index": "B",
+    "title": "Bogosort",
+    "url": "https://codeforces.com/problemset/problem/1312/B",
+    "rating": 1000,
+    "topics": [
+      "Sortings",
+      "Constructive Algorithms"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1155A",
+    "contest_id": "1155",
+    "index": "A",
+    "title": "Reverse a Substring",
+    "url": "https://codeforces.com/problemset/problem/1155/A",
+    "rating": 1000,
+    "topics": [
+      "Implementation",
+      "Sorting",
+      "Strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1917B",
+    "contest_id": "1917",
+    "index": "B",
+    "title": "Erase First or Second Letter",
+    "url": "https://codeforces.com/problemset/problem/1917/B",
+    "rating": 1100,
+    "topics": [
+      "Strings",
+      "DP",
+      "Combinatorics"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1914C",
+    "contest_id": "1914",
+    "index": "C",
+    "title": "Quests",
+    "url": "https://codeforces.com/problemset/problem/1914/C",
+    "rating": 1100,
+    "topics": [
+      "Greedy",
+      "Math",
+      "Implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1904B",
+    "contest_id": "1904",
+    "index": "B",
+    "title": "Collecting Game",
+    "url": "https://codeforces.com/problemset/problem/1904/B",
+    "rating": 1100,
+    "topics": [
+      "Sorting",
+      "Greedy",
+      "Prefix Sums"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1899C",
+    "contest_id": "1899",
+    "index": "C",
+    "title": "Yarik and Array",
+    "url": "https://codeforces.com/problemset/problem/1899/C",
+    "rating": 1100,
+    "topics": [
+      "Greedy",
+      "DP",
+      "Two Pointers"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1899B",
+    "contest_id": "1899",
+    "index": "B",
+    "title": "250 Thousand Tons of TNT",
+    "url": "https://codeforces.com/problemset/problem/1899/B",
+    "rating": 1100,
+    "topics": [
+      "Math",
+      "Number Theory",
+      "Implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1891B",
+    "contest_id": "1891",
+    "index": "B",
+    "title": "Deja Vu",
+    "url": "https://codeforces.com/problemset/problem/1891/B",
+    "rating": 1100,
+    "topics": [
+      "Math",
+      "Implementation",
+      "Arrays"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1873E",
+    "contest_id": "1873",
+    "index": "E",
+    "title": "Building an Aquarium",
+    "url": "https://codeforces.com/problemset/problem/1873/E",
+    "rating": 1100,
+    "topics": [
+      "Binary Search",
+      "Sorting",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1869B",
+    "contest_id": "1869",
+    "index": "B",
+    "title": "2D Traveling",
+    "url": "https://codeforces.com/problemset/problem/1869/B",
+    "rating": 1100,
+    "topics": [
+      "Geometry",
+      "Math",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1850E",
+    "contest_id": "1850",
+    "index": "E",
+    "title": "Cardboard for Pictures",
+    "url": "https://codeforces.com/problemset/problem/1850/E",
+    "rating": 1100,
+    "topics": [
+      "Binary Search",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1842B",
+    "contest_id": "1842",
+    "index": "B",
+    "title": "Tenzing and Books",
+    "url": "https://codeforces.com/problemset/problem/1842/B",
+    "rating": 1100,
+    "topics": [
+      "Bitmasks",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1832B",
+    "contest_id": "1832",
+    "index": "B",
+    "title": "Maximum Sum",
+    "url": "https://codeforces.com/problemset/problem/1832/B",
+    "rating": 1100,
+    "topics": [
+      "DP",
+      "Greedy",
+      "Math",
+      "Prefix Sums"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1828C",
+    "contest_id": "1828",
+    "index": "C",
+    "title": "Counting Orders",
+    "url": "https://codeforces.com/problemset/problem/1828/C",
+    "rating": 1100,
+    "topics": [
+      "Combinatorics",
+      "Sorting",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1826B",
+    "contest_id": "1826",
+    "index": "B",
+    "title": "Lunatic Never Content",
+    "url": "https://codeforces.com/problemset/problem/1826/B",
+    "rating": 1100,
+    "topics": [
+      "Math",
+      "Number Theory (GCD)"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1821B",
+    "contest_id": "1821",
+    "index": "B",
+    "title": "Sort the Subarray",
+    "url": "https://codeforces.com/problemset/problem/1821/B",
+    "rating": 1100,
+    "topics": [
+      "Arrays",
+      "Two Pointers",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1820B",
+    "contest_id": "1820",
+    "index": "B",
+    "title": "JoJo's Incredible Adventures",
+    "url": "https://codeforces.com/problemset/problem/1820/B",
+    "rating": 1100,
+    "topics": [
+      "Strings",
+      "Math",
+      "Implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1807G2",
+    "contest_id": "1807",
+    "index": "G2",
+    "title": "Subsequence Addition (Hard Version)",
+    "url": "https://codeforces.com/problemset/problem/1807/G2",
+    "rating": 1100,
+    "topics": [
+      "Greedy",
+      "Sorting",
+      "DP"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1797B",
+    "contest_id": "1797",
+    "index": "B",
+    "title": "Li Hua and Pattern",
+    "url": "https://codeforces.com/problemset/problem/1797/B",
+    "rating": 1100,
+    "topics": [
+      "Matrices",
+      "Math",
+      "Constructive Algorithms"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1791G1",
+    "contest_id": "1791",
+    "index": "G1",
+    "title": "Teleporters (Easy Version)",
+    "url": "https://codeforces.com/problemset/problem/1791/G1",
+    "rating": 1100,
+    "topics": [
+      "Greedy",
+      "Sorting"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1791E",
+    "contest_id": "1791",
+    "index": "E",
+    "title": "Negatives and Positives",
+    "url": "https://codeforces.com/problemset/problem/1791/E",
+    "rating": 1100,
+    "topics": [
+      "Greedy",
+      "Math",
+      "DP"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1780B",
+    "contest_id": "1780",
+    "index": "B",
+    "title": "GCD Partition",
+    "url": "https://codeforces.com/problemset/problem/1780/B",
+    "rating": 1100,
+    "topics": [
+      "Prefix Sums",
+      "Math",
+      "Number Theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1742D",
+    "contest_id": "1742",
+    "index": "D",
+    "title": "Coprime",
+    "url": "https://codeforces.com/problemset/problem/1742/D",
+    "rating": 1100,
+    "topics": [
+      "Math",
+      "Number Theory",
+      "Brute Force"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1731B",
+    "contest_id": "1731",
+    "index": "B",
+    "title": "Kill Demodogs",
+    "url": "https://codeforces.com/problemset/problem/1731/B",
+    "rating": 1100,
+    "topics": [
+      "Math",
+      "Combinatorics"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1708B",
+    "contest_id": "1708",
+    "index": "B",
+    "title": "Difference of GCDs",
+    "url": "https://codeforces.com/problemset/problem/1708/B",
+    "rating": 1100,
+    "topics": [
+      "Constructive Algorithms",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1682B",
+    "contest_id": "1682",
+    "index": "B",
+    "title": "AND Sorting",
+    "url": "https://codeforces.com/problemset/problem/1682/B",
+    "rating": 1100,
+    "topics": [
+      "Bitmasks",
+      "Sorting"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1673B",
+    "contest_id": "1673",
+    "index": "B",
+    "title": "A Perfectly Balanced String?",
+    "url": "https://codeforces.com/problemset/problem/1673/B",
+    "rating": 1100,
+    "topics": [
+      "Strings",
+      "Implementation",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1669F",
+    "contest_id": "1669",
+    "index": "F",
+    "title": "Eating Candies",
+    "url": "https://codeforces.com/problemset/problem/1669/F",
+    "rating": 1100,
+    "topics": [
+      "Two Pointers",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1656B",
+    "contest_id": "1656",
+    "index": "B",
+    "title": "Subtract Operation",
+    "url": "https://codeforces.com/problemset/problem/1656/B",
+    "rating": 1100,
+    "topics": [
+      "Math",
+      "Two Pointers",
+      "Data Structures"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1631B",
+    "contest_id": "1631",
+    "index": "B",
+    "title": "Fun with Even Subarrays",
+    "url": "https://codeforces.com/problemset/problem/1631/B",
+    "rating": 1100,
+    "topics": [
+      "DP",
+      "Greedy",
+      "Implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1618C",
+    "contest_id": "1618",
+    "index": "C",
+    "title": "Paint the Array",
+    "url": "https://codeforces.com/problemset/problem/1618/C",
+    "rating": 1100,
+    "topics": [
+      "Math",
+      "Number Theory (GCD)"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1610B",
+    "contest_id": "1610",
+    "index": "B",
+    "title": "Kalindrome Array",
+    "url": "https://codeforces.com/problemset/problem/1610/B",
+    "rating": 1100,
+    "topics": [
+      "Arrays",
+      "Two Pointers",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1511C",
+    "contest_id": "1511",
+    "index": "C",
+    "title": "Berland Regional",
+    "url": "https://codeforces.com/problemset/problem/1511/C",
+    "rating": 1400,
+    "topics": [
+      "Sorting",
+      "Greedy",
+      "Prefix Sums"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1931D",
+    "contest_id": "1931",
+    "index": "D",
+    "title": "Divisible Pairs",
+    "url": "https://codeforces.com/problemset/problem/1931/D",
+    "rating": 1300,
+    "topics": [
+      "Math",
+      "Number Theory",
+      "Combinatorics"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1927D",
+    "contest_id": "1927",
+    "index": "D",
+    "title": "Find the Different Ones!",
+    "url": "https://codeforces.com/problemset/problem/1927/D",
+    "rating": 1300,
+    "topics": [
+      "Prefix Sums",
+      "Binary Search",
+      "Data Structures"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1915E",
+    "contest_id": "1915",
+    "index": "E",
+    "title": "Romantic Glasses",
+    "url": "https://codeforces.com/problemset/problem/1915/E",
+    "rating": 1300,
+    "topics": [
+      "Prefix Sums",
+      "Math",
+      "Hashing"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1881D",
+    "contest_id": "1881",
+    "index": "D",
+    "title": "Divide and Equalize",
+    "url": "https://codeforces.com/problemset/problem/1881/D",
+    "rating": 1300,
+    "topics": [
+      "Math",
+      "Number Theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1857D",
+    "contest_id": "1857",
+    "index": "D",
+    "title": "Strong Vertices",
+    "url": "https://codeforces.com/problemset/problem/1857/D",
+    "rating": 1300,
+    "topics": [
+      "Math",
+      "Arrays",
+      "Trees/Graphs"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1794C",
+    "contest_id": "1794",
+    "index": "C",
+    "title": "Scoring Subsequences",
+    "url": "https://codeforces.com/problemset/problem/1794/C",
+    "rating": 1300,
+    "topics": [
+      "Binary Search",
+      "Two Pointers",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1775B",
+    "contest_id": "1775",
+    "index": "B",
+    "title": "Gardener and the Array",
+    "url": "https://codeforces.com/problemset/problem/1775/B",
+    "rating": 1300,
+    "topics": [
+      "Bitmasks",
+      "Greedy",
+      "Arrays"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1676G",
+    "contest_id": "1676",
+    "index": "G",
+    "title": "White-Black Balanced Subtrees",
+    "url": "https://codeforces.com/problemset/problem/1676/G",
+    "rating": 1300,
+    "topics": [
+      "Trees",
+      "DFS and Similar",
+      "Graphs"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1669H",
+    "contest_id": "1669",
+    "index": "H",
+    "title": "Maximal AND",
+    "url": "https://codeforces.com/problemset/problem/1669/H",
+    "rating": 1300,
+    "topics": [
+      "Bitmasks",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1612C",
+    "contest_id": "1612",
+    "index": "C",
+    "title": "Chat Ban",
+    "url": "https://codeforces.com/problemset/problem/1612/C",
+    "rating": 1300,
+    "topics": [
+      "Binary Search",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1601A",
+    "contest_id": "1601",
+    "index": "A",
+    "title": "Array Elimination",
+    "url": "https://codeforces.com/problemset/problem/1601/A",
+    "rating": 1300,
+    "topics": [
+      "Bitmasks",
+      "Math",
+      "Number Theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1561C",
+    "contest_id": "1561",
+    "index": "C",
+    "title": "Deep Down Below",
+    "url": "https://codeforces.com/problemset/problem/1561/C",
+    "rating": 1300,
+    "topics": [
+      "Binary Search",
+      "Greedy",
+      "Sorting"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1498B",
+    "contest_id": "1498",
+    "index": "B",
+    "title": "Box Fitting",
+    "url": "https://codeforces.com/problemset/problem/1498/B",
+    "rating": 1300,
+    "topics": [
+      "Bitmasks",
+      "Greedy",
+      "Data Structures"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1470A",
+    "contest_id": "1470",
+    "index": "A",
+    "title": "Strange Birthday Party",
+    "url": "https://codeforces.com/problemset/problem/1470/A",
+    "rating": 1300,
+    "topics": [
+      "Greedy",
+      "Sorting"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1459B",
+    "contest_id": "1459",
+    "index": "B",
+    "title": "Move and Turn",
+    "url": "https://codeforces.com/problemset/problem/1459/B",
+    "rating": 1300,
+    "topics": [
+      "Math",
+      "Combinatorics"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1372B",
+    "contest_id": "1372",
+    "index": "B",
+    "title": "Omkar and Last Class of Math",
+    "url": "https://codeforces.com/problemset/problem/1372/B",
+    "rating": 1300,
+    "topics": [
+      "Math",
+      "Number Theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1366B",
+    "contest_id": "1366",
+    "index": "B",
+    "title": "Shuffle",
+    "url": "https://codeforces.com/problemset/problem/1366/B",
+    "rating": 1300,
+    "topics": [
+      "Math",
+      "Implementation",
+      "Two Pointers"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1364B",
+    "contest_id": "1364",
+    "index": "B",
+    "title": "Most socially-distanced subsequence",
+    "url": "https://codeforces.com/problemset/problem/1364/B",
+    "rating": 1300,
+    "topics": [
+      "Greedy",
+      "Math",
+      "Arrays"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1360D",
+    "contest_id": "1360",
+    "index": "D",
+    "title": "Buying Shovels",
+    "url": "https://codeforces.com/problemset/problem/1360/D",
+    "rating": 1300,
+    "topics": [
+      "Math",
+      "Number Theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1294C",
+    "contest_id": "1294",
+    "index": "C",
+    "title": "Product of three numbers",
+    "url": "https://codeforces.com/problemset/problem/1294/C",
+    "rating": 1300,
+    "topics": [
+      "Math",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1285B",
+    "contest_id": "1285",
+    "index": "B",
+    "title": "Just Eat It!",
+    "url": "https://codeforces.com/problemset/problem/1285/B",
+    "rating": 1300,
+    "topics": [
+      "Greedy",
+      "DP"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1237B",
+    "contest_id": "1237",
+    "index": "B",
+    "title": "Balanced Tunnel",
+    "url": "https://codeforces.com/problemset/problem/1237/B",
+    "rating": 1300,
+    "topics": [
+      "Two Pointers",
+      "Arrays",
+      "Data Structures"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx",
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1178B",
+    "contest_id": "1178",
+    "index": "B",
+    "title": "WOW Factor",
+    "url": "https://codeforces.com/problemset/problem/1178/B",
+    "rating": 1300,
+    "topics": [
+      "Strings",
+      "DP"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1119B",
+    "contest_id": "1119",
+    "index": "B",
+    "title": "Alyona and a Narrow Fridge",
+    "url": "https://codeforces.com/problemset/problem/1119/B",
+    "rating": 1300,
+    "topics": [
+      "Sorting",
+      "Greedy",
+      "Binary Search"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1077C",
+    "contest_id": "1077",
+    "index": "C",
+    "title": "Good Array",
+    "url": "https://codeforces.com/problemset/problem/1077/C",
+    "rating": 1300,
+    "topics": [
+      "Arrays",
+      "Math",
+      "Data Structures"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "862B",
+    "contest_id": "862",
+    "index": "B",
+    "title": "Mahmoud and Ehab and the bipartiteness",
+    "url": "https://codeforces.com/problemset/problem/862/B",
+    "rating": 1300,
+    "topics": [
+      "Trees",
+      "DFS",
+      "Bipartite Graphs"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "808B",
+    "contest_id": "808",
+    "index": "B",
+    "title": "Average Sleep Time",
+    "url": "https://codeforces.com/problemset/problem/808/B",
+    "rating": 1300,
+    "topics": [
+      "Prefix Sums",
+      "Two Pointers"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "665C",
+    "contest_id": "665",
+    "index": "C",
+    "title": "Simple Strings",
+    "url": "https://codeforces.com/problemset/problem/665/C",
+    "rating": 1300,
+    "topics": [
+      "Strings",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1927E",
+    "contest_id": "1927",
+    "index": "E",
+    "title": "Anna and the Valentine's Day Gift",
+    "url": "https://codeforces.com/problemset/problem/1927/E",
+    "rating": 1400,
+    "topics": [
+      "Greedy",
+      "Sorting",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1919C",
+    "contest_id": "1919",
+    "index": "C",
+    "title": "Grouping Increases",
+    "url": "https://codeforces.com/problemset/problem/1919/C",
+    "rating": 1400,
+    "topics": [
+      "Greedy",
+      "DP",
+      "Data Structures"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1907D",
+    "contest_id": "1907",
+    "index": "D",
+    "title": "Jumping Through Segments",
+    "url": "https://codeforces.com/problemset/problem/1907/D",
+    "rating": 1400,
+    "topics": [
+      "Binary Search",
+      "Greedy",
+      "Two Pointers"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1895C",
+    "contest_id": "1895",
+    "index": "C",
+    "title": "Array Game",
+    "url": "https://codeforces.com/problemset/problem/1895/C",
+    "rating": 1400,
+    "topics": [
+      "Math",
+      "Sorting",
+      "Brute Force"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1878E",
+    "contest_id": "1878",
+    "index": "E",
+    "title": "Iva & Pav",
+    "url": "https://codeforces.com/problemset/problem/1878/E",
+    "rating": 1400,
+    "topics": [
+      "Bitmasks",
+      "Binary Search",
+      "Data Structures"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1837D",
+    "contest_id": "1837",
+    "index": "D",
+    "title": "Bracket Coloring",
+    "url": "https://codeforces.com/problemset/problem/1837/D",
+    "rating": 1400,
+    "topics": [
+      "Strings",
+      "Constructive Algorithms",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1830A",
+    "contest_id": "1830",
+    "index": "A",
+    "title": "Copil Copac Draws Trees",
+    "url": "https://codeforces.com/problemset/problem/1830/A",
+    "rating": 1400,
+    "topics": [
+      "Trees",
+      "DFS/BFS",
+      "Graphs"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1771B",
+    "contest_id": "1771",
+    "index": "B",
+    "title": "Hossam and Friends",
+    "url": "https://codeforces.com/problemset/problem/1771/B",
+    "rating": 1400,
+    "topics": [
+      "Two Pointers",
+      "Combinatorics",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1759D",
+    "contest_id": "1759",
+    "index": "D",
+    "title": "Make It Round",
+    "url": "https://codeforces.com/problemset/problem/1759/D",
+    "rating": 1400,
+    "topics": [
+      "Math",
+      "Number Theory",
+      "Brute Force"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1714E",
+    "contest_id": "1714",
+    "index": "E",
+    "title": "Add Modulo 10",
+    "url": "https://codeforces.com/problemset/problem/1714/E",
+    "rating": 1400,
+    "topics": [
+      "Math",
+      "Number Theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1701C",
+    "contest_id": "1701",
+    "index": "C",
+    "title": "Schedule Management",
+    "url": "https://codeforces.com/problemset/problem/1701/C",
+    "rating": 1400,
+    "topics": [
+      "Binary Search",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1692G",
+    "contest_id": "1692",
+    "index": "G",
+    "title": "2^Sort",
+    "url": "https://codeforces.com/problemset/problem/1692/G",
+    "rating": 1400,
+    "topics": [
+      "Two Pointers",
+      "Arrays"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1648A",
+    "contest_id": "1648",
+    "index": "A",
+    "title": "Weird Sum",
+    "url": "https://codeforces.com/problemset/problem/1648/A",
+    "rating": 1400,
+    "topics": [
+      "Math",
+      "Sorting",
+      "Combinatorics"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1634D",
+    "contest_id": "1634",
+    "index": "D",
+    "title": "Fortune Telling",
+    "url": "https://codeforces.com/problemset/problem/1634/D",
+    "rating": 1400,
+    "topics": [
+      "Bitmasks",
+      "Math",
+      "Interactive"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1520E",
+    "contest_id": "1520",
+    "index": "E",
+    "title": "Arranging The Sheep",
+    "url": "https://codeforces.com/problemset/problem/1520/E",
+    "rating": 1400,
+    "topics": [
+      "Greedy",
+      "Strings",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1513B",
+    "contest_id": "1513",
+    "index": "B",
+    "title": "AND Sequences",
+    "url": "https://codeforces.com/problemset/problem/1513/B",
+    "rating": 1400,
+    "topics": [
+      "Bitmasks",
+      "Combinatorics",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1475C",
+    "contest_id": "1475",
+    "index": "C",
+    "title": "Ball in Berland",
+    "url": "https://codeforces.com/problemset/problem/1475/C",
+    "rating": 1400,
+    "topics": [
+      "Graphs",
+      "Math",
+      "Combinatorics"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1374D",
+    "contest_id": "1374",
+    "index": "D",
+    "title": "Zero Remainder Array",
+    "url": "https://codeforces.com/problemset/problem/1374/D",
+    "rating": 1400,
+    "topics": [
+      "Math",
+      "Sorting",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1362C",
+    "contest_id": "1362",
+    "index": "C",
+    "title": "Johnny and Another Rating Drop",
+    "url": "https://codeforces.com/problemset/problem/1362/C",
+    "rating": 1400,
+    "topics": [
+      "Bitmasks",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1350B",
+    "contest_id": "1350",
+    "index": "B",
+    "title": "Orac and Models",
+    "url": "https://codeforces.com/problemset/problem/1350/B",
+    "rating": 1400,
+    "topics": [
+      "DP",
+      "Math",
+      "Number Theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1320A",
+    "contest_id": "1320",
+    "index": "A",
+    "title": "Journey Planning",
+    "url": "https://codeforces.com/problemset/problem/1320/A",
+    "rating": 1400,
+    "topics": [
+      "DP",
+      "Greedy",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1215B",
+    "contest_id": "1215",
+    "index": "B",
+    "title": "The Number of Products",
+    "url": "https://codeforces.com/problemset/problem/1215/B",
+    "rating": 1400,
+    "topics": [
+      "DP",
+      "Combinatorics",
+      "Math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1195C",
+    "contest_id": "1195",
+    "index": "C",
+    "title": "Basketball Exercise",
+    "url": "https://codeforces.com/problemset/problem/1195/C",
+    "rating": 1400,
+    "topics": [
+      "DP",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1183C",
+    "contest_id": "1183",
+    "index": "C",
+    "title": "Candy Box (easy version)",
+    "url": "https://codeforces.com/problemset/problem/1183/C",
+    "rating": 1400,
+    "topics": [
+      "Sorting",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1015F",
+    "contest_id": "1015",
+    "index": "F",
+    "title": "News Distribution",
+    "url": "https://codeforces.com/problemset/problem/1015/F",
+    "rating": 1400,
+    "topics": [
+      "DSU",
+      "Graphs",
+      "DFS/BFS"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1167B",
+    "contest_id": "1167",
+    "index": "B",
+    "title": "Lost Numbers",
+    "url": "https://codeforces.com/problemset/problem/1167/B",
+    "rating": 1400,
+    "topics": [
+      "Interactive",
+      "Math",
+      "Brute Force"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1143C",
+    "contest_id": "1143",
+    "index": "C",
+    "title": "Queen",
+    "url": "https://codeforces.com/problemset/problem/1143/C",
+    "rating": 1400,
+    "topics": [
+      "Trees",
+      "DFS/BFS",
+      "Implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1115A",
+    "contest_id": "1115",
+    "index": "A",
+    "title": "Tape",
+    "url": "https://www.google.com/search?q=https://codeforces.com/problemset/problem/1115/A",
+    "rating": 1400,
+    "topics": [
+      "Sorting",
+      "Greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "414B",
+    "contest_id": "414",
+    "index": "B",
+    "title": "Mashmokh and ACM",
+    "url": "https://codeforces.com/problemset/problem/414/B",
+    "rating": 1400,
+    "topics": [
+      "DP",
+      "Combinatorics",
+      "Number Theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "cf_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "66B",
+    "contest_id": "66",
+    "index": "B",
+    "title": "Petya and Countryside",
+    "url": "https://codeforces.com/problemset/problem/66/B",
+    "rating": 1100,
+    "topics": [
+      "brute force",
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=XRgCL-gVU7M&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "680B",
+    "contest_id": "680",
+    "index": "B",
+    "title": "Bear and Finding Criminals",
+    "url": "https://codeforces.com/problemset/problem/680/B",
+    "rating": 1000,
+    "topics": [
+      "constructive algorithms",
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=oKRNtI-ZI5g&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "16B",
+    "contest_id": "16",
+    "index": "B",
+    "title": "Burglar and Matches",
+    "url": "https://codeforces.com/problemset/problem/16/B",
+    "rating": 900,
+    "topics": [
+      "greedy",
+      "implementation",
+      "sortings"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=eDg_yuWBS8o&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "463B",
+    "contest_id": "463",
+    "index": "B",
+    "title": "Caisa and Pylons",
+    "url": "https://codeforces.com/problemset/problem/463/B",
+    "rating": 1100,
+    "topics": [
+      "brute force",
+      "implementation",
+      "math"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=c6X5U5HATAA",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "102B",
+    "contest_id": "102",
+    "index": "B",
+    "title": "Sum of Digits",
+    "url": "https://codeforces.com/problemset/problem/102/B",
+    "rating": 1000,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=_qdIm9Yj9_U",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "47B",
+    "contest_id": "47",
+    "index": "B",
+    "title": "Coins",
+    "url": "https://codeforces.com/problemset/problem/47/B",
+    "rating": 1200,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=lvK0ZlpWeEY&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "227B",
+    "contest_id": "227",
+    "index": "B",
+    "title": "Effective Approach",
+    "url": "https://codeforces.com/problemset/problem/227/B",
+    "rating": 1100,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=76gg4S0A2nk",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "78B",
+    "contest_id": "78",
+    "index": "B",
+    "title": "Easter Eggs",
+    "url": "https://codeforces.com/problemset/problem/78/B",
+    "rating": 1200,
+    "topics": [
+      "constructive algorithms",
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=rJN_rI2xiV4",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "746B",
+    "contest_id": "746",
+    "index": "B",
+    "title": "Decoding",
+    "url": "https://codeforces.com/problemset/problem/746/B",
+    "rating": 900,
+    "topics": [
+      "implementation",
+      "strings"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=FI5HvI9SQtA",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "492B",
+    "contest_id": "492",
+    "index": "B",
+    "title": "Vanya and Lanterns",
+    "url": "https://codeforces.com/problemset/problem/492/B",
+    "rating": 1200,
+    "topics": [
+      "binary search",
+      "implementation",
+      "math",
+      "sortings"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=i4fMKTt8e84",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "433B",
+    "contest_id": "433",
+    "index": "B",
+    "title": "Kuriyama Mirai's Stones",
+    "url": "https://codeforces.com/problemset/problem/433/B",
+    "rating": 1200,
+    "topics": [
+      "dp",
+      "implementation",
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "363B",
+    "contest_id": "363",
+    "index": "B",
+    "title": "Fence",
+    "url": "https://codeforces.com/problemset/problem/363/B",
+    "rating": 1100,
+    "topics": [
+      "brute force",
+      "dp"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=uwbfFMVMYBg&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "6B",
+    "contest_id": "6",
+    "index": "B",
+    "title": "President's Office",
+    "url": "https://codeforces.com/problemset/problem/6/B",
+    "rating": 1100,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=FTM7HQahAc8&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "688B",
+    "contest_id": "688",
+    "index": "B",
+    "title": "Lovely Palindromes",
+    "url": "https://codeforces.com/problemset/problem/688/B",
+    "rating": 1000,
+    "topics": [
+      "constructive algorithms",
+      "math"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=sy_g77hnbaA",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "451B",
+    "contest_id": "451",
+    "index": "B",
+    "title": "Sort the Array",
+    "url": "https://codeforces.com/problemset/problem/451/B",
+    "rating": 1300,
+    "topics": [
+      "implementation",
+      "sortings"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=I_WHkB7Aeeo",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "810B",
+    "contest_id": "810",
+    "index": "B",
+    "title": "Summer sell-off",
+    "url": "https://codeforces.com/problemset/problem/810/B",
+    "rating": 1300,
+    "topics": [
+      "greedy",
+      "sortings"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=cFqla_dXSBs",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "79B",
+    "contest_id": "79",
+    "index": "B",
+    "title": "Colorful Field",
+    "url": "https://codeforces.com/problemset/problem/79/B",
+    "rating": 1400,
+    "topics": [
+      "implementation",
+      "sortings"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=QIANdSy3nQg",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "88B",
+    "contest_id": "88",
+    "index": "B",
+    "title": "Keyboard",
+    "url": "https://codeforces.com/problemset/problem/88/B",
+    "rating": 1500,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=IlM9o1-xgE4&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "766B",
+    "contest_id": "766",
+    "index": "B",
+    "title": "Mahmoud and a Triangle",
+    "url": "https://codeforces.com/problemset/problem/766/B",
+    "rating": 1000,
+    "topics": [
+      "constructive algorithms",
+      "geometry",
+      "greedy",
+      "math",
+      "number theory",
+      "sortings"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=dCChUGZjaS4",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "242C",
+    "contest_id": "242",
+    "index": "C",
+    "title": "King's Path",
+    "url": "https://codeforces.com/problemset/problem/242/C",
+    "rating": 1800,
+    "topics": [
+      "dfs and similar",
+      "graphs",
+      "hashing",
+      "shortest paths"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=KmxeOFQ_4Rw",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "129B",
+    "contest_id": "129",
+    "index": "B",
+    "title": "Students and Shoelaces",
+    "url": "https://codeforces.com/problemset/problem/129/B",
+    "rating": 1200,
+    "topics": [
+      "brute force",
+      "dfs and similar",
+      "graphs",
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=si51JINxbpk&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "476B",
+    "contest_id": "476",
+    "index": "B",
+    "title": "Dreamoon and WiFi",
+    "url": "https://codeforces.com/problemset/problem/476/B",
+    "rating": 1300,
+    "topics": [
+      "bitmasks",
+      "brute force",
+      "combinatorics",
+      "dp",
+      "math",
+      "probabilities"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=uzA2fH9Ol7I&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "469B",
+    "contest_id": "469",
+    "index": "B",
+    "title": "Chat Online",
+    "url": "https://codeforces.com/problemset/problem/469/B",
+    "rating": 1300,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=7ns-xfWB-8g",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "215B",
+    "contest_id": "215",
+    "index": "B",
+    "title": "Olympic Medal",
+    "url": "https://codeforces.com/problemset/problem/215/B",
+    "rating": 1300,
+    "topics": [
+      "greedy",
+      "math"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=9PMRkDH1SAY&t=4s",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "714B",
+    "contest_id": "714",
+    "index": "B",
+    "title": "Filya and Homework",
+    "url": "https://codeforces.com/problemset/problem/714/B",
+    "rating": 1200,
+    "topics": [
+      "implementation",
+      "sortings"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=aDDoryh3x_g",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "400B",
+    "contest_id": "400",
+    "index": "B",
+    "title": "Inna and New Matrix of Candies",
+    "url": "https://codeforces.com/problemset/problem/400/B",
+    "rating": 1200,
+    "topics": [
+      "brute force",
+      "implementation",
+      "schedules"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=ZWL57YYKwUM&t=1s",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "152B",
+    "contest_id": "152",
+    "index": "B",
+    "title": "Steps",
+    "url": "https://codeforces.com/problemset/problem/152/B",
+    "rating": 1300,
+    "topics": [
+      "binary search",
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=PNB_OSbdCpQ&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "186B",
+    "contest_id": "186",
+    "index": "B",
+    "title": "Growing Mushrooms",
+    "url": "https://codeforces.com/problemset/problem/186/B",
+    "rating": 1200,
+    "topics": [
+      "greedy",
+      "sortings"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=WdzdNdsaku4",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "148B",
+    "contest_id": "148",
+    "index": "B",
+    "title": "Escape",
+    "url": "https://codeforces.com/problemset/problem/148/B",
+    "rating": 1500,
+    "topics": [
+      "implementation",
+      "math"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=IVVN9u6PGJM&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "699C",
+    "contest_id": "699",
+    "index": "C",
+    "title": "Vacations",
+    "url": "https://codeforces.com/problemset/problem/699/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "545C",
+    "contest_id": "545",
+    "index": "C",
+    "title": "Woodcutters",
+    "url": "https://codeforces.com/problemset/problem/545/C",
+    "rating": 1500,
+    "topics": [
+      "dp",
+      "greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "225C",
+    "contest_id": "225",
+    "index": "C",
+    "title": "Barcode",
+    "url": "https://codeforces.com/problemset/problem/225/C",
+    "rating": 1700,
+    "topics": [
+      "dp",
+      "matrices"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=O7Tja1S5IYQ",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "262B",
+    "contest_id": "262",
+    "index": "B",
+    "title": "Roma and Changing Signs",
+    "url": "https://codeforces.com/problemset/problem/262/B",
+    "rating": 1200,
+    "topics": [
+      "greedy"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=6Ic_MPWfhEg",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "385B",
+    "contest_id": "385",
+    "index": "B",
+    "title": "Bear and Strings",
+    "url": "https://codeforces.com/problemset/problem/385/B",
+    "rating": 1200,
+    "topics": [
+      "brute force",
+      "greedy",
+      "implementation",
+      "math",
+      "strings"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=hTUYMzcMuvA",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "376B",
+    "contest_id": "376",
+    "index": "B",
+    "title": "I.O.U.",
+    "url": "https://codeforces.com/problemset/problem/376/B",
+    "rating": 1300,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=d962qNWSvas&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "352B",
+    "contest_id": "352",
+    "index": "B",
+    "title": "Jeff and Periods",
+    "url": "https://codeforces.com/problemset/problem/352/B",
+    "rating": 1300,
+    "topics": [
+      "implementation",
+      "sortings"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=7xgzxrYuwUc",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "144B",
+    "contest_id": "144",
+    "index": "B",
+    "title": "Meeting",
+    "url": "https://codeforces.com/problemset/problem/144/B",
+    "rating": 1300,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=9fpKWAPudyo&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "617B",
+    "contest_id": "617",
+    "index": "B",
+    "title": "Chocolate",
+    "url": "https://codeforces.com/problemset/problem/617/B",
+    "rating": 1300,
+    "topics": [
+      "combinatorics"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=APkfGgJJVCc",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "236B",
+    "contest_id": "236",
+    "index": "B",
+    "title": "Easy Number Challenge",
+    "url": "https://codeforces.com/problemset/problem/236/B",
+    "rating": 1300,
+    "topics": [
+      "implementation",
+      "number theory"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=Tv2JpMqQWYg",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "514B",
+    "contest_id": "514",
+    "index": "B",
+    "title": "Han Solo and Lazer Gun",
+    "url": "https://codeforces.com/problemset/problem/514/B",
+    "rating": 1400,
+    "topics": [
+      "brute force",
+      "data structures",
+      "geometry",
+      "implementation",
+      "math"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=YKDpTulKcLY&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "253B",
+    "contest_id": "253",
+    "index": "B",
+    "title": "Physics Practical",
+    "url": "https://codeforces.com/problemset/problem/253/B",
+    "rating": 1400,
+    "topics": [
+      "binary search",
+      "dp",
+      "sortings",
+      "two pointers"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=ZR0IxC_xoFk",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "520B",
+    "contest_id": "520",
+    "index": "B",
+    "title": "Two Buttons",
+    "url": "https://codeforces.com/problemset/problem/520/B",
+    "rating": 1400,
+    "topics": [
+      "dfs and similar",
+      "graphs",
+      "greedy",
+      "implementation",
+      "math",
+      "shortest paths"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=tMsOxSRU4Sk",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "505B",
+    "contest_id": "505",
+    "index": "B",
+    "title": "Mr. Kitayuta's Colorful Graph",
+    "url": "https://codeforces.com/problemset/problem/505/B",
+    "rating": 1400,
+    "topics": [
+      "dfs and similar",
+      "dp",
+      "dsu",
+      "graphs"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=4516VTXcDJM&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "445B",
+    "contest_id": "445",
+    "index": "B",
+    "title": "DZY Loves Chemistry",
+    "url": "https://codeforces.com/problemset/problem/445/B",
+    "rating": 1400,
+    "topics": [
+      "dfs and similar",
+      "dsu",
+      "greedy"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=-VBxPnLk3_c&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "584B",
+    "contest_id": "584",
+    "index": "B",
+    "title": "Kolya and Tanya",
+    "url": "https://codeforces.com/problemset/problem/584/B",
+    "rating": 1500,
+    "topics": [
+      "combinatorics"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=-Dh_FyJiJ9Q",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "448B",
+    "contest_id": "448",
+    "index": "B",
+    "title": "Suffix Structures",
+    "url": "https://codeforces.com/problemset/problem/448/B",
+    "rating": 1400,
+    "topics": [
+      "implementation",
+      "strings"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=-J0VaYdgbRc",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "716B",
+    "contest_id": "716",
+    "index": "B",
+    "title": "Complete the Word",
+    "url": "https://codeforces.com/problemset/problem/716/B",
+    "rating": 1300,
+    "topics": [
+      "greedy",
+      "two pointers"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=lu6BhwVMNhw",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "544B",
+    "contest_id": "544",
+    "index": "B",
+    "title": "Sea and Islands",
+    "url": "https://codeforces.com/problemset/problem/544/B",
+    "rating": 1400,
+    "topics": [
+      "constructive algorithms",
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=7MC9PFQTlxs",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "141B",
+    "contest_id": "141",
+    "index": "B",
+    "title": "Hopscotch",
+    "url": "https://codeforces.com/problemset/problem/141/B",
+    "rating": 1400,
+    "topics": [
+      "geometry",
+      "math"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=edI2c3Myaek&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "369B",
+    "contest_id": "369",
+    "index": "B",
+    "title": "Valera and Contest",
+    "url": "https://codeforces.com/problemset/problem/369/B",
+    "rating": 1400,
+    "topics": [
+      "constructive algorithms",
+      "implementation",
+      "math"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=1CHX-WYiQvA",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "791B",
+    "contest_id": "791",
+    "index": "B",
+    "title": "Bear and Friendship Condition",
+    "url": "https://codeforces.com/problemset/problem/791/B",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=3tVJoeUE0Ag&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "550B",
+    "contest_id": "550",
+    "index": "B",
+    "title": "Preparing Olympiad",
+    "url": "https://codeforces.com/problemset/problem/550/B",
+    "rating": 1400,
+    "topics": [
+      "bitmasks",
+      "brute force"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=o5fKByvQguE",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "415B",
+    "contest_id": "415",
+    "index": "B",
+    "title": "Mashmokh and Tokens",
+    "url": "https://codeforces.com/problemset/problem/415/B",
+    "rating": 1500,
+    "topics": [
+      "binary search",
+      "greedy",
+      "implementation",
+      "math"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=ZNxSTHmpLGc&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "602B",
+    "contest_id": "602",
+    "index": "B",
+    "title": "Approximating a Constant Range",
+    "url": "https://codeforces.com/problemset/problem/602/B",
+    "rating": 1400,
+    "topics": [
+      "dp",
+      "implementation",
+      "two pointers"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=g93nX3rLVuk",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "614B",
+    "contest_id": "614",
+    "index": "B",
+    "title": "Gena's Code",
+    "url": "https://codeforces.com/problemset/problem/614/B",
+    "rating": 1400,
+    "topics": [
+      "implementation",
+      "math"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=LigGvEEwnDQ",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "510B",
+    "contest_id": "510",
+    "index": "B",
+    "title": "Fox And Two Dots",
+    "url": "https://codeforces.com/problemset/problem/510/B",
+    "rating": 1500,
+    "topics": [
+      "dfs and similar"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=LHIZzMjnG0k&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "493B",
+    "contest_id": "493",
+    "index": "B",
+    "title": "Vasya and Wrestling",
+    "url": "https://codeforces.com/problemset/problem/493/B",
+    "rating": 1400,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=oAOERsp49B8",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "608B",
+    "contest_id": "608",
+    "index": "B",
+    "title": "Hamming Distance Sum",
+    "url": "https://codeforces.com/problemset/problem/608/B",
+    "rating": 1500,
+    "topics": [
+      "combinatorics",
+      "strings"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=pE3ksAAcqEI",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "621B",
+    "contest_id": "621",
+    "index": "B",
+    "title": "Wet Shark and Bishops",
+    "url": "https://codeforces.com/problemset/problem/621/B",
+    "rating": 1300,
+    "topics": [
+      "combinatorics",
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=zKne2u4DuIs&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "580B",
+    "contest_id": "580",
+    "index": "B",
+    "title": "Kefa and Company",
+    "url": "https://codeforces.com/problemset/problem/580/B",
+    "rating": 1500,
+    "topics": [
+      "binary search",
+      "sortings",
+      "two pointers"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=kUXDNSkFECM",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "535B",
+    "contest_id": "535",
+    "index": "B",
+    "title": "Tavas and SaDDas",
+    "url": "https://codeforces.com/problemset/problem/535/B",
+    "rating": 1100,
+    "topics": [
+      "bitmasks",
+      "brute force",
+      "combinatorics",
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=NPVp5BntYZ4",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1009B",
+    "contest_id": "1009",
+    "index": "B",
+    "title": "Minimum Ternary String",
+    "url": "https://codeforces.com/problemset/problem/1009/B",
+    "rating": 1400,
+    "topics": [
+      "greedy",
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=PId-mUSek5s&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1030B",
+    "contest_id": "1030",
+    "index": "B",
+    "title": "Vasya and Cornfield",
+    "url": "https://codeforces.com/problemset/problem/1030/B",
+    "rating": 1100,
+    "topics": [
+      "geometry"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "1051B",
+    "contest_id": "1051",
+    "index": "B",
+    "title": "Relatively Prime Pairs",
+    "url": "https://codeforces.com/problemset/problem/1051/B",
+    "rating": 1000,
+    "topics": [
+      "greedy",
+      "math",
+      "number theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "282B",
+    "contest_id": "282",
+    "index": "B",
+    "title": "Painting Eggs",
+    "url": "https://codeforces.com/problemset/problem/282/B",
+    "rating": 1500,
+    "topics": [
+      "greedy",
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "435B",
+    "contest_id": "435",
+    "index": "B",
+    "title": "Pasha Maximizes",
+    "url": "https://codeforces.com/problemset/problem/435/B",
+    "rating": 1400,
+    "topics": [
+      "greedy"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=hDsuoSTdytw&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "276B",
+    "contest_id": "276",
+    "index": "B",
+    "title": "Little Girl and Game",
+    "url": "https://codeforces.com/problemset/problem/276/B",
+    "rating": 1300,
+    "topics": [
+      "games",
+      "greedy"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=WrpG_n0SrbY&feature=youtu.be",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "525B",
+    "contest_id": "525",
+    "index": "B",
+    "title": "Pasha and String",
+    "url": "https://codeforces.com/problemset/problem/525/B",
+    "rating": 1400,
+    "topics": [
+      "constructive algorithms",
+      "greedy",
+      "math",
+      "strings"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=NPVp5BntYZ4",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "416C",
+    "contest_id": "416",
+    "index": "C",
+    "title": "Booking System",
+    "url": "https://codeforces.com/problemset/problem/416/C",
+    "rating": 1600,
+    "topics": [
+      "binary search",
+      "dp",
+      "greedy",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "492C",
+    "contest_id": "492",
+    "index": "C",
+    "title": "Vanya and Exams",
+    "url": "https://codeforces.com/problemset/problem/492/C",
+    "rating": 1400,
+    "topics": [
+      "greedy",
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "439B",
+    "contest_id": "439",
+    "index": "B",
+    "title": "Devu, the Dumb Guy",
+    "url": "https://codeforces.com/problemset/problem/439/B",
+    "rating": 1200,
+    "topics": [
+      "implementation",
+      "sortings"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=KoGeW-vs7VY",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "796B",
+    "contest_id": "796",
+    "index": "B",
+    "title": "Find The Bone",
+    "url": "https://codeforces.com/problemset/problem/796/B",
+    "rating": 1300,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=sLBLgccZ3CM",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "26B",
+    "contest_id": "26",
+    "index": "B",
+    "title": "Regular Bracket Sequence",
+    "url": "https://codeforces.com/problemset/problem/26/B",
+    "rating": 1400,
+    "topics": [
+      "greedy"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=bz1ZEbzCFfU",
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "465B",
+    "contest_id": "465",
+    "index": "B",
+    "title": "Inbox (100500)",
+    "url": "https://codeforces.com/problemset/problem/465/B",
+    "rating": 1000,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "672B",
+    "contest_id": "672",
+    "index": "B",
+    "title": "Different is Good",
+    "url": "https://codeforces.com/problemset/problem/672/B",
+    "rating": 1000,
+    "topics": [
+      "constructive algorithms",
+      "implementation",
+      "strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "137B",
+    "contest_id": "137",
+    "index": "B",
+    "title": "Permutation",
+    "url": "https://codeforces.com/problemset/problem/137/B",
+    "rating": 1000,
+    "topics": [
+      "greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "259B",
+    "contest_id": "259",
+    "index": "B",
+    "title": "Little Elephant and Magic Square",
+    "url": "https://codeforces.com/problemset/problem/259/B",
+    "rating": 1100,
+    "topics": [
+      "brute force",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "218B",
+    "contest_id": "218",
+    "index": "B",
+    "title": "Airport",
+    "url": "https://codeforces.com/problemset/problem/218/B",
+    "rating": 1100,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "732B",
+    "contest_id": "732",
+    "index": "B",
+    "title": "Cormen --- The Best Friend Of a Man",
+    "url": "https://codeforces.com/problemset/problem/732/B",
+    "rating": 1000,
+    "topics": [
+      "dp",
+      "greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "427B",
+    "contest_id": "427",
+    "index": "B",
+    "title": "Prison Transfer",
+    "url": "https://codeforces.com/problemset/problem/427/B",
+    "rating": 1100,
+    "topics": [
+      "data structures",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "519B",
+    "contest_id": "519",
+    "index": "B",
+    "title": "A and B and Compilation Errors",
+    "url": "https://codeforces.com/problemset/problem/519/B",
+    "rating": 1100,
+    "topics": [
+      "data structures",
+      "implementation",
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "43B",
+    "contest_id": "43",
+    "index": "B",
+    "title": "Letter",
+    "url": "https://codeforces.com/problemset/problem/43/B",
+    "rating": 1100,
+    "topics": [
+      "implementation",
+      "strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "670B",
+    "contest_id": "670",
+    "index": "B",
+    "title": "Game of Robots",
+    "url": "https://codeforces.com/problemset/problem/670/B",
+    "rating": 1000,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "90B",
+    "contest_id": "90",
+    "index": "B",
+    "title": "African Crossword",
+    "url": "https://codeforces.com/problemset/problem/90/B",
+    "rating": 1100,
+    "topics": [
+      "implementation",
+      "strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "284B",
+    "contest_id": "284",
+    "index": "B",
+    "title": "Cows and Poker Game",
+    "url": "https://codeforces.com/problemset/problem/284/B",
+    "rating": 1000,
+    "topics": [
+      "brute force",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "285B",
+    "contest_id": "285",
+    "index": "B",
+    "title": "Find Marble",
+    "url": "https://codeforces.com/problemset/problem/285/B",
+    "rating": 1200,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "706B",
+    "contest_id": "706",
+    "index": "B",
+    "title": "Interesting drink",
+    "url": "https://codeforces.com/problemset/problem/706/B",
+    "rating": 1100,
+    "topics": [
+      "binary search",
+      "dp",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "424B",
+    "contest_id": "424",
+    "index": "B",
+    "title": "Megacity",
+    "url": "https://codeforces.com/problemset/problem/424/B",
+    "rating": 1200,
+    "topics": [
+      "binary search",
+      "greedy",
+      "implementation",
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "651B",
+    "contest_id": "651",
+    "index": "B",
+    "title": "Beautiful Paintings",
+    "url": "https://codeforces.com/problemset/problem/651/B",
+    "rating": 1200,
+    "topics": [
+      "greedy",
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "313B",
+    "contest_id": "313",
+    "index": "B",
+    "title": "Ilya and Queries",
+    "url": "https://codeforces.com/problemset/problem/313/B",
+    "rating": 1100,
+    "topics": [
+      "dp",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "255B",
+    "contest_id": "255",
+    "index": "B",
+    "title": "Code Parsing",
+    "url": "https://codeforces.com/problemset/problem/255/B",
+    "rating": 1200,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "327B",
+    "contest_id": "327",
+    "index": "B",
+    "title": "Hungry Sequence",
+    "url": "https://codeforces.com/problemset/problem/327/B",
+    "rating": 1200,
+    "topics": [
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "743B",
+    "contest_id": "743",
+    "index": "B",
+    "title": "Chloe and the sequence",
+    "url": "https://codeforces.com/problemset/problem/743/B",
+    "rating": 1200,
+    "topics": [
+      "binary search",
+      "bitmasks",
+      "constructive algorithms",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "581B",
+    "contest_id": "581",
+    "index": "B",
+    "title": "Luxurious Houses",
+    "url": "https://codeforces.com/problemset/problem/581/B",
+    "rating": 1100,
+    "topics": [
+      "implementation",
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "63B",
+    "contest_id": "63",
+    "index": "B",
+    "title": "Settlers' Training",
+    "url": "https://codeforces.com/problemset/problem/63/B",
+    "rating": 1200,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "596B",
+    "contest_id": "596",
+    "index": "B",
+    "title": "Wilbur and Array",
+    "url": "https://codeforces.com/problemset/problem/596/B",
+    "rating": 1100,
+    "topics": [
+      "greedy",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "723B",
+    "contest_id": "723",
+    "index": "B",
+    "title": "Text Document Analysis",
+    "url": "https://codeforces.com/problemset/problem/723/B",
+    "rating": 1100,
+    "topics": [
+      "expression parsing",
+      "implementation",
+      "strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "431B",
+    "contest_id": "431",
+    "index": "B",
+    "title": "Shower Line",
+    "url": "https://codeforces.com/problemset/problem/431/B",
+    "rating": 1200,
+    "topics": [
+      "brute force",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "501B",
+    "contest_id": "501",
+    "index": "B",
+    "title": "Misha and Changing Handles",
+    "url": "https://codeforces.com/problemset/problem/501/B",
+    "rating": 1100,
+    "topics": [
+      "data structures",
+      "dsu",
+      "strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "667B",
+    "contest_id": "667",
+    "index": "B",
+    "title": "Coat of Anticubism",
+    "url": "https://codeforces.com/problemset/problem/667/B",
+    "rating": 1100,
+    "topics": [
+      "constructive algorithms",
+      "geometry"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "136B",
+    "contest_id": "136",
+    "index": "B",
+    "title": "Ternary Logic",
+    "url": "https://codeforces.com/problemset/problem/136/B",
+    "rating": 1100,
+    "topics": [
+      "implementation",
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "189B",
+    "contest_id": "189",
+    "index": "B",
+    "title": "Counting Rhombi",
+    "url": "https://codeforces.com/problemset/problem/189/B",
+    "rating": 1300,
+    "topics": [
+      "brute force",
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "459B",
+    "contest_id": "459",
+    "index": "B",
+    "title": "Pashmak and Flowers",
+    "url": "https://codeforces.com/problemset/problem/459/B",
+    "rating": 1300,
+    "topics": [
+      "combinatorics",
+      "implementation",
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "592B",
+    "contest_id": "592",
+    "index": "B",
+    "title": "The Monster and the Squirrel",
+    "url": "https://codeforces.com/problemset/problem/592/B",
+    "rating": 1100,
+    "topics": [
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "365B",
+    "contest_id": "365",
+    "index": "B",
+    "title": "The Fibonacci Segment",
+    "url": "https://codeforces.com/problemset/problem/365/B",
+    "rating": 1100,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "705B",
+    "contest_id": "705",
+    "index": "B",
+    "title": "Spider Man",
+    "url": "https://codeforces.com/problemset/problem/705/B",
+    "rating": 1100,
+    "topics": [
+      "games",
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "686B",
+    "contest_id": "686",
+    "index": "B",
+    "title": "Little Robber Girl's Zoo",
+    "url": "https://codeforces.com/problemset/problem/686/B",
+    "rating": 1100,
+    "topics": [
+      "constructive algorithms",
+      "implementation",
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "133B",
+    "contest_id": "133",
+    "index": "B",
+    "title": "Unary",
+    "url": "https://codeforces.com/problemset/problem/133/B",
+    "rating": 1200,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "127B",
+    "contest_id": "127",
+    "index": "B",
+    "title": "Canvas Frames",
+    "url": "https://codeforces.com/problemset/problem/127/B",
+    "rating": 1000,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "554B",
+    "contest_id": "554",
+    "index": "B",
+    "title": "Ohana Cleans Up",
+    "url": "https://codeforces.com/problemset/problem/554/B",
+    "rating": 1200,
+    "topics": [
+      "brute force",
+      "greedy",
+      "strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "408B",
+    "contest_id": "408",
+    "index": "B",
+    "title": "Garland",
+    "url": "https://codeforces.com/problemset/problem/408/B",
+    "rating": 1200,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "362B",
+    "contest_id": "362",
+    "index": "B",
+    "title": "Petya and Staircases",
+    "url": "https://codeforces.com/problemset/problem/362/B",
+    "rating": 1100,
+    "topics": [
+      "implementation",
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "545B",
+    "contest_id": "545",
+    "index": "B",
+    "title": "Equidistant String",
+    "url": "https://codeforces.com/problemset/problem/545/B",
+    "rating": 1100,
+    "topics": [
+      "greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "677B",
+    "contest_id": "677",
+    "index": "B",
+    "title": "Vanya and Food Processor",
+    "url": "https://codeforces.com/problemset/problem/677/B",
+    "rating": 1400,
+    "topics": [
+      "implementation",
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "304B",
+    "contest_id": "304",
+    "index": "B",
+    "title": "Calendar",
+    "url": "https://codeforces.com/problemset/problem/304/B",
+    "rating": 1300,
+    "topics": [
+      "brute force",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "507B",
+    "contest_id": "507",
+    "index": "B",
+    "title": "Amr and Pins",
+    "url": "https://codeforces.com/problemset/problem/507/B",
+    "rating": 1400,
+    "topics": [
+      "geometry",
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "289B",
+    "contest_id": "289",
+    "index": "B",
+    "title": "Polo the Penguin and Matrix",
+    "url": "https://codeforces.com/problemset/problem/289/B",
+    "rating": 1400,
+    "topics": [
+      "brute force",
+      "dp",
+      "implementation",
+      "sortings",
+      "ternary search"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "387B",
+    "contest_id": "387",
+    "index": "B",
+    "title": "George and Round",
+    "url": "https://codeforces.com/problemset/problem/387/B",
+    "rating": 1200,
+    "topics": [
+      "brute force",
+      "greedy",
+      "two pointers"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "740B",
+    "contest_id": "740",
+    "index": "B",
+    "title": "Alyona and flowers",
+    "url": "https://codeforces.com/problemset/problem/740/B",
+    "rating": 1200,
+    "topics": [
+      "constructive algorithms"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "735B",
+    "contest_id": "735",
+    "index": "B",
+    "title": "Urbanization",
+    "url": "https://codeforces.com/problemset/problem/735/B",
+    "rating": 1100,
+    "topics": [
+      "greedy",
+      "number theory",
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "104B",
+    "contest_id": "104",
+    "index": "B",
+    "title": "Testing Pants for Sadness",
+    "url": "https://codeforces.com/problemset/problem/104/B",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "701B",
+    "contest_id": "701",
+    "index": "B",
+    "title": "Cells Not Under Attack",
+    "url": "https://codeforces.com/problemset/problem/701/B",
+    "rating": 1200,
+    "topics": [
+      "data structures",
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "552B",
+    "contest_id": "552",
+    "index": "B",
+    "title": "Vanya and Books",
+    "url": "https://codeforces.com/problemset/problem/552/B",
+    "rating": 1200,
+    "topics": [
+      "implementation",
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "474B",
+    "contest_id": "474",
+    "index": "B",
+    "title": "Worms",
+    "url": "https://codeforces.com/problemset/problem/474/B",
+    "rating": 1200,
+    "topics": [
+      "binary search",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "59B",
+    "contest_id": "59",
+    "index": "B",
+    "title": "Fortune Telling",
+    "url": "https://codeforces.com/problemset/problem/59/B",
+    "rating": 1200,
+    "topics": [
+      "implementation",
+      "number theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "192B",
+    "contest_id": "192",
+    "index": "B",
+    "title": "Walking in the Rain",
+    "url": "https://codeforces.com/problemset/problem/192/B",
+    "rating": 1100,
+    "topics": [
+      "brute force",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "366B",
+    "contest_id": "366",
+    "index": "B",
+    "title": "Dima and To-do List",
+    "url": "https://codeforces.com/problemset/problem/366/B",
+    "rating": 1200,
+    "topics": [
+      "brute force",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "298B",
+    "contest_id": "298",
+    "index": "B",
+    "title": "Sail",
+    "url": "https://codeforces.com/problemset/problem/298/B",
+    "rating": 1200,
+    "topics": [
+      "brute force",
+      "greedy",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "389B",
+    "contest_id": "389",
+    "index": "B",
+    "title": "Fox and Cross",
+    "url": "https://codeforces.com/problemset/problem/389/B",
+    "rating": 1100,
+    "topics": [
+      "greedy",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Easy"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "591B",
+    "contest_id": "591",
+    "index": "B",
+    "title": "Rebranding",
+    "url": "https://codeforces.com/problemset/problem/591/B",
+    "rating": 1200,
+    "topics": [
+      "implementation",
+      "strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "246B",
+    "contest_id": "246",
+    "index": "B",
+    "title": "Increase and Decrease",
+    "url": "https://codeforces.com/problemset/problem/246/B",
+    "rating": 1300,
+    "topics": [
+      "greedy",
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "682B",
+    "contest_id": "682",
+    "index": "B",
+    "title": "Alyona and Mex",
+    "url": "https://codeforces.com/problemset/problem/682/B",
+    "rating": 1200,
+    "topics": [
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "58B",
+    "contest_id": "58",
+    "index": "B",
+    "title": "Coins",
+    "url": "https://codeforces.com/problemset/problem/58/B",
+    "rating": 1300,
+    "topics": [
+      "greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "567B",
+    "contest_id": "567",
+    "index": "B",
+    "title": "Berland National Library",
+    "url": "https://codeforces.com/problemset/problem/567/B",
+    "rating": 1300,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "416B",
+    "contest_id": "416",
+    "index": "B",
+    "title": "Art Union",
+    "url": "https://codeforces.com/problemset/problem/416/B",
+    "rating": 1300,
+    "topics": [
+      "brute force",
+      "dp",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "489B",
+    "contest_id": "489",
+    "index": "B",
+    "title": "BerSU Ball",
+    "url": "https://codeforces.com/problemset/problem/489/B",
+    "rating": 1200,
+    "topics": [
+      "dfs and similar",
+      "dp",
+      "graph matchings",
+      "greedy",
+      "sortings",
+      "two pointers"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "478B",
+    "contest_id": "478",
+    "index": "B",
+    "title": "Random Teams",
+    "url": "https://codeforces.com/problemset/problem/478/B",
+    "rating": 1300,
+    "topics": [
+      "combinatorics",
+      "constructive algorithms",
+      "greedy",
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "94B",
+    "contest_id": "94",
+    "index": "B",
+    "title": "Friends",
+    "url": "https://codeforces.com/problemset/problem/94/B",
+    "rating": 1300,
+    "topics": [
+      "graphs",
+      "implementation",
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "625B",
+    "contest_id": "625",
+    "index": "B",
+    "title": "War of the Corporations",
+    "url": "https://codeforces.com/problemset/problem/625/B",
+    "rating": 1200,
+    "topics": [
+      "constructive algorithms",
+      "greedy",
+      "strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "330B",
+    "contest_id": "330",
+    "index": "B",
+    "title": "Road Construction",
+    "url": "https://codeforces.com/problemset/problem/330/B",
+    "rating": 1300,
+    "topics": [
+      "constructive algorithms",
+      "graphs"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "92B",
+    "contest_id": "92",
+    "index": "B",
+    "title": "Binary Number",
+    "url": "https://codeforces.com/problemset/problem/92/B",
+    "rating": 1300,
+    "topics": [
+      "greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "4B",
+    "contest_id": "4",
+    "index": "B",
+    "title": "Before an Exam",
+    "url": "https://codeforces.com/problemset/problem/4/B",
+    "rating": 1200,
+    "topics": [
+      "constructive algorithms",
+      "greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "9B",
+    "contest_id": "9",
+    "index": "B",
+    "title": "Running Student",
+    "url": "https://codeforces.com/problemset/problem/9/B",
+    "rating": 1200,
+    "topics": [
+      "brute force",
+      "geometry",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "508B",
+    "contest_id": "508",
+    "index": "B",
+    "title": "Anton and currency you all know",
+    "url": "https://codeforces.com/problemset/problem/508/B",
+    "rating": 1300,
+    "topics": [
+      "greedy",
+      "math",
+      "strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "151B",
+    "contest_id": "151",
+    "index": "B",
+    "title": "Phone Numbers",
+    "url": "https://codeforces.com/problemset/problem/151/B",
+    "rating": 1200,
+    "topics": [
+      "implementation",
+      "strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "b_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "515C",
+    "contest_id": "515",
+    "index": "C",
+    "title": "Drazil and Factorial",
+    "url": "https://codeforces.com/problemset/problem/515/C",
+    "rating": 1400,
+    "topics": [
+      "greedy",
+      "math",
+      "sortings"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=QEh0ugyYPUw",
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "304C",
+    "contest_id": "304",
+    "index": "C",
+    "title": "Lucky Permutation Triple",
+    "url": "https://codeforces.com/problemset/problem/304/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "546C",
+    "contest_id": "546",
+    "index": "C",
+    "title": "Soldier and Cards",
+    "url": "https://codeforces.com/problemset/problem/546/C",
+    "rating": 1400,
+    "topics": [
+      "brute force",
+      "dfs and similar",
+      "games"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "651C",
+    "contest_id": "651",
+    "index": "C",
+    "title": "Watchmen",
+    "url": "https://codeforces.com/problemset/problem/651/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "371B",
+    "contest_id": "371",
+    "index": "B",
+    "title": "Fox Dividing Cheese",
+    "url": "https://codeforces.com/problemset/problem/371/B",
+    "rating": 1300,
+    "topics": [
+      "math",
+      "number theory"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=s9jsw8Uj4uI&feature=youtu.be",
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "588B",
+    "contest_id": "588",
+    "index": "B",
+    "title": "Duff in Love",
+    "url": "https://codeforces.com/problemset/problem/588/B",
+    "rating": 1300,
+    "topics": [
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "371C",
+    "contest_id": "371",
+    "index": "C",
+    "title": "Hamburgers",
+    "url": "https://codeforces.com/problemset/problem/371/C",
+    "rating": 1600,
+    "topics": [
+      "binary search",
+      "brute force"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "437B",
+    "contest_id": "437",
+    "index": "B",
+    "title": "The Child and Set",
+    "url": "https://codeforces.com/problemset/problem/437/B",
+    "rating": 1500,
+    "topics": [
+      "bitmasks",
+      "greedy",
+      "implementation",
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "518B",
+    "contest_id": "518",
+    "index": "B",
+    "title": "Tanya and Postcard",
+    "url": "https://codeforces.com/problemset/problem/518/B",
+    "rating": 1400,
+    "topics": [
+      "greedy",
+      "implementation",
+      "strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "296C",
+    "contest_id": "296",
+    "index": "C",
+    "title": "Greg and Array",
+    "url": "https://codeforces.com/problemset/problem/296/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "131C",
+    "contest_id": "131",
+    "index": "C",
+    "title": "The World is a Theatre",
+    "url": "https://codeforces.com/problemset/problem/131/C",
+    "rating": 1400,
+    "topics": [
+      "combinatorics",
+      "math"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=96OYl0On3hc",
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "88C",
+    "contest_id": "88",
+    "index": "C",
+    "title": "Trains",
+    "url": "https://codeforces.com/problemset/problem/88/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "378B",
+    "contest_id": "378",
+    "index": "B",
+    "title": "Semifinals",
+    "url": "https://codeforces.com/problemset/problem/378/B",
+    "rating": 1300,
+    "topics": [
+      "implementation",
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "479B",
+    "contest_id": "479",
+    "index": "B",
+    "title": "Towers",
+    "url": "https://codeforces.com/problemset/problem/479/B",
+    "rating": 1400,
+    "topics": [
+      "brute force",
+      "constructive algorithms",
+      "greedy",
+      "implementation",
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "402C",
+    "contest_id": "402",
+    "index": "C",
+    "title": "Searching for Graph",
+    "url": "https://codeforces.com/problemset/problem/402/C",
+    "rating": 1500,
+    "topics": [
+      "brute force",
+      "constructive algorithms",
+      "graphs"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "227C",
+    "contest_id": "227",
+    "index": "C",
+    "title": "Flying Saucer Segments",
+    "url": "https://codeforces.com/problemset/problem/227/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "577C",
+    "contest_id": "577",
+    "index": "C",
+    "title": "Vasya and Petya's Game",
+    "url": "https://codeforces.com/problemset/problem/577/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "71C",
+    "contest_id": "71",
+    "index": "C",
+    "title": "Round Table Knights",
+    "url": "https://codeforces.com/problemset/problem/71/C",
+    "rating": 1600,
+    "topics": [
+      "dp",
+      "math",
+      "number theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "580C",
+    "contest_id": "580",
+    "index": "C",
+    "title": "Kefa and Park",
+    "url": "https://codeforces.com/problemset/problem/580/C",
+    "rating": 1500,
+    "topics": [
+      "dfs and similar",
+      "graphs",
+      "trees"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=ebC3c-YJDIk",
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "357C",
+    "contest_id": "357",
+    "index": "C",
+    "title": "Knight Tournament",
+    "url": "https://codeforces.com/problemset/problem/357/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "219B",
+    "contest_id": "219",
+    "index": "B",
+    "title": "Special Offer! Super Price 999 Bourles!",
+    "url": "https://codeforces.com/problemset/problem/219/B",
+    "rating": 1400,
+    "topics": [
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "424C",
+    "contest_id": "424",
+    "index": "C",
+    "title": "Magic Formulas",
+    "url": "https://codeforces.com/problemset/problem/424/C",
+    "rating": 1600,
+    "topics": [
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "707C",
+    "contest_id": "707",
+    "index": "C",
+    "title": "Pythagorean Triples",
+    "url": "https://codeforces.com/problemset/problem/707/C",
+    "rating": 1500,
+    "topics": [
+      "math",
+      "number theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "560C",
+    "contest_id": "560",
+    "index": "C",
+    "title": "Gerald's Hexagon",
+    "url": "https://codeforces.com/problemset/problem/560/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "252C",
+    "contest_id": "252",
+    "index": "C",
+    "title": "Points on Line",
+    "url": "https://codeforces.com/problemset/problem/252/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "353C",
+    "contest_id": "353",
+    "index": "C",
+    "title": "Find Maximum",
+    "url": "https://codeforces.com/problemset/problem/353/C",
+    "rating": 1600,
+    "topics": [
+      "implementation",
+      "math",
+      "number theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "450B",
+    "contest_id": "450",
+    "index": "B",
+    "title": "Jzzhu and Sequences",
+    "url": "https://codeforces.com/problemset/problem/450/B",
+    "rating": 1300,
+    "topics": [
+      "implementation",
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "570B",
+    "contest_id": "570",
+    "index": "B",
+    "title": "Simple Game",
+    "url": "https://codeforces.com/problemset/problem/570/B",
+    "rating": 1300,
+    "topics": [
+      "constructive algorithms",
+      "games",
+      "greedy",
+      "implementation",
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "271B",
+    "contest_id": "271",
+    "index": "B",
+    "title": "Prime Matrix",
+    "url": "https://codeforces.com/problemset/problem/271/B",
+    "rating": 1300,
+    "topics": [
+      "binary search",
+      "brute force",
+      "math",
+      "number theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "344C",
+    "contest_id": "344",
+    "index": "C",
+    "title": "Rational Resistance",
+    "url": "https://codeforces.com/problemset/problem/344/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "275C",
+    "contest_id": "275",
+    "index": "C",
+    "title": "k-Multiple Free Set",
+    "url": "https://codeforces.com/problemset/problem/275/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "534C",
+    "contest_id": "534",
+    "index": "C",
+    "title": "Polycarpus' Dice",
+    "url": "https://codeforces.com/problemset/problem/534/C",
+    "rating": 1600,
+    "topics": [
+      "math"
+    ],
+    "solution_link": "https://codeforces.com/contest/534/submission/61924545",
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "631B",
+    "contest_id": "631",
+    "index": "B",
+    "title": "Print Check",
+    "url": "https://codeforces.com/problemset/problem/631/B",
+    "rating": 1200,
+    "topics": [
+      "constructive algorithms",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "257B",
+    "contest_id": "257",
+    "index": "B",
+    "title": "Playing Cubes",
+    "url": "https://codeforces.com/problemset/problem/257/B",
+    "rating": 1300,
+    "topics": [
+      "games",
+      "greedy",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "230B",
+    "contest_id": "230",
+    "index": "B",
+    "title": "T-primes",
+    "url": "https://codeforces.com/problemset/problem/230/B",
+    "rating": 1300,
+    "topics": [
+      "binary search",
+      "implementation",
+      "math",
+      "number theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "378C",
+    "contest_id": "378",
+    "index": "C",
+    "title": "Maze",
+    "url": "https://codeforces.com/problemset/problem/378/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "705C",
+    "contest_id": "705",
+    "index": "C",
+    "title": "Thor",
+    "url": "https://codeforces.com/problemset/problem/705/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "405C",
+    "contest_id": "405",
+    "index": "C",
+    "title": "Unusual Product",
+    "url": "https://codeforces.com/problemset/problem/405/C",
+    "rating": 1600,
+    "topics": [
+      "implementation",
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "486C",
+    "contest_id": "486",
+    "index": "C",
+    "title": "Palindrome Transformation",
+    "url": "https://codeforces.com/problemset/problem/486/C",
+    "rating": 1700,
+    "topics": [
+      "brute force",
+      "greedy",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "496C",
+    "contest_id": "496",
+    "index": "C",
+    "title": "Removing Columns",
+    "url": "https://codeforces.com/problemset/problem/496/C",
+    "rating": 1500,
+    "topics": [
+      "brute force",
+      "constructive algorithms",
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=skSCRsMLPMI",
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "499C",
+    "contest_id": "499",
+    "index": "C",
+    "title": "Crazy Town",
+    "url": "https://codeforces.com/problemset/problem/499/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "490B",
+    "contest_id": "490",
+    "index": "B",
+    "title": "Queue",
+    "url": "https://codeforces.com/problemset/problem/490/B",
+    "rating": 1500,
+    "topics": [
+      "dsu",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "610B",
+    "contest_id": "610",
+    "index": "B",
+    "title": "Vika and Squares",
+    "url": "https://codeforces.com/problemset/problem/610/B",
+    "rating": 1300,
+    "topics": [
+      "constructive algorithms",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "222B",
+    "contest_id": "222",
+    "index": "B",
+    "title": "Cosmic Tables",
+    "url": "https://codeforces.com/problemset/problem/222/B",
+    "rating": 1300,
+    "topics": [
+      "data structures",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "253C",
+    "contest_id": "253",
+    "index": "C",
+    "title": "Text Editor",
+    "url": "https://codeforces.com/problemset/problem/253/C",
+    "rating": 1600,
+    "topics": [
+      "data structures",
+      "dfs and similar",
+      "graphs",
+      "greedy",
+      "shortest paths"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "604C",
+    "contest_id": "604",
+    "index": "C",
+    "title": "Alternative Thinking",
+    "url": "https://codeforces.com/problemset/problem/604/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "735C",
+    "contest_id": "735",
+    "index": "C",
+    "title": "Tennis Championship",
+    "url": "https://codeforces.com/problemset/problem/735/C",
+    "rating": 1600,
+    "topics": [
+      "combinatorics",
+      "constructive algorithms",
+      "greedy",
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "507C",
+    "contest_id": "507",
+    "index": "C",
+    "title": "Guess Your Way Out!",
+    "url": "https://codeforces.com/problemset/problem/507/C",
+    "rating": 1700,
+    "topics": [
+      "implementation",
+      "math",
+      "trees"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=1Ki1L9BAJIQ",
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "84C",
+    "contest_id": "84",
+    "index": "C",
+    "title": "Biathlon",
+    "url": "https://codeforces.com/problemset/problem/84/C",
+    "rating": 1700,
+    "topics": [
+      "binary search",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "584C",
+    "contest_id": "584",
+    "index": "C",
+    "title": "Marina and Vasya",
+    "url": "https://codeforces.com/problemset/problem/584/C",
+    "rating": 1700,
+    "topics": [
+      "constructive algorithms",
+      "greedy",
+      "strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "792C",
+    "contest_id": "792",
+    "index": "C",
+    "title": "Divide by Three",
+    "url": "https://codeforces.com/problemset/problem/792/C",
+    "rating": 2000,
+    "topics": [
+      "dp",
+      "greedy",
+      "math",
+      "number theory"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=BgG5sjJslYk",
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Hard"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "534B",
+    "contest_id": "534",
+    "index": "B",
+    "title": "Covered Path",
+    "url": "https://codeforces.com/problemset/problem/534/B",
+    "rating": 1400,
+    "topics": [
+      "dp",
+      "greedy",
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "75B",
+    "contest_id": "75",
+    "index": "B",
+    "title": "Facetook Priority Wall",
+    "url": "https://codeforces.com/problemset/problem/75/B",
+    "rating": 1500,
+    "topics": [
+      "expression parsing",
+      "implementation",
+      "strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "979B",
+    "contest_id": "979",
+    "index": "B",
+    "title": "Treasure Hunt",
+    "url": "https://codeforces.com/problemset/problem/979/B",
+    "rating": 1800,
+    "topics": [
+      "greedy"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=Wxzd5xY_Kso",
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "189A",
+    "contest_id": "189",
+    "index": "A",
+    "title": "Cut Ribbon",
+    "url": "https://codeforces.com/problemset/problem/189/A",
+    "rating": 1300,
+    "topics": [
+      "brute force",
+      "dp"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=4VBt8sKocyw",
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "445C",
+    "contest_id": "445",
+    "index": "C",
+    "title": "",
+    "url": "https://codeforces.com/problemset/problem/445/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "822C",
+    "contest_id": "822",
+    "index": "C",
+    "title": "Hacker, pack your bags!",
+    "url": "https://codeforces.com/problemset/problem/822/C",
+    "rating": 1600,
+    "topics": [
+      "binary search",
+      "greedy",
+      "implementation",
+      "sortings"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=VvR9spazigA",
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "834C",
+    "contest_id": "834",
+    "index": "C",
+    "title": "The Meaningless Game",
+    "url": "https://codeforces.com/problemset/problem/834/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=tge-NMPdndc",
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "835C",
+    "contest_id": "835",
+    "index": "C",
+    "title": "Star sky",
+    "url": "https://codeforces.com/problemset/problem/835/C",
+    "rating": 1600,
+    "topics": [
+      "dp",
+      "implementation"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=McKM0CgVLUM",
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "483C",
+    "contest_id": "483",
+    "index": "C",
+    "title": "Diverse Permutation",
+    "url": "https://codeforces.com/problemset/problem/483/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "136C",
+    "contest_id": "136",
+    "index": "C",
+    "title": "Replacement",
+    "url": "https://codeforces.com/problemset/problem/136/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "102C",
+    "contest_id": "102",
+    "index": "C",
+    "title": "Homework",
+    "url": "https://codeforces.com/problemset/problem/102/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "581C",
+    "contest_id": "581",
+    "index": "C",
+    "title": "Developing Skills",
+    "url": "https://codeforces.com/problemset/problem/581/C",
+    "rating": 1400,
+    "topics": [
+      "implementation",
+      "math",
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "262C",
+    "contest_id": "262",
+    "index": "C",
+    "title": "Maxim and Discounts",
+    "url": "https://codeforces.com/problemset/problem/262/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "389C",
+    "contest_id": "389",
+    "index": "C",
+    "title": "Fox and Box Accumulation",
+    "url": "https://codeforces.com/problemset/problem/389/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "218C",
+    "contest_id": "218",
+    "index": "C",
+    "title": "Ice Skating",
+    "url": "https://codeforces.com/problemset/problem/218/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "441C",
+    "contest_id": "441",
+    "index": "C",
+    "title": "Valera and Tubes",
+    "url": "https://codeforces.com/problemset/problem/441/C",
+    "rating": 1500,
+    "topics": [
+      "constructive algorithms",
+      "dfs and similar",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "271C",
+    "contest_id": "271",
+    "index": "C",
+    "title": "Secret",
+    "url": "https://codeforces.com/problemset/problem/271/C",
+    "rating": 1500,
+    "topics": [
+      "constructive algorithms",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "701C",
+    "contest_id": "701",
+    "index": "C",
+    "title": "They Are Everywhere",
+    "url": "https://codeforces.com/problemset/problem/701/C",
+    "rating": 1500,
+    "topics": [
+      "binary search",
+      "strings",
+      "two pointers"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "16C",
+    "contest_id": "16",
+    "index": "C",
+    "title": "Monitor",
+    "url": "https://codeforces.com/problemset/problem/16/C",
+    "rating": 1800,
+    "topics": [
+      "binary search",
+      "number theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "22C",
+    "contest_id": "22",
+    "index": "C",
+    "title": "System Administrator",
+    "url": "https://codeforces.com/problemset/problem/22/C",
+    "rating": 1700,
+    "topics": [
+      "graphs"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "122C",
+    "contest_id": "122",
+    "index": "C",
+    "title": "Lucky Sum",
+    "url": "https://codeforces.com/problemset/problem/122/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "743C",
+    "contest_id": "743",
+    "index": "C",
+    "title": "Vladik and fractions",
+    "url": "https://codeforces.com/problemset/problem/743/C",
+    "rating": 1500,
+    "topics": [
+      "brute force",
+      "constructive algorithms",
+      "math",
+      "number theory"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "556C",
+    "contest_id": "556",
+    "index": "C",
+    "title": "Case of Matryoshkas",
+    "url": "https://codeforces.com/problemset/problem/556/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "677C",
+    "contest_id": "677",
+    "index": "C",
+    "title": "Vanya and Label",
+    "url": "https://codeforces.com/problemset/problem/677/C",
+    "rating": 1500,
+    "topics": [
+      "bitmasks",
+      "combinatorics",
+      "implementation",
+      "strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "479C",
+    "contest_id": "479",
+    "index": "C",
+    "title": "Exams",
+    "url": "https://codeforces.com/problemset/problem/479/C",
+    "rating": 1400,
+    "topics": [
+      "greedy",
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "456C",
+    "contest_id": "456",
+    "index": "C",
+    "title": "Boredom",
+    "url": "https://codeforces.com/problemset/problem/456/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "278C",
+    "contest_id": "278",
+    "index": "C",
+    "title": "Learning Languages",
+    "url": "https://codeforces.com/problemset/problem/278/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "268C",
+    "contest_id": "268",
+    "index": "C",
+    "title": "Beautiful Sets of Points",
+    "url": "https://codeforces.com/problemset/problem/268/C",
+    "rating": 1500,
+    "topics": [
+      "constructive algorithms",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "812C",
+    "contest_id": "812",
+    "index": "C",
+    "title": "Sagheer and Nubian Market",
+    "url": "https://codeforces.com/problemset/problem/812/C",
+    "rating": 1500,
+    "topics": [
+      "binary search",
+      "sortings"
+    ],
+    "solution_link": "https://www.youtube.com/watch?v=SDEpB87Uxpg",
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "330C",
+    "contest_id": "330",
+    "index": "C",
+    "title": "Purification",
+    "url": "https://codeforces.com/problemset/problem/330/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "149C",
+    "contest_id": "149",
+    "index": "C",
+    "title": "Division into Teams",
+    "url": "https://codeforces.com/problemset/problem/149/C",
+    "rating": 1500,
+    "topics": [
+      "greedy",
+      "math",
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "49C",
+    "contest_id": "49",
+    "index": "C",
+    "title": "Disposition",
+    "url": "https://codeforces.com/problemset/problem/49/C",
+    "rating": 1700,
+    "topics": [
+      "constructive algorithms",
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "415C",
+    "contest_id": "415",
+    "index": "C",
+    "title": "Mashmokh and Numbers",
+    "url": "https://codeforces.com/problemset/problem/415/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "129C",
+    "contest_id": "129",
+    "index": "C",
+    "title": "Statues",
+    "url": "https://codeforces.com/problemset/problem/129/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "400C",
+    "contest_id": "400",
+    "index": "C",
+    "title": "Inna and Huge Candy Matrix",
+    "url": "https://codeforces.com/problemset/problem/400/C",
+    "rating": 1500,
+    "topics": [
+      "implementation",
+      "math"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "144C",
+    "contest_id": "144",
+    "index": "C",
+    "title": "Anagram Search",
+    "url": "https://codeforces.com/problemset/problem/144/C",
+    "rating": 1500,
+    "topics": [
+      "implementation",
+      "strings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "525C",
+    "contest_id": "525",
+    "index": "C",
+    "title": "Ilya and Sticks",
+    "url": "https://codeforces.com/problemset/problem/525/C",
+    "rating": 1600,
+    "topics": [
+      "greedy",
+      "math",
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "599C",
+    "contest_id": "599",
+    "index": "C",
+    "title": "Day at the Beach",
+    "url": "https://codeforces.com/problemset/problem/599/C",
+    "rating": 1600,
+    "topics": [
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "462C",
+    "contest_id": "462",
+    "index": "C",
+    "title": "Appleman and Toastman",
+    "url": "https://codeforces.com/problemset/problem/462/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": "https://github.com/MedoN11/CompetitiveProgramming/blob/master/Atcoder/CF_462C.java",
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "518C",
+    "contest_id": "518",
+    "index": "C",
+    "title": "Anya and Smartphone",
+    "url": "https://codeforces.com/problemset/problem/518/C",
+    "rating": 1600,
+    "topics": [
+      "constructive algorithms",
+      "data structures",
+      "implementation"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "276C",
+    "contest_id": "276",
+    "index": "C",
+    "title": "Little Girl and Maximum Sum",
+    "url": "https://codeforces.com/problemset/problem/276/C",
+    "rating": 1500,
+    "topics": [
+      "data structures",
+      "greedy",
+      "implementation",
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "368C",
+    "contest_id": "368",
+    "index": "C",
+    "title": "Sereja and Algorithm",
+    "url": "https://codeforces.com/problemset/problem/368/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "437C",
+    "contest_id": "437",
+    "index": "C",
+    "title": "The Child and Toy",
+    "url": "https://codeforces.com/problemset/problem/437/C",
+    "rating": 1400,
+    "topics": [
+      "graphs",
+      "greedy",
+      "sortings"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "318C",
+    "contest_id": "318",
+    "index": "C",
+    "title": "Perfect Pair",
+    "url": "https://codeforces.com/problemset/problem/318/C",
+    "rating": null,
+    "topics": [
+      "algorithms",
+      "codeforces"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "731C",
+    "contest_id": "731",
+    "index": "C",
+    "title": "Socks",
+    "url": "https://codeforces.com/problemset/problem/731/C",
+    "rating": 1600,
+    "topics": [
+      "dfs and similar",
+      "dsu",
+      "graphs",
+      "greedy"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  },
+  {
+    "platform": "Codeforces",
+    "platform_id": "369C",
+    "contest_id": "369",
+    "index": "C",
+    "title": "Valera and Elections",
+    "url": "https://codeforces.com/problemset/problem/369/C",
+    "rating": 1600,
+    "topics": [
+      "dfs and similar",
+      "graphs",
+      "trees"
+    ],
+    "solution_link": null,
+    "sources": [
+      "c1_problem.xlsx"
+    ],
+    "difficulty": "Medium"
+  }
+]

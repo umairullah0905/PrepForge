@@ -1,4 +1,7 @@
 import { NextResponse } from "next/server";
+import { executeCodeLocal } from "@/lib/local_runner";
+
+export const runtime = "nodejs";
 
 const PISTON_URL = process.env.PISTON_URL || "http://127.0.0.1:2000/api/v2/execute";
 
@@ -49,6 +52,50 @@ export interface ExecutionResult {
   executionTime?: number;
 }
 
+async function executeSingleCase(
+  language: string,
+  code: string,
+  stdin: string,
+  config: { pistonLang: string; filename: string }
+): Promise<{ stdout: string; stderr: string; compileError?: string; time?: number }> {
+  const pistonPayload = {
+    language: config.pistonLang,
+    version: "*",
+    files: [{ name: config.filename, content: code }],
+    stdin: stdin || "",
+    run_timeout: 4000,
+    compile_timeout: 8000,
+  };
+
+  try {
+    const res = await fetch(PISTON_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(pistonPayload),
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      return {
+        stdout: data.run?.stdout || "",
+        stderr: data.run?.stderr || data.compile?.stderr || "",
+        compileError: data.compile?.stderr || undefined,
+        time: data.run?.time,
+      };
+    }
+  } catch (err: any) {
+    // Port 2000 not reachable -> execute directly via local runner
+  }
+
+  const localRes = await executeCodeLocal(language, code, stdin, 5000);
+  return {
+    stdout: localRes.stdout,
+    stderr: localRes.stderr,
+    compileError: localRes.compileError,
+    time: localRes.time,
+  };
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -69,32 +116,12 @@ export async function POST(req: Request) {
 
     // Case 1: Custom one-off run with provided stdin
     if (!testCases || !Array.isArray(testCases) || testCases.length === 0) {
-      const pistonPayload = {
-        language: config.pistonLang,
-        version: "*",
-        files: [{ name: config.filename, content: code }],
-        stdin: stdin || "",
-        run_timeout: 4000,
-        compile_timeout: 8000,
-      };
-
-      const res = await fetch(PISTON_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(pistonPayload),
-      });
-
-      if (!res.ok) {
-        const errText = await res.text();
-        return NextResponse.json(
-          { error: `Piston execution failed: ${errText || res.statusText}` },
-          { status: 502 }
-        );
-      }
-
-      const data = await res.json();
-      const stdout = data.run?.stdout || "";
-      const stderr = data.run?.stderr || data.compile?.stderr || "";
+      const { stdout, stderr, time } = await executeSingleCase(
+        language,
+        code,
+        stdin || "",
+        config
+      );
 
       return NextResponse.json({
         success: true,
@@ -106,7 +133,7 @@ export async function POST(req: Request) {
             actual: stdout,
             stderr,
             passed: !stderr,
-            executionTime: data.run?.time,
+            executionTime: time,
           },
         ],
       });
@@ -117,34 +144,16 @@ export async function POST(req: Request) {
     let compileError = "";
 
     for (const test of testCases as TestCase[]) {
-      const pistonPayload = {
-        language: config.pistonLang,
-        version: "*",
-        files: [{ name: config.filename, content: code }],
-        stdin: (test.input || "").trim(),
-        run_timeout: 4000,
-        compile_timeout: 8000,
-      };
+      const rawInput = (test.input || "").trim();
+      const { stdout, stderr, compileError: compErr, time } = await executeSingleCase(
+        language,
+        code,
+        rawInput,
+        config
+      );
 
-      const res = await fetch(PISTON_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(pistonPayload),
-      });
-
-      if (!res.ok) {
-        const errText = await res.text();
-        return NextResponse.json(
-          { error: `Execution sandbox error: ${errText || res.statusText}` },
-          { status: 502 }
-        );
-      }
-
-      const data = await res.json();
-
-      // Check for compilation errors (e.g. C++, Java)
-      if (data.compile?.stderr) {
-        compileError = data.compile.stderr;
+      if (compErr) {
+        compileError = compErr;
         results.push({
           input: test.input || "",
           expected: test.expectedOutput,
@@ -155,26 +164,24 @@ export async function POST(req: Request) {
         break;
       }
 
-      const stdout = (data.run?.stdout || "").trim();
-      const stderr = (data.run?.stderr || "").trim();
+      const trimmedStdout = (stdout || "").trim();
+      const trimmedStderr = (stderr || "").trim();
       const expected = (test.expectedOutput || "").trim();
 
-      // Comparison logic: normalize line endings and trim whitespace
-      const normalizedActual = stdout.replace(/\r\n/g, "\n");
+      const normalizedActual = trimmedStdout.replace(/\r\n/g, "\n");
       const normalizedExpected = expected.replace(/\r\n/g, "\n");
-      const passed = expected.length > 0 ? normalizedActual === normalizedExpected : !stderr;
+      const passed = expected.length > 0 ? normalizedActual === normalizedExpected : !trimmedStderr;
 
       results.push({
         input: test.input || "",
         expected: test.expectedOutput,
-        actual: stdout,
+        actual: trimmedStdout,
         passed,
-        stderr,
-        executionTime: data.run?.time,
+        stderr: trimmedStderr,
+        executionTime: time,
       });
 
-      // If runtime exception / fatal crash occurred, break early
-      if (stderr && data.run?.code !== 0) {
+      if (trimmedStderr && passed === false) {
         break;
       }
     }
@@ -192,10 +199,7 @@ export async function POST(req: Request) {
     console.error("Execute API Handler Error:", error);
     return NextResponse.json(
       {
-        error:
-          error.code === "ECONNREFUSED"
-            ? "Piston Docker sandbox is not running. Please ensure the container is started on port 2000."
-            : error.message || "Internal server error during execution",
+        error: error.message || "Internal server error during execution",
       },
       { status: 500 }
     );
