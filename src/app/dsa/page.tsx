@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { getProfile, getCompletedQuestTitles } from "@/lib/progress";
-import { getCachedQuestions, getCachedCompanyQuestions } from "@/lib/questions";
+import { getCachedQuestions, getCachedCompanyQuestions, normalizeTopicName } from "@/lib/questions";
 import Navbar from "@/components/Navbar";
 import ClientQuestsView from "../quests/ClientQuestsView";
 import { signOutAction } from "../actions";
@@ -78,12 +78,18 @@ export default async function DsaHubPage(props: {
           {/* Header section - Full Width */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 pb-6 mb-8 border-b border-zinc-800/80">
             <div>
-              <div className="flex items-center gap-2 text-xs font-mono text-zinc-500 mb-1.5">
+              <div className="flex items-center gap-2 text-xs text-zinc-500 mb-1.5">
                 <Link href="/" className="hover:text-zinc-300 transition-colors">
                   Overview
                 </Link>
                 <span>/</span>
-                <span className="text-zinc-300">DSA Workspace</span>
+                <Link href="/dsa" className="hover:text-zinc-300 transition-colors">
+                  Problems
+                </Link>
+                <span>/</span>
+                <span className="text-zinc-200 font-medium">
+                  {currentTab === "companies" ? "Company Archives" : "Pattern Quests"}
+                </span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100">
                 Data Structures &amp; Algorithms
@@ -133,7 +139,7 @@ export default async function DsaHubPage(props: {
                   <div className="flex-1 w-full">
                     <label
                       htmlFor="company-input"
-                      className="block font-mono text-xs uppercase tracking-wider text-zinc-400 mb-2 font-semibold"
+                      className="block text-xs font-medium text-zinc-300 mb-1.5"
                     >
                       Company Filter
                     </label>
@@ -153,7 +159,7 @@ export default async function DsaHubPage(props: {
                   <div className="flex-1 w-full">
                     <label
                       htmlFor="topic-input"
-                      className="block font-mono text-xs uppercase tracking-wider text-zinc-400 mb-2 font-semibold"
+                      className="block text-xs font-medium text-zinc-300 mb-1.5"
                     >
                       Topic / Pattern
                     </label>
@@ -228,13 +234,13 @@ export default async function DsaHubPage(props: {
                                   {q.company_names?.slice(0, 4).map((c: string) => (
                                     <span
                                       key={c}
-                                      className="rounded bg-zinc-950 px-2 py-0.5 text-xs font-mono text-zinc-300 border border-zinc-800"
+                                      className="rounded-md bg-zinc-800/60 px-2.5 py-0.5 text-xs font-medium text-zinc-300"
                                     >
                                       {c}
                                     </span>
                                   ))}
                                   {q.company_names?.length > 4 && (
-                                    <span className="text-xs font-mono text-zinc-500 self-center">
+                                    <span className="text-xs font-mono text-zinc-400 self-center">
                                       +{q.company_names.length - 4}
                                     </span>
                                   )}
@@ -246,7 +252,7 @@ export default async function DsaHubPage(props: {
                                   href={q.link}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="font-semibold text-sm sm:text-base text-zinc-200 group-hover:text-white hover:underline inline-flex items-center gap-2"
+                                  className="font-semibold text-sm sm:text-base text-zinc-200 group-hover:text-emerald-400 hover:underline inline-flex items-center gap-2 transition-colors"
                                 >
                                   {isCompleted ? (
                                     <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
@@ -265,18 +271,23 @@ export default async function DsaHubPage(props: {
                               </td>
 
                               <td className="py-3.5 px-5">
-                                <div className="flex flex-wrap gap-1.5">
+                                <div className="flex flex-wrap items-center gap-1.5 text-xs text-zinc-400">
                                   {q.topics ? (
-                                    q.topics.split(",").map((t: string) => (
-                                      <span
-                                        key={t.trim()}
-                                        className="rounded bg-zinc-950 px-2 py-0.5 text-xs font-mono text-zinc-400 border border-zinc-800/80"
-                                      >
-                                        {t.trim()}
-                                      </span>
-                                    ))
+                                    q.topics
+                                      .split(",")
+                                      .slice(0, 3)
+                                      .map((t: string, idx: number, arr: string[]) => (
+                                        <span key={idx} className="inline-flex items-center gap-1.5">
+                                          <span className="text-zinc-400 hover:text-zinc-200 transition-colors">
+                                            {normalizeTopicName(t.trim())}
+                                          </span>
+                                          {idx < arr.length - 1 && (
+                                            <span className="text-zinc-600 select-none">·</span>
+                                          )}
+                                        </span>
+                                      ))
                                   ) : (
-                                    <span className="text-zinc-600 font-mono text-xs">-</span>
+                                    <span className="text-zinc-600 text-xs">-</span>
                                   )}
                                 </div>
                               </td>

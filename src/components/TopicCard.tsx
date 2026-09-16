@@ -53,30 +53,30 @@ export default function TopicCard({
       className="group relative flex flex-col justify-between rounded-xl border border-zinc-800 bg-zinc-900/60 p-6 transition-all hover:bg-zinc-900 hover:border-zinc-700 hover:shadow-lg shadow-sm"
     >
       <div>
-        <div className="flex items-center justify-between text-xs text-zinc-500 mb-4">
-          <span className="font-mono text-xs font-semibold uppercase tracking-wider text-zinc-400">
-            {eyebrow}
+        <div className="flex items-center justify-between text-xs mb-4">
+          <span className="text-xs font-semibold tracking-wide text-zinc-400">
+            {eyebrow.replace("_", " ")}
           </span>
-          <span className="rounded border border-zinc-800 bg-zinc-950 px-2.5 py-1 font-mono text-xs text-zinc-300">
+          <span className="rounded-md bg-zinc-800/60 px-2.5 py-0.5 text-xs font-medium text-zinc-300">
             {level}
           </span>
         </div>
 
         <div className="flex items-center gap-3.5 mb-3">
           {icon || defaultIcon}
-          <h3 className="font-bold text-lg sm:text-xl text-zinc-100 group-hover:text-white transition-colors">
+          <h3 className="font-semibold text-lg text-zinc-100 group-hover:text-emerald-400 transition-colors">
             {title}
           </h3>
         </div>
 
-        <p className="text-sm text-zinc-400 leading-relaxed mb-6">
+        <p className="text-sm text-zinc-300 leading-relaxed mb-6">
           {description}
         </p>
       </div>
 
-      <div className="flex items-center justify-between pt-4 border-t border-zinc-800/80 text-sm font-mono text-zinc-400">
-        <span className="text-zinc-300 font-medium">{problemCount} Active Problems</span>
-        <span className="flex items-center gap-1.5 text-zinc-300 group-hover:text-white font-sans font-medium transition-colors">
+      <div className="flex items-center justify-between pt-4 border-t border-zinc-800/70 text-xs text-zinc-400">
+        <span className="font-mono text-zinc-400">{problemCount} Active Problems</span>
+        <span className="flex items-center gap-1.5 font-medium text-zinc-200 group-hover:text-emerald-400 transition-colors">
           <span>Explore Track</span>
           <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </span>

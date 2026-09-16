@@ -147,3 +147,40 @@ export const XP_PER_LEVEL = 200;
 export function xpProgressPercent(xp: number): number {
   return ((xp % XP_PER_LEVEL) / XP_PER_LEVEL) * 100;
 }
+
+export const getCompletedSystemDesignSlugs = cache(async function getCompletedSystemDesignSlugs(
+  supabase: SupabaseClient,
+  userId: string
+): Promise<string[]> {
+  try {
+    const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/system_design_progress?select=chapter_slug&user_id=eq.${userId}`;
+    const res = await fetch(url, {
+      headers: {
+        apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string}`,
+      },
+      next: {
+        revalidate: 15,
+        tags: [`sd-progress-${userId}`],
+      },
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data)) {
+        return data.map((row: any) => row.chapter_slug as string);
+      }
+    }
+  } catch (err) {
+    console.error("Error fetching completed system design slugs via REST:", err);
+  }
+
+  // Fallback to client query
+  const { data } = await supabase
+    .from("system_design_progress")
+    .select("chapter_slug")
+    .eq("user_id", userId);
+
+  return (data || []).map((row: any) => row.chapter_slug as string);
+});
+

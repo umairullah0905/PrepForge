@@ -21,9 +21,13 @@ import type { ChapterSummary } from "@/lib/system-design";
 
 interface ChapterListClientProps {
   chapters: ChapterSummary[];
+  completedSlugs?: string[];
 }
 
-export default function ChapterListClient({ chapters }: ChapterListClientProps) {
+export default function ChapterListClient({
+  chapters,
+  completedSlugs = [],
+}: ChapterListClientProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>("All");
@@ -103,10 +107,10 @@ export default function ChapterListClient({ chapters }: ChapterListClientProps) 
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
+                className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer ${
                   active
-                    ? "bg-zinc-100 text-zinc-950 font-semibold"
-                    : "bg-zinc-950 text-zinc-400 border border-zinc-800 hover:text-zinc-200 hover:border-zinc-700"
+                    ? "bg-zinc-800 text-zinc-100 font-semibold border border-zinc-700 shadow-sm"
+                    : "bg-zinc-950/80 text-zinc-400 border border-zinc-850 hover:text-zinc-200 hover:border-zinc-700"
                 }`}
               >
                 {cat}
@@ -121,6 +125,12 @@ export default function ChapterListClient({ chapters }: ChapterListClientProps) 
         <span>
           Showing {filteredChapters.length} of {chapters.length} System Design
           Chapters
+          {completedSlugs.length > 0 && (
+            <span className="text-emerald-400 font-medium ml-2 inline-flex items-center gap-1">
+              <CheckCircle2 className="h-3.5 w-3.5 inline" />
+              {completedSlugs.length} completed
+            </span>
+          )}
         </span>
         <span className="hidden sm:inline">
           Reference Source: ByteByteGo (Alex Xu)
@@ -130,6 +140,7 @@ export default function ChapterListClient({ chapters }: ChapterListClientProps) 
       {/* Chapter Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {filteredChapters.map((c) => {
+          const isCompleted = completedSlugs.includes(c.slug);
           const diffClass =
             c.difficulty.toLowerCase() === "fundamentals" ||
             c.difficulty.toLowerCase() === "interview framework"
@@ -141,7 +152,11 @@ export default function ChapterListClient({ chapters }: ChapterListClientProps) 
           return (
             <div
               key={c.slug}
-              className="group rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 sm:p-6 flex flex-col justify-between hover:border-zinc-700/90 transition-all hover:bg-zinc-900/50 shadow-sm"
+              className={`group rounded-xl border p-5 sm:p-6 flex flex-col justify-between transition-all shadow-sm ${
+                isCompleted
+                  ? "border-emerald-500/30 bg-emerald-500/[0.02] hover:border-emerald-500/50"
+                  : "border-zinc-800 bg-zinc-900/30 hover:border-zinc-700/90 hover:bg-zinc-900/50"
+              }`}
             >
               <div>
                 {/* Card Top Pill Row */}
@@ -155,6 +170,12 @@ export default function ChapterListClient({ chapters }: ChapterListClientProps) 
                     >
                       {c.difficulty}
                     </span>
+                    {isCompleted && (
+                      <span className="inline-flex items-center gap-1 rounded border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 font-mono text-[11px] font-semibold text-emerald-400">
+                        <CheckCircle2 className="h-3 w-3" />
+                        <span>Completed</span>
+                      </span>
+                    )}
                   </div>
 
                   <span className="inline-flex items-center gap-1 font-mono text-xs text-zinc-400">
@@ -179,13 +200,13 @@ export default function ChapterListClient({ chapters }: ChapterListClientProps) 
                   {c.topics.slice(0, 4).map((topic, i) => (
                     <span
                       key={i}
-                      className="rounded bg-zinc-950 px-2 py-0.5 text-[11px] font-mono text-zinc-400 border border-zinc-800/80"
+                      className="rounded-md bg-zinc-800/50 px-2 py-0.5 text-[11px] font-mono text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200 transition-colors"
                     >
                       {topic}
                     </span>
                   ))}
                   {c.topics.length > 4 && (
-                    <span className="rounded bg-zinc-950 px-2 py-0.5 text-[11px] font-mono text-zinc-400 border border-zinc-800/80">
+                    <span className="rounded-md bg-zinc-800/50 px-2 py-0.5 text-[11px] font-mono text-zinc-500">
                       +{c.topics.length - 4} more
                     </span>
                   )}
@@ -198,7 +219,7 @@ export default function ChapterListClient({ chapters }: ChapterListClientProps) 
                   href={c.byteByteGoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 font-mono text-zinc-400 hover:text-amber-300 transition-colors"
+                  className="inline-flex items-center gap-1 text-xs text-zinc-500 hover:text-zinc-300 transition-colors"
                   title="Open reference on ByteByteGo"
                 >
                   <span>ByteByteGo Ref</span>
@@ -207,7 +228,7 @@ export default function ChapterListClient({ chapters }: ChapterListClientProps) 
 
                 <Link
                   href={`/system-design/${c.slug}`}
-                  className="inline-flex items-center gap-1.5 font-medium text-zinc-200 group-hover:text-emerald-300 transition-colors"
+                  className="inline-flex items-center gap-1.5 font-semibold text-zinc-100 group-hover:text-emerald-300 transition-colors"
                 >
                   <span>Study Spec</span>
                   <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import Navbar from "@/components/Navbar";
-import { getProfile, getCompletedQuestTitles } from "@/lib/progress";
+import { getProfile, getCompletedQuestTitles, getCompletedSystemDesignSlugs } from "@/lib/progress";
 import { signOutAction } from "@/app/actions";
 import { getChapterBySlug, getAdjacentChapters } from "@/lib/system-design";
 import ChapterViewer from "@/components/system-design/ChapterViewer";
@@ -14,7 +14,7 @@ export default async function ChapterDetailPage(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
-  const chapter = getChapterBySlug(slug);
+  const chapter = await getChapterBySlug(slug);
 
   if (!chapter) {
     notFound();
@@ -27,7 +27,9 @@ export default async function ChapterDetailPage(props: {
 
   const profile = user ? await getProfile(supabase, user.id) : null;
   const completedTitles = user ? await getCompletedQuestTitles(supabase, user.id) : [];
-  const { prev, next } = getAdjacentChapters(slug);
+  const completedSdSlugs = user ? await getCompletedSystemDesignSlugs(supabase, user.id) : [];
+  const isCompleted = completedSdSlugs.includes(slug);
+  const { prev, next } = await getAdjacentChapters(slug);
 
   return (
     <div className="qx-root flex flex-col min-h-screen">
@@ -71,6 +73,8 @@ export default async function ChapterDetailPage(props: {
             chapter={chapter}
             prevChapter={prev}
             nextChapter={next}
+            initialCompleted={isCompleted}
+            isLoggedIn={!!user}
           />
         </div>
       </main>

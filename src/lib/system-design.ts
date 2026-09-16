@@ -52,7 +52,7 @@ function assignCategory(slug: string): ChapterSummary["category"] {
   return "Services & Scale";
 }
 
-export function getAllChapters(): ChapterSummary[] {
+function getLocalChapters(): ChapterSummary[] {
   try {
     const chaptersPath = path.join(DATA_DIR, "chapters.json");
     if (!fs.existsSync(chaptersPath)) return [];
@@ -63,12 +63,12 @@ export function getAllChapters(): ChapterSummary[] {
       category: assignCategory(item.slug),
     }));
   } catch (err) {
-    console.error("Error reading system design chapters:", err);
+    console.error("Error reading local system design chapters:", err);
     return [];
   }
 }
 
-export function getChapterBySlug(slug: string): ChapterDetail | null {
+function getLocalChapterBySlug(slug: string): ChapterDetail | null {
   try {
     const filePath = path.join(DATA_DIR, `${slug}.json`);
     if (!fs.existsSync(filePath)) return null;
@@ -79,16 +79,107 @@ export function getChapterBySlug(slug: string): ChapterDetail | null {
       category: assignCategory(slug),
     };
   } catch (err) {
-    console.error(`Error reading system design chapter ${slug}:`, err);
+    console.error(`Error reading local system design chapter ${slug}:`, err);
     return null;
   }
 }
 
-export function getAdjacentChapters(currentSlug: string): {
+export async function getAllChapters(): Promise<ChapterSummary[]> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (supabaseUrl && supabaseKey) {
+    try {
+      const url = `${supabaseUrl}/rest/v1/system_design_chapters?select=slug,title,chapter_number,difficulty,scale,topics,read_time_minutes,bytebytego_url,category&order=chapter_number.asc`;
+      const res = await fetch(url, {
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+        },
+        next: {
+          revalidate: 60,
+          tags: ["system-design-chapters"],
+        },
+      });
+
+      if (res.ok) {
+        const rows = await res.json();
+        if (Array.isArray(rows) && rows.length > 0) {
+          return rows.map((r: any) => ({
+            slug: r.slug,
+            title: r.title,
+            chapterNumber: r.chapter_number,
+            difficulty: r.difficulty,
+            scale: r.scale || "",
+            topics: r.topics || [],
+            readTimeMinutes: r.read_time_minutes || "",
+            byteByteGoUrl: r.bytebytego_url || "",
+            category: (r.category as ChapterSummary["category"]) || assignCategory(r.slug),
+          }));
+        }
+      }
+    } catch (err) {
+      console.error("Error querying system_design_chapters from Supabase:", err);
+    }
+  }
+
+  // Fallback to local JSON files
+  return getLocalChapters();
+}
+
+export async function getChapterBySlug(slug: string): Promise<ChapterDetail | null> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (supabaseUrl && supabaseKey) {
+    try {
+      const url = `${supabaseUrl}/rest/v1/system_design_chapters?slug=eq.${slug}&select=*`;
+      const res = await fetch(url, {
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+        },
+        next: {
+          revalidate: 60,
+          tags: [`sd-chapter-${slug}`],
+        },
+      });
+
+      if (res.ok) {
+        const rows = await res.json();
+        if (Array.isArray(rows) && rows.length > 0) {
+          const r = rows[0];
+          return {
+            slug: r.slug,
+            title: r.title,
+            chapterNumber: r.chapter_number,
+            difficulty: r.difficulty || "Intermediate",
+            scale: r.scale || "",
+            topics: r.topics || [],
+            readTimeMinutes: r.read_time_minutes || "",
+            byteByteGoUrl: r.bytebytego_url || "",
+            category: (r.category as ChapterSummary["category"]) || assignCategory(r.slug),
+            course: "System Design Interview",
+            wordCount: (r.content_html || "").split(/\s+/).length,
+            toc: r.toc || [],
+            contentHtml: r.content_html || "",
+          };
+        }
+      }
+    } catch (err) {
+      console.error(`Error querying system_design_chapter ${slug} from Supabase:`, err);
+    }
+  }
+
+  // Fallback to local file
+  return getLocalChapterBySlug(slug);
+}
+
+export async function getAdjacentChapters(currentSlug: string): Promise<{
   prev: ChapterSummary | null;
   next: ChapterSummary | null;
-} {
-  const all = getAllChapters();
+}> {
+  const all = await getAllChapters();
   const currentIndex = all.findIndex((c) => c.slug === currentSlug);
   if (currentIndex === -1) return { prev: null, next: null };
 

@@ -18,38 +18,62 @@ import {
   Check,
 } from "lucide-react";
 import type { ChapterDetail, ChapterSummary } from "@/lib/system-design";
+import { toggleSystemDesignChapterCompletion } from "@/app/actions";
 
 interface ChapterViewerProps {
   chapter: ChapterDetail;
   prevChapter: ChapterSummary | null;
   nextChapter: ChapterSummary | null;
+  initialCompleted?: boolean;
+  isLoggedIn?: boolean;
 }
 
 export default function ChapterViewer({
   chapter,
   prevChapter,
   nextChapter,
+  initialCompleted = false,
+  isLoggedIn = false,
 }: ChapterViewerProps) {
   const [activeSection, setActiveSection] = useState<string>("");
   const [scrollProgress, setScrollProgress] = useState(0);
   const [lightboxImg, setLightboxImg] = useState<{ src: string; alt: string } | null>(null);
   const [copied, setCopied] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(initialCompleted);
+  const [isSyncing, setIsSyncing] = useState(false);
 
-  // Load completion state from localStorage
+  // Sync completion state with initialCompleted or localStorage
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem(`sd_completed_${chapter.slug}`);
-      if (saved === "true") setIsCompleted(true);
-    } catch (e) {}
-  }, [chapter.slug]);
+    if (initialCompleted) {
+      setIsCompleted(true);
+    } else {
+      try {
+        const saved = localStorage.getItem(`sd_completed_${chapter.slug}`);
+        if (saved === "true") setIsCompleted(true);
+      } catch (e) {}
+    }
+  }, [chapter.slug, initialCompleted]);
 
-  const toggleComplete = () => {
+  const toggleComplete = async () => {
     const nextState = !isCompleted;
     setIsCompleted(nextState);
+
+    // Save to local storage for offline continuity
     try {
       localStorage.setItem(`sd_completed_${chapter.slug}`, String(nextState));
     } catch (e) {}
+
+    // Sync to Supabase table and award XP if logged in
+    if (isLoggedIn) {
+      setIsSyncing(true);
+      try {
+        await toggleSystemDesignChapterCompletion(chapter.slug, nextState);
+      } catch (err) {
+        console.error("Failed to sync chapter progress to Supabase:", err);
+      } finally {
+        setIsSyncing(false);
+      }
+    }
   };
 
   const handleCopyLink = () => {
@@ -224,14 +248,22 @@ export default function ChapterViewer({
             <div className="flex items-center gap-2">
               <button
                 onClick={toggleComplete}
-                className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors ${
+                disabled={isSyncing}
+                className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer ${
                   isCompleted
                     ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20"
                     : "border-zinc-800 bg-zinc-950 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100"
                 }`}
+                title={isCompleted ? "Click to mark as incomplete" : "Mark chapter as completed (+50 XP)"}
               >
                 <CheckCircle2 className="h-3.5 w-3.5" />
-                <span>{isCompleted ? "Mark Incomplete" : "Mark as Read"}</span>
+                <span>
+                  {isCompleted
+                    ? "Completed"
+                    : isSyncing
+                    ? "Saving..."
+                    : "Mark as Read (+50 XP)"}
+                </span>
               </button>
 
               <button

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import Navbar from "@/components/Navbar";
-import { getProfile, getCompletedQuestTitles } from "@/lib/progress";
+import { getProfile, getCompletedQuestTitles, getCompletedSystemDesignSlugs } from "@/lib/progress";
 import { signOutAction } from "@/app/actions";
 import { getAllChapters } from "@/lib/system-design";
 import ChapterListClient from "@/components/system-design/ChapterListClient";
@@ -17,8 +17,9 @@ export default async function SystemDesignPage() {
 
   const profile = user ? await getProfile(supabase, user.id) : null;
   const completedTitles = user ? await getCompletedQuestTitles(supabase, user.id) : [];
+  const completedSdSlugs = user ? await getCompletedSystemDesignSlugs(supabase, user.id) : [];
 
-  const chapters = getAllChapters();
+  const chapters = await getAllChapters();
 
   return (
     <div className="qx-root flex flex-col min-h-screen">
@@ -38,7 +39,7 @@ export default async function SystemDesignPage() {
                 Overview
               </Link>
               <span>/</span>
-              <span className="text-zinc-300">System Architecture</span>
+              <span className="text-zinc-300">System Design</span>
             </div>
 
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
@@ -64,49 +65,25 @@ export default async function SystemDesignPage() {
               </a>
             </div>
 
-            {/* Quick Stats Strip */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
+            {/* Quick Stats Strip - 3 Clean Balanced Metrics */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6">
               <div className="rounded-lg border border-zinc-800/80 bg-zinc-900/30 p-3.5">
-                <div className="text-xs font-mono text-zinc-500">Curriculum</div>
-                <div className="text-lg font-bold text-zinc-200 mt-0.5">13 Chapters</div>
+                <div className="text-xs font-medium text-zinc-400">Curriculum Chapters</div>
+                <div className="text-lg font-bold font-mono text-zinc-100 mt-0.5">13 Chapters</div>
               </div>
               <div className="rounded-lg border border-zinc-800/80 bg-zinc-900/30 p-3.5">
-                <div className="text-xs font-mono text-zinc-500">Content Scope</div>
-                <div className="text-lg font-bold text-emerald-400 mt-0.5">50,000+ Words</div>
+                <div className="text-xs font-medium text-zinc-400">Comprehensive Scope</div>
+                <div className="text-lg font-bold font-mono text-zinc-100 mt-0.5">50,000+ Words</div>
               </div>
               <div className="rounded-lg border border-zinc-800/80 bg-zinc-900/30 p-3.5">
-                <div className="text-xs font-mono text-zinc-500">Visual Diagrams</div>
-                <div className="text-lg font-bold text-blue-400 mt-0.5">Interactive Lightbox</div>
-              </div>
-              <div className="rounded-lg border border-zinc-800/80 bg-zinc-900/30 p-3.5">
-                <div className="text-xs font-mono text-zinc-500">Reference Source</div>
-                <div className="text-lg font-bold text-amber-400 mt-0.5">Alex Xu / ByteByteGo</div>
+                <div className="text-xs font-medium text-zinc-400">Visual Specifications</div>
+                <div className="text-lg font-bold font-mono text-zinc-100 mt-0.5">Interactive Lightbox</div>
               </div>
             </div>
-          </div>
-
-          {/* Reference Attribution Banner */}
-          <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 sm:p-5 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm">
-            <div className="flex items-start sm:items-center gap-3.5">
-              <div className="h-10 w-10 rounded-lg bg-zinc-950 border border-zinc-800 flex items-center justify-center text-amber-400 shrink-0">
-                <BookOpen className="h-5 w-5" />
-              </div>
-              <div>
-                <div className="font-semibold text-zinc-200">
-                  ByteByteGo System Design Interview Course Reference
-                </div>
-                <div className="text-zinc-400 text-xs mt-0.5">
-                  All architecture specifications, flowcharts, and trade-off matrices are attributed to Alex Xu & ByteByteGo. Direct links are provided on every chapter.
-                </div>
-              </div>
-            </div>
-            <span className="hidden sm:inline-block rounded border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 font-mono text-xs text-emerald-400 font-medium whitespace-nowrap">
-              13 CHAPTERS SYNCED
-            </span>
           </div>
 
           {/* Interactive Chapter Grid */}
-          <ChapterListClient chapters={chapters} />
+          <ChapterListClient chapters={chapters} completedSlugs={completedSdSlugs} />
         </div>
       </main>
     </div>

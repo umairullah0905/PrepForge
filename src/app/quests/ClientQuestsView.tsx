@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import QuestCard, { type Quest } from "@/components/QuestCard";
 import { PlatformIcon, LeetCodeIcon, CodeforcesIcon } from "@/components/PlatformIcons";
+import { normalizeTopicName } from "@/lib/questions";
 
 function getPageNumbers(currentPage: number, totalPages: number): (number | "...")[] {
   if (totalPages <= 7) {
@@ -60,15 +61,20 @@ export default function ClientQuestsView({
     return ["ALL", ...Array.from(set).sort()];
   }, [questions]);
 
-  // Group questions by topic
+  // Group questions by normalized topic to eliminate duplicates (e.g. Array vs Arrays, brute force vs Brute Force)
   const { topics, questionsByTopic } = useMemo(() => {
     const topicMap: Record<string, any[]> = { All: questions };
 
     questions.forEach((q) => {
       if (q.topics && q.topics.length > 0) {
-        q.topics.forEach((topic: string) => {
-          if (!topicMap[topic]) topicMap[topic] = [];
-          topicMap[topic].push(q);
+        const addedNormalizedTopics = new Set<string>();
+        q.topics.forEach((rawTopic: string) => {
+          const norm = normalizeTopicName(rawTopic);
+          if (!addedNormalizedTopics.has(norm)) {
+            addedNormalizedTopics.add(norm);
+            if (!topicMap[norm]) topicMap[norm] = [];
+            topicMap[norm].push(q);
+          }
         });
       } else {
         if (!topicMap["Uncategorized"]) topicMap["Uncategorized"] = [];
@@ -76,9 +82,34 @@ export default function ClientQuestsView({
       }
     });
 
+    // Logical pedagogical ordering for core interview patterns
+    const CORE_PATTERNS = [
+      "All",
+      "Arrays",
+      "Two Pointers",
+      "Sliding Window",
+      "Stack & Queue",
+      "Binary Search",
+      "Linked List",
+      "Trees",
+      "Graphs",
+      "Breadth-First Search",
+      "Depth-First Search",
+      "Dynamic Programming",
+      "Backtracking",
+      "Greedy",
+      "Bit Manipulation & Bitmasks",
+      "Math & Number Theory",
+      "Hash Table",
+      "Sorting",
+    ];
+
     const sortedTopics = Object.keys(topicMap).sort((a, b) => {
-      if (a === "All") return -1;
-      if (b === "All") return 1;
+      const idxA = CORE_PATTERNS.indexOf(a);
+      const idxB = CORE_PATTERNS.indexOf(b);
+      if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+      if (idxA !== -1) return -1;
+      if (idxB !== -1) return 1;
       return a.localeCompare(b);
     });
 
@@ -107,7 +138,9 @@ export default function ClientQuestsView({
       if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase();
         const matchTitle = q.title?.toLowerCase().includes(query);
-        const matchTopic = q.topics?.some((t: string) => t.toLowerCase().includes(query));
+        const matchTopic = q.topics?.some((t: string) =>
+          t.toLowerCase().includes(query) || normalizeTopicName(t).toLowerCase().includes(query)
+        );
         const matchPlatform = q.platform?.toLowerCase().includes(query);
         if (!matchTitle && !matchTopic && !matchPlatform) return false;
       }
@@ -255,9 +288,9 @@ export default function ClientQuestsView({
     <div ref={containerRef} className="flex flex-col lg:flex-row gap-6 items-start w-full">
       {/* Topics Sidebar */}
       <aside className="w-full lg:w-72 shrink-0 rounded-xl border border-zinc-800 bg-zinc-900/40 p-4 shadow-sm">
-        <div className="flex items-center justify-between px-2 pb-3 mb-3 border-b border-zinc-800 text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold">
-          <span>Categories</span>
-          <span>{questions.length} problems</span>
+        <div className="flex items-center justify-between px-2 pb-3 mb-3 border-b border-zinc-800/80 text-xs text-zinc-400 font-medium">
+          <span className="font-semibold text-zinc-200">Categories</span>
+          <span className="font-mono text-zinc-500">{questions.length} problems</span>
         </div>
 
         <div className="flex flex-row lg:flex-col gap-1.5 max-h-[70vh] overflow-y-auto overflow-x-auto pr-1">
@@ -301,88 +334,118 @@ export default function ClientQuestsView({
 
           <div className="flex flex-wrap items-center gap-3">
             {/* Platform Filter */}
-            <div className="flex rounded-lg border border-zinc-800 bg-zinc-950 p-1 text-xs font-mono">
-              <button
-                onClick={() => setPlatformFilter("ALL")}
-                className={`inline-flex items-center gap-1.5 rounded px-2.5 py-1.5 text-xs font-semibold transition-colors ${
-                  platformFilter.toUpperCase() === "ALL"
-                    ? "bg-zinc-800 text-zinc-100 shadow-sm"
-                    : "text-zinc-400 hover:text-zinc-200"
-                }`}
-              >
-                <Globe className="w-3.5 h-3.5 text-zinc-400" />
-                <span>All</span>
-              </button>
-              <button
-                onClick={() => setPlatformFilter("LeetCode")}
-                className={`inline-flex items-center gap-1.5 rounded px-2.5 py-1.5 text-xs font-semibold transition-colors ${
-                  platformFilter.toUpperCase() === "LEETCODE"
-                    ? "bg-zinc-800 text-zinc-100 shadow-sm"
-                    : "text-zinc-400 hover:text-zinc-200"
-                }`}
-              >
-                <LeetCodeIcon className="w-3.5 h-3.5" />
-                <span>LeetCode</span>
-              </button>
-              <button
-                onClick={() => setPlatformFilter("Codeforces")}
-                className={`inline-flex items-center gap-1.5 rounded px-2.5 py-1.5 text-xs font-semibold transition-colors ${
-                  platformFilter.toUpperCase() === "CODEFORCES"
-                    ? "bg-zinc-800 text-zinc-100 shadow-sm"
-                    : "text-zinc-400 hover:text-zinc-200"
-                }`}
-              >
-                <CodeforcesIcon className="w-3.5 h-3.5" />
-                <span>Codeforces</span>
-              </button>
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs text-zinc-400 font-medium hidden sm:inline">Platform:</span>
+              <div className="flex rounded-lg border border-zinc-800 bg-zinc-950 p-1 text-xs">
+                <button
+                  onClick={() => setPlatformFilter("ALL")}
+                  className={`inline-flex items-center gap-1.5 rounded px-2.5 py-1 text-xs font-medium transition-colors ${
+                    platformFilter.toUpperCase() === "ALL"
+                      ? "bg-zinc-800 text-zinc-100 shadow-sm"
+                      : "text-zinc-400 hover:text-zinc-200"
+                  }`}
+                >
+                  <Globe className="w-3.5 h-3.5 text-zinc-400" />
+                  <span>All</span>
+                </button>
+                <button
+                  onClick={() => setPlatformFilter("LeetCode")}
+                  className={`inline-flex items-center gap-1.5 rounded px-2.5 py-1 text-xs font-medium transition-colors ${
+                    platformFilter.toUpperCase() === "LEETCODE"
+                      ? "bg-zinc-800 text-zinc-100 shadow-sm"
+                      : "text-zinc-400 hover:text-zinc-200"
+                  }`}
+                >
+                  <LeetCodeIcon className="w-3.5 h-3.5" />
+                  <span>LeetCode</span>
+                </button>
+                <button
+                  onClick={() => setPlatformFilter("Codeforces")}
+                  className={`inline-flex items-center gap-1.5 rounded px-2.5 py-1 text-xs font-medium transition-colors ${
+                    platformFilter.toUpperCase() === "CODEFORCES"
+                      ? "bg-zinc-800 text-zinc-100 shadow-sm"
+                      : "text-zinc-400 hover:text-zinc-200"
+                  }`}
+                >
+                  <CodeforcesIcon className="w-3.5 h-3.5" />
+                  <span>Codeforces</span>
+                </button>
+              </div>
             </div>
+
+            <div className="h-4 w-px bg-zinc-800 hidden xl:block" />
 
             {/* Status Filter */}
-            <div className="flex rounded-lg border border-zinc-800 bg-zinc-950 p-1 text-xs font-mono">
-              {(["ALL", "TODO", "SOLVED"] as const).map((st) => (
-                <button
-                  key={st}
-                  onClick={() => setStatusFilter(st)}
-                  className={`rounded px-3 py-1.5 text-xs font-semibold transition-colors ${
-                    statusFilter === st
-                      ? "bg-zinc-800 text-zinc-100 shadow-sm"
-                      : "text-zinc-400 hover:text-zinc-200"
-                  }`}
-                >
-                  {st}
-                </button>
-              ))}
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs text-zinc-400 font-medium hidden sm:inline">Status:</span>
+              <div className="flex rounded-lg border border-zinc-800 bg-zinc-950 p-1 text-xs">
+                {(["ALL", "TODO", "SOLVED"] as const).map((st) => (
+                  <button
+                    key={st}
+                    onClick={() => setStatusFilter(st)}
+                    className={`rounded px-2.5 py-1 text-xs font-medium transition-colors ${
+                      statusFilter === st
+                        ? "bg-zinc-800 text-zinc-100 shadow-sm"
+                        : "text-zinc-400 hover:text-zinc-200"
+                    }`}
+                  >
+                    {st === "ALL" ? "All" : st === "TODO" ? "To Do" : "Solved"}
+                  </button>
+                ))}
+              </div>
             </div>
+
+            <div className="h-4 w-px bg-zinc-800 hidden xl:block" />
 
             {/* Difficulty Filter */}
-            <div className="flex rounded-lg border border-zinc-800 bg-zinc-950 p-1 text-xs font-mono">
-              {(["ALL", "EASY", "MEDIUM", "HARD"] as const).map((diff) => (
-                <button
-                  key={diff}
-                  onClick={() => setDifficultyFilter(diff)}
-                  className={`rounded px-3 py-1.5 text-xs font-semibold transition-colors ${
-                    difficultyFilter === diff
-                      ? "bg-zinc-800 text-zinc-100 shadow-sm"
-                      : "text-zinc-400 hover:text-zinc-200"
-                  }`}
-                >
-                  {diff}
-                </button>
-              ))}
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs text-zinc-400 font-medium hidden sm:inline">Difficulty:</span>
+              <div className="flex rounded-lg border border-zinc-800 bg-zinc-950 p-1 text-xs">
+                {(["ALL", "EASY", "MEDIUM", "HARD"] as const).map((diff) => (
+                  <button
+                    key={diff}
+                    onClick={() => setDifficultyFilter(diff)}
+                    className={`rounded px-2.5 py-1 text-xs font-medium transition-colors ${
+                      difficultyFilter === diff
+                        ? "bg-zinc-800 text-zinc-100 shadow-sm"
+                        : "text-zinc-400 hover:text-zinc-200"
+                    }`}
+                  >
+                    {diff === "ALL" ? "All" : diff.charAt(0) + diff.slice(1).toLowerCase()}
+                  </button>
+                ))}
+              </div>
             </div>
 
+            {/* Reset Filter Button */}
+            {(selectedTopic !== "All" || difficultyFilter !== "ALL" || statusFilter !== "ALL" || platformFilter !== "ALL" || searchQuery.trim()) && (
+              <button
+                onClick={() => {
+                  setSelectedTopic("All");
+                  setDifficultyFilter("ALL");
+                  setStatusFilter("ALL");
+                  setPlatformFilter("ALL");
+                  setSearchQuery("");
+                }}
+                className="text-xs text-zinc-400 hover:text-zinc-200 underline transition-colors cursor-pointer ml-1"
+                title="Reset all filters"
+              >
+                Reset
+              </button>
+            )}
+
             {/* View Mode Switcher */}
-            <div className="flex rounded-lg border border-zinc-800 bg-zinc-950 p-1 text-zinc-400">
+            <div className="flex rounded-lg border border-zinc-800 bg-zinc-950 p-1 text-zinc-400 ml-auto">
               <button
                 onClick={() => setViewMode("table")}
-                className={`p-1.5 rounded ${viewMode === "table" ? "bg-zinc-800 text-zinc-100 shadow-sm" : "hover:text-zinc-200"}`}
+                className={`p-1.5 rounded transition-colors ${viewMode === "table" ? "bg-zinc-800 text-zinc-100 shadow-sm" : "hover:text-zinc-200"}`}
                 title="Table view"
               >
                 <List className="h-4 w-4" />
               </button>
               <button
                 onClick={() => setViewMode("grid")}
-                className={`p-1.5 rounded ${viewMode === "grid" ? "bg-zinc-800 text-zinc-100 shadow-sm" : "hover:text-zinc-200"}`}
+                className={`p-1.5 rounded transition-colors ${viewMode === "grid" ? "bg-zinc-800 text-zinc-100 shadow-sm" : "hover:text-zinc-200"}`}
                 title="Grid view"
               >
                 <LayoutGrid className="h-4 w-4" />
@@ -438,15 +501,22 @@ export default function ClientQuestsView({
                               <span>{q.title}</span>
                             </Link>
                             {q.topics && q.topics.length > 0 && (
-                              <div className="flex flex-wrap gap-1.5">
-                                {q.topics.slice(0, 4).map((t: string, i: number) => (
-                                  <span
-                                    key={i}
-                                    className="rounded bg-zinc-950 px-2 py-0.5 text-xs font-mono text-zinc-400 border border-zinc-800/80"
-                                  >
-                                    {t}
+                              <div className="flex flex-wrap items-center gap-1.5 text-xs text-zinc-400 mt-0.5">
+                                {q.topics.slice(0, 3).map((t: string, i: number) => (
+                                  <span key={i} className="inline-flex items-center gap-1.5">
+                                    <span className="text-zinc-400 hover:text-zinc-200 transition-colors">
+                                      {normalizeTopicName(t)}
+                                    </span>
+                                    {i < Math.min(q.topics.length, 3) - 1 && (
+                                      <span className="text-zinc-600 select-none">·</span>
+                                    )}
                                   </span>
                                 ))}
+                                {q.topics.length > 3 && (
+                                  <span className="text-zinc-500 font-mono text-[11px]">
+                                    +{q.topics.length - 3}
+                                  </span>
+                                )}
                               </div>
                             )}
                           </div>
@@ -510,8 +580,23 @@ export default function ClientQuestsView({
 
                   {paginatedQuestions.length === 0 && (
                     <tr>
-                      <td colSpan={5} className="py-16 text-center text-zinc-500 font-mono text-sm">
-                        No problems match the current filters.
+                      <td colSpan={5} className="py-16 text-center text-zinc-400 text-sm">
+                        <div className="flex flex-col items-center justify-center gap-3">
+                          <p className="text-zinc-300 font-medium">No problems match the current filters.</p>
+                          <p className="text-zinc-500 text-xs">Try adjusting your keywords or clearing difficulty and platform filters.</p>
+                          <button
+                            onClick={() => {
+                              setSelectedTopic("All");
+                              setDifficultyFilter("ALL");
+                              setStatusFilter("ALL");
+                              setPlatformFilter("ALL");
+                              setSearchQuery("");
+                            }}
+                            className="rounded-md border border-zinc-800 bg-zinc-900 px-3.5 py-1.5 text-xs font-medium text-zinc-200 hover:bg-zinc-800 transition-colors cursor-pointer"
+                          >
+                            Reset all filters
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   )}
@@ -545,8 +630,23 @@ export default function ClientQuestsView({
               })}
 
               {paginatedQuestions.length === 0 && (
-                <div className="col-span-full py-16 text-center rounded-xl border border-dashed border-zinc-800 text-zinc-500 font-mono text-sm">
-                  No problems match the current filters.
+                <div className="col-span-full py-16 text-center rounded-xl border border-dashed border-zinc-800 bg-zinc-900/20 text-zinc-400 text-sm">
+                  <div className="flex flex-col items-center justify-center gap-3">
+                    <p className="text-zinc-300 font-medium">No problems match the current filters.</p>
+                    <p className="text-zinc-500 text-xs">Try adjusting your keywords or clearing difficulty and platform filters.</p>
+                    <button
+                      onClick={() => {
+                        setSelectedTopic("All");
+                        setDifficultyFilter("ALL");
+                        setStatusFilter("ALL");
+                        setPlatformFilter("ALL");
+                        setSearchQuery("");
+                      }}
+                      className="rounded-md border border-zinc-800 bg-zinc-900 px-3.5 py-1.5 text-xs font-medium text-zinc-200 hover:bg-zinc-800 transition-colors cursor-pointer"
+                    >
+                      Reset all filters
+                    </button>
+                  </div>
                 </div>
               )}
             </div>

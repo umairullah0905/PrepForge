@@ -1,29 +1,130 @@
 @config "../../tailwind.config.ts";
 @import "tailwindcss";
 
-/* ---------- DEVELOPER DESIGN SYSTEM (Vercel / shadcn / GitHub) ---------- */
+/* ==========================================================================
+   THEME DESIGN TOKENS
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   DARK THEME (Default) — Technical Developer-Tool Aesthetic
+   - Near-black background
+   - Charcoal surfaces
+   - Subtle borders
+   - Off-white primary text
+   - Muted gray secondary text
+   - Restrained technical emerald/amber/rose status accents
+   -------------------------------------------------------------------------- */
 :root {
-  --bg: #09090b; /* zinc-950 */
+  color-scheme: dark;
+
+  /* Core Surface Tokens */
+  --bg: #09090b; /* zinc-950 near-black page background */
   --bg-elevated: #121215;
-  --bg-card: #18181b; /* zinc-900 */
-  --bg-muted: #27272a; /* zinc-800 */
+  --bg-card: #18181b; /* zinc-900 charcoal card surface */
+  --bg-muted: #27272a; /* zinc-800 muted surface */
+  --bg-subtle: #141417;
+
+  /* Border Tokens */
   --line: #27272a; /* zinc-800 subtle border */
   --line-subtle: #1f1f23;
-  --line-strong: #3f3f46; /* zinc-700 */
-  
-  --primary: #f4f4f5; /* zinc-100 */
+  --line-strong: #3f3f46; /* zinc-700 defined border */
+
+  /* Text Tokens */
+  --text: #f4f4f5; /* zinc-100 off-white primary text */
+  --text-dim: #a1a1aa; /* zinc-400 muted gray secondary text */
+  --text-muted: #71717a; /* zinc-500 tertiary/metadata text */
+
+  /* Primary & Accent Tokens */
+  --primary: #f4f4f5;
   --primary-foreground: #09090b;
-  
-  --accent-blue: #3b82f6;
-  --accent-indigo: #6366f1;
-  --easy: #10b981; /* emerald-500 */
-  --medium: #f59e0b; /* amber-500 */
-  --hard: #f43f5e; /* rose-500 */
-  
+  --accent: #10b981; /* emerald-500 technical accent */
+  --accent-foreground: #ffffff;
+  --accent-warm: #10b981;
+  --accent-hover: #059669;
+  --accent-subtle: rgba(16, 185, 129, 0.12);
+
+  /* Status Colors */
+  --easy: #10b981;
+  --medium: #f59e0b;
+  --hard: #f43f5e;
+  --info: #3b82f6;
+  --purple: #a855f7;
   --success: #10b981;
-  --text: #f4f4f5; /* zinc-100 */
-  --text-dim: #a1a1aa; /* zinc-400 */
-  --text-muted: #71717a; /* zinc-500 */
+
+  /* Tailwind Zinc Color Mapping in Dark Mode */
+  --color-zinc-950: #09090b;
+  --color-zinc-900: #18181b;
+  --color-zinc-850: #202024;
+  --color-zinc-800: #27272a;
+  --color-zinc-700: #3f3f46;
+  --color-zinc-600: #52525b;
+  --color-zinc-500: #71717a;
+  --color-zinc-400: #a1a1aa;
+  --color-zinc-300: #d4d4d8;
+  --color-zinc-200: #e4e4e7;
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-50: #fafafa;
+}
+
+/* --------------------------------------------------------------------------
+   LIGHT THEME — Claude-Inspired Warm Editorial Aesthetic
+   - Warm off-white parchment page background (#FAF8F5)
+   - Warm crisp white card surfaces (#FFFFFF)
+   - Deep warm charcoal/espresso text (#24201C)
+   - Subtle warm-gray borders (#E5DFD5)
+   - Muted warm walnut secondary text (#5E564D)
+   - Restrained terracotta/rust primary accent (#D96543)
+   -------------------------------------------------------------------------- */
+html.light {
+  color-scheme: light;
+
+  /* Core Surface Tokens */
+  --bg: #FAF8F5; /* Warm off-white parchment */
+  --bg-elevated: #F4EFEA; /* Sandstone elevated surface */
+  --bg-card: #FFFFFF; /* Warm white card surface */
+  --bg-muted: #EBE5DC; /* Warm muted surface */
+  --bg-subtle: #F7F4EE;
+
+  /* Border Tokens */
+  --line: #E5DFD5; /* Subtle warm border */
+  --line-subtle: #EDE7DC; /* Soft warm divider */
+  --line-strong: #D4CABE; /* Defined warm border */
+
+  /* Text Tokens */
+  --text: #24201C; /* Deep warm espresso charcoal text */
+  --text-dim: #5E564D; /* Warm walnut secondary text (WCAG AAA) */
+  --text-muted: #847B6F; /* Warm muted label text */
+
+  /* Primary & Accent Tokens */
+  --primary: #24201C;
+  --primary-foreground: #FAF8F5;
+  --accent: #D96543; /* Terracotta/rust primary accent */
+  --accent-foreground: #FFFFFF;
+  --accent-warm: #D96543;
+  --accent-hover: #C25333;
+  --accent-subtle: rgba(217, 101, 67, 0.09);
+
+  /* Status Colors (High Contrast, Restrained) */
+  --easy: #15803d; /* Forest green */
+  --medium: #B45309; /* Warm ochre amber */
+  --hard: #BE123C; /* Deep crimson */
+  --info: #1D4ED8;
+  --purple: #7E22CE;
+  --success: #15803d;
+
+  /* Tailwind Zinc Color Mapping in Light Mode (Component Theme Adaptation) */
+  --color-zinc-950: #FAF8F5; /* Warm parchment page background */
+  --color-zinc-900: #FFFFFF; /* Warm white surface */
+  --color-zinc-850: #F4EFEA; /* Elevated sandstone surface */
+  --color-zinc-800: #E5DFD5; /* Warm subtle border */
+  --color-zinc-700: #D4CABE; /* Defined warm border */
+  --color-zinc-600: #9E9486; /* Subtle muted */
+  --color-zinc-500: #847B6F; /* Muted secondary text */
+  --color-zinc-400: #5E564D; /* Walnut secondary text */
+  --color-zinc-300: #38322B; /* Dark charcoal text */
+  --color-zinc-200: #2C2621; /* Strong charcoal text */
+  --color-zinc-100: #24201C; /* Deep espresso charcoal text */
+  --color-zinc-50: #14110E;
 }
 
 @theme inline {
@@ -45,7 +146,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbars for dense views */
+/* Custom scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -59,6 +160,23 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #3f3f46;
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: #D4CABE;
+}
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #BAAF9C;
+}
+
+/* Text Selection */
+::selection {
+  background-color: #27272a;
+  color: #f4f4f5;
+}
+html.light ::selection {
+  background-color: #F4D9CE;
+  color: #24201C;
 }
 
 /* Technical typography */
@@ -82,7 +200,7 @@ body {
   letter-spacing: -0.02em;
 }
 
-/* Layout container - expanded to full UI width */
+/* Layout container */
 .qx-root {
   min-height: 100vh;
   width: 100%;
@@ -128,6 +246,11 @@ body {
   z-index: 50;
 }
 
+html.light .qx-nav {
+  background: rgba(250, 248, 245, 0.88);
+  border-bottom-color: var(--line);
+}
+
 .qx-navlinks {
   display: flex;
   align-items: center;
@@ -154,9 +277,20 @@ body {
   background: rgba(255, 255, 255, 0.05);
 }
 
+html.light .qx-navlinks a:hover,
+html.light .qx-navlinks button.qx-link:hover {
+  color: var(--text);
+  background: rgba(36, 32, 28, 0.05);
+}
+
 .qx-navlinks a.active {
   color: var(--text);
   background: rgba(255, 255, 255, 0.08);
+}
+
+html.light .qx-navlinks a.active {
+  color: var(--text);
+  background: rgba(36, 32, 28, 0.08);
 }
 
 /* ---------- BUTTONS (shadcn variants) ---------- */
@@ -198,6 +332,12 @@ body {
   color: #fff;
 }
 
+html.light .qx-btn-ghost:hover {
+  background: #F4EFEA;
+  border-color: var(--line-strong);
+  color: var(--text);
+}
+
 .qx-btn-sm {
   font-size: 12px;
   padding: 5px 12px;
@@ -211,12 +351,24 @@ body {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 20px;
-  transition: border-color 0.15s ease, background 0.15s ease;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
 }
 
 .qx-card:hover,
 .qx-dash-card:hover {
   border-color: #3f3f46;
+}
+
+html.light .qx-card,
+html.light .qx-dash-card {
+  background: #FFFFFF;
+  border-color: var(--line);
+}
+
+html.light .qx-card:hover,
+html.light .qx-dash-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 4px 16px -2px rgba(36, 32, 28, 0.05);
 }
 
 /* Difficulty badges */
@@ -253,6 +405,27 @@ body {
   border: 1px solid rgba(244, 63, 94, 0.25);
 }
 
+html.light .diff-badge-easy,
+html.light .quest-cr--easy {
+  background: #EDF7EE;
+  color: #15803d;
+  border-color: #C3E6C7;
+}
+
+html.light .diff-badge-medium,
+html.light .quest-cr--medium {
+  background: #FEF7EA;
+  color: #B45309;
+  border-color: #F8DFC0;
+}
+
+html.light .diff-badge-hard,
+html.light .quest-cr--hard {
+  background: #FDF1F3;
+  color: #BE123C;
+  border-color: #F8CAD1;
+}
+
 .quest-cr {
   display: inline-flex;
   align-items: center;
@@ -275,6 +448,13 @@ body {
   border-radius: 4px;
 }
 
+html.light .platform-pill,
+html.light .quest-platform-tag {
+  background: #F4EFEA;
+  border-color: #E5DFD5;
+  color: #5E564D;
+}
+
 /* Clean Input Fields */
 .qx-input {
   width: 100%;
@@ -295,6 +475,21 @@ body {
 
 .qx-input::placeholder {
   color: #52525b;
+}
+
+html.light .qx-input {
+  background: #FFFFFF;
+  border-color: #D4CABE;
+  color: #24201C;
+}
+
+html.light .qx-input:focus {
+  border-color: #D96543;
+  box-shadow: 0 0 0 1px #D96543;
+}
+
+html.light .qx-input::placeholder {
+  color: #847B6F;
 }
 
 .qx-field-label {
@@ -338,12 +533,33 @@ body {
   color: var(--text);
 }
 
+html.light .auth-tabs {
+  background: #EDE7DC;
+  border-color: #E5DFD5;
+}
+
+html.light .auth-tab.active {
+  color: #24201C;
+  background: #FFFFFF;
+  box-shadow: 0 1px 3px rgba(36, 32, 28, 0.08);
+}
+
+html.light .auth-tab:hover:not(.active) {
+  color: #24201C;
+}
+
 /* Accessibility */
 a:focus-visible,
 button:focus-visible,
 .qx-input:focus-visible {
   outline: 2px solid #52525b;
   outline-offset: 2px;
+}
+
+html.light a:focus-visible,
+html.light button:focus-visible,
+html.light .qx-input:focus-visible {
+  outline-color: #D96543;
 }
 
 /* Footer */
@@ -354,4 +570,186 @@ button:focus-visible,
   font-size: 12px;
   border-top: 1px solid var(--line);
   background: var(--bg);
+}
+
+/* ==========================================================================
+   LIGHT MODE COMPONENT & OPACITY UTILITY ADAPTATIONS
+   ========================================================================== */
+
+/* Background Opacity Utilities */
+html.light .bg-zinc-950\/90,
+html.light .bg-zinc-950\/80,
+html.light .bg-zinc-950\/70,
+html.light .bg-zinc-950\/60,
+html.light .bg-zinc-950\/40 {
+  background-color: rgba(250, 248, 245, 0.92) !important;
+}
+
+html.light .bg-zinc-900\/90,
+html.light .bg-zinc-900\/80 {
+  background-color: rgba(255, 255, 255, 0.96) !important;
+}
+
+html.light .bg-zinc-900\/70,
+html.light .bg-zinc-900\/60,
+html.light .bg-zinc-900\/50 {
+  background-color: #FFFFFF !important;
+}
+
+html.light .bg-zinc-900\/40,
+html.light .bg-zinc-900\/30,
+html.light .bg-zinc-900\/20 {
+  background-color: rgba(244, 239, 234, 0.75) !important;
+}
+
+html.light .bg-zinc-800\/80,
+html.light .bg-zinc-800\/60,
+html.light .bg-zinc-800\/50,
+html.light .bg-zinc-800\/40 {
+  background-color: rgba(235, 229, 220, 0.7) !important;
+}
+
+/* Border Opacity Utilities */
+html.light .border-zinc-800\/90,
+html.light .border-zinc-800\/80,
+html.light .border-zinc-800\/70,
+html.light .border-zinc-800\/60,
+html.light .border-zinc-850\/60 {
+  border-color: #E5DFD5 !important;
+}
+
+html.light .border-zinc-700\/90,
+html.light .border-zinc-700\/80,
+html.light .border-zinc-700\/60 {
+  border-color: #D4CABE !important;
+}
+
+html.light .to-zinc-950\/60 {
+  --tw-gradient-to: rgba(250, 248, 245, 0.8) !important;
+}
+
+/* Hover States in Light Mode */
+html.light .hover\:bg-zinc-900\/60:hover,
+html.light .hover\:bg-zinc-900\/70:hover,
+html.light .hover\:bg-zinc-900\/80:hover {
+  background-color: #F4EFEA !important;
+}
+
+html.light .hover\:border-zinc-700:hover {
+  border-color: #BAAF9C !important;
+}
+
+html.light .hover\:text-white:hover {
+  color: #14110E !important;
+}
+
+/* Card hover glow with terracotta accent in light mode */
+html.light .group:hover .group-hover\:text-emerald-400 {
+  color: #D96543 !important;
+}
+
+/* Status text tones in light mode (WCAG AAA contrast) */
+html.light .text-emerald-400 {
+  color: #15803d !important;
+}
+html.light .text-amber-400 {
+  color: #B45309 !important;
+}
+html.light .text-rose-400 {
+  color: #BE123C !important;
+}
+html.light .text-cyan-400 {
+  color: #0369A1 !important;
+}
+html.light .text-purple-400 {
+  color: #7E22CE !important;
+}
+html.light .text-blue-400 {
+  color: #1D4ED8 !important;
+}
+html.light .text-indigo-400 {
+  color: #4338CA !important;
+}
+
+/* Primary solid button action styling */
+html.light button.bg-zinc-100,
+html.light a.bg-zinc-100 {
+  background-color: #24201C !important;
+  color: #FAF8F5 !important;
+  border-color: transparent !important;
+}
+
+html.light button.bg-zinc-100:hover,
+html.light a.bg-zinc-100:hover {
+  background-color: #14110E !important;
+  color: #FFFFFF !important;
+}
+
+/* System Design & Spec Content in Light Mode */
+html.light .sd-article-body {
+  color: #38322B;
+}
+html.light .sd-article-body h1,
+html.light .sd-article-body h2,
+html.light .sd-article-body h3,
+html.light .sd-article-body h4 {
+  color: #24201C;
+}
+html.light .sd-article-body h1,
+html.light .sd-article-body h2 {
+  border-bottom-color: #E5DFD5;
+}
+html.light .sd-article-body strong {
+  color: #14110E;
+}
+html.light .sd-article-body code {
+  background: #F4EFEA;
+  border-color: #E5DFD5;
+  color: #24201C;
+}
+html.light .sd-article-body pre {
+  background: #F4EFEA;
+  border-color: #E5DFD5;
+  color: #24201C;
+}
+html.light .sd-article-body blockquote {
+  background: #F7F4EE;
+  border-left-color: #D96543;
+  color: #5E564D;
+}
+html.light .sd-article-body th {
+  background: #F4EFEA;
+  border-color: #E5DFD5;
+  color: #24201C;
+}
+html.light .sd-article-body td {
+  border-color: #E5DFD5;
+  color: #38322B;
+}
+
+html.light .spec-content {
+  color: #38322B;
+}
+html.light .spec-content pre {
+  background: #F4EFEA;
+  border-color: #E5DFD5;
+  color: #24201C;
+}
+html.light .spec-content code {
+  background: #F4EFEA;
+  border-color: #E5DFD5;
+  color: #24201C;
+}
+html.light .spec-content strong {
+  color: #14110E;
+}
+html.light .spec-content .katex {
+  color: #14110E;
+}
+html.light .spec-content .tex-font-style-tt {
+  background: #F4EFEA;
+  color: #24201C;
+}
+html.light .spec-content .section-title {
+  color: #24201C;
 }

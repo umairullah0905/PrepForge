@@ -50,18 +50,18 @@ export default function QuestMap({
             <Link
               key={topic.name}
               href={`/dsa?topic=${encodeURIComponent(topic.name)}`}
-              className={`group flex flex-col justify-between rounded-xl border p-4.5 transition-all ${
+              className={`group flex flex-col justify-between rounded-xl border p-4 transition-all ${
                 isCurrent
-                  ? "border-zinc-600 bg-zinc-900 shadow-md ring-1 ring-zinc-700"
+                  ? "border-emerald-500/50 bg-zinc-900/90 shadow-md ring-1 ring-emerald-500/20"
                   : isCompleted
                   ? "border-emerald-500/20 bg-emerald-500/5 hover:border-emerald-500/40"
-                  : "border-zinc-800 bg-zinc-900/40 hover:border-zinc-700 hover:bg-zinc-900/80"
+                  : "border-zinc-800/80 bg-zinc-900/40 hover:border-zinc-700 hover:bg-zinc-900/70"
               }`}
             >
               <div>
                 <div className="flex items-center justify-between text-xs text-zinc-500 mb-3">
                   <div className="flex items-center gap-2">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-md bg-zinc-950 border border-zinc-800">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-md bg-zinc-950/80">
                       {topicIcon}
                     </div>
                     <span className="font-mono text-xs font-semibold text-zinc-400">
@@ -72,20 +72,20 @@ export default function QuestMap({
                   {isCompleted ? (
                     <CheckCircle2 className="h-4 w-4 text-emerald-400" />
                   ) : isCurrent ? (
-                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
                   ) : (
-                    <Circle className="h-4 w-4 text-zinc-600" />
+                    <Circle className="h-3.5 w-3.5 text-zinc-600" />
                   )}
                 </div>
 
-                <div className="font-semibold text-sm sm:text-base text-zinc-100 group-hover:text-white transition-colors line-clamp-1 mb-2">
+                <div className="font-semibold text-sm text-zinc-100 group-hover:text-emerald-400 transition-colors line-clamp-1 mb-2">
                   {topic.name}
                 </div>
               </div>
 
-              <div className="flex items-center justify-between pt-3 border-t border-zinc-800/80 text-xs font-mono text-zinc-400">
-                <span className="text-zinc-300 font-medium">{topic.count} questions</span>
-                <ArrowUpRight className="h-4 w-4 text-zinc-500 group-hover:text-zinc-200 transition-colors" />
+              <div className="flex items-center justify-between pt-3 border-t border-zinc-800/60 text-xs text-zinc-400">
+                <span className="font-mono text-zinc-400">{topic.count} questions</span>
+                <ArrowUpRight className="h-4 w-4 text-zinc-500 group-hover:text-emerald-400 transition-colors" />
               </div>
             </Link>
           );

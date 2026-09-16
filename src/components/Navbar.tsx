@@ -1,9 +1,58 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { Terminal, User, LogOut, CheckCircle2, Search } from "lucide-react";
 import { xpProgressPercent, type Profile } from "@/lib/progress";
+import ThemeToggle from "./ThemeToggle";
+
+const NAV_ITEMS = [
+  { name: "Overview", href: "/" },
+  { name: "Problems", href: "/dsa" },
+  { name: "Companies", href: "/dsa?tab=companies" },
+  { name: "System Design", href: "/system-design" },
+  { name: "Discussions", href: "/forums" },
+  { name: "Community", href: "/community" },
+];
+
+function NavLinks() {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentTab = searchParams.get("tab");
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    if (href.includes("tab=companies")) {
+      return pathname.startsWith("/dsa") && currentTab === "companies";
+    }
+    if (href === "/dsa") {
+      return pathname.startsWith("/dsa") && currentTab !== "companies";
+    }
+    return pathname.startsWith(href.split("?")[0]);
+  };
+
+  return (
+    <nav className="hidden md:flex items-center gap-1.5">
+      {NAV_ITEMS.map((item) => {
+        const active = isActive(item.href);
+        return (
+          <Link
+            key={item.name}
+            href={item.href}
+            className={`rounded-md px-3.5 py-1.5 text-sm font-medium transition-colors ${
+              active
+                ? "bg-zinc-900 text-zinc-100 border border-zinc-800/90 shadow-sm"
+                : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900/60"
+            }`}
+          >
+            {item.name}
+          </Link>
+        );
+      })}
+    </nav>
+  );
+}
 
 export default function Navbar({
   userEmail,
@@ -16,25 +65,10 @@ export default function Navbar({
   completedCount?: number;
   signOutAction?: () => void;
 }) {
-  const pathname = usePathname();
   const isLoggedIn = !!userEmail;
   const xp = profile?.xp ?? 0;
   const level = profile?.level ?? 1;
   const xpPct = xpProgressPercent(xp);
-
-  const navItems = [
-    { name: "Overview", href: "/" },
-    { name: "Problems", href: "/dsa" },
-    { name: "Companies", href: "/dsa?tab=companies" },
-    { name: "System Design", href: "/system-design" },
-    { name: "Discussions", href: "/forums" },
-    { name: "Community", href: "/community" },
-  ];
-
-  const isActive = (href: string) => {
-    if (href === "/") return pathname === "/";
-    return pathname.startsWith(href.split("?")[0]);
-  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-zinc-800/80 bg-zinc-950/90 backdrop-blur-md">
@@ -55,25 +89,24 @@ export default function Navbar({
             </div>
           </Link>
 
-          {/* Navigation links */}
-          <nav className="hidden md:flex items-center gap-1.5">
-            {navItems.map((item) => {
-              const active = isActive(item.href);
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`rounded-md px-3.5 py-1.5 text-sm font-medium transition-colors ${
-                    active
-                      ? "bg-zinc-900 text-zinc-100 border border-zinc-800/90 shadow-sm"
-                      : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900/60"
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              );
-            })}
-          </nav>
+          {/* Navigation links with Suspense boundary */}
+          <Suspense
+            fallback={
+              <nav className="hidden md:flex items-center gap-1.5">
+                {NAV_ITEMS.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="rounded-md px-3.5 py-1.5 text-sm font-medium text-zinc-400"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </nav>
+            }
+          >
+            <NavLinks />
+          </Suspense>
         </div>
 
         {/* Right side status / user */}
@@ -89,6 +122,9 @@ export default function Navbar({
               ⌘K
             </kbd>
           </Link>
+
+          {/* Theme Toggle */}
+          <ThemeToggle />
 
           {isLoggedIn && profile ? (
             <div className="flex items-center gap-3">
