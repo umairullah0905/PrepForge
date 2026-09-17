@@ -37,6 +37,32 @@ export function LeetCodeIcon({ className = "w-3.5 h-3.5", ...props }: React.SVGP
   );
 }
 
+export function CodeChefIcon({ className = "w-3.5 h-3.5", ...props }: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={`shrink-0 ${className}`}
+      {...props}
+    >
+      <path
+        d="M18.8 9.5C18.4 6.4 15.6 4 12 4S5.6 6.4 5.2 9.5C3.4 10.2 2 12 2 14.1C2 16.8 4.2 19 6.9 19h10.2c2.7 0 4.9-2.2 4.9-4.9c0-2.1-1.4-3.9-3.2-4.6z"
+        fill="#8B572A"
+      />
+      <circle cx="9" cy="11.5" r="1.5" fill="#FFFFFF" />
+      <circle cx="15" cy="11.5" r="1.5" fill="#FFFFFF" />
+      <path
+        d="M9.5 15.5C10.2 16.5 11.1 17 12 17s1.8-.5 2.5-1.5"
+        stroke="#FFFFFF"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <rect x="7" y="19" width="10" height="2" rx="1" fill="#6A3B14" />
+    </svg>
+  );
+}
+
 export function PlatformIcon({
   platform,
   className = "w-3.5 h-3.5",
@@ -50,6 +76,9 @@ export function PlatformIcon({
   }
   if (p === "leetcode") {
     return <LeetCodeIcon className={className} />;
+  }
+  if (p === "codechef") {
+    return <CodeChefIcon className={className} />;
   }
   return null;
 }

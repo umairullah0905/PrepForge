@@ -3,6 +3,7 @@ import LandingContent from "@/components/LandingContent";
 import { signOutAction } from "./actions";
 import { getProfile, getCompletedQuestTitles } from "@/lib/progress";
 import { getCachedQuestions } from "@/lib/questions";
+import { getUpcomingContests } from "@/lib/contests";
 
 export const revalidate = 30;
 
@@ -12,11 +13,12 @@ export default async function Home() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Parallelize user profile, completed titles, and cached questions query
-  const [profile, completedTitles, questions] = await Promise.all([
+  // Parallelize user profile, completed titles, cached questions, and upcoming contests
+  const [profile, completedTitles, questions, contests] = await Promise.all([
     user ? getProfile(supabase, user.id) : Promise.resolve(null),
     user ? getCompletedQuestTitles(supabase, user.id) : Promise.resolve([]),
     getCachedQuestions(),
+    getUpcomingContests(),
   ]);
 
   return (
@@ -26,6 +28,7 @@ export default async function Home() {
       completedQuestTitles={completedTitles}
       signOutAction={signOutAction}
       questions={questions}
+      contests={contests}
     />
   );
 }

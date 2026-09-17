@@ -4,7 +4,9 @@ import { useMemo } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import TopicCard from "@/components/TopicCard";
+import ContestCalendar from "@/components/ContestCalendar";
 import { type Profile, xpProgressPercent } from "@/lib/progress";
+import { type Contest } from "@/lib/contests";
 import { ArrowRight, Terminal } from "lucide-react";
 
 export default function LandingContent({
@@ -13,12 +15,14 @@ export default function LandingContent({
   completedQuestTitles = [],
   signOutAction,
   questions = [],
+  contests = [],
 }: {
   userEmail: string | null;
   profile: Profile | null;
   completedQuestTitles: string[];
   signOutAction: () => void;
   questions: any[];
+  contests?: Contest[];
 }) {
   const isLoggedIn = !!userEmail;
   const completedCount = completedQuestTitles.length;
@@ -237,6 +241,9 @@ export default function LandingContent({
               </div>
             </section>
           )}
+
+          {/* UPCOMING CONTESTS CALENDAR */}
+          <ContestCalendar initialContests={contests} />
 
           {/* CURATED TRACKS - Distinct Icons & Expanded Grid */}
           <section className="mb-14">
