@@ -34,6 +34,8 @@ import {
   Check,
   RefreshCw,
   Loader2,
+  Info,
+  Edit3,
 } from "lucide-react";
 import CodeEditor from "./CodeEditor";
 import { completeQuestAction } from "@/app/quest-actions";
@@ -69,24 +71,10 @@ def solve():
         return
     
     # Process and print output
-    # Example: print first token
     print(input_data[0])
 
 if __name__ == "__main__":
     solve()
-`,
-  javascript: `// Solution for: {TITLE}
-const fs = require('fs');
-
-function solve() {
-    const input = fs.readFileSync(0, 'utf-8').trim();
-    if (!input) return;
-
-    // Process and print output
-    console.log(input);
-}
-
-solve();
 `,
   cpp: `// Solution for: {TITLE}
 #include <iostream>
@@ -105,19 +93,6 @@ int main() {
     }
 
     return 0;
-}
-`,
-  java: `// Solution for: {TITLE}
-import java.util.Scanner;
-
-public class Solution {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        if (scanner.hasNext()) {
-            System.out.println(scanner.next());
-        }
-        scanner.close();
-    }
 }
 `,
 };
@@ -288,6 +263,21 @@ export default function ProblemWorkspace({
 
   const isLeetCode = question.platform?.toLowerCase() === "leetcode";
   const isCodeforces = question.platform?.toLowerCase() === "codeforces";
+  const platformName = isLeetCode ? "LeetCode" : isCodeforces ? "Codeforces" : (question.platform || "the official platform");
+
+  const hasMultipleSolutionsPossible = React.useMemo(() => {
+    const text = (question.description || "").toLowerCase();
+    return (
+      text.includes("in any order") ||
+      text.includes("print any") ||
+      text.includes("output any") ||
+      text.includes("multiple answers") ||
+      text.includes("multiple solutions") ||
+      text.includes("several solutions") ||
+      text.includes("any valid") ||
+      text.includes("special judge")
+    );
+  }, [question.description]);
 
   const renderedDescription = React.useMemo(() => {
     return renderMathInHtml(question.description || "");
@@ -392,22 +382,6 @@ export default function ProblemWorkspace({
       setRunResults(data.results || []);
       setAllPassed(data.allPassed);
       setCompileError(data.compileError || null);
-
-      // If submission succeeded and passed all test cases, award XP
-      if (isSubmission && data.allPassed) {
-        startTransition(async () => {
-          const questXp = question.xp || 50;
-          const result = await completeQuestAction(question.title, questXp);
-          if (result.ok) {
-            setIsCompleted(true);
-            setAwardMessage(
-              result.awarded
-                ? `Accepted! +${questXp} XP Awarded (Level ${result.level})`
-                : "Accepted! Quest already completed."
-            );
-          }
-        });
-      }
     } catch (err: any) {
       setCompileError(err.message || "Failed to communicate with sandbox");
     } finally {
@@ -994,6 +968,15 @@ export default function ProblemWorkspace({
                   <span className="rounded border border-zinc-800 bg-zinc-900 px-2 py-0.5 font-mono text-[11px] text-zinc-400">
                     {question.platform || "LeetCode"}
                   </span>
+                  {hasMultipleSolutionsPossible && (
+                    <span
+                      className="rounded border border-amber-500/25 bg-amber-500/10 px-2 py-0.5 font-mono text-[10px] text-amber-300 flex items-center gap-1 cursor-help"
+                      title="This problem allows multiple valid answer combinations. Local runner only matches the sample output; submit to official platform to verify with special judge."
+                    >
+                      <Sparkles className="h-2.5 w-2.5 text-amber-400" />
+                      Multiple Answers Allowed
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -1079,10 +1062,8 @@ export default function ProblemWorkspace({
                       onChange={(e) => setSelectedLanguage(e.target.value)}
                       className="bg-zinc-950 border border-zinc-700 text-zinc-200 text-xs rounded px-2.5 py-1 font-mono focus:outline-none focus:border-zinc-500"
                     >
-                      <option value="python">Python 3 (3.10)</option>
-                      <option value="javascript">JavaScript (Node 18)</option>
-                      <option value="cpp">C++ (GCC 10.2)</option>
-                      <option value="java">Java (OpenJDK 15)</option>
+                      <option value="python">Python 3</option>
+                      <option value="cpp">C++ (g++)</option>
                     </select>
 
                     <button
@@ -1097,9 +1078,19 @@ export default function ProblemWorkspace({
 
                   <div className="flex items-center gap-2 font-mono text-[11px] text-zinc-400">
                     <span className="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
-                    <span>Docker Sandbox Active</span>
+                    <span>Sandbox Active (Python &amp; C++)</span>
                   </div>
                 </div>
+
+                {/* LeetCode Notice Banner */}
+                {isLeetCode && (
+                  <div className="flex items-center gap-2 px-3 py-1.5 bg-amber-500/5 border-b border-amber-500/20 text-amber-300 text-[11px] font-mono">
+                    <Info className="h-3.5 w-3.5 shrink-0 text-amber-400" />
+                    <span className="truncate">
+                      <strong>LeetCode Note:</strong> Add a <code className="bg-amber-500/20 px-1 py-0.5 rounded text-amber-200">main()</code> function to run locally, or submit directly to LeetCode below.
+                    </span>
+                  </div>
+                )}
 
                 {/* Monaco Editor */}
                 <div className="flex-1 w-full overflow-hidden">
@@ -1246,8 +1237,21 @@ export default function ProblemWorkspace({
                       {/* Active Test Case Inputs */}
                       {testCases[activeCaseIndex] && (
                         <div className="space-y-3 pt-1">
+                          <div className="flex items-center justify-between text-[11px] text-zinc-400 bg-zinc-900/50 p-2 rounded border border-zinc-800">
+                            <div className="flex items-center gap-1.5 text-zinc-200 font-semibold">
+                              <Edit3 className="h-3.5 w-3.5 text-amber-400" />
+                              <span>Editing Case {activeCaseIndex + 1}</span>
+                            </div>
+                            <span className="text-zinc-400 text-[10px]">
+                              Tip: You can freely edit or reformat the inputs below if fetched in an invalid format.
+                            </span>
+                          </div>
+
                           <div>
-                            <div className="text-zinc-400 mb-1 text-[11px]">Standard Input (stdin):</div>
+                            <div className="flex items-center justify-between text-zinc-400 mb-1 text-[11px]">
+                              <span>Standard Input (stdin):</span>
+                              <span className="text-[10px] text-zinc-500 font-mono">Piped to your program</span>
+                            </div>
                             <textarea
                               value={testCases[activeCaseIndex].input}
                               onChange={(e) => {
@@ -1259,13 +1263,16 @@ export default function ProblemWorkspace({
                                 );
                               }}
                               placeholder="Enter stdin input..."
-                              rows={2}
-                              className="w-full rounded bg-zinc-900 border border-zinc-800 p-2.5 text-zinc-200 focus:outline-none focus:border-zinc-600 font-mono"
+                              rows={3}
+                              className="w-full rounded bg-zinc-900 border border-zinc-800 p-2.5 text-zinc-200 focus:outline-none focus:border-zinc-500 font-mono text-xs"
                             />
                           </div>
 
                           <div>
-                            <div className="text-zinc-400 mb-1 text-[11px]">Expected Output:</div>
+                            <div className="flex items-center justify-between text-zinc-400 mb-1 text-[11px]">
+                              <span>Expected Output:</span>
+                              <span className="text-[10px] text-zinc-500 font-mono">Matched against stdout</span>
+                            </div>
                             <textarea
                               value={testCases[activeCaseIndex].expectedOutput}
                               onChange={(e) => {
@@ -1278,7 +1285,7 @@ export default function ProblemWorkspace({
                               }}
                               placeholder="Enter expected stdout to compare against..."
                               rows={2}
-                              className="w-full rounded bg-zinc-900 border border-zinc-800 p-2.5 text-zinc-200 focus:outline-none focus:border-zinc-600 font-mono"
+                              className="w-full rounded bg-zinc-900 border border-zinc-800 p-2.5 text-zinc-200 focus:outline-none focus:border-zinc-500 font-mono text-xs"
                             />
                           </div>
                         </div>
@@ -1461,34 +1468,61 @@ export default function ProblemWorkspace({
                         </div>
                       ) : runResults ? (
                         <div className="space-y-4">
-                          {/* Overall Verdict Banner */}
+                          {/* Minimalist Unified Verdict Banner */}
                           <div
-                            className={`flex items-center justify-between p-3 rounded border ${
+                            className={`p-3 rounded-lg border text-xs ${
                               allPassed
-                                ? "bg-emerald-950/30 border-emerald-800/50 text-emerald-300"
-                                : "bg-rose-950/30 border-rose-800/50 text-rose-300"
+                                ? "bg-emerald-950/25 border-emerald-800/40 text-emerald-300"
+                                : "bg-rose-950/20 border-rose-900/40 text-zinc-300"
                             }`}
                           >
-                            <div className="flex items-center gap-2 font-bold text-sm">
-                              {allPassed ? (
-                                <>
-                                  <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-                                  <span>Accepted — All Test Cases Passed!</span>
-                                </>
-                              ) : (
-                                <>
-                                  <XCircle className="h-4 w-4 text-rose-400" />
-                                  <span>Wrong Answer / Failed Testcases</span>
-                                </>
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-2 font-semibold text-sm">
+                                {allPassed ? (
+                                  <>
+                                    <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                                    <span className="text-emerald-300">Accepted — Sample Test Cases Passed</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <XCircle className="h-4 w-4 text-rose-400" />
+                                    <span className="text-rose-300">Sample Tests Did Not Match</span>
+                                  </>
+                                )}
+                              </div>
+
+                              {runResults[0]?.executionTime && (
+                                <div className="flex items-center gap-1 text-[11px] text-zinc-400 font-mono">
+                                  <Clock className="h-3 w-3" />
+                                  <span>{runResults[0].executionTime} ms</span>
+                                </div>
                               )}
                             </div>
 
-                            {runResults[0]?.executionTime && (
-                              <div className="flex items-center gap-1 text-[11px] text-zinc-400">
-                                <Clock className="h-3 w-3" />
-                                <span>{runResults[0].executionTime} ms</span>
-                              </div>
-                            )}
+                            {/* Minimalist 1-line contextual footnote */}
+                            <div className="mt-2.5 pt-2 border-t border-zinc-800/70 text-[11px] flex flex-wrap items-center justify-between gap-2">
+                              {allPassed ? (
+                                <span className="text-emerald-300/85">
+                                  Passed sample tests. <strong>Submit to {platformName}</strong> to verify hidden test cases &amp; earn XP.
+                                </span>
+                              ) : (
+                                <span className="text-zinc-400">
+                                  💡 <em>Multiple valid combinations?</em> Local runner tests exact sample diff. Submit to {platformName} for official judge verification.
+                                </span>
+                              )}
+
+                              {(isLeetCode || isCodeforces) && (
+                                <button
+                                  onClick={isLeetCode ? submitToLeetCodeHandler : submitToCodeforcesHandler}
+                                  disabled={isSubmittingLeetCode || isSubmittingCodeforces}
+                                  className={`text-[11px] font-semibold hover:underline flex items-center gap-1 transition-colors shrink-0 ${
+                                    isLeetCode ? "text-amber-400 hover:text-amber-300" : "text-blue-400 hover:text-blue-300"
+                                  }`}
+                                >
+                                  <span>Submit to {platformName} →</span>
+                                </button>
+                              )}
+                            </div>
                           </div>
 
                           {/* Individual Test Results */}
@@ -1502,15 +1536,28 @@ export default function ProblemWorkspace({
                                   <span className="font-semibold text-zinc-300">
                                     Test Case {i + 1}
                                   </span>
-                                  <span
-                                    className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                                      r.passed
-                                        ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
-                                        : "bg-rose-500/20 text-rose-400 border border-rose-500/30"
-                                    }`}
-                                  >
-                                    {r.passed ? "PASSED" : "FAILED"}
-                                  </span>
+                                  <div className="flex items-center gap-2">
+                                    <button
+                                      onClick={() => {
+                                        setActiveCaseIndex(i);
+                                        setActiveConsoleTab("testcase");
+                                      }}
+                                      className="inline-flex items-center gap-1 text-[11px] text-amber-400 hover:text-amber-300 transition-colors py-0.5 px-1.5 rounded hover:bg-zinc-800/80 border border-transparent hover:border-zinc-700"
+                                      title="Edit this test case's input and expected output"
+                                    >
+                                      <Edit3 className="h-3 w-3" />
+                                      <span>Edit Case</span>
+                                    </button>
+                                    <span
+                                      className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                                        r.passed
+                                          ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                                          : "bg-rose-500/20 text-rose-400 border border-rose-500/30"
+                                      }`}
+                                    >
+                                      {r.passed ? "PASSED" : "FAILED"}
+                                    </span>
+                                  </div>
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">

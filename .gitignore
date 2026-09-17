@@ -42,3 +42,6 @@ next-env.d.ts
 backend/leetcode-company-wise-problems/
 backend/.browser_profile/
 backend/.chrome_profile/
+backend/.cf_browser_profile/
+runner/
+Dockerfile

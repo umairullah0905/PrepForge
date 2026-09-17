@@ -3,7 +3,14 @@ import { executeCodeLocal } from "@/lib/local_runner";
 
 export const runtime = "nodejs";
 
-const PISTON_URL = process.env.PISTON_URL || "http://127.0.0.1:2000/api/v2/execute";
+function getPistonEndpoint(): string {
+  const raw = (process.env.PISTON_URL || "http://127.0.0.1:2000").trim();
+  if (raw.endsWith("/api/v2/execute")) {
+    return raw;
+  }
+  const base = raw.replace(/\/+$/, "");
+  return `${base}/api/v2/execute`;
+}
 
 // Map friendly language names to Piston language identifiers and file names
 const LANGUAGE_CONFIG: Record<
@@ -15,25 +22,15 @@ const LANGUAGE_CONFIG: Record<
     version: "3.10.0",
     filename: "solution.py",
   },
-  javascript: {
-    pistonLang: "javascript",
-    version: "18.15.0",
-    filename: "solution.js",
-  },
-  typescript: {
-    pistonLang: "typescript",
-    version: "5.0.3",
-    filename: "solution.ts",
-  },
   cpp: {
     pistonLang: "c++",
-    version: "10.2.0",
+    version: "17",
     filename: "main.cpp",
   },
-  java: {
-    pistonLang: "java",
-    version: "15.0.2",
-    filename: "Solution.java",
+  "c++": {
+    pistonLang: "c++",
+    version: "17",
+    filename: "main.cpp",
   },
 };
 
@@ -68,7 +65,8 @@ async function executeSingleCase(
   };
 
   try {
-    const res = await fetch(PISTON_URL, {
+    const endpoint = getPistonEndpoint();
+    const res = await fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(pistonPayload),

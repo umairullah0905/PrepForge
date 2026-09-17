@@ -27,10 +27,8 @@ interface CodeEditorProps {
 
 const MONACO_LANG_MAP: Record<string, string> = {
   python: "python",
-  javascript: "javascript",
-  typescript: "typescript",
   cpp: "cpp",
-  java: "java",
+  "c++": "cpp",
 };
 
 export default function CodeEditor({

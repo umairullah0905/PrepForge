@@ -5,9 +5,10 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import TopicCard from "@/components/TopicCard";
 import ContestCalendar from "@/components/ContestCalendar";
+import QuestCard from "@/components/QuestCard";
 import { type Profile, xpProgressPercent } from "@/lib/progress";
 import { type Contest } from "@/lib/contests";
-import { ArrowRight, Terminal } from "lucide-react";
+import { ArrowRight, Terminal, Lock, Code2 } from "lucide-react";
 
 export default function LandingContent({
   userEmail,
@@ -45,6 +46,15 @@ export default function LandingContent({
     });
 
     return { easy, medium, hard };
+  }, [questions, completedQuestTitles]);
+
+  // Preview a few questions (first 6) for the home page
+  const previewQuestions = useMemo(() => {
+    const completedSet = new Set(completedQuestTitles);
+    return questions.slice(0, 6).map((q) => ({
+      ...q,
+      completed: completedSet.has(q.title),
+    }));
   }, [questions, completedQuestTitles]);
 
   return (
@@ -242,8 +252,8 @@ export default function LandingContent({
             </section>
           )}
 
-          {/* UPCOMING CONTESTS CALENDAR */}
-          <ContestCalendar initialContests={contests} />
+          {/* UPCOMING CONTESTS CALENDAR (Logged In Only) */}
+          {isLoggedIn && <ContestCalendar initialContests={contests} />}
 
           {/* CURATED TRACKS - Distinct Icons & Expanded Grid */}
           <section className="mb-14">
@@ -288,6 +298,75 @@ export default function LandingContent({
               />
             </div>
           </section>
+
+          {/* FEATURED PRACTICE PROBLEMS (Few visible on Home) */}
+          {previewQuestions.length > 0 && (
+            <section className="mb-14">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                <div>
+                  <div className="inline-flex items-center gap-2 rounded-md border border-zinc-800 bg-zinc-900/90 px-2.5 py-1 text-xs font-mono text-zinc-300 mb-2">
+                    <Code2 className="h-3.5 w-3.5 text-emerald-400" />
+                    <span>CURRICULUM_PREVIEW</span>
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-100">
+                    Featured Practice Problems
+                  </h2>
+                  <p className="text-sm text-zinc-400 mt-1">
+                    {isLoggedIn
+                      ? "Hand-picked high-yield problems from top tech company interview patterns."
+                      : "Preview a sample of questions below. Sign in to unlock the complete archive."}
+                  </p>
+                </div>
+
+                {isLoggedIn && (
+                  <Link
+                    href="/dsa"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-300 hover:text-white transition-colors"
+                  >
+                    <span>View All Problems ({totalQuestions})</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                )}
+              </div>
+
+              {/* Grid of sample questions (few visible) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {previewQuestions.map((quest, idx) => (
+                  <QuestCard key={quest.id || idx} quest={quest} />
+                ))}
+              </div>
+
+              {/* If NOT logged in: Lock banner asking to sign in to see all */}
+              {!isLoggedIn && (
+                <div className="relative mt-6 overflow-hidden rounded-xl border border-zinc-800 bg-gradient-to-b from-zinc-900/90 to-zinc-950 p-6 sm:p-8 text-center backdrop-blur-sm shadow-sm">
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-zinc-800 border border-zinc-700 text-zinc-300 mb-4">
+                    <Lock className="h-5 w-5 text-amber-400" />
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-bold text-zinc-100 mb-2">
+                    Want to see all {totalQuestions}+ practice questions?
+                  </h3>
+                  <p className="text-sm text-zinc-400 max-w-xl mx-auto mb-6 leading-relaxed">
+                    Sign in to unlock our full problem database, company-tagged archives (Google, Amazon, Meta), live code verification, contest schedules, and sync your LeetCode and Codeforces progress.
+                  </p>
+                  <div className="flex flex-wrap items-center justify-center gap-3">
+                    <Link
+                      href="/login"
+                      className="inline-flex items-center gap-2 rounded-md bg-zinc-100 px-6 py-2.5 text-sm font-semibold text-zinc-950 hover:bg-white transition-colors shadow-sm"
+                    >
+                      <Lock className="h-4 w-4" />
+                      <span>Sign In to See All Questions</span>
+                    </Link>
+                    <Link
+                      href="/login"
+                      className="inline-flex items-center gap-2 rounded-md border border-zinc-800 bg-zinc-900 px-5 py-2.5 text-sm font-medium text-zinc-300 hover:text-white hover:bg-zinc-850 transition-colors"
+                    >
+                      <span>Create Free Account</span>
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </section>
+          )}
 
         </div>
       </main>

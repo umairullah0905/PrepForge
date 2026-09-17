@@ -1,58 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
-import { Suspense } from "react";
 import { Terminal, User, LogOut, CheckCircle2, Search } from "lucide-react";
 import { xpProgressPercent, type Profile } from "@/lib/progress";
 import ThemeToggle from "./ThemeToggle";
-
-const NAV_ITEMS = [
-  { name: "Overview", href: "/" },
-  { name: "Problems", href: "/dsa" },
-  { name: "Companies", href: "/dsa?tab=companies" },
-  { name: "System Design", href: "/system-design" },
-  { name: "Discussions", href: "/forums" },
-  { name: "Community", href: "/community" },
-];
-
-function NavLinks() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const currentTab = searchParams.get("tab");
-
-  const isActive = (href: string) => {
-    if (href === "/") return pathname === "/";
-    if (href.includes("tab=companies")) {
-      return pathname.startsWith("/dsa") && currentTab === "companies";
-    }
-    if (href === "/dsa") {
-      return pathname.startsWith("/dsa") && currentTab !== "companies";
-    }
-    return pathname.startsWith(href.split("?")[0]);
-  };
-
-  return (
-    <nav className="hidden md:flex items-center gap-1.5">
-      {NAV_ITEMS.map((item) => {
-        const active = isActive(item.href);
-        return (
-          <Link
-            key={item.name}
-            href={item.href}
-            className={`rounded-md px-3.5 py-1.5 text-sm font-medium transition-colors ${
-              active
-                ? "bg-zinc-900 text-zinc-100 border border-zinc-800/90 shadow-sm"
-                : "text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900/60"
-            }`}
-          >
-            {item.name}
-          </Link>
-        );
-      })}
-    </nav>
-  );
-}
 
 export default function Navbar({
   userEmail,
@@ -88,25 +39,6 @@ export default function Navbar({
               </span>
             </div>
           </Link>
-
-          {/* Navigation links with Suspense boundary */}
-          <Suspense
-            fallback={
-              <nav className="hidden md:flex items-center gap-1.5">
-                {NAV_ITEMS.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="rounded-md px-3.5 py-1.5 text-sm font-medium text-zinc-400"
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </nav>
-            }
-          >
-            <NavLinks />
-          </Suspense>
         </div>
 
         {/* Right side status / user */}
