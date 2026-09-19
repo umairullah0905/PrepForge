@@ -1,11 +1,12 @@
 import { createClient } from '@supabase/supabase-js';
+import { getSupabaseUrl, getSupabaseAnonKey } from '@/utils/supabase/config';
 
 // Revalidate the page every 0 seconds to disable caching for testing
 export const revalidate = 0;
 
 export default async function TestQuestionsPage() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const supabaseUrl = getSupabaseUrl();
+  const supabaseKey = getSupabaseAnonKey();
   
   if (!supabaseUrl || !supabaseKey) {
     return <div className="p-8 text-red-500">Missing Supabase environment variables.</div>;

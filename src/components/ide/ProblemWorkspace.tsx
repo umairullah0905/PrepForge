@@ -40,6 +40,7 @@ import {
 import CodeEditor from "./CodeEditor";
 import { completeQuestAction } from "@/app/quest-actions";
 import { renderMathInHtml } from "@/lib/math";
+import AiHintAvatar from "@/components/ai/AiHintAvatar";
 
 export interface QuestionData {
   id: string;
@@ -2077,6 +2078,15 @@ export default function ProblemWorkspace({
           </div>
         </div>
       )}
+
+      {/* Floating AI Coach & Hint Avatar */}
+      <AiHintAvatar
+        problemTitle={question.title}
+        problemDifficulty={question.difficulty}
+        problemDescription={question.description}
+        userCode={currentCode}
+        language={selectedLanguage}
+      />
     </div>
   );
 }

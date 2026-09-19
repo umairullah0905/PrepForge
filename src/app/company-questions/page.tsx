@@ -3,6 +3,7 @@ import { createClient } from "@/utils/supabase/server";
 import { getProfile, getCompletedQuestTitles } from "@/lib/progress";
 import Navbar from "@/components/Navbar";
 import { signOutAction } from "../actions";
+import { getSupabaseUrl, getSupabaseAnonKey } from "@/utils/supabase/config";
 import {
   Search,
   Building2,
@@ -19,8 +20,8 @@ export default async function CompanyQuestionsPage({
 }: {
   searchParams: Promise<{ company?: string; topic?: string; page?: string }>;
 }) {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const supabaseUrl = getSupabaseUrl();
+  const supabaseKey = getSupabaseAnonKey();
 
   if (!supabaseUrl || !supabaseKey) {
     return (

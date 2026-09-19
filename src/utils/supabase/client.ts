@@ -1,9 +1,12 @@
 import { createBrowserClient } from '@supabase/ssr'
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config'
+import { getSupabaseUrl, getSupabaseAnonKey, SUPABASE_URL, SUPABASE_ANON_KEY } from './config'
 
-export function createClient() {
+export function createClient(
+  url: string = getSupabaseUrl() || SUPABASE_URL,
+  anonKey: string = getSupabaseAnonKey() || SUPABASE_ANON_KEY
+) {
   return createBrowserClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
+    url,
+    anonKey
   )
 }

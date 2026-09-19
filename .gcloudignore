@@ -1,0 +1,37 @@
+# This file specifies files that should NOT be uploaded to Google Cloud Build.
+# Without this file, gcloud packages .next (1.6 GB) and node_modules (560 MB),
+# making the upload over 1.3 GB!
+
+.gcloudignore
+.git
+.gitignore
+!Dockerfile
+
+# Next.js build cache and standalone outputs (~1.6 GB)
+.next/
+out/
+build/
+
+# Local node dependencies (~560 MB, rebuilt cleanly inside Alpine Docker container)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment and sensitive secrets
+.env*
+*.pem
+
+# Separate backend and runner services (deployed separately)
+backend/
+runner/
+
+# Large local screenshots and assets
+*.png
+*.jpg
+*.jpeg
+
+# TypeScript and OS files
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store

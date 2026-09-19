@@ -1,13 +1,16 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { cookies } from 'next/headers'
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config'
+import { getSupabaseUrl, getSupabaseAnonKey } from './config'
 
 export async function createClient() {
   const cookieStore = await cookies()
 
+  const url = getSupabaseUrl();
+  const key = getSupabaseAnonKey();
+
   return createServerClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY,
+    url,
+    key,
     {
       global: {
         fetch: (url, options) => {

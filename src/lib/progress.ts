@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { cache } from "react";
+import { getSupabaseUrl, getSupabaseAnonKey } from "@/utils/supabase/config";
 
 export type Profile = {
   id: string;
@@ -14,18 +15,22 @@ export const getProfile = cache(async function getProfile(
   supabase: SupabaseClient,
   userId: string
 ): Promise<Profile | null> {
-  try {
-    const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/profiles?id=eq.${userId}&select=id,full_name,level,xp,leetcode_username,codeforces_username`;
-    const res = await fetch(url, {
-      headers: {
-        apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string,
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string}`,
-      },
-      next: {
-        revalidate: 30,
-        tags: [`profile-${userId}`],
-      },
-    });
+  const baseUrl = getSupabaseUrl();
+  const apiKey = getSupabaseAnonKey();
+
+  if (baseUrl && apiKey) {
+    try {
+      const url = `${baseUrl}/rest/v1/profiles?id=eq.${userId}&select=id,full_name,level,xp,leetcode_username,codeforces_username`;
+      const res = await fetch(url, {
+        headers: {
+          apikey: apiKey,
+          Authorization: `Bearer ${apiKey}`,
+        },
+        next: {
+          revalidate: 30,
+          tags: [`profile-${userId}`],
+        },
+      });
 
     if (res.ok) {
       const rows = await res.json();
@@ -41,8 +46,9 @@ export const getProfile = cache(async function getProfile(
         };
       }
     }
-  } catch (err) {
-    console.error("Error fetching profile via REST:", err);
+    } catch (err) {
+      console.error("Error fetching profile via REST:", err);
+    }
   }
 
   const { data, error } = await supabase
@@ -66,27 +72,32 @@ export const getCompletedQuestTitles = cache(async function getCompletedQuestTit
   supabase: SupabaseClient,
   userId: string
 ): Promise<string[]> {
-  try {
-    const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/quest_progress?select=quest_title&user_id=eq.${userId}`;
-    const res = await fetch(url, {
-      headers: {
-        apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string,
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string}`,
-      },
-      next: {
-        revalidate: 30,
-        tags: [`progress-${userId}`],
-      },
-    });
+  const baseUrl = getSupabaseUrl();
+  const apiKey = getSupabaseAnonKey();
 
-    if (res.ok) {
-      const data = await res.json();
-      if (Array.isArray(data)) {
-        return data.map((row: any) => row.quest_title as string);
+  if (baseUrl && apiKey) {
+    try {
+      const url = `${baseUrl}/rest/v1/quest_progress?select=quest_title&user_id=eq.${userId}`;
+      const res = await fetch(url, {
+        headers: {
+          apikey: apiKey,
+          Authorization: `Bearer ${apiKey}`,
+        },
+        next: {
+          revalidate: 30,
+          tags: [`progress-${userId}`],
+        },
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          return data.map((row: any) => row.quest_title as string);
+        }
       }
+    } catch (err) {
+      console.error("Error fetching completed quest titles via REST:", err);
     }
-  } catch (err) {
-    console.error("Error fetching completed quest titles via REST:", err);
   }
 
   // Fallback to client query
@@ -108,27 +119,32 @@ export const getQuestProgressRows = cache(async function getQuestProgressRows(
   supabase: SupabaseClient,
   userId: string
 ): Promise<QuestProgressRow[]> {
-  try {
-    const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/quest_progress?select=quest_title,xp_earned,completed_at&user_id=eq.${userId}&order=completed_at.desc`;
-    const res = await fetch(url, {
-      headers: {
-        apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string,
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string}`,
-      },
-      next: {
-        revalidate: 30,
-        tags: [`progress-rows-${userId}`],
-      },
-    });
+  const baseUrl = getSupabaseUrl();
+  const apiKey = getSupabaseAnonKey();
 
-    if (res.ok) {
-      const data = await res.json();
-      if (Array.isArray(data)) {
-        return data as QuestProgressRow[];
+  if (baseUrl && apiKey) {
+    try {
+      const url = `${baseUrl}/rest/v1/quest_progress?select=quest_title,xp_earned,completed_at&user_id=eq.${userId}&order=completed_at.desc`;
+      const res = await fetch(url, {
+        headers: {
+          apikey: apiKey,
+          Authorization: `Bearer ${apiKey}`,
+        },
+        next: {
+          revalidate: 30,
+          tags: [`progress-rows-${userId}`],
+        },
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          return data as QuestProgressRow[];
+        }
       }
+    } catch (err) {
+      console.error("Error fetching quest progress rows via REST:", err);
     }
-  } catch (err) {
-    console.error("Error fetching quest progress rows via REST:", err);
   }
 
   // Fallback to client query
@@ -152,27 +168,32 @@ export const getCompletedSystemDesignSlugs = cache(async function getCompletedSy
   supabase: SupabaseClient,
   userId: string
 ): Promise<string[]> {
-  try {
-    const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/system_design_progress?select=chapter_slug&user_id=eq.${userId}`;
-    const res = await fetch(url, {
-      headers: {
-        apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string,
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string}`,
-      },
-      next: {
-        revalidate: 15,
-        tags: [`sd-progress-${userId}`],
-      },
-    });
+  const baseUrl = getSupabaseUrl();
+  const apiKey = getSupabaseAnonKey();
 
-    if (res.ok) {
-      const data = await res.json();
-      if (Array.isArray(data)) {
-        return data.map((row: any) => row.chapter_slug as string);
+  if (baseUrl && apiKey) {
+    try {
+      const url = `${baseUrl}/rest/v1/system_design_progress?select=chapter_slug&user_id=eq.${userId}`;
+      const res = await fetch(url, {
+        headers: {
+          apikey: apiKey,
+          Authorization: `Bearer ${apiKey}`,
+        },
+        next: {
+          revalidate: 15,
+          tags: [`sd-progress-${userId}`],
+        },
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          return data.map((row: any) => row.chapter_slug as string);
+        }
       }
+    } catch (err) {
+      console.error("Error fetching completed system design slugs via REST:", err);
     }
-  } catch (err) {
-    console.error("Error fetching completed system design slugs via REST:", err);
   }
 
   // Fallback to client query

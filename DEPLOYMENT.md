@@ -56,12 +56,14 @@ gcloud run deploy prepforge-web `
   --max-instances 2 `
   --memory 512Mi `
   --cpu 1 `
-  --timeout 30s
+  --timeout 30s `
+  --set-env-vars="NEXT_PUBLIC_SUPABASE_URL=https://<your-project>.supabase.co,NEXT_PUBLIC_SUPABASE_ANON_KEY=<your_anon_key>,GEMINI_API_KEY=<your_gemini_key>"
 ```
 
 > **What this command does:**
 > - `--min-instances 0`: Shuts down containers when idle to consume 0 vCPU-seconds.
 > - `--source .`: Triggers Cloud Build using our multi-stage [`Dockerfile`](./Dockerfile) generating a tiny **~65 MB** image.
+> - `--set-env-vars`: Securely injects Supabase and Google Gemini credentials at runtime without hardcoding secrets into the Dockerfile or git.
 > - `--memory 512Mi`: Keeps memory usage well below free limits while running Next.js smoothly.
 
 Once completed, Google Cloud outputs your live service URL:
@@ -230,7 +232,8 @@ gcloud run services update prepforge-web `
 
 - [`Dockerfile`](./Dockerfile) — Multi-stage Alpine build producing Next.js standalone package.
 - [`runner/Dockerfile`](./runner/Dockerfile) — Lightweight Alpine container with Python 3 and g++ compilers.
-- [`.dockerignore`](./.dockerignore) — Excludes `node_modules`, git, and local assets from uploads.
+- [`.dockerignore`](./.dockerignore) — Excludes `node_modules`, git, and local assets from Docker image builds.
+- [`.gcloudignore`](./.gcloudignore) — Excludes `.next`, `node_modules`, git, and backend from gcloud uploads (reduces upload size from 1.3 GB to ~4.5 MB).
 - [`next.config.ts`](./next.config.ts) — Configured with `output: "standalone"` and `experimental.serverActions.allowedOrigins` for Cloudflare Workers (`*.workers.dev`).
 - [`src/utils/supabase/config.ts`](./src/utils/supabase/config.ts) — Centralized Supabase credentials with build and runtime fallbacks.
 

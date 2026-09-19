@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
+import { getSupabaseUrl, getSupabaseAnonKey } from "@/utils/supabase/config";
 import CommunityChat, { type ChatMessage } from "@/components/CommunityChat";
 import Navbar from "@/components/Navbar";
 import { getProfile, getCompletedQuestTitles } from "@/lib/progress";
@@ -50,6 +51,8 @@ export default async function CommunityPage() {
             initialMessages={initialMessages}
             currentUserId={user?.id ?? null}
             currentUserName={profile?.name ?? user?.email ?? null}
+            supabaseUrl={getSupabaseUrl()}
+            supabaseAnonKey={getSupabaseAnonKey()}
           />
         </div>
       </main>

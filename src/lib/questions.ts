@@ -1,4 +1,5 @@
 import { cache } from "react";
+import { getSupabaseUrl, getSupabaseAnonKey } from "@/utils/supabase/config";
 
 export interface Question {
   id: string;
@@ -21,12 +22,19 @@ export interface CompanyQuestion {
 }
 
 export const getCachedQuestions = cache(async function getCachedQuestions(): Promise<Question[]> {
+  const baseUrl = getSupabaseUrl();
+  const apiKey = getSupabaseAnonKey();
+
+  if (!baseUrl || !apiKey) {
+    return [];
+  }
+
   try {
-    const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/questions?select=id,title,difficulty,platform,topics,url,solution_link,created_at&order=created_at.desc`;
+    const url = `${baseUrl}/rest/v1/questions?select=id,title,difficulty,platform,topics,url,solution_link,created_at&order=created_at.desc`;
     const res = await fetch(url, {
       headers: {
-        apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string,
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string}`,
+        apikey: apiKey,
+        Authorization: `Bearer ${apiKey}`,
       },
       next: {
         revalidate: 60,
@@ -45,12 +53,19 @@ export const getCachedQuestions = cache(async function getCachedQuestions(): Pro
 });
 
 export const getCachedCompanyQuestions = cache(async function getCachedCompanyQuestions(): Promise<CompanyQuestion[]> {
+  const baseUrl = getSupabaseUrl();
+  const apiKey = getSupabaseAnonKey();
+
+  if (!baseUrl || !apiKey) {
+    return [];
+  }
+
   try {
-    const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/company_questions?select=id,title,difficulty,company_names,topics,link&order=title.asc`;
+    const url = `${baseUrl}/rest/v1/company_questions?select=id,title,difficulty,company_names,topics,link&order=title.asc`;
     const res = await fetch(url, {
       headers: {
-        apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string,
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string}`,
+        apikey: apiKey,
+        Authorization: `Bearer ${apiKey}`,
       },
       next: {
         revalidate: 300,

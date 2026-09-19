@@ -27,10 +27,14 @@ export default function CommunityChat({
   initialMessages,
   currentUserId,
   currentUserName,
+  supabaseUrl,
+  supabaseAnonKey,
 }: {
   initialMessages: ChatMessage[];
   currentUserId: string | null;
   currentUserName: string | null;
+  supabaseUrl?: string;
+  supabaseAnonKey?: string;
 }) {
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
   const [draft, setDraft] = useState("");
@@ -39,7 +43,7 @@ export default function CommunityChat({
   const isLoggedIn = !!currentUserId;
 
   useEffect(() => {
-    const supabase = createClient();
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
     const channel = supabase
       .channel("community-messages")
       .on(

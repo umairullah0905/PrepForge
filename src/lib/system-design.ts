@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { getSupabaseUrl, getSupabaseAnonKey } from "@/utils/supabase/config";
 
 export interface ChapterSummary {
   slug: string;
@@ -85,8 +86,8 @@ function getLocalChapterBySlug(slug: string): ChapterDetail | null {
 }
 
 export async function getAllChapters(): Promise<ChapterSummary[]> {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const supabaseUrl = getSupabaseUrl();
+  const supabaseKey = getSupabaseAnonKey();
 
   if (supabaseUrl && supabaseKey) {
     try {
@@ -128,8 +129,8 @@ export async function getAllChapters(): Promise<ChapterSummary[]> {
 }
 
 export async function getChapterBySlug(slug: string): Promise<ChapterDetail | null> {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const supabaseUrl = getSupabaseUrl();
+  const supabaseKey = getSupabaseAnonKey();
 
   if (supabaseUrl && supabaseKey) {
     try {
