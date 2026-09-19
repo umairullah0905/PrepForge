@@ -283,6 +283,29 @@ export default function ProblemWorkspace({
     return renderMathInHtml(question.description || "");
   }, [question.description]);
 
+  const specContentRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (!specContentRef.current) return;
+    const imgs = specContentRef.current.querySelectorAll("img");
+    imgs.forEach((img) => {
+      img.onerror = () => {
+        if (img.dataset.hasFallback) return;
+        img.dataset.hasFallback = "true";
+        img.style.display = "none";
+        const fallback = document.createElement("div");
+        fallback.className =
+          "my-3 p-3 rounded-lg border border-zinc-800 bg-zinc-900/80 text-xs text-zinc-400 flex items-center justify-between";
+        fallback.innerHTML = `<span>Diagram could not be loaded directly.</span>${
+          question.url
+            ? `<a href="${question.url}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline inline-flex items-center gap-1 font-medium">View original diagram &rarr;</a>`
+            : ""
+        }`;
+        img.parentNode?.insertBefore(fallback, img.nextSibling);
+      };
+    });
+  }, [renderedDescription, question.url]);
+
   // Initialize testcases dynamically from question content
   const [testCases, setTestCases] = useState<TestCaseItem[]>(() =>
     extractTestCases(question.description, (question as any).test_cases)
@@ -1016,10 +1039,12 @@ export default function ProblemWorkspace({
                     .spec-content .tex-font-style-bf { font-weight: 700; color: #fff; }
                     .spec-content .tex-font-style-it { font-style: italic; }
                     .spec-content .section-title { font-weight: 700; font-size: 1.05rem; margin-top: 1.5rem; margin-bottom: 0.5rem; color: #fafafa; }
+                    .spec-content img { max-width: 100%; height: auto; border-radius: 8px; background: #ffffff; padding: 6px; margin: 1.25rem auto; display: block; border: 1px solid #27272a; }
                   `,
                   }}
                 />
                 <div
+                  ref={specContentRef}
                   className="spec-content"
                   dangerouslySetInnerHTML={{ __html: renderedDescription }}
                 />

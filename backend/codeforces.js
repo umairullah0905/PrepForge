@@ -74,6 +74,23 @@ async function fetchAndSaveCodeforcesDetails(page, prob) {
       return;
     }
 
+    // Capture any images inside .problem-statement and inline as Base64 to bypass external CORS & hotlinking blocks
+    const imageReplacements = [];
+    try {
+      const imgElements = await page.$$('.problem-statement img');
+      for (const el of imgElements) {
+        const src = await el.evaluate((node) => node.getAttribute('src'));
+        if (src && !src.startsWith('data:')) {
+          const b64 = await el.screenshot({ encoding: 'base64' });
+          if (b64 && b64.length > 50) {
+            imageReplacements.push({ src, dataUri: `data:image/png;base64,${b64}` });
+          }
+        }
+      }
+    } catch (imgErr) {
+      console.warn(`Could not capture inline images for ${prob.contestId}${prob.index}:`, imgErr.message);
+    }
+
     const contentHtml = await page.content();
     const $ = cheerio.load(contentHtml);
     
@@ -82,11 +99,15 @@ async function fetchAndSaveCodeforcesDetails(page, prob) {
     // Remove the header as it just has time limits and title which we already have
     statement.find('.header').remove();
     
-    const descriptionHtml = statement.html();
+    let descriptionHtml = statement.html();
     
     if (!descriptionHtml) {
         console.log(`Could not parse HTML for ${prob.contestId}${prob.index}`);
         return;
+    }
+
+    for (const rep of imageReplacements) {
+      descriptionHtml = descriptionHtml.split(rep.src).join(rep.dataUri);
     }
 
     const platformId = `${prob.contestId}${prob.index}`;

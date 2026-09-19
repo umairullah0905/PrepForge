@@ -127,6 +127,25 @@ async function fetchAndSaveQuestionDetails(titleSlug, basicInfo) {
 
     const topics = questionDetails.topicTags ? questionDetails.topicTags.map(t => t.name) : [];
 
+    // Automatically inline any external images (e.g. from assets.leetcode.com) as Base64 data URIs
+    let descriptionHtml = questionDetails.content;
+    const imgMatches = [...descriptionHtml.matchAll(/src=["']((https?:)?\/\/[^"']+)["']/gi)];
+    for (const m of imgMatches) {
+      let imgUrl = m[1];
+      if (imgUrl.startsWith('//')) imgUrl = 'https:' + imgUrl;
+      if (imgUrl.startsWith('data:')) continue;
+      try {
+        const imgRes = await axios.get(imgUrl, { responseType: 'arraybuffer', timeout: 10000 });
+        const contentType = imgRes.headers['content-type'] || 'image/png';
+        const base64 = Buffer.from(imgRes.data, 'binary').toString('base64');
+        const dataUri = `data:${contentType};base64,${base64}`;
+        descriptionHtml = descriptionHtml.split(m[1]).join(dataUri);
+        console.log(`Inlined image for ${titleSlug}: ${imgUrl}`);
+      } catch (err) {
+        console.warn(`Could not inline LeetCode image ${imgUrl}:`, err.message);
+      }
+    }
+
     // Save to Supabase
     const { data, error } = await supabase
       .from('questions')
@@ -136,7 +155,7 @@ async function fetchAndSaveQuestionDetails(titleSlug, basicInfo) {
         title: questionDetails.title,
         url: `https://leetcode.com/problems/${titleSlug}/`,
         solution_link: `https://leetcode.com/problems/${titleSlug}/editorial/`,
-        description: questionDetails.content, // This is HTML and contains images/constraints
+        description: descriptionHtml, // Inlined HTML with embedded base64 images
         difficulty: questionDetails.difficulty,
         topics: topics,
         test_cases: questionDetails.exampleTestcases
