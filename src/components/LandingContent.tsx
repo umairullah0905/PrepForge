@@ -1,5 +1,5 @@
 "use client";
-
+import { motion } from "framer-motion";
 import { useMemo } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
@@ -9,6 +9,8 @@ import QuestCard from "@/components/QuestCard";
 import { type Profile, xpProgressPercent } from "@/lib/progress";
 import { type Contest } from "@/lib/contests";
 import { ArrowRight, Terminal, Lock, Code2 } from "lucide-react";
+import WordRotate from "@/components/WordRotate";
+import NumberTicker from "@/components/NumberTicker";
 
 export default function LandingContent({
   userEmail,
@@ -205,7 +207,11 @@ export default function LandingContent({
                 </div>
 
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-zinc-100 mb-4 max-w-5xl leading-[1.15]">
-                  Engineered for algorithmic mastery.
+                  Engineered for algorithmic{" "}
+                  <WordRotate
+                    words={["mastery.", "precision.", "speed.", "excellence."]}
+                    className="text-zinc-100"
+                  />
                 </h1>
 
                 <p className="text-base sm:text-lg text-zinc-300 leading-relaxed max-w-4xl mb-8">
@@ -231,24 +237,56 @@ export default function LandingContent({
               </div>
 
               {/* Technical summary specs banner */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10 pt-8 border-t border-zinc-850 text-sm font-mono">
-                <div>
-                  <div className="text-zinc-500 text-xs uppercase font-semibold">PROBLEMS INDEXED</div>
-                  <div className="text-zinc-100 font-bold text-base sm:text-lg mt-1">{totalQuestions}+ Verified</div>
-                </div>
-                <div>
-                  <div className="text-zinc-500 text-xs uppercase font-semibold">CURRICULUM PATTERNS</div>
-                  <div className="text-zinc-100 font-bold text-base sm:text-lg mt-1">18 Core Trees</div>
-                </div>
-                <div>
-                  <div className="text-zinc-500 text-xs uppercase font-semibold">INTEGRATIONS</div>
-                  <div className="text-zinc-100 font-bold text-base sm:text-lg mt-1">LeetCode &amp; Codeforces</div>
-                </div>
-                <div>
-                  <div className="text-zinc-500 text-xs uppercase font-semibold">VERIFICATION</div>
-                  <div className="text-zinc-100 font-bold text-base sm:text-lg mt-1">Automated Sync</div>
-                </div>
-              </div>
+                            {/* Technical summary specs banner */}
+              <motion.div
+                className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10 pt-8 border-t border-zinc-850 text-sm font-mono"
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: "-40px" }}
+                variants={{
+                  hidden: {},
+                  show: { transition: { staggerChildren: 0.12 } },
+                }}
+              >
+                {[
+                  {
+                    label: "PROBLEMS INDEXED",
+                    value: (
+                      <>
+                        <NumberTicker value={totalQuestions} suffix="+" /> Verified
+                      </>
+                    ),
+                  },
+                  {
+                    label: "CURRICULUM PATTERNS",
+                    value: (
+                      <>
+                        <NumberTicker value={18} /> Core Trees
+                      </>
+                    ),
+                  },
+                  {
+                    label: "INTEGRATIONS",
+                    value: "LeetCode & Codeforces",
+                  },
+                  {
+                    label: "VERIFICATION",
+                    value: "Automated Sync",
+                  },
+                ].map((stat) => (
+                  <motion.div
+                    key={stat.label}
+                    variants={{
+                      hidden: { opacity: 0, y: 14 },
+                      show: { opacity: 1, y: 0 },
+                    }}
+                    transition={{ duration: 0.45, ease: "easeOut" }}
+                  >
+                    <div className="text-zinc-500 text-xs uppercase font-semibold">{stat.label}</div>
+                    <div className="text-zinc-100 font-bold text-base sm:text-lg mt-1">{stat.value}</div>
+                  </motion.div>
+                ))}
+              </motion.div>
             </section>
           )}
 
