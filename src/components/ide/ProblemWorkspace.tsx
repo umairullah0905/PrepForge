@@ -254,6 +254,7 @@ export default function ProblemWorkspace({
   const [hasSavedCfSession, setHasSavedCfSession] = useState<boolean>(false);
   const [cfSessionFeedbackMsg, setCfSessionFeedbackMsg] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [isCfBrowserLoggingIn, setIsCfBrowserLoggingIn] = useState<boolean>(false);
+  const [isExtensionInstalled, setIsExtensionInstalled] = useState<boolean>(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -261,6 +262,80 @@ export default function ProblemWorkspace({
       setHasSavedSession(!!saved && saved.trim().length > 0);
       const savedCf = localStorage.getItem("codeforces_session");
       setHasSavedCfSession(!!savedCf && savedCf.trim().length > 0);
+
+      // Check if extension content script already marked dataset
+      if (document.documentElement.dataset.prepforgeExtension === "true") {
+        setIsExtensionInstalled(true);
+      }
+
+      const handleMessage = (event: MessageEvent) => {
+        if (!event.data || typeof event.data !== "object") return;
+
+        if (event.data.type === "PREPFORGE_EXTENSION_LOADED") {
+          setIsExtensionInstalled(true);
+        }
+
+        if (event.data.type === "PREPFORGE_RESPONSE_LEETCODE_SESSION") {
+          setIsBrowserLoggingIn(false);
+          const res = event.data.data;
+          if (res?.success && res.sessionCookie) {
+            localStorage.setItem("leetcode_session", res.sessionCookie);
+            setSessionInput(res.sessionCookie);
+            setHasSavedSession(true);
+            setSessionFeedbackMsg({
+              type: "success",
+              text: "🎉 Connected to LeetCode instantly via PrepForge Companion!",
+            });
+            setTimeout(() => {
+              setIsSessionModalOpen(false);
+              setSessionFeedbackMsg(null);
+            }, 1400);
+          } else {
+            setSessionFeedbackMsg({
+              type: "error",
+              text:
+                res?.error ||
+                "No active LeetCode session found in your browser. Please log into leetcode.com first!",
+            });
+          }
+        }
+
+        if (event.data.type === "PREPFORGE_RESPONSE_CODEFORCES_SESSION") {
+          setIsCfBrowserLoggingIn(false);
+          const res = event.data.data;
+          if (res?.success && res.sessionCookies) {
+            localStorage.setItem("codeforces_session", res.sessionCookies);
+            if (res.handle) {
+              localStorage.setItem("codeforces_handle", res.handle);
+              setCfHandleInput(res.handle);
+            }
+            setCfSessionInput(res.sessionCookies);
+            setHasSavedCfSession(true);
+            setCfSessionFeedbackMsg({
+              type: "success",
+              text: "🎉 Connected to Codeforces instantly via PrepForge Companion!",
+            });
+            setTimeout(() => {
+              setIsCfSessionModalOpen(false);
+              setCfSessionFeedbackMsg(null);
+            }, 1400);
+          } else {
+            setCfSessionFeedbackMsg({
+              type: "error",
+              text:
+                res?.error ||
+                "No active Codeforces session found in your browser. Please log into codeforces.com first!",
+            });
+          }
+        }
+      };
+
+      window.addEventListener("message", handleMessage);
+      window.postMessage({ type: "PREPFORGE_PING_EXTENSION" }, "*");
+
+      return () => {
+        window.removeEventListener("message", handleMessage);
+      };
     }
   }, []);
 
@@ -482,6 +557,16 @@ export default function ProblemWorkspace({
   };
 
   const handleBrowserLogin = async () => {
+    if (isExtensionInstalled) {
+      setIsBrowserLoggingIn(true);
+      setSessionFeedbackMsg({
+        type: "success",
+        text: "Connecting to LeetCode via PrepForge Companion Extension...",
+      });
+      window.postMessage({ type: "PREPFORGE_REQUEST_LEETCODE_SESSION" }, "*");
+      return;
+    }
+
     const isLocal =
       typeof window !== "undefined" &&
       (window.location.hostname === "localhost" ||
@@ -490,7 +575,7 @@ export default function ProblemWorkspace({
     if (!isLocal) {
       setSessionFeedbackMsg({
         type: "error",
-        text: "1-Click Auto-Detect is only available when running PrepForge locally on your desktop. On this cloud deployment, please copy & paste your LEETCODE_SESSION cookie manually into the box below.",
+        text: "PrepForge Companion Extension not detected. Install the extension (see download below) or paste your cookie manually.",
       });
       return;
     }
@@ -707,6 +792,16 @@ export default function ProblemWorkspace({
   };
 
   const handleCfBrowserLogin = async () => {
+    if (isExtensionInstalled) {
+      setIsCfBrowserLoggingIn(true);
+      setCfSessionFeedbackMsg({
+        type: "success",
+        text: "Connecting to Codeforces via PrepForge Companion Extension...",
+      });
+      window.postMessage({ type: "PREPFORGE_REQUEST_CODEFORCES_SESSION" }, "*");
+      return;
+    }
+
     const isLocal =
       typeof window !== "undefined" &&
       (window.location.hostname === "localhost" ||
@@ -715,7 +810,7 @@ export default function ProblemWorkspace({
     if (!isLocal) {
       setCfSessionFeedbackMsg({
         type: "error",
-        text: "Automated browser login is only available when running locally on your desktop. On this cloud deployment, please enter your Codeforces session credentials manually below.",
+        text: "PrepForge Companion Extension not detected. Install the extension (see download below) or enter credentials manually.",
       });
       return;
     }
@@ -1732,17 +1827,36 @@ export default function ProblemWorkspace({
                 <div>
                   <h3 className="text-xs font-semibold text-zinc-100 flex items-center gap-1.5">
                     <span>1-Click Auto-Detect &amp; Connect</span>
-                    <span className="text-[10px] text-amber-400 font-mono font-normal border border-amber-500/30 bg-amber-500/10 px-1.5 py-0.2 rounded">Instant</span>
+                    {isExtensionInstalled ? (
+                      <span className="text-[10px] text-emerald-400 font-mono font-medium border border-emerald-500/30 bg-emerald-500/10 px-1.5 py-0.2 rounded flex items-center gap-1">
+                        ● Extension Active
+                      </span>
+                    ) : (
+                      <span className="text-[10px] text-amber-400 font-mono font-normal border border-amber-500/30 bg-amber-500/10 px-1.5 py-0.2 rounded">
+                        1-Click
+                      </span>
+                    )}
                   </h3>
                   <p className="text-[11px] text-zinc-400">
-                    Works automatically with Firefox or opens a quick sign-in window.
+                    {isExtensionInstalled
+                      ? "PrepForge Companion is active. Click below to grab your LeetCode session in 1 second!"
+                      : "Syncs automatically with the PrepForge Companion browser extension."}
                   </p>
                 </div>
               </div>
 
-              <p className="text-[11px] text-zinc-400 leading-relaxed">
-                Click below to auto-import your active LeetCode session from Firefox or open a secure sign-in window. No DevTools or copying required!
-              </p>
+              {!isExtensionInstalled && (
+                <div className="p-2.5 rounded-lg bg-zinc-900/90 border border-zinc-800 text-[11px] text-zinc-300 flex items-center justify-between gap-2">
+                  <span>⚡ Want 1-click sync without DevTools?</span>
+                  <a
+                    href="/prepforge-companion.zip"
+                    download="prepforge-companion.zip"
+                    className="shrink-0 text-amber-400 hover:text-amber-300 font-medium underline inline-flex items-center gap-1"
+                  >
+                    Download Extension (.zip) &rarr;
+                  </a>
+                </div>
+              )}
 
               <button
                 type="button"
@@ -1753,12 +1867,18 @@ export default function ProblemWorkspace({
                 {isBrowserLoggingIn ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin text-zinc-950" />
-                    <span>Detecting LeetCode Session...</span>
+                    <span>Connecting LeetCode Session...</span>
                   </>
                 ) : (
                   <>
                     <Sparkles className="h-4 w-4 text-zinc-950" />
-                    <span>{hasSavedSession ? "Refresh / Re-detect LeetCode Session" : "1-Click Auto-Detect / Connect"}</span>
+                    <span>
+                      {isExtensionInstalled
+                        ? "1-Click Connect with Extension"
+                        : hasSavedSession
+                        ? "Refresh / Re-detect LeetCode Session"
+                        : "1-Click Auto-Detect / Connect"}
+                    </span>
                   </>
                 )}
               </button>
@@ -1986,17 +2106,36 @@ export default function ProblemWorkspace({
                 <div>
                   <h3 className="text-xs font-semibold text-zinc-100 flex items-center gap-1.5">
                     <span>1-Click Auto-Detect &amp; Connect</span>
-                    <span className="text-[10px] text-blue-400 font-mono font-normal border border-blue-500/30 bg-blue-500/10 px-1.5 py-0.2 rounded">Instant</span>
+                    {isExtensionInstalled ? (
+                      <span className="text-[10px] text-emerald-400 font-mono font-medium border border-emerald-500/30 bg-emerald-500/10 px-1.5 py-0.2 rounded flex items-center gap-1">
+                        ● Extension Active
+                      </span>
+                    ) : (
+                      <span className="text-[10px] text-blue-400 font-mono font-normal border border-blue-500/30 bg-blue-500/10 px-1.5 py-0.2 rounded">
+                        1-Click
+                      </span>
+                    )}
                   </h3>
                   <p className="text-[11px] text-zinc-400">
-                    Opens a secure Codeforces sign-in window and auto-detects your session.
+                    {isExtensionInstalled
+                      ? "PrepForge Companion is active. Click below to grab your Codeforces session in 1 second!"
+                      : "Syncs automatically with the PrepForge Companion browser extension."}
                   </p>
                 </div>
               </div>
 
-              <p className="text-[11px] text-zinc-400 leading-relaxed">
-                Click below to launch an official Codeforces login window. Once signed in, InterviewOS will automatically extract your handle and session credentials.
-              </p>
+              {!isExtensionInstalled && (
+                <div className="p-2.5 rounded-lg bg-zinc-900/90 border border-zinc-800 text-[11px] text-zinc-300 flex items-center justify-between gap-2">
+                  <span>⚡ Want 1-click sync without DevTools?</span>
+                  <a
+                    href="/prepforge-companion.zip"
+                    download="prepforge-companion.zip"
+                    className="shrink-0 text-blue-400 hover:text-blue-300 font-medium underline inline-flex items-center gap-1"
+                  >
+                    Download Extension (.zip) &rarr;
+                  </a>
+                </div>
+              )}
 
               <button
                 type="button"
@@ -2007,12 +2146,18 @@ export default function ProblemWorkspace({
                 {isCfBrowserLoggingIn ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin text-zinc-950" />
-                    <span>Detecting Codeforces Session...</span>
+                    <span>Connecting Codeforces Session...</span>
                   </>
                 ) : (
                   <>
                     <Sparkles className="h-4 w-4 text-zinc-950" />
-                    <span>{hasSavedCfSession ? "Refresh / Re-detect Codeforces Session" : "1-Click Auto-Detect / Connect"}</span>
+                    <span>
+                      {isExtensionInstalled
+                        ? "1-Click Connect with Extension"
+                        : hasSavedCfSession
+                        ? "Refresh / Re-detect Codeforces Session"
+                        : "1-Click Auto-Detect / Connect"}
+                    </span>
                   </>
                 )}
               </button>

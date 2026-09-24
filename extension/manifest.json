@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "PrepForge Companion",
+  "version": "1.0.0",
+  "description": "One-click session sync for LeetCode and Codeforces with PrepForge IDE.",
+  "permissions": [
+    "cookies"
+  ],
+  "host_permissions": [
+    "https://leetcode.com/*",
+    "https://*.leetcode.com/*",
+    "https://codeforces.com/*",
+    "https://*.codeforces.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost/*",
+        "http://localhost:*/*",
+        "http://127.0.0.1/*",
+        "http://127.0.0.1:*/*",
+        "https://*.workers.dev/*",
+        "https://*.run.app/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "PrepForge Companion"
+  }
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PrepForge Companion</title>
+  <style>
+    body {
+      width: 280px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 16px;
+      background: #09090b;
+      color: #fafafa;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid #27272a;
+      padding-bottom: 10px;
+    }
+    .title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #f59e0b;
+      letter-spacing: -0.02em;
+    }
+    .status-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      margin-bottom: 8px;
+      background: #18181b;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .badge {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+    .badge-ok {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .badge-no {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    .footer {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 11px;
+      color: #a1a1aa;
+      line-height: 1.4;
+    }
+    .hint {
+      color: #71717a;
+      font-size: 10px;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span style="font-size: 18px;">⚡</span>
+    <div class="title">PrepForge Companion</div>
+  </div>
+
+  <div class="status-item">
+    <span>LeetCode Session</span>
+    <span id="lc-status" class="badge badge-no">Checking...</span>
+  </div>
+
+  <div class="status-item">
+    <span>Codeforces Session</span>
+    <span id="cf-status" class="badge badge-no">Checking...</span>
+  </div>
+
+  <div class="footer">
+    <div>Ready to auto-sync with PrepForge IDE.</div>
+    <div class="hint">Open PrepForge to connect with 1-click!</div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
