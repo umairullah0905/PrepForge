@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+
 import { useMemo } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
@@ -11,6 +11,23 @@ import { type Contest } from "@/lib/contests";
 import { ArrowRight, Terminal, Lock, Code2 } from "lucide-react";
 import WordRotate from "@/components/WordRotate";
 import NumberTicker from "@/components/NumberTicker";
+import Marquee from "@/components/Marquee";
+import { motion } from "framer-motion";
+
+const FEATURED_COMPANIES = [
+  "Google",
+  "Meta",
+  "Amazon",
+  "Apple",
+  "Microsoft",
+  "Netflix",
+  "Bloomberg",
+  "Uber",
+  "Airbnb",
+  "Stripe",
+  "LinkedIn",
+  "Adobe",
+];
 
 export default function LandingContent({
   userEmail,
@@ -237,7 +254,6 @@ export default function LandingContent({
               </div>
 
               {/* Technical summary specs banner */}
-                            {/* Technical summary specs banner */}
               <motion.div
                 className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10 pt-8 border-t border-zinc-850 text-sm font-mono"
                 initial="hidden"
@@ -289,6 +305,14 @@ export default function LandingContent({
               </motion.div>
             </section>
           )}
+
+          {/* TRUSTED COMPANIES MARQUEE */}
+          <section className="mb-14 -mt-6">
+            <div className="text-zinc-600 text-xs uppercase font-semibold font-mono tracking-wide mb-4">
+              Questions from companies
+            </div>
+            <Marquee items={FEATURED_COMPANIES} speed={28} />
+          </section>
 
           {/* UPCOMING CONTESTS CALENDAR (Logged In Only) */}
           {isLoggedIn && <ContestCalendar initialContests={contests} />}
