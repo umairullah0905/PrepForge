@@ -6,50 +6,77 @@ export const runtime = "nodejs";
 
 const BACKEND_URL = process.env.BACKEND_API_URL || "http://127.0.0.1:4000";
 
+import fs from "fs";
+
 async function executeViaLocalCfRunner(payload: any): Promise<any> {
+  const scriptPath = path.join(process.cwd(), "backend", "cf_submit_runner.js");
+  const backendCwd = path.join(process.cwd(), "backend");
+
+  if (!fs.existsSync(scriptPath) || !fs.existsSync(backendCwd)) {
+    return {
+      success: false,
+      error:
+        "Codeforces automated submission is only available when running locally on your computer with the local backend active.",
+    };
+  }
+
   return new Promise((resolve, reject) => {
-    const scriptPath = path.join(process.cwd(), "backend", "cf_submit_runner.js");
-    const child = spawn(process.execPath, [scriptPath], {
-      cwd: path.join(process.cwd(), "backend"),
-      env: {
-        ...process.env,
-        NODE_PATH: path.join(process.cwd(), "backend", "node_modules"),
-      },
-    });
+    try {
+      const child = spawn(process.execPath, [scriptPath], {
+        cwd: backendCwd,
+        env: {
+          ...process.env,
+          NODE_PATH: path.join(backendCwd, "node_modules"),
+        },
+      });
 
-    let stdout = "";
-    let stderr = "";
+      let stdout = "";
+      let stderr = "";
 
-    child.stdout.on("data", (data) => {
-      stdout += data.toString();
-    });
+      child.stdout?.on("data", (data) => {
+        stdout += data.toString();
+      });
 
-    child.stderr.on("data", (data) => {
-      stderr += data.toString();
-    });
+      child.stderr?.on("data", (data) => {
+        stderr += data.toString();
+      });
 
-    child.on("error", (err) => {
-      reject(err);
-    });
-
-    child.on("close", (code) => {
-      if (stdout.trim()) {
-        try {
-          const parsed = JSON.parse(stdout);
-          return resolve(parsed);
-        } catch (e) {
-          // ignore json parse error
+      child.on("error", (err: any) => {
+        if (err.code === "ENOENT") {
+          resolve({
+            success: false,
+            error:
+              "Codeforces submission runner was not found on this server. Please run locally or configure the backend service.",
+          });
+        } else {
+          reject(err);
         }
-      }
-      if (code !== 0) {
-        reject(new Error(stderr || `CF Runner process exited with code ${code}`));
-      } else {
-        resolve({ success: false, error: stderr || "Submission failed without output" });
-      }
-    });
+      });
 
-    child.stdin.write(JSON.stringify(payload));
-    child.stdin.end();
+      child.on("close", (code) => {
+        if (stdout.trim()) {
+          try {
+            const parsed = JSON.parse(stdout);
+            return resolve(parsed);
+          } catch (e) {
+            // ignore json parse error
+          }
+        }
+        if (code !== 0) {
+          reject(new Error(stderr || `CF Runner process exited with code ${code}`));
+        } else {
+          resolve({ success: false, error: stderr || "Submission failed without output" });
+        }
+      });
+
+      child.stdin?.write(JSON.stringify(payload));
+      child.stdin?.end();
+    } catch (err: any) {
+      resolve({
+        success: false,
+        error: "Failed to launch Codeforces runner process.",
+      });
+    }
   });
 }
 

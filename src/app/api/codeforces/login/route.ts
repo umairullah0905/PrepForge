@@ -6,47 +6,75 @@ export const runtime = "nodejs";
 
 const BACKEND_URL = process.env.BACKEND_API_URL || "http://127.0.0.1:4000";
 
+import fs from "fs";
+
 async function executeViaLocalCfLoginRunner(): Promise<any> {
+  const scriptPath = path.join(process.cwd(), "backend", "cf_login_runner.js");
+  const backendCwd = path.join(process.cwd(), "backend");
+
+  if (!fs.existsSync(scriptPath) || !fs.existsSync(backendCwd)) {
+    return {
+      success: false,
+      error:
+        "1-Click Auto-Detect is only available when running locally on your computer. On the cloud deployment, please enter your Codeforces session credentials manually.",
+    };
+  }
+
   return new Promise((resolve, reject) => {
-    const scriptPath = path.join(process.cwd(), "backend", "cf_login_runner.js");
-    const child = spawn(process.execPath, [scriptPath], {
-      cwd: path.join(process.cwd(), "backend"),
-      env: {
-        ...process.env,
-        NODE_PATH: path.join(process.cwd(), "backend", "node_modules"),
-      },
-    });
+    try {
+      const child = spawn(process.execPath, [scriptPath], {
+        cwd: backendCwd,
+        env: {
+          ...process.env,
+          NODE_PATH: path.join(backendCwd, "node_modules"),
+        },
+      });
 
-    let stdout = "";
-    let stderr = "";
+      let stdout = "";
+      let stderr = "";
 
-    child.stdout.on("data", (data) => {
-      stdout += data.toString();
-    });
+      child.stdout?.on("data", (data) => {
+        stdout += data.toString();
+      });
 
-    child.stderr.on("data", (data) => {
-      stderr += data.toString();
-    });
+      child.stderr?.on("data", (data) => {
+        stderr += data.toString();
+      });
 
-    child.on("error", (err) => {
-      reject(err);
-    });
-
-    child.on("close", (code) => {
-      if (stdout.trim()) {
-        try {
-          const parsed = JSON.parse(stdout);
-          return resolve(parsed);
-        } catch (e) {
-          // ignore json parse error
+      child.on("error", (err: any) => {
+        if (err.code === "ENOENT") {
+          resolve({
+            success: false,
+            error:
+              "1-Click Auto-Detect is only available when running locally on your computer. Please enter your credentials manually.",
+          });
+        } else {
+          reject(err);
         }
-      }
-      if (code !== 0) {
-        reject(new Error(stderr || `CF Login runner exited with code ${code}`));
-      } else {
-        resolve({ success: false, error: stderr || "Login failed without output" });
-      }
-    });
+      });
+
+      child.on("close", (code) => {
+        if (stdout.trim()) {
+          try {
+            const parsed = JSON.parse(stdout);
+            return resolve(parsed);
+          } catch (e) {
+            // ignore json parse error
+          }
+        }
+        if (code !== 0) {
+          reject(new Error(stderr || `CF Login runner exited with code ${code}`));
+        } else {
+          resolve({ success: false, error: stderr || "Login failed without output" });
+        }
+      });
+    } catch (err: any) {
+      resolve({
+        success: false,
+        error:
+          "1-Click Auto-Detect is only available when running locally. Please enter your credentials manually.",
+      });
+    }
   });
 }
 

@@ -312,7 +312,7 @@ export default async function DsaHubPage(props: {
                             href={`/dsa?tab=companies&company=${encodeURIComponent(
                               rawCompany
                             )}&topic=${encodeURIComponent(topicFilter)}&page=${currentPage - 1}`}
-                            className="inline-flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors"
+                            className="inline-flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 dark:hover:text-white transition-colors"
                           >
                             <ChevronLeft className="h-4 w-4" />
                             <span>Prev</span>
@@ -326,7 +326,7 @@ export default async function DsaHubPage(props: {
                             href={`/dsa?tab=companies&company=${encodeURIComponent(
                               rawCompany
                             )}&topic=${encodeURIComponent(topicFilter)}&page=${currentPage + 1}`}
-                            className="inline-flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors"
+                            className="inline-flex items-center gap-1 rounded-md border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 dark:hover:text-white transition-colors"
                           >
                             <span>Next</span>
                             <ChevronRight className="h-4 w-4" />

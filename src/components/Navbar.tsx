@@ -93,6 +93,11 @@ export default function Navbar({
                 <span className="max-w-[140px] truncate hidden md:inline">
                   {profile.name || userEmail}
                 </span>
+                {profile.is_premium && (
+                  <span className="rounded bg-amber-500/15 border border-amber-500/30 px-1.5 py-0.2 text-[10px] font-mono text-amber-400 font-bold">
+                    PRO
+                  </span>
+                )}
               </Link>
 
               {/* Sign out */}

@@ -626,7 +626,7 @@ function ContestCard({
         </div>
 
         {/* Contest Title */}
-        <h4 className="text-sm sm:text-base font-bold text-zinc-100 group-hover:text-white transition-colors line-clamp-2 leading-snug">
+        <h4 className="text-sm sm:text-base font-bold text-zinc-100 group-hover:text-emerald-400 transition-colors line-clamp-2 leading-snug">
           {contest.title}
         </h4>
 

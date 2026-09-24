@@ -496,7 +496,7 @@ export default function ClientQuestsView({
                           <div className="flex flex-col gap-1.5">
                             <Link
                               href={q.id ? `/quests/${q.id}` : q.url || "#"}
-                              className="font-semibold text-sm sm:text-base text-zinc-200 group-hover:text-white hover:underline inline-flex items-center gap-1.5"
+                              className="font-semibold text-sm sm:text-base text-zinc-200 group-hover:text-emerald-400 hover:underline inline-flex items-center gap-1.5 transition-colors"
                             >
                               <span>{q.title}</span>
                             </Link>
@@ -566,7 +566,7 @@ export default function ClientQuestsView({
                                 href={q.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="rounded-md border border-zinc-800 bg-zinc-950 px-3 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors inline-flex items-center gap-1.5 shadow-sm"
+                                className="rounded-md border border-zinc-800 bg-zinc-950 px-3 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 dark:hover:text-white transition-colors inline-flex items-center gap-1.5 shadow-sm"
                               >
                                 <span>Solve</span>
                                 <ExternalLink className="h-3.5 w-3.5" />

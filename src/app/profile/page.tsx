@@ -55,6 +55,11 @@ export default async function ProfilePage() {
                     <span className="rounded border border-zinc-750 bg-zinc-950 px-3 py-1 font-mono text-xs font-semibold text-zinc-300">
                       Tier L{level}
                     </span>
+                    {profile?.is_premium && (
+                      <span className="rounded border border-amber-500/40 bg-amber-500/15 px-2.5 py-0.5 font-mono text-xs font-semibold text-amber-400 shadow-sm">
+                        PRO
+                      </span>
+                    )}
                   </div>
                   <div className="text-sm text-zinc-400 font-mono mt-1">
                     {user.email}

@@ -3,7 +3,7 @@ export function getSupabaseUrl(): string {
     process.env.SUPABASE_URL ||
     process.env["NEXT_PUBLIC_SUPABASE_URL"] ||
     "";
-  return url.trim();
+  return url.trim().replace(/^["']|["']$/g, "");
 }
 
 export function getSupabaseAnonKey(): string {
@@ -11,7 +11,7 @@ export function getSupabaseAnonKey(): string {
     process.env.SUPABASE_ANON_KEY ||
     process.env["NEXT_PUBLIC_SUPABASE_ANON_KEY"] ||
     "";
-  return key.trim();
+  return key.trim().replace(/^["']|["']$/g, "");
 }
 
 // Dynamic fallbacks evaluated at runtime

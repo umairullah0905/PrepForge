@@ -19,6 +19,7 @@ import {
   Flame,
   Brain,
   MessageSquare,
+  Lock,
 } from "lucide-react";
 
 export interface AiHintAvatarProps {
@@ -27,6 +28,7 @@ export interface AiHintAvatarProps {
   problemDescription?: string;
   userCode?: string;
   language?: string;
+  isPremium?: boolean;
 }
 
 const HINT_STEPS = [
@@ -42,6 +44,7 @@ export default function AiHintAvatar({
   problemDescription = "",
   userCode = "",
   language = "python",
+  isPremium = false,
 }: AiHintAvatarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
@@ -51,6 +54,7 @@ export default function AiHintAvatar({
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isConfigError, setIsConfigError] = useState(false);
+  const [isPremiumRequired, setIsPremiumRequired] = useState(!isPremium);
   const [copied, setCopied] = useState(false);
   const [customQuestion, setCustomQuestion] = useState("");
   const [customAnswers, setCustomAnswers] = useState<
@@ -60,8 +64,18 @@ export default function AiHintAvatar({
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    setIsPremiumRequired(!isPremium);
+  }, [isPremium]);
+
   // Fetch hint for a specific level
   const fetchHint = async (level: number) => {
+    if (!isPremium || isPremiumRequired) {
+      setIsPremiumRequired(true);
+      setErrorMsg("PrepForge AI Coach is exclusively available for PRO members.");
+      return;
+    }
+
     if (hints[level]) {
       setActiveTab(level);
       return;
@@ -88,6 +102,9 @@ export default function AiHintAvatar({
       const data = await res.json();
 
       if (!res.ok || !data.success) {
+        if (data.isPremiumRequired || res.status === 403) {
+          setIsPremiumRequired(true);
+        }
         if (data.isConfigError) {
           setIsConfigError(true);
         }
@@ -107,6 +124,12 @@ export default function AiHintAvatar({
 
   // Ask custom question or quick chip
   const handleAskQuestion = async (queryText?: string) => {
+    if (!isPremium || isPremiumRequired) {
+      setIsPremiumRequired(true);
+      setErrorMsg("PrepForge AI Coach is exclusively available for PRO members.");
+      return;
+    }
+
     const q = (queryText || customQuestion).trim();
     if (!q || loading) return;
 
@@ -131,6 +154,9 @@ export default function AiHintAvatar({
       const data = await res.json();
 
       if (!res.ok || !data.success) {
+        if (data.isPremiumRequired || res.status === 403) {
+          setIsPremiumRequired(true);
+        }
         if (data.isConfigError) {
           setIsConfigError(true);
         }
@@ -251,31 +277,53 @@ export default function AiHintAvatar({
             onClick={() => {
               setIsOpen(true);
               setIsMinimized(false);
-              if (maxUnlockedLevel === 0) {
+              if (isPremium && !isPremiumRequired && maxUnlockedLevel === 0) {
                 fetchHint(1);
               }
             }}
-            className="group relative flex items-center gap-2.5 px-3.5 py-2 rounded-full border border-emerald-500/40 bg-zinc-950/95 hover:bg-zinc-900 text-zinc-100 shadow-xl shadow-emerald-950/30 hover:border-emerald-400 hover:scale-[1.03] transition-all duration-200"
-            title="Ask AI Coach for progressive hints"
+            className={`group relative flex items-center gap-2.5 px-3.5 py-2 rounded-full border bg-zinc-950/95 hover:bg-zinc-900 text-zinc-100 shadow-xl transition-all duration-200 ${
+              isPremium && !isPremiumRequired
+                ? "border-emerald-500/40 shadow-emerald-950/30 hover:border-emerald-400 hover:scale-[1.03]"
+                : "border-amber-500/40 shadow-amber-950/20 hover:border-amber-400 hover:scale-[1.02]"
+            }`}
+            title={isPremium && !isPremiumRequired ? "Ask AI Coach for progressive hints" : "AI Coach is a PRO feature"}
           >
-            {/* Glowing Orb Animation */}
-            <span className="relative flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-tr from-emerald-600 via-teal-500 to-cyan-400 p-[1px] shadow-sm">
-              <span className="flex h-full w-full items-center justify-center rounded-full bg-zinc-950">
-                <Bot className="h-4 w-4 text-emerald-400 group-hover:rotate-12 transition-transform duration-200" />
+            {/* Orb Animation */}
+            {isPremium && !isPremiumRequired ? (
+              <span className="relative flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-tr from-emerald-600 via-teal-500 to-cyan-400 p-[1px] shadow-sm">
+                <span className="flex h-full w-full items-center justify-center rounded-full bg-zinc-950">
+                  <Bot className="h-4 w-4 text-emerald-400 group-hover:rotate-12 transition-transform duration-200" />
+                </span>
+                <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+                </span>
               </span>
-              <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+            ) : (
+              <span className="relative flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-tr from-amber-600 via-yellow-500 to-amber-400 p-[1px] shadow-sm">
+                <span className="flex h-full w-full items-center justify-center rounded-full bg-zinc-950">
+                  <Lock className="h-3.5 w-3.5 text-amber-400" />
+                </span>
               </span>
-            </span>
+            )}
 
             <div className="flex flex-col text-left">
               <span className="text-xs font-semibold text-zinc-100 flex items-center gap-1">
-                AI Hints
-                <Sparkles className="h-3 w-3 text-emerald-400" />
+                AI Coach
+                {isPremium && !isPremiumRequired ? (
+                  <Sparkles className="h-3 w-3 text-emerald-400" />
+                ) : (
+                  <span className="px-1 py-0.2 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[9px] font-mono font-semibold">
+                    PRO
+                  </span>
+                )}
               </span>
               <span className="text-[10px] text-zinc-400 font-mono">
-                {maxUnlockedLevel > 0 ? `Hint ${maxUnlockedLevel}/4 Ready` : "Stuck? Get a nudge"}
+                {isPremium && !isPremiumRequired
+                  ? maxUnlockedLevel > 0
+                    ? `Hint ${maxUnlockedLevel}/4 Ready`
+                    : "Stuck? Get a nudge"
+                  : "PRO Member Only"}
               </span>
             </div>
           </button>
@@ -294,9 +342,17 @@ export default function AiHintAvatar({
           {/* Header */}
           <div className="flex items-center justify-between px-3.5 py-2.5 border-b border-zinc-800/80 bg-zinc-900/50">
             <div className="flex items-center gap-2.5 min-w-0">
-              <div className="relative flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-tr from-emerald-500 to-teal-400 p-[1px]">
+              <div className={`relative flex h-7 w-7 items-center justify-center rounded-full p-[1px] ${
+                isPremium && !isPremiumRequired
+                  ? "bg-gradient-to-tr from-emerald-500 to-teal-400"
+                  : "bg-gradient-to-tr from-amber-500 to-yellow-400"
+              }`}>
                 <div className="flex h-full w-full items-center justify-center rounded-full bg-zinc-950">
-                  <Bot className="h-3.5 w-3.5 text-emerald-400" />
+                  {isPremium && !isPremiumRequired ? (
+                    <Bot className="h-3.5 w-3.5 text-emerald-400" />
+                  ) : (
+                    <Lock className="h-3.5 w-3.5 text-amber-400" />
+                  )}
                 </div>
               </div>
               <div className="min-w-0">
@@ -304,9 +360,15 @@ export default function AiHintAvatar({
                   <span className="text-xs font-semibold text-zinc-100 truncate">
                     PrepForge AI Coach
                   </span>
-                  <span className="px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[9px] font-mono">
-                    Gemini
-                  </span>
+                  {isPremium && !isPremiumRequired ? (
+                    <span className="px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[9px] font-mono">
+                      OpenRouter
+                    </span>
+                  ) : (
+                    <span className="px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[9px] font-mono font-semibold flex items-center gap-0.5">
+                      <Lock className="h-2.5 w-2.5" /> PRO
+                    </span>
+                  )}
                 </div>
                 <p className="text-[10px] text-zinc-400 truncate max-w-[220px]">
                   {problemTitle}
@@ -345,34 +407,38 @@ export default function AiHintAvatar({
               <div className="px-3 pt-2.5 pb-2 border-b border-zinc-800/60 bg-zinc-900/20">
                 <div className="flex items-center justify-between text-[11px] font-mono text-zinc-400 mb-1.5">
                   <span>Step-by-Step Guidance</span>
-                  <span className="text-emerald-400 font-medium">
-                    {maxUnlockedLevel}/4 Unlocked
+                  <span className={isPremium && !isPremiumRequired ? "text-emerald-400 font-medium" : "text-amber-400/80 font-medium"}>
+                    {isPremium && !isPremiumRequired ? `${maxUnlockedLevel}/4 Unlocked` : "PRO Locked"}
                   </span>
                 </div>
 
                 <div className="grid grid-cols-4 gap-1.5">
                   {HINT_STEPS.map((step) => {
-                    const isUnlocked = !!hints[step.level];
-                    const isActive = activeTab === step.level;
-                    const StepIcon = step.icon;
+                    const isUnlocked = isPremium && !isPremiumRequired && !!hints[step.level];
+                    const isActive = isPremium && !isPremiumRequired && activeTab === step.level;
+                    const isNextToUnlock = isPremium && !isPremiumRequired && step.level === maxUnlockedLevel + 1;
+                    const StepIcon = isPremium && !isPremiumRequired ? step.icon : Lock;
 
                     return (
                       <button
                         key={step.level}
                         onClick={() => {
+                          if (!isPremium || isPremiumRequired) return;
                           if (isUnlocked) {
                             setActiveTab(step.level);
                           } else if (step.level <= maxUnlockedLevel + 1) {
                             fetchHint(step.level);
                           }
                         }}
-                        disabled={loading && !isUnlocked}
+                        disabled={!isPremium || isPremiumRequired || (loading && !isUnlocked)}
                         className={`flex flex-col items-center py-1.5 px-1 rounded-md border text-center transition-all ${
-                          isActive
+                          !isPremium || isPremiumRequired
+                            ? "border-zinc-800/40 bg-zinc-950/40 text-zinc-600 cursor-not-allowed opacity-60"
+                            : isActive
                             ? "border-emerald-500/60 bg-emerald-950/30 text-emerald-300 shadow-sm"
                             : isUnlocked
                             ? "border-zinc-700/60 bg-zinc-900/50 text-zinc-300 hover:bg-zinc-800/60"
-                            : step.level === maxUnlockedLevel + 1
+                            : isNextToUnlock
                             ? "border-dashed border-emerald-500/40 bg-zinc-950 text-emerald-400/80 hover:border-emerald-400 hover:bg-emerald-950/20"
                             : "border-zinc-800/40 bg-zinc-950/50 text-zinc-600 cursor-not-allowed opacity-60"
                         }`}
@@ -382,7 +448,7 @@ export default function AiHintAvatar({
                           <span>{step.label}</span>
                         </div>
                         <span className="text-[8px] opacity-70 font-mono">
-                          {isUnlocked ? "Ready" : step.level === maxUnlockedLevel + 1 ? "Unlock" : "Locked"}
+                          {!isPremium || isPremiumRequired ? "Locked" : isUnlocked ? "Ready" : isNextToUnlock ? "Unlock" : "Locked"}
                         </span>
                       </button>
                     );
@@ -395,138 +461,169 @@ export default function AiHintAvatar({
                 ref={scrollRef}
                 className="flex-1 overflow-y-auto px-3.5 py-3 space-y-3 font-sans"
               >
-                {/* Configuration Error Alert */}
-                {isConfigError && (
-                  <div className="p-3 rounded-lg border border-amber-500/30 bg-amber-950/20 text-amber-300 text-xs space-y-1.5">
-                    <div className="flex items-center gap-1.5 font-semibold text-amber-200">
-                      <AlertTriangle className="h-4 w-4 text-amber-400" />
-                      <span>Gemini API Key Required</span>
+                {/* PRO Restriction Banner */}
+                {(!isPremium || isPremiumRequired) ? (
+                  <div className="my-auto py-8 px-4 rounded-xl border border-amber-500/30 bg-gradient-to-b from-amber-500/10 via-zinc-900/80 to-zinc-950 text-center space-y-3 shadow-lg">
+                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-400 shadow-lg shadow-amber-500/10">
+                      <Lock className="h-6 w-6" />
                     </div>
-                    <p className="text-[11px] text-amber-300/80 leading-relaxed">
-                      To enable AI hints, add your Google Gemini API key to your environment:
-                    </p>
-                    <div className="p-1.5 rounded bg-zinc-950/80 border border-zinc-800 font-mono text-[10px] text-zinc-300">
-                      GEMINI_API_KEY=&quot;your_key_here&quot;
+                    <div className="space-y-1">
+                      <h3 className="text-sm font-bold text-zinc-100 flex items-center justify-center gap-1.5">
+                        <span>PrepForge AI Coach</span>
+                        <span className="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[9px] font-mono font-semibold">
+                          PRO ONLY
+                        </span>
+                      </h3>
+                      <p className="text-xs text-zinc-400 max-w-xs mx-auto leading-relaxed">
+                        Progressive Socratic hints, code bug inspections, and algorithm walkthroughs are strictly reserved for PRO members.
+                      </p>
                     </div>
-                  </div>
-                )}
-
-                {/* General Error Alert */}
-                {errorMsg && !isConfigError && (
-                  <div className="p-2.5 rounded-md border border-rose-500/30 bg-rose-950/20 text-rose-300 text-xs flex items-start gap-2">
-                    <AlertTriangle className="h-4 w-4 text-rose-400 shrink-0 mt-0.5" />
-                    <span>{errorMsg}</span>
-                  </div>
-                )}
-
-                {/* Active Hint View */}
-                {hints[activeTab] ? (
-                  <div className="p-3 rounded-lg border border-zinc-800 bg-zinc-900/40 relative group">
-                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-zinc-800/80 text-[11px] font-mono text-zinc-400">
-                      <span className="flex items-center gap-1 text-emerald-400 font-medium">
-                        <Sparkles className="h-3 w-3" />
-                        {HINT_STEPS[activeTab - 1]?.label} Hint ({activeTab}/4)
-                      </span>
-                      <button
-                        onClick={() => handleCopyHint(hints[activeTab])}
-                        className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
+                    <div className="pt-2">
+                      <a
+                        href="/profile"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-zinc-950 font-semibold text-xs shadow-md transition-all duration-150"
                       >
-                        {copied ? (
-                          <>
-                            <Check className="h-3 w-3 text-emerald-400" />
-                            <span className="text-emerald-400">Copied</span>
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="h-3 w-3" />
-                            <span>Copy</span>
-                          </>
-                        )}
-                      </button>
+                        <span>Upgrade to PRO</span>
+                        <ChevronRight className="h-3.5 w-3.5" />
+                      </a>
                     </div>
-
-                    {renderFormattedText(hints[activeTab])}
-
-                    {/* Next Hint Action Button */}
-                    {activeTab < 4 && !hints[activeTab + 1] && (
-                      <div className="mt-3 pt-2 border-t border-zinc-800/60 flex justify-end">
-                        <button
-                          onClick={() => fetchHint(activeTab + 1)}
-                          disabled={loading}
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white font-medium text-xs transition-colors shadow-sm"
-                        >
-                          {loading ? (
-                            <>
-                              <Loader2 className="h-3 w-3 animate-spin" />
-                              <span>Generating next hint...</span>
-                            </>
-                          ) : (
-                            <>
-                              <span>Unlock Hint {activeTab + 1}: {HINT_STEPS[activeTab]?.label}</span>
-                              <ChevronRight className="h-3.5 w-3.5" />
-                            </>
-                          )}
-                        </button>
-                      </div>
-                    )}
                   </div>
                 ) : (
-                  !loading &&
-                  maxUnlockedLevel === 0 &&
-                  !errorMsg && (
-                    <div className="text-center py-8 px-4">
-                      <div className="h-10 w-10 mx-auto mb-2 rounded-full border border-emerald-500/30 bg-emerald-950/20 flex items-center justify-center text-emerald-400">
-                        <Lightbulb className="h-5 w-5" />
-                      </div>
-                      <h4 className="text-xs font-semibold text-zinc-200 mb-1">
-                        Ready to Tackle this Problem?
-                      </h4>
-                      <p className="text-[11px] text-zinc-400 max-w-xs mx-auto mb-4">
-                        I can give you progressive, Socratic hints without spoiling the final answer.
-                      </p>
-                      <button
-                        onClick={() => fetchHint(1)}
-                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-medium transition-colors shadow-sm"
-                      >
-                        <Sparkles className="h-3.5 w-3.5" />
-                        <span>Get First Hint (Intuition)</span>
-                      </button>
-                    </div>
-                  )
-                )}
-
-                {/* Custom Q&A History */}
-                {customAnswers.map((item, index) => (
-                  <div key={index} className="space-y-2">
-                    {/* User Question */}
-                    <div className="flex justify-end">
-                      <div className="max-w-[85%] rounded-lg px-2.5 py-1.5 bg-emerald-950/30 border border-emerald-500/30 text-emerald-200 text-xs">
-                        <p className="font-medium">{item.q}</p>
-                        <span className="text-[9px] text-emerald-400/60 font-mono block text-right mt-0.5">
-                          {item.time}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* AI Answer */}
-                    <div className="flex justify-start">
-                      <div className="max-w-[95%] rounded-lg p-2.5 bg-zinc-900/60 border border-zinc-800 text-zinc-300 text-xs">
-                        <div className="flex items-center gap-1 text-[10px] text-emerald-400 font-mono mb-1">
-                          <Bot className="h-3 w-3" />
-                          <span>AI Coach</span>
+                  <>
+                    {/* Configuration Error Alert */}
+                    {isConfigError && (
+                      <div className="p-3 rounded-lg border border-amber-500/30 bg-amber-950/20 text-amber-300 text-xs space-y-1.5">
+                        <div className="flex items-center gap-1.5 font-semibold text-amber-200">
+                          <AlertTriangle className="h-4 w-4 text-amber-400" />
+                          <span>OpenRouter API Key Required</span>
                         </div>
-                        {renderFormattedText(item.a)}
+                        <p className="text-[11px] text-amber-300/80 leading-relaxed">
+                          To enable AI hints, add your OpenRouter API key to your environment variables:
+                        </p>
+                        <div className="p-1.5 rounded bg-zinc-950/80 border border-zinc-800 font-mono text-[10px] text-zinc-300">
+                          OPENROUTER_API_KEY=&quot;your_key_here&quot;
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                ))}
+                    )}
 
-                {/* Loading State */}
-                {loading && (
-                  <div className="flex items-center gap-2 p-3 rounded-lg border border-zinc-800 bg-zinc-900/30 text-zinc-400 text-xs animate-pulse">
-                    <Loader2 className="h-4 w-4 animate-spin text-emerald-400" />
-                    <span>Gemini is thinking about {problemTitle}...</span>
-                  </div>
+                    {/* General Error Alert */}
+                    {errorMsg && !isConfigError && (
+                      <div className="p-2.5 rounded-md border border-rose-500/30 bg-rose-950/20 text-rose-300 text-xs flex items-start gap-2">
+                        <AlertTriangle className="h-4 w-4 text-rose-400 shrink-0 mt-0.5" />
+                        <span>{errorMsg}</span>
+                      </div>
+                    )}
+
+                    {/* Active Hint View */}
+                    {hints[activeTab] ? (
+                      <div className="p-3 rounded-lg border border-zinc-800 bg-zinc-900/40 relative group">
+                        <div className="flex items-center justify-between pb-2 mb-2 border-b border-zinc-800/80 text-[11px] font-mono text-zinc-400">
+                          <span className="flex items-center gap-1 text-emerald-400 font-medium">
+                            <Sparkles className="h-3 w-3" />
+                            {HINT_STEPS[activeTab - 1]?.label} Hint ({activeTab}/4)
+                          </span>
+                          <button
+                            onClick={() => handleCopyHint(hints[activeTab])}
+                            className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
+                          >
+                            {copied ? (
+                              <>
+                                <Check className="h-3 w-3 text-emerald-400" />
+                                <span className="text-emerald-400">Copied</span>
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="h-3 w-3" />
+                                <span>Copy</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
+
+                        {renderFormattedText(hints[activeTab])}
+
+                        {/* Next Hint Action Button */}
+                        {activeTab < 4 && !hints[activeTab + 1] && (
+                          <div className="mt-3 pt-2 border-t border-zinc-800/60 flex justify-end">
+                            <button
+                              onClick={() => fetchHint(activeTab + 1)}
+                              disabled={loading}
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white font-medium text-xs transition-colors shadow-sm"
+                            >
+                              {loading ? (
+                                <>
+                                  <Loader2 className="h-3 w-3 animate-spin" />
+                                  <span>Generating next hint...</span>
+                                </>
+                              ) : (
+                                <>
+                                  <span>Unlock Hint {activeTab + 1}: {HINT_STEPS[activeTab]?.label}</span>
+                                  <ChevronRight className="h-3.5 w-3.5" />
+                                </>
+                              )}
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      !loading &&
+                      maxUnlockedLevel === 0 &&
+                      !errorMsg && (
+                        <div className="text-center py-8 px-4">
+                          <div className="h-10 w-10 mx-auto mb-2 rounded-full border border-emerald-500/30 bg-emerald-950/20 flex items-center justify-center text-emerald-400">
+                            <Lightbulb className="h-5 w-5" />
+                          </div>
+                          <h4 className="text-xs font-semibold text-zinc-200 mb-1">
+                            Ready to Tackle this Problem?
+                          </h4>
+                          <p className="text-[11px] text-zinc-400 max-w-xs mx-auto mb-4">
+                            I can give you progressive, Socratic hints without spoiling the final answer.
+                          </p>
+                          <button
+                            onClick={() => fetchHint(1)}
+                            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-medium transition-colors shadow-sm"
+                          >
+                            <Sparkles className="h-3.5 w-3.5" />
+                            <span>Get First Hint (Intuition)</span>
+                          </button>
+                        </div>
+                      )
+                    )}
+
+                    {/* Custom Q&A History */}
+                    {customAnswers.map((item, index) => (
+                      <div key={index} className="space-y-2">
+                        {/* User Question */}
+                        <div className="flex justify-end">
+                          <div className="max-w-[85%] rounded-lg px-2.5 py-1.5 bg-emerald-950/30 border border-emerald-500/30 text-emerald-200 text-xs">
+                            <p className="font-medium">{item.q}</p>
+                            <span className="text-[9px] text-emerald-400/60 font-mono block text-right mt-0.5">
+                              {item.time}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* AI Answer */}
+                        <div className="flex justify-start">
+                          <div className="max-w-[95%] rounded-lg p-2.5 bg-zinc-900/60 border border-zinc-800 text-zinc-300 text-xs">
+                            <div className="flex items-center gap-1 text-[10px] text-emerald-400 font-mono mb-1">
+                              <Bot className="h-3 w-3" />
+                              <span>AI Coach</span>
+                            </div>
+                            {renderFormattedText(item.a)}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+
+                    {/* Loading State */}
+                    {loading && (
+                      <div className="flex items-center gap-2 p-3 rounded-lg border border-zinc-800 bg-zinc-900/30 text-zinc-400 text-xs animate-pulse">
+                        <Loader2 className="h-4 w-4 animate-spin text-emerald-400" />
+                        <span>AI Coach is thinking about {problemTitle}...</span>
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
 
@@ -534,23 +631,23 @@ export default function AiHintAvatar({
               <div className="px-3 py-1.5 border-t border-zinc-800/60 bg-zinc-900/30 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
                 <button
                   onClick={() => handleAskQuestion("Can you review my current code and spot any potential bugs without giving away the answer?")}
-                  disabled={loading || !userCode.trim()}
-                  className="shrink-0 px-2 py-1 rounded text-[10px] border border-zinc-800 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white transition-colors disabled:opacity-40"
+                  disabled={!isPremium || isPremiumRequired || loading || !userCode.trim()}
+                  className="shrink-0 px-2 py-1 rounded text-[10px] border border-zinc-800 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                   title="Analyze code in editor"
                 >
                   🔍 Spot bugs in code
                 </button>
                 <button
                   onClick={() => handleAskQuestion("What are the most critical edge cases to consider for this problem?")}
-                  disabled={loading}
-                  className="shrink-0 px-2 py-1 rounded text-[10px] border border-zinc-800 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white transition-colors disabled:opacity-40"
+                  disabled={!isPremium || isPremiumRequired || loading}
+                  className="shrink-0 px-2 py-1 rounded text-[10px] border border-zinc-800 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   ⚠️ Check edge cases
                 </button>
                 <button
                   onClick={() => handleAskQuestion("What is the optimal Time and Space complexity for this problem?")}
-                  disabled={loading}
-                  className="shrink-0 px-2 py-1 rounded text-[10px] border border-zinc-800 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white transition-colors disabled:opacity-40"
+                  disabled={!isPremium || isPremiumRequired || loading}
+                  className="shrink-0 px-2 py-1 rounded text-[10px] border border-zinc-800 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   ⏱️ Target complexity
                 </button>
@@ -569,17 +666,25 @@ export default function AiHintAvatar({
                     type="text"
                     value={customQuestion}
                     onChange={(e) => setCustomQuestion(e.target.value)}
-                    placeholder="Ask AI Coach a question..."
-                    disabled={loading}
-                    className="flex-1 rounded-md border border-zinc-800 bg-zinc-900/90 px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/30"
+                    placeholder={
+                      !isPremium || isPremiumRequired
+                        ? "PRO membership required to ask AI Coach..."
+                        : "Ask AI Coach a question..."
+                    }
+                    disabled={!isPremium || isPremiumRequired || loading}
+                    className="flex-1 rounded-md border border-zinc-800 bg-zinc-900/90 px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-500 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/30 disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <button
                     type="submit"
-                    disabled={!customQuestion.trim() || loading}
-                    className="flex h-8 w-8 items-center justify-center rounded-md bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 text-white transition-colors"
-                    title="Send Question"
+                    disabled={!isPremium || isPremiumRequired || !customQuestion.trim() || loading}
+                    className="flex h-8 w-8 items-center justify-center rounded-md bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed text-white transition-colors"
+                    title={!isPremium || isPremiumRequired ? "PRO Required" : "Send Question"}
                   >
-                    <Send className="h-3.5 w-3.5" />
+                    {!isPremium || isPremiumRequired ? (
+                      <Lock className="h-3.5 w-3.5 text-zinc-400" />
+                    ) : (
+                      <Send className="h-3.5 w-3.5" />
+                    )}
                   </button>
                 </form>
 
@@ -589,11 +694,12 @@ export default function AiHintAvatar({
                       type="checkbox"
                       checked={includeCode}
                       onChange={(e) => setIncludeCode(e.target.checked)}
-                      className="rounded border-zinc-700 text-emerald-500 focus:ring-0 focus:ring-offset-0 bg-zinc-900"
+                      disabled={!isPremium || isPremiumRequired}
+                      className="rounded border-zinc-700 text-emerald-500 focus:ring-0 focus:ring-offset-0 bg-zinc-900 disabled:opacity-50"
                     />
                     <span>Include my code from editor</span>
                   </label>
-                  <span>Socratic Tutor</span>
+                  <span>{!isPremium || isPremiumRequired ? "PRO Locked" : "Socratic Tutor"}</span>
                 </div>
               </div>
             </>

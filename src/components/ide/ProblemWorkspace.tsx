@@ -59,6 +59,7 @@ interface ProblemWorkspaceProps {
   isInitiallyCompleted: boolean;
   userEmail: string | null;
   initialSnippets?: Record<string, string>;
+  isPremium?: boolean;
 }
 
 const STARTER_TEMPLATES: Record<string, string> = {
@@ -224,6 +225,7 @@ export default function ProblemWorkspace({
   isInitiallyCompleted,
   userEmail,
   initialSnippets,
+  isPremium = false,
 }: ProblemWorkspaceProps) {
   const [selectedLanguage, setSelectedLanguage] = useState<string>("python");
   const [isCompleted, setIsCompleted] = useState<boolean>(isInitiallyCompleted);
@@ -480,6 +482,19 @@ export default function ProblemWorkspace({
   };
 
   const handleBrowserLogin = async () => {
+    const isLocal =
+      typeof window !== "undefined" &&
+      (window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1");
+
+    if (!isLocal) {
+      setSessionFeedbackMsg({
+        type: "error",
+        text: "1-Click Auto-Detect is only available when running PrepForge locally on your desktop. On this cloud deployment, please copy & paste your LEETCODE_SESSION cookie manually into the box below.",
+      });
+      return;
+    }
+
     setIsBrowserLoggingIn(true);
     setSessionFeedbackMsg({
       type: "success",
@@ -692,6 +707,19 @@ export default function ProblemWorkspace({
   };
 
   const handleCfBrowserLogin = async () => {
+    const isLocal =
+      typeof window !== "undefined" &&
+      (window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1");
+
+    if (!isLocal) {
+      setCfSessionFeedbackMsg({
+        type: "error",
+        text: "Automated browser login is only available when running locally on your desktop. On this cloud deployment, please enter your Codeforces session credentials manually below.",
+      });
+      return;
+    }
+
     setIsCfBrowserLoggingIn(true);
     setCfSessionFeedbackMsg({
       type: "success",
@@ -2086,6 +2114,7 @@ export default function ProblemWorkspace({
         problemDescription={question.description}
         userCode={currentCode}
         language={selectedLanguage}
+        isPremium={isPremium}
       />
     </div>
   );

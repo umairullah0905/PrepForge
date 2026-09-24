@@ -639,12 +639,21 @@ html.light .hover\:border-zinc-700:hover {
   border-color: #BAAF9C !important;
 }
 
-html.light .hover\:text-white:hover {
+html.light .hover\:text-white:hover,
+html.light .group:hover .group-hover\:text-white,
+html.light .group-hover\:text-white,
+html.light [class*="group"]:hover [class*="group-hover:text-white"] {
   color: #14110E !important;
 }
 
-/* Card hover glow with terracotta accent in light mode */
-html.light .group:hover .group-hover\:text-emerald-400 {
+html.light .group:hover .group-hover\:text-zinc-50,
+html.light .group:hover .group-hover\:text-zinc-100 {
+  color: #14110E !important;
+}
+
+/* Card and question hover glow with terracotta accent in light mode */
+html.light .group:hover .group-hover\:text-emerald-400,
+html.light .group-hover\:text-emerald-400 {
   color: #D96543 !important;
 }
 

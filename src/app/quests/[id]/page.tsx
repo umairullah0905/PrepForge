@@ -83,6 +83,7 @@ export default async function QuestDetailPage(props: { params: Promise<{ id: str
           isInitiallyCompleted={isCompleted}
           userEmail={user?.email ?? null}
           initialSnippets={snippets}
+          isPremium={Boolean(profile?.is_premium)}
         />
       </main>
     </div>
