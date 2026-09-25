@@ -313,7 +313,9 @@ export default function ProblemWorkspace({
             setHasSavedCfSession(true);
             setCfSessionFeedbackMsg({
               type: "success",
-              text: "🎉 Connected to Codeforces instantly via PrepForge Companion!",
+              text: `🎉 Connected to Codeforces instantly via PrepForge Companion!${
+                res.handle ? ` (${res.handle})` : ""
+              }`,
             });
             setTimeout(() => {
               setIsCfSessionModalOpen(false);

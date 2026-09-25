@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     if (res.codeforces && res.codeforces.success) {
-      cfEl.textContent = "Detected";
+      cfEl.textContent = res.codeforces.handle ? `Detected (${res.codeforces.handle})` : "Detected";
       cfEl.className = "badge badge-ok";
     } else {
       cfEl.textContent = "Not Logged In";

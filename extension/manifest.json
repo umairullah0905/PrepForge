@@ -1,16 +1,18 @@
 {
   "manifest_version": 3,
   "name": "PrepForge Companion",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "One-click session sync for LeetCode and Codeforces with PrepForge IDE.",
   "permissions": [
-    "cookies"
+    "cookies",
+    "tabs",
+    "scripting"
   ],
   "host_permissions": [
-    "https://leetcode.com/*",
-    "https://*.leetcode.com/*",
-    "https://codeforces.com/*",
-    "https://*.codeforces.com/*"
+    "*://leetcode.com/*",
+    "*://*.leetcode.com/*",
+    "*://codeforces.com/*",
+    "*://*.codeforces.com/*"
   ],
   "background": {
     "service_worker": "background.js"
@@ -20,10 +22,15 @@
       "matches": [
         "http://localhost/*",
         "http://localhost:*/*",
+        "https://localhost/*",
+        "https://localhost:*/*",
         "http://127.0.0.1/*",
         "http://127.0.0.1:*/*",
         "https://*.workers.dev/*",
-        "https://*.run.app/*"
+        "https://*.run.app/*",
+        "https://*.vercel.app/*",
+        "https://*.pages.dev/*",
+        "https://*.netlify.app/*"
       ],
       "js": ["content.js"],
       "run_at": "document_start"
