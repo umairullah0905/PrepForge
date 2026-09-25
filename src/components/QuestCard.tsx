@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { CheckCircle2, Circle, ExternalLink, FileCode2, Lightbulb, MessageSquare } from "lucide-react";
+import { CheckCircle2, Circle, ExternalLink, FileCode2, Lightbulb, MessageSquare, Code2 } from "lucide-react";
 import { PlatformIcon } from "@/components/PlatformIcons";
 
 export type Quest = {
@@ -123,24 +123,25 @@ export default function QuestCard({
           </Link>
         )}
 
-        {quest.url ? (
+        <Link
+          href={quest.id ? `/quests/${quest.id}` : quest.url || "#"}
+          onClick={onBegin}
+          className="inline-flex items-center gap-1.5 rounded-md border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1.5 text-xs font-semibold text-emerald-400 hover:bg-emerald-500/20 hover:text-emerald-300 transition-colors flex-1 justify-center shadow-sm"
+        >
+          <Code2 className="h-3.5 w-3.5" />
+          <span>Solve</span>
+        </Link>
+
+        {quest.url && (
           <a
             href={quest.url}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={onBegin}
-            className="inline-flex items-center gap-1.5 rounded-md border border-zinc-800 bg-zinc-950 px-2.5 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 transition-colors flex-1 justify-center"
+            className="inline-flex items-center justify-center rounded-md border border-zinc-800 bg-zinc-950 p-1.5 text-zinc-400 hover:text-zinc-200 hover:border-zinc-700 transition-colors"
+            title={`Open on ${quest.platform || "official platform"}`}
           >
-            <span>Solve</span>
-            <ExternalLink className="h-3 w-3 text-zinc-400" />
+            <ExternalLink className="h-3.5 w-3.5" />
           </a>
-        ) : (
-          <button
-            onClick={onBegin}
-            className="inline-flex items-center gap-1.5 rounded-md border border-zinc-800 bg-zinc-950 px-2.5 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 transition-colors flex-1 justify-center"
-          >
-            Start
-          </button>
         )}
 
         {quest.solution_link && (

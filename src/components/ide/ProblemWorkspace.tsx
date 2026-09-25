@@ -41,6 +41,7 @@ import CodeEditor from "./CodeEditor";
 import { completeQuestAction } from "@/app/quest-actions";
 import { renderMathInHtml } from "@/lib/math";
 import AiHintAvatar from "@/components/ai/AiHintAvatar";
+import { PlatformIcon } from "@/components/PlatformIcons";
 
 export interface QuestionData {
   id: string;
@@ -1107,16 +1108,50 @@ export default function ProblemWorkspace({
 
             <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-6">
               <div>
-                <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-100 mb-2">
-                  {question.title}
-                </h1>
-                <div className="flex items-center gap-2">
+                <div className="flex items-start justify-between gap-3 mb-2.5">
+                  <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-100">
+                    {question.title}
+                  </h1>
+
+                  {question.url && (
+                    <a
+                      href={question.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-zinc-800 bg-zinc-900/90 text-xs font-medium text-zinc-300 hover:text-white hover:bg-zinc-800 hover:border-zinc-700 transition-colors shrink-0 shadow-sm"
+                      title={`Open original problem on ${question.platform || "official platform"}`}
+                    >
+                      <PlatformIcon platform={question.platform} className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">View on {question.platform || "Platform"}</span>
+                      <span className="sm:hidden">Source</span>
+                      <ExternalLink className="h-3 w-3 text-zinc-400" />
+                    </a>
+                  )}
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2">
                   <span className={`rounded border px-2 py-0.5 font-mono text-[11px] font-medium ${diffClass}`}>
                     {question.difficulty}
                   </span>
-                  <span className="rounded border border-zinc-800 bg-zinc-900 px-2 py-0.5 font-mono text-[11px] text-zinc-400">
-                    {question.platform || "LeetCode"}
+                  <span className="inline-flex items-center gap-1 rounded border border-zinc-800 bg-zinc-900 px-2 py-0.5 font-mono text-[11px] text-zinc-400">
+                    <PlatformIcon platform={question.platform} className="w-3 h-3" />
+                    <span>{question.platform || "LeetCode"}</span>
                   </span>
+
+                  {/* Question Head Topics */}
+                  {question.topics && question.topics.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      {question.topics.map((t, i) => (
+                        <span
+                          key={i}
+                          className="rounded bg-zinc-900/80 px-2 py-0.5 text-[10px] font-mono text-zinc-400 border border-zinc-800/80"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
                   {hasMultipleSolutionsPossible && (
                     <span
                       className="rounded border border-amber-500/25 bg-amber-500/10 px-2 py-0.5 font-mono text-[10px] text-amber-300 flex items-center gap-1 cursor-help"
@@ -1178,18 +1213,33 @@ export default function ProblemWorkspace({
 
               {/* Topics */}
               {question.topics && question.topics.length > 0 && (
-                <div className="pt-4 border-t border-zinc-800/60">
-                  <div className="text-xs font-mono text-zinc-400 mb-2">Related Topics:</div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {question.topics.map((t, i) => (
-                      <span
-                        key={i}
-                        className="rounded bg-zinc-900 px-2 py-0.5 text-[11px] font-mono text-zinc-400 border border-zinc-800"
-                      >
-                        {t}
-                      </span>
-                    ))}
+                <div className="pt-4 border-t border-zinc-800/60 flex items-center justify-between flex-wrap gap-2">
+                  <div>
+                    <div className="text-xs font-mono text-zinc-400 mb-2">Related Topics:</div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {question.topics.map((t, i) => (
+                        <span
+                          key={i}
+                          className="rounded bg-zinc-900 px-2 py-0.5 text-[11px] font-mono text-zinc-400 border border-zinc-800"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
                   </div>
+
+                  {question.url && (
+                    <a
+                      href={question.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-zinc-200 transition-colors underline underline-offset-4 font-mono self-end"
+                      title="Open original problem on official platform"
+                    >
+                      <span>Problem Link</span>
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
+                  )}
                 </div>
               )}
             </div>

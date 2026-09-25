@@ -16,6 +16,7 @@ import {
   ChevronsLeft,
   ChevronsRight,
   Globe,
+  Code2,
 } from "lucide-react";
 import QuestCard, { type Quest } from "@/components/QuestCard";
 import { PlatformIcon, LeetCodeIcon, CodeforcesIcon } from "@/components/PlatformIcons";
@@ -566,12 +567,20 @@ export default function ClientQuestsView({
                                 href={q.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="rounded-md border border-zinc-800 bg-zinc-950 px-3 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 dark:hover:text-white transition-colors inline-flex items-center gap-1.5 shadow-sm"
+                                className="rounded-md border border-zinc-800 bg-zinc-950 p-2 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
+                                title={`Open on ${q.platform || "official platform"}`}
                               >
-                                <span>Solve</span>
-                                <ExternalLink className="h-3.5 w-3.5" />
+                                <ExternalLink className="h-4 w-4" />
                               </a>
                             )}
+
+                            <Link
+                              href={q.id ? `/quests/${q.id}` : q.url || "#"}
+                              className="rounded-md border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-semibold text-emerald-400 hover:bg-emerald-500/20 hover:text-emerald-300 transition-colors inline-flex items-center gap-1.5 shadow-sm"
+                            >
+                              <Code2 className="h-3.5 w-3.5" />
+                              <span>Solve</span>
+                            </Link>
                           </div>
                         </td>
                       </tr>
